@@ -16,18 +16,18 @@ public class WaveManager : MonoBehaviour
 
     public float speed;
 
-    public List<Transform> spawnedObj;
+    public List<GameObject> spawnedObj;
     public List<int> cPoint;
 
     public float spawnDelay;
     public int amountOfSpawns;
     public float waveDelay;
 
+    public float turnDist;
+
 
     private void Start()
     {
-        spawnedObj = new List<Transform>();
-        cPoint = new List<int>();
         StartCoroutine(SpawnLoop());
     }
 
@@ -38,7 +38,8 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(waveDelay);
             for (int i = 0; i < amountOfSpawns; i++)
             {
-                Instantiate(prefab, points[0].position, Quaternion.identity);
+                spawnedObj.Add(Instantiate(prefab, points[0].position, Quaternion.identity));
+                cPoint.Add(1);
                 yield return new WaitForSeconds(spawnDelay);
             }
         }
@@ -46,9 +47,21 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0;i < spawnedObj.Count ;i++)
+        for (int i = 0; i < spawnedObj.Count; i++)
         {
-            Vector3.MoveTowards(spawnedObj[i].position, points[cPoint[i]], speed * Time.deltaTime)
+            spawnedObj[i].transform.position = Vector3.MoveTowards(spawnedObj[i].transform.position, points[cPoint[i]].position, speed * Time.deltaTime);
+            if (Vector3.Distance(spawnedObj[i].transform.position, points[cPoint[i]].position) < turnDist)
+            {
+                cPoint[i] += 1;
+                if (cPoint[i] == points.Length)
+                {
+                    Destroy(spawnedObj[i]);
+                    spawnedObj.RemoveAt(i);
+                    cPoint.RemoveAt(i);
+
+                    i -= 1;
+                }
+            }
         }
     }
 }
