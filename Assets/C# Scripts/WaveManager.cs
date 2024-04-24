@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class WaveManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class WaveManager : MonoBehaviour
     public GameObject prefab;
 
     public float speed;
+    public float circularSpeed;
 
     public List<GameObject> spawnedObj;
     public List<int> cPoint;
@@ -23,7 +25,8 @@ public class WaveManager : MonoBehaviour
     public int amountOfSpawns;
     public float waveDelay;
 
-    public float turnDist;
+    public float radius;
+
 
 
     private void Start()
@@ -33,6 +36,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator SpawnLoop()
     {
+        GetComponent<SplineAnimate>().
         while (true)
         {
             yield return new WaitForSeconds(waveDelay);
@@ -45,23 +49,31 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
+    
         for (int i = 0; i < spawnedObj.Count; i++)
         {
-            spawnedObj[i].transform.position = Vector3.MoveTowards(spawnedObj[i].transform.position, points[cPoint[i]].position, speed * Time.deltaTime);
-            if (Vector3.Distance(spawnedObj[i].transform.position, points[cPoint[i]].position) < turnDist)
+            if (((float)cPoint[i] / 2) == Mathf.RoundToInt(cPoint[i] / 2))
             {
-                cPoint[i] += 1;
-                if (cPoint[i] == points.Length)
-                {
-                    Destroy(spawnedObj[i]);
-                    spawnedObj.RemoveAt(i);
-                    cPoint.RemoveAt(i);
 
-                    i -= 1;
+            }
+            else
+            {
+                spawnedObj[i].transform.position = Vector3.MoveTowards(spawnedObj[i].transform.position, points[cPoint[i]].position, speed * Time.deltaTime);
+                if (Vector3.Distance(spawnedObj[i].transform.position, points[cPoint[i]].position) < turnDist)
+                {
+                    cPoint[i] += 1;
+                    if (cPoint[i] == points.Length)
+                    {
+                        Destroy(spawnedObj[i]);
+                        spawnedObj.RemoveAt(i);
+                        cPoint.RemoveAt(i);
+
+                        i -= 1;
+                    }
                 }
             }
         }
-    }
+    }*/
 }
