@@ -8,72 +8,66 @@ public class WaveManager : MonoBehaviour
     public static WaveManager Instance;
     private void Awake()
     {
-        Instance = this;  
+        Instance = this;
     }
 
 
-    public Transform[] points;
-    public GameObject prefab;
+    public Transform startPoint;
+    public Transform endPoint;
 
-    public float speed;
-    public float circularSpeed;
+    [HideInInspector]
+    public SplineContainer splineContainer;
 
-    public List<GameObject> spawnedObj;
-    public List<int> cPoint;
 
-    public float spawnDelay;
-    public int amountOfSpawns;
-    public float waveDelay;
+    public float preparationTime;
 
-    public float radius;
+    public WaveDataSO[] waves;
+
+    public List<EnemyCore> spawnedObj;
 
 
 
     private void Start()
     {
+        splineContainer = GetComponent<SplineContainer>();
         StartCoroutine(SpawnLoop());
     }
 
     private IEnumerator SpawnLoop()
     {
-        GetComponent<SplineAnimate>().
-        while (true)
+        yield return new WaitForSeconds(preparationTime);
+
+        for (int i = 0; i < waves.Length; i++)
         {
-            yield return new WaitForSeconds(waveDelay);
-            for (int i = 0; i < amountOfSpawns; i++)
+            for (int i2 = 0; i2 < waves[i].waveParts.Length; i2++)
             {
-                spawnedObj.Add(Instantiate(prefab, points[0].position, Quaternion.identity));
-                cPoint.Add(1);
-                yield return new WaitForSeconds(spawnDelay);
+                yield return new WaitForSeconds(waves[i].waveParts[i2].startDelay);
+
+                EnemyCore enemyCore = Instantiate(waves[i].waveParts[i2].enemy, startPoint.position, Quaternion.identity);
+
+                spawnedObj.Add(enemyCore);
+                enemyCore.Init(splineContainer);
             }
+
+            yield return new WaitForSeconds(waves[i].waveEndDelay);
         }
     }
 
-    /*private void Update()
+    private void Update()
     {
-    
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            spawnedObj[0].splineAnimator.ElapsedTime *= 0.5f;
+            spawnedObj[0].splineAnimator.Duration *= 0.5f;
+        }
         for (int i = 0; i < spawnedObj.Count; i++)
         {
-            if (((float)cPoint[i] / 2) == Mathf.RoundToInt(cPoint[i] / 2))
+            if (Vector3.Distance(spawnedObj[i].transform.position, endPoint.position) < 0.1f)
             {
-
-            }
-            else
-            {
-                spawnedObj[i].transform.position = Vector3.MoveTowards(spawnedObj[i].transform.position, points[cPoint[i]].position, speed * Time.deltaTime);
-                if (Vector3.Distance(spawnedObj[i].transform.position, points[cPoint[i]].position) < turnDist)
-                {
-                    cPoint[i] += 1;
-                    if (cPoint[i] == points.Length)
-                    {
-                        Destroy(spawnedObj[i]);
-                        spawnedObj.RemoveAt(i);
-                        cPoint.RemoveAt(i);
-
-                        i -= 1;
-                    }
-                }
+                Destroy(spawnedObj[i].gameObject);
+                spawnedObj.RemoveAt(i);
+                i -= 1;
             }
         }
-    }*/
+    }
 }
