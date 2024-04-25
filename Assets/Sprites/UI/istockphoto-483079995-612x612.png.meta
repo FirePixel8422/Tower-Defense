@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 301d6ed70941e85479fe7708423f87e5
+guid: c34c7f4a211fe554a8dd9bd932dac76d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: buttons TD_0
+      name: istockphoto-483079995-612x612_0
       rect:
         serializedVersion: 2
-        x: 47
-        y: 471
-        width: 522
-        height: 242
+        x: 61
+        y: 442
+        width: 491
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58215f927e3f12f48ac7df168e64e89a
-      internalID: -860935706
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: buttons TD_1
-      rect:
-        serializedVersion: 2
-        x: 45
-        y: 803
-        width: 524
-        height: 244
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cddf38e613cea43439123bfb58a06d6e
-      internalID: -853338915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: buttons TD_2
-      rect:
-        serializedVersion: 2
-        x: 45
-        y: 155
-        width: 524
-        height: 241
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6e5241692033b541a9538f36ec4df79
-      internalID: -1861381236
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: buttons TD_3
-      rect:
-        serializedVersion: 2
-        x: 633
-        y: 474
-        width: 519
-        height: 239
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d50be867b46a8443bf0bdf9538265df
-      internalID: -839700489
+      spriteID: d5e8e49f83d11d84cad0336d0ef8a000
+      internalID: 1774973901
       vertices: []
       indices: 
       edges: []
@@ -191,10 +128,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      buttons TD_0: -860935706
-      buttons TD_1: -853338915
-      buttons TD_2: -1861381236
-      buttons TD_3: -839700489
+      istockphoto-483079995-612x612_0: 1774973901
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
