@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,10 +44,14 @@ public class WaveManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(waves[i].waveParts[i2].startDelay);
 
-                EnemyCore enemyCore = Instantiate(waves[i].waveParts[i2].enemy, startPoint.position, Quaternion.identity);
+                for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
+                {
+                    EnemyCore enemyCore = Instantiate(waves[i].waveParts[i2].enemy, startPoint.position, Quaternion.identity);
 
-                spawnedObj.Add(enemyCore);
-                enemyCore.Init(splineContainer);
+                    spawnedObj.Add(enemyCore);
+                    enemyCore.Init(splineContainer);
+                    yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
+                }
             }
 
             yield return new WaitForSeconds(waves[i].waveEndDelay);
