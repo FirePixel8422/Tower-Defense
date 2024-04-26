@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+
 
 public class GridManager : MonoBehaviour
 {
@@ -11,12 +11,9 @@ public class GridManager : MonoBehaviour
     }
 
 
-    public Renderer folow;
-    public SpriteRenderer rangeRenderer;
-    public LayerMask floor;
-    public LayerMask path;
-
+    public bool drawMasterGizmos;
     public bool drawTileGizmos;
+    public bool drawTileDataGizmos;
 
     public Vector3 gridPosition;
     public Vector3Int gridSize;
@@ -48,7 +45,7 @@ public class GridManager : MonoBehaviour
                 Vector3 _worldPos = worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2);
                 
                 int _type = 0;
-                if(Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, path))
+                if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, PlacementManager.Instance.path))
                 {
                     _type = 1;
                 }
@@ -64,26 +61,7 @@ public class GridManager : MonoBehaviour
         Destroy(WaveManager.Instance.GetComponent<MeshCollider>());
     }
 
-    void Update()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor))
-        {
-            Vector3 worldPos = hitInfo.point;
-            GridObjectData gridData = GridObjectFromWorldPoint(worldPos);
-            if (gridData.type != 1)
-            {
-                folow.material.color = Color.green;
-                rangeRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-            }
-            else
-            {
-                folow.material.color = Color.red;
-                rangeRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
-            }
-            folow.transform.position = gridData.worldPos;
-        }
-    }
+
     public GridObjectData GridObjectFromWorldPoint(Vector3 worldPosition)
     {
         float percentX = Mathf.Clamp01((worldPosition.x - gridPosition.x + gridSize.x / 2) / gridSize.x);
@@ -109,6 +87,11 @@ public class GridManager : MonoBehaviour
 
     public void OnDrawGizmos()
     {
+        if (drawMasterGizmos == false)
+        {
+            return;
+        }
+
         Gizmos.DrawWireCube(gridPosition, new Vector3(gridSize.x * tileSize, gridSize.y, gridSize.z * tileSize));
 
         if (drawTileGizmos)
@@ -121,6 +104,19 @@ public class GridManager : MonoBehaviour
             {
                 for (int z = 0; z < gridSizeZ; z++)
                 {
+                    if (drawTileDataGizmos && Application.isPlaying)
+                    {
+                        if (grid[x, z].type == 1)
+                        {
+                            Gizmos.color = Color.red;
+                        }
+                        else
+                        {
+                            Gizmos.color = Color.green;
+                        }
+                        Gizmos.DrawCube(worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2), new Vector3(tileSize / 2, tileSize / 2, tileSize / 2));
+                    }
+                    Gizmos.color = Color.white;
                     Gizmos.DrawWireCube(worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2), new Vector3(tileSize, gridSize.y, tileSize));
                 }
             }
