@@ -5,21 +5,25 @@ using UnityEngine;
 
 public class TowerCore : MonoBehaviour
 {
-    public Material mat;
-    public float active;
-    public float speed;
+    public Material dissolveMaterial;
+    public float dissolveEffectState;
+    public float dissolveSpeed;
+    public float endDisolveValue;
 
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        mat = GetComponent<Renderer>().material;
+        dissolveMaterial = GetComponent<Renderer>().material;
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator CreateTower()
     {
-        active -= Time.deltaTime * speed;
-        mat.SetFloat("_Active", active);
+        while (dissolveEffectState > endDisolveValue)
+        {
+            yield return null;
+            dissolveEffectState -= Time.deltaTime * dissolveSpeed;
+            dissolveMaterial.SetFloat("_Active", dissolveEffectState);
+        }
     }
 }
