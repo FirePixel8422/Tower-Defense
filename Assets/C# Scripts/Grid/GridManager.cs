@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 
@@ -81,6 +82,11 @@ public class GridManager : MonoBehaviour
     {
         gridPos.Clamp(new Vector2Int(0, 0), new Vector2Int(gridSizeX -1, gridSizeZ -1));
         return grid[gridPos.x, gridPos.y];
+    }
+
+    public void UpdateGridDataFieldType(Vector2Int gridPos, int newType)
+    {
+        grid[gridPos.x, gridPos.y].type = newType;
     }
 
 
