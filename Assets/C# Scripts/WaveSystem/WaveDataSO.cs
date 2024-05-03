@@ -16,24 +16,14 @@ public class WaveDataSO : ScriptableObject
         [Header("Delay between spawned creatures")]
         public float spawnDelay;
         public int amount;
-
-        public ImmunityBarrier immunityBarrier;
     }
     public float waveEndDelay;
 }
 
-public enum MagicType
+public enum Element
 {
     Neutral,
     Life,
     Arcane,
     Ember
-}
-public enum ImmunityBarrier
-{
-    None,
-    Life,
-    Arcane,
-    Ember,
-    Smart
 }

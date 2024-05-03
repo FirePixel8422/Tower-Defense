@@ -13,8 +13,8 @@ public class PlacementManager : MonoBehaviour
         Instance = this;
     }
 
-    private GridManager gridManager;
-    private TowerManager towerManager;
+    [HideInInspector]
+    public GridManager gridManager;
     private Camera mainCam;
 
     public LayerMask floor;
@@ -31,7 +31,6 @@ public class PlacementManager : MonoBehaviour
     private void Start()
     {
         gridManager = GridManager.Instance;
-        towerManager = TowerManager.Instance;
         mainCam = Camera.main;
 
         Button[] buttons = towerUIHolder.GetComponentsInChildren<Button>();
@@ -64,7 +63,6 @@ public class PlacementManager : MonoBehaviour
             {
                 tower.transform.localPosition = Vector3.zero;
                 tower = Instantiate(tower.gameObject, gridData.worldPos, Quaternion.identity).GetComponent<TowerCore>();
-                towerManager.spawnedTowerObj.Add(tower);
                 tower.Init();
 
                 gridManager.UpdateGridDataFieldType(gridData.gridPos, 2);

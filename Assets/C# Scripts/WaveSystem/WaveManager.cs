@@ -49,7 +49,7 @@ public class WaveManager : MonoBehaviour
                     EnemyCore enemyCore = Instantiate(waves[i].waveParts[i2].enemy, startPoint.position, Quaternion.identity);
 
                     spawnedObj.Add(enemyCore);
-                    enemyCore.Init(splineContainer, waves[i].waveParts[i2].immunityBarrier);
+                    enemyCore.Init(splineContainer);
                     yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                 }
             }
