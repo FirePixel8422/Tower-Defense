@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -9,17 +10,30 @@ public class EnemyCore : MonoBehaviour
     public float health;
     public float damage;
     public float mapCompletionTime;
-    public Element[] elements;
+    public MagicType[] elements;
+
+    public MagicType immunityBarrier;
+    public Material barrierShader;
 
     [HideInInspector]
     public SplineAnimate splineAnimator;
 
 
-    public void Init(SplineContainer spline)
+    public void Init(SplineContainer spline, ImmunityBarrier _immunityBarrier)
     {
         splineAnimator = GetComponent<SplineAnimate>();
         splineAnimator.Container = spline;
         splineAnimator.Duration = mapCompletionTime;
+
+        if (_immunityBarrier != ImmunityBarrier.None)
+        {
+            if (_immunityBarrier == ImmunityBarrier.Smart)
+            {
+                immunityBarrier = TowerManager.Instance.HighestMagicType();
+            }
+            barrierShader.GameObject().SetActive(true);
+        }
+
         StartCoroutine(StartDelay());
     }
 
