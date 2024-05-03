@@ -314,7 +314,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da2b9854db7cf3b4daf2a11c58da4d19, type: 2}
   - {fileID: 11400000, guid: da2b9854db7cf3b4daf2a11c58da4d19, type: 2}
   - {fileID: 11400000, guid: da2b9854db7cf3b4daf2a11c58da4d19, type: 2}
-  spawnedObj: []
+  spawnedEnemyObj: []
 --- !u!4 &146782329
 Transform:
   m_ObjectHideFlags: 0
@@ -1791,7 +1791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6b35522d41ad4a9be216b2e2e2fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 0}
   floor:
     serializedVersion: 2
     m_Bits: 64
@@ -1801,6 +1800,7 @@ MonoBehaviour:
   preSpawnedTowerHolder: {fileID: 700871595}
   towerUIHolder: {fileID: 768326204}
   tower: {fileID: 0}
+  spawnedTowerObj: []
   isPlacingTower: 0
 --- !u!1 &1443546590
 GameObject:
@@ -1814,7 +1814,6 @@ GameObject:
   - component: {fileID: 1443546593}
   - component: {fileID: 1443546592}
   - component: {fileID: 1443546595}
-  - component: {fileID: 1443546596}
   m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
@@ -1908,23 +1907,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 20, y: 0.01, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1443546596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443546590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2e41a424001ac47810039df0613f64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dissolveMaterial: {fileID: 0}
-  startDissolveEffectState: 0
-  dissolveSpeed: 0.2
-  endDisolveValue: -1
-  towerPreviewRenderer: {fileID: 0}
 --- !u!1 &1524239065
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,6 +2038,10 @@ PrefabInstance:
     - target: {fileID: 6201746674639778729, guid: 7dfab933d9606174fb73ea22e4e61f17, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557177556691728456, guid: 7dfab933d9606174fb73ea22e4e61f17, type: 3}
+      propertyPath: range
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6557177556691728456, guid: 7dfab933d9606174fb73ea22e4e61f17, type: 3}
       propertyPath: dissolveSpeed
