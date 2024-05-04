@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -26,19 +27,19 @@ public class TowerManager : MonoBehaviour
         int[] magicValues = new int[4];
         foreach (TowerCore tower in spawnedTowerObj)
         {
-            if (tower.magicType == MagicType.Neutral)
+            if (tower.magicType.Contains(MagicType.Neutral))
             {
                 magicValues[0] += 1;
             }
-            else if (tower.magicType == MagicType.Arcane)
+            else if (tower.magicType.Contains(MagicType.Arcane))
             {
                 magicValues[1] += 1;
             }
-            else if (tower.magicType == MagicType.Ember)
+            else if (tower.magicType.Contains(MagicType.Ember))
             {
                 magicValues[2] += 1;
             }
-            else if (tower.magicType == MagicType.Life)
+            else if (tower.magicType.Contains(MagicType.Life))
             {
                 magicValues[3] += 1;
             }
@@ -76,6 +77,11 @@ public class TowerManager : MonoBehaviour
     {
         for (int i = 0; i < spawnedTowerObj.Count; i++)
         {
+            if (spawnedTowerObj[i].towerCompleted == false || spawnedTowerObj[i].attackSpeed == 0)
+            {
+                continue;
+            }
+
             float progression = -1;
             int id = -1;
             for (int i2 = 0; i2 < waveManager.spawnedObj.Count; i2++)
@@ -89,7 +95,14 @@ public class TowerManager : MonoBehaviour
                     }
                 }
             }
-            spawnedTowerObj[i].transform.LookAt(waveManager.spawnedObj[id].transform.position, Vector3.up);
+
+            if (id != -1)
+            {
+                Vector3 dir = spawnedTowerObj[i].transform.position - waveManager.spawnedObj[id].transform.position;
+                float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+                spawnedTowerObj[i].transform.rotation = Quaternion.RotateTowards(spawnedTowerObj[i].transform.rotation, Quaternion.Euler(0, angle, 0), spawnedTowerObj[i].rotSpeed * Time.deltaTime);
+            }
         }
     }
 }

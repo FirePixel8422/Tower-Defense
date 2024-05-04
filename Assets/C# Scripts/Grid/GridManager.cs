@@ -46,7 +46,7 @@ public class GridManager : MonoBehaviour
                 Vector3 _worldPos = worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2);
                 
                 int _type = 0;
-                if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, PlacementManager.Instance.path))
+                if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, SelectionManager.Instance.path))
                 {
                     _type = 1;
                 }
@@ -87,6 +87,11 @@ public class GridManager : MonoBehaviour
     public void UpdateGridDataFieldType(Vector2Int gridPos, int newType)
     {
         grid[gridPos.x, gridPos.y].type = newType;
+    }
+    public void UpdateGridDataFieldType(Vector2Int gridPos, int newType, TowerCore tower)
+    {
+        grid[gridPos.x, gridPos.y].type = newType;
+        grid[gridPos.x, gridPos.y].tower = tower;
     }
 
 

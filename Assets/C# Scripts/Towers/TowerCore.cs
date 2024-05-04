@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class TowerCore : MonoBehaviour
 {
-    #region disolveEffect
-    public Material dissolveMaterial;
+    public int amountOfDissolves;
+    public int cDissolves;
 
-    private float cDissolveEffectState;
-    public float startDissolveEffectState;
-    public float dissolveSpeed;
-    public float endDisolveValue;
-    #endregion
+    public bool towerCompleted;
 
-
-    public SpriteRenderer towerRange;
+    [HideInInspector]
+    public SpriteRenderer towerPreviewRenderer;
 
 
-    public Element[] elements;
+    public MagicType[] magicType;
+    public float rotSpeed;
     public float attackSpeed;
     public float range;
 
@@ -25,25 +22,38 @@ public class TowerCore : MonoBehaviour
 
     private void Start()
     {
-        dissolveMaterial = GetComponent<Renderer>().material;
-
-        towerRange = GetComponentInChildren<SpriteRenderer>();
-        towerRange.transform.localScale = Vector3.one * range;
+        towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
+        towerPreviewRenderer.transform.localScale = Vector3.one * range;
     }
-    public void Init()
+    public virtual void Init()
     {
-        StartCoroutine(CreateTower());
-    }
-    private IEnumerator CreateTower()
-    {
-        towerRange.enabled = false;
+        DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
+        amountOfDissolves = dissolves.Length;
 
-        cDissolveEffectState = startDissolveEffectState;
-        while (cDissolveEffectState > endDisolveValue)
+        foreach (var dissolve in dissolves)
         {
-            yield return null;
-            cDissolveEffectState -= Time.deltaTime * dissolveSpeed;
-            dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
+            dissolve.Init(this);
+        }
+
+        towerPreviewRenderer.enabled = false;
+    }
+
+    public void SelectOrDeselectTower(bool select)
+    {
+        DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
+
+        foreach (var d in dissolves)
+        {
+            d.dissolveMaterial.SetInt("Selected", select ? 1 : 0);
+        }
+    }
+
+    public void DissolveCompleted()
+    {
+        cDissolves += 1;
+        if (cDissolves == amountOfDissolves)
+        {
+            towerCompleted = true;
         }
     }
 }
