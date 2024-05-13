@@ -9,7 +9,7 @@ public class TowerCore : MonoBehaviour
 
     public bool towerCompleted;
 
-    [HideInInspector]
+    //[HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
 
 
@@ -20,7 +20,7 @@ public class TowerCore : MonoBehaviour
 
 
 
-    private void Start()
+    public virtual void Start()
     {
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
         towerPreviewRenderer.transform.localScale = Vector3.one * range;
@@ -38,13 +38,13 @@ public class TowerCore : MonoBehaviour
         towerPreviewRenderer.enabled = false;
     }
 
-    public void SelectOrDeselectTower(bool select)
+    public virtual void SelectOrDeselectTower(bool select)
     {
         DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
 
         foreach (var d in dissolves)
         {
-            d.dissolveMaterial.SetInt("Selected", select ? 1 : 0);
+            d.dissolveMaterial.SetInt("_Selected", select ? 1 : 0);
         }
     }
 

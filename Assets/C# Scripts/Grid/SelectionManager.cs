@@ -86,6 +86,13 @@ public class SelectionManager : MonoBehaviour
             GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
             if (gridData.tower != null)
             {
+                //deselect older selected tower
+                if (towerSelected)
+                {
+                    selectedTower.towerPreviewRenderer.enabled = false;
+                    selectedTower.SelectOrDeselectTower(false);
+                }
+
                 //select tower
                 selectedTower = gridData.tower;
                 selectedTower.towerPreviewRenderer.enabled = true;
@@ -96,13 +103,13 @@ public class SelectionManager : MonoBehaviour
             }
         }
 
-        //deselect tower
+        //deselect tower if clicked on empty space
         if (towerSelected)
         {
             selectedTower.towerPreviewRenderer.enabled = false;
+            selectedTower.SelectOrDeselectTower(false);
         }
         towerSelected = false;
-        selectedTower.SelectOrDeselectTower(false);
     }
 
 
