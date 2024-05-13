@@ -98,10 +98,10 @@ public class TowerManager : MonoBehaviour
 
             if (id != -1)
             {
-                Vector3 dir = spawnedTowerObj[i].transform.position - waveManager.spawnedObj[id].transform.position;
+                Vector3 dir = spawnedTowerObj[i].rotPoint.position - waveManager.spawnedObj[id].transform.position;
                 float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
-                spawnedTowerObj[i].transform.rotation = Quaternion.RotateTowards(spawnedTowerObj[i].transform.rotation, Quaternion.Euler(0, angle, 0), spawnedTowerObj[i].rotSpeed * Time.deltaTime);
+                spawnedTowerObj[i].rotPoint.rotation = Quaternion.RotateTowards(spawnedTowerObj[i].rotPoint.rotation, Quaternion.Euler(0, angle, 0) * spawnedTowerObj[i].rotOffset, spawnedTowerObj[i].rotSpeed * Time.deltaTime);
             }
         }
     }

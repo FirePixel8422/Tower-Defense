@@ -309,7 +309,7 @@ namespace UnityEngine.Splines
                 else
                     m_ElapsedTime = m_Duration * m_NormalizedTime;
                 
-                UpdateTransform();
+                UpdateTransform(out _);
             }
         }
 
@@ -324,7 +324,6 @@ namespace UnityEngine.Splines
             {
                 m_ElapsedTime = value;
                 CalculateNormalizedTime(0f);
-                UpdateTransform();
             }
         }
 
@@ -461,51 +460,40 @@ namespace UnityEngine.Splines
                     Debug.Log($"{m_Method} animation method is not supported!");
                     break;
             }
-            UpdateTransform();
             UpdateStartOffsetT();
 
             if (autoplay)
                 Play();
         }
 
+
+
+
+        private void Awake()
+        {
+            SplineAnimateManager.Instance.AddAnim(this);
+        }
         /// <summary>
         /// Evaluates the animation along the Spline based on deltaTime.
         /// </summary>
         public void FixedUpdate()
         {
-            
-        }
-
-        private void Awake()
-        {
-            StartCoroutine(CustomFixedUpdateLoop());
-        }
-        private IEnumerator CustomFixedUpdateLoop()
-        {
-            float customFixedDeltaTime = 1 / 30;
-            while (true)
+            if (!m_Playing || (m_LoopMode == LoopMode.Once && m_NormalizedTime >= 1f))
             {
-                float mTime = Time.time;
-                yield return new WaitForSeconds(customFixedDeltaTime);
-
-                if (!m_Playing || (m_LoopMode == LoopMode.Once && m_NormalizedTime >= 1f))
-                {
-                    continue;
-                }
-
-                float dt = Time.time - mTime;
-#if UNITY_EDITOR
-                if (!EditorApplication.isPlaying)
-                {
-                    dt = (float)(EditorApplication.timeSinceStartup - m_LastEditorUpdateTime);
-                    m_LastEditorUpdateTime = EditorApplication.timeSinceStartup;
-                }
-#endif
-                CalculateNormalizedTime(dt);
-                UpdateTransform();
+                return;
             }
-        }
 
+            float dt = Time.fixedDeltaTime;
+#if UNITY_EDITOR
+            if (!EditorApplication.isPlaying)
+            {
+                dt = (float)(EditorApplication.timeSinceStartup - m_LastEditorUpdateTime);
+                m_LastEditorUpdateTime = EditorApplication.timeSinceStartup;
+            }
+#endif
+            CalculateNormalizedTime(dt);
+            //UpdateTransform();
+        }
 
 
         void CalculateNormalizedTime(float deltaTime)
@@ -580,26 +568,28 @@ namespace UnityEngine.Splines
                 m_StartOffsetT = m_SplinePath.ConvertIndexUnit(m_StartOffset * m_SplineLength, PathIndexUnit.Distance, PathIndexUnit.Normalized);
         }
 
-        void UpdateTransform()
+        public void UpdateTransform(out Vector3 m_Position)
         {
+            m_Position = Vector3.zero;
+
             if (m_Target == null)
                 return;
 
-            EvaluatePositionAndRotation(out var position, out var rotation);
-
+            EvaluatePositionAndRotation(out m_Position, out var rotation);
+            /*
 #if UNITY_EDITOR
             if (EditorApplication.isPlaying)
             {
 #endif
-                transform.position = position;
+                transform.position = m_Position;
                 if (m_AlignmentMode != AlignmentMode.None)
                     transform.rotation = rotation;
 
 #if UNITY_EDITOR
             }
-#endif
-            onUpdated?.Invoke(position, rotation);
-            Updated?.Invoke(position, rotation);
+#endif*/
+            onUpdated?.Invoke(m_Position, rotation);
+            Updated?.Invoke(m_Position, rotation);
         }
 
         void EvaluatePositionAndRotation(out Vector3 position, out Quaternion rotation)

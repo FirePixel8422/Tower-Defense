@@ -68,7 +68,7 @@ public class SelectionManager : MonoBehaviour
             if (gridData.type == 0)
             {
                 selectedTower.transform.localPosition = Vector3.zero;
-                selectedTower = Instantiate(selectedTower.gameObject, gridData.worldPos, Quaternion.identity).GetComponent<TowerCore>();
+                selectedTower = Instantiate(selectedTower.gameObject, gridData.worldPos, selectedTower.transform.rotation).GetComponent<TowerCore>();
 
                 towerManager.spawnedTowerObj.Add(selectedTower);
                 selectedTower.Init();

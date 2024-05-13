@@ -9,12 +9,14 @@ public class TowerCore : MonoBehaviour
 
     public bool towerCompleted;
 
-    //[HideInInspector]
+    [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
-
 
     public MagicType[] magicType;
     public float rotSpeed;
+    public Transform rotPoint;
+    public Quaternion rotOffset;
+
     public float attackSpeed;
     public float range;
 
