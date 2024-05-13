@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 8546146520190900313}
   - component: {fileID: 4761256058764485286}
   - component: {fileID: 7313333341657438347}
-  - component: {fileID: 1299747321028979762}
   - component: {fileID: -7427253877955255539}
+  - component: {fileID: -4831716323322401915}
   m_Layer: 0
   m_Name: purple
   m_TagString: Untagged
@@ -169,29 +169,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4634640182298528768}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1299747321028979762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4634640182298528768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_LoopMode: 0
-  m_Method: 0
-  m_Duration: 1
-  m_MaxSpeed: 2
-  m_EasingMode: 0
-  m_AlignmentMode: 1
-  m_ObjectForwardAxis: 5
-  m_ObjectUpAxis: 1
-  m_StartOffset: 0
 --- !u!114 &-7427253877955255539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,4 +185,29 @@ MonoBehaviour:
   damage: 5
   mapCompletionTime: 15
   elements: 00000000
+  immunityBarrier: 0
+  barrierShader: {fileID: 0}
   splineAnimator: {fileID: 0}
+--- !u!114 &-4831716323322401915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634640182298528768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0355764de157ee445944c8382cb063d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_LoopMode: 0
+  m_Method: 0
+  m_Duration: 1
+  m_MaxSpeed: 10
+  m_EasingMode: 0
+  m_AlignmentMode: 1
+  m_ObjectForwardAxis: 5
+  m_ObjectUpAxis: 1
+  m_StartOffset: 0

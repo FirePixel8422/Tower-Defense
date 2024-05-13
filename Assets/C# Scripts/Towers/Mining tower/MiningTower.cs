@@ -8,12 +8,20 @@ public class MiningTower : TowerCore
 
     public Material magicColormaterial;
     public Color[] magicColors;
+    public float colorSwapSpeed;
+    public int colorIndex;
 
     public MagicType generationType;
     public float generationPower;
     public float generatedEssence;
 
 
+
+    public override void Start()
+    {
+        base.Start();
+        magicColormaterial = transform.GetChild(0).GetComponent<Renderer>().material;
+    }
 
     public override void Init()
     {
@@ -23,6 +31,7 @@ public class MiningTower : TowerCore
 
     public void ChangeGenerationType(MagicType newType)
     {
+        colorIndex = (int)newType - 1;
         generationType = newType;
         generatedEssence = 0;
     }
@@ -33,6 +42,8 @@ public class MiningTower : TowerCore
         {
             return;
         }
+        magicColormaterial.SetColor("_Base_Color", Color.Lerp(magicColormaterial.GetColor("_Base_Color"), magicColors[colorIndex], colorSwapSpeed * Time.deltaTime));
+
         generatedEssence += generationPower * Time.deltaTime;
 
         essenceManager.AddRemoveEssence((int)generatedEssence, generationType);
