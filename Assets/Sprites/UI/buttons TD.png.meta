@@ -180,6 +180,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: buttons TD_4
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 807
+        width: 518
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e66c37af84558c4ea0cc63aa912abc5
+      internalID: -1885970156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -195,6 +216,7 @@ TextureImporter:
       buttons TD_1: -853338915
       buttons TD_2: -1861381236
       buttons TD_3: -839700489
+      buttons TD_4: -1885970156
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
