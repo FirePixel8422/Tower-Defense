@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3802653620527029649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9211410283693322695}
+  m_Layer: 0
+  m_Name: shootpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9211410283693322695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802653620527029649}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.395, z: 0.514}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6840111195699165374}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4861587314236299889
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +181,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ad4731bb2c639e149b27386b6b7f3aa3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5445087217858300655}
+    - targetCorrespondingSourceObject: {fileID: -9154029896749543797, guid: ad4731bb2c639e149b27386b6b7f3aa3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9211410283693322695}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad4731bb2c639e149b27386b6b7f3aa3, type: 3}
       insertIndex: -1
@@ -226,6 +260,9 @@ MonoBehaviour:
   cDissolves: 0
   towerCompleted: 0
   towerPreviewRenderer: {fileID: 0}
+  projectile: {fileID: 6691617337945683247, guid: 90b2e13ffabbcd34484ffe885c206d3d, type: 3}
+  shootPoint: {fileID: 9211410283693322695}
+  target: {fileID: 0}
   magicType: 
   rotSpeed: 540
   rotPoint: {fileID: 6840111195699165374}
