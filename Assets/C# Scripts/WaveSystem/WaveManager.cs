@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class WaveManager : MonoBehaviour
 {
@@ -12,19 +15,22 @@ public class WaveManager : MonoBehaviour
     }
 
 
-    public Transform[] points;
-
+    public List<Transform> points;
+    public float smoothValue;
+    public float rotMultiplier;
 
     public float preparationTime;
-
+    
     public WaveDataSO[] waves;
 
     public List<EnemyCore> spawnedObj;
 
 
-
     private void Start()
     {
+        points = GetComponentsInChildren<Transform>().ToList();
+        points.Remove(transform);
+
         StartCoroutine(SpawnLoop());
     }
 
@@ -40,10 +46,13 @@ public class WaveManager : MonoBehaviour
 
                 for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
                 {
-                    EnemyCore enemyCore = Instantiate(waves[i].waveParts[i2].enemy.gameObject, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
+                    EnemyCore target = Instantiate(waves[i].waveParts[i2].enemy.gameObject, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
 
-                    spawnedObj.Add(enemyCore);
-                    enemyCore.Init(waves[i].waveParts[i2].immunityBarrier);
+                    spawnedObj.Add(target);
+
+                    UpdateTargetDir(target);
+                    target.Init(waves[i].waveParts[i2].immunityBarrier);
+
                     yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                 }
             }
@@ -58,27 +67,102 @@ public class WaveManager : MonoBehaviour
         //then rotate them towards the next points, making them turn.
         for (int i = 0; i < spawnedObj.Count; i++)
         {
-            //make a wa to get rotation between current point and next one, and calculate rotation speed with it
-            spawnedObj[i].transform.rotation = Quaternion.RotateTowards(spawnedObj[i].transform.rotation,
-                points[spawnedObj[i].pointIndex].rotation, spawnedObj[i].rotSpeed * Time.deltaTime);
-            spawnedObj[i].transform.position -= spawnedObj[i].moveSpeed * Time.deltaTime * spawnedObj[i].transform.forward;
+            //make a way to get rotation between current point and next one, and calculate rotation speed with it
 
-            spawnedObj[i].progression += Time.deltaTime * spawnedObj[i].moveSpeed;
+            EnemyCore target = spawnedObj[i];
+            int pointIndex = target.pointIndex;
 
-            if (Vector3.Distance(spawnedObj[i].transform.position, points[spawnedObj[i].pointIndex].position) < 0.1f)
+            int rotPointDiff = Mathf.RoundToInt(Quaternion.Angle(points[Mathf.Max(0, pointIndex - 1)].rotation, points[pointIndex].rotation) / 90);
+            float targetSpeed = (target.moveSpeed * 90 + Mathf.Max(0, rotPointDiff - 1) * 45) * rotMultiplier * Time.deltaTime;
+
+            Vector3 movement =  target.moveSpeed * Time.deltaTime * target.transform.forward;
+
+            float dist = movement.x + movement.y + movement.z;
+            if (Vector3.Distance(target.transform.position, points[pointIndex].position) < dist)
             {
-                 spawnedObj[i].pointIndex += 1;
+                target.transform.position = points[pointIndex].position;
+            }
+            else
+            {
+                target.transform.position = target.transform.position - movement;
+            }
+
+            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, points[pointIndex].rotation, targetSpeed);
+
+
+            //retrive int2 direction and lock its position in those 2 angles (x-1,x1,z-1,z1)
+            Vector3 pos = target.transform.position;
+            int2 dir = target.dir;
+            if (dir.x == 1)
+            {
+                if (target.transform.position.x < points[pointIndex].position.x)
+                {
+                    pos.x = points[pointIndex].position.x;
+                }
+            }
+            if (dir.x == -1)
+            {
+                if (target.transform.position.x > points[pointIndex].position.x)
+                {
+                    pos.x = points[pointIndex].position.x;
+                }
+            }
+            if (dir.y == 1)
+            {
+                if(target.transform.position.z < points[pointIndex].position.z)
+                {
+                    pos.z = points[pointIndex].position.z;
+                }
+            }
+            if (dir.y == -1)
+            {
+                if (target.transform.position.z > points[pointIndex].position.z)
+                {
+                    pos.z = points[pointIndex].position.z;
+                }
+            }
+            target.transform.position = pos;
+
+            target.progression += Time.deltaTime * target.moveSpeed;
+
+
+            //update targetPoint to target and give new dir with UpdateTargetDir
+            if (Vector3.Distance(target.transform.position, points[pointIndex].position) < 0.035f)
+            {
+                target.pointIndex += 1;
+                
+                if (target.pointIndex == points.Count)
+                {
+                    Destroy(spawnedObj[i].gameObject);
+                    spawnedObj.RemoveAt(i);
+                }
+                else
+                {
+                    UpdateTargetDir(target);
+                }
             }
         }
+    }
 
-        for (int i = 0; i < spawnedObj.Count; i++)
+    public void UpdateTargetDir(EnemyCore target)
+    {
+        int2 dir = int2.zero;
+        if (target.transform.position.x > points[target.pointIndex].position.x)
         {
-            if (Vector3.Distance(spawnedObj[i].transform.position, points[points.Length - 1].position) < 0.1f)
-            {
-                Destroy(spawnedObj[i].gameObject);
-                spawnedObj.RemoveAt(i);
-                i -= 1;
-            }
+            dir.x = 1;
         }
+        if (target.transform.position.x < points[target.pointIndex].position.x)
+        {
+            dir.x = -1;
+        }
+        if (target.transform.position.z > points[target.pointIndex].position.z)
+        {
+            dir.y = 1;
+        }
+        if (target.transform.position.z < points[target.pointIndex].position.z)
+        {
+            dir.y = -1;
+        }
+        target.dir = dir;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Scripting;
 using UnityEngine;
 
 public class TowerManager : MonoBehaviour
@@ -88,10 +89,13 @@ public class TowerManager : MonoBehaviour
             {
                 if (Vector3.Distance(spawnedTowerObj[i].transform.position, waveManager.spawnedObj[i2].transform.position) < spawnedTowerObj[i].range)
                 {
-                    if (waveManager.spawnedObj[i2].progression > progression)
+                    if (waveManager.spawnedObj[i2].incomingDamage < waveManager.spawnedObj[i2].health)
                     {
-                        progression = waveManager.spawnedObj[i2].progression;
-                        id = i2;
+                        if (waveManager.spawnedObj[i2].progression > progression)
+                        {
+                            progression = waveManager.spawnedObj[i2].progression;
+                            id = i2;
+                        }
                     }
                 }
             }
@@ -102,6 +106,11 @@ public class TowerManager : MonoBehaviour
                 float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
                 spawnedTowerObj[i].rotPoint.rotation = Quaternion.RotateTowards(spawnedTowerObj[i].rotPoint.rotation, Quaternion.Euler(0, angle, 0) * spawnedTowerObj[i].rotOffset, spawnedTowerObj[i].rotSpeed * Time.deltaTime);
+                spawnedTowerObj[i].target = waveManager.spawnedObj[id];
+            }
+            else
+            {
+                spawnedTowerObj[i].target = null;
             }
         }
     }

@@ -180,11 +180,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee2c164db7e18d439225a200a575896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 25
   damage: 5
-  moveSpeed: 2
-  rotSpeed: 270
+  moveSpeed: 1.5
   pointIndex: 0
+  dir:
+    x: 0
+    y: 0
   progression: 0
   elements: 00000000
   immunityBarrier: 0

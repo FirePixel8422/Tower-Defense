@@ -180,12 +180,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee2c164db7e18d439225a200a575896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 10
   damage: 5
-  moveSpeed: 3
-  rotSpeed: 360
+  incomingDamage: 0
+  moveSpeed: 6
   pointIndex: 0
+  dir:
+    x: 0
+    y: 0
   progression: 0
   elements: 00000000
   immunityBarrier: 0
-  barrierShader: {fileID: 0}
+  barrierRenderer: {fileID: 0}
