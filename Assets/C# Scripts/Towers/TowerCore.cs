@@ -11,6 +11,8 @@ public class TowerCore : MonoBehaviour
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
+    [HideInInspector]
+    public Animator anim;
 
     public GameObject projectile;
     public Transform shootPoint;
@@ -22,18 +24,18 @@ public class TowerCore : MonoBehaviour
     public Transform rotPoint;
     public Quaternion rotOffset;
 
-    public float attackSpeed;
-    public float speed;
-    public float damage;
     public float range;
     public float lookTreshold;
+    public float attackSpeed;
 
+    public ProjectileStats projStats;
 
 
     public virtual void Start()
     {
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
         towerPreviewRenderer.transform.localScale = Vector3.one * range;
+        anim = GetComponent<Animator>();
     }
     public virtual void Init()
     {
@@ -52,18 +54,32 @@ public class TowerCore : MonoBehaviour
 
     private IEnumerator ShootLoop()
     {
+        float timer = 0;
         while (true)
         {
-            yield return new WaitForSeconds(attackSpeed);
-            yield return new WaitUntil(() => target != null && Vector3.Dot(shootPoint.forward, (target.transform.position - transform.position).normalized) >= lookTreshold);
-            Shoot();
+            timer -= Time.deltaTime;
+            yield return null;
+
+            if (timer < 0)
+            {
+                if (target != null &&
+                    target.incomingDamage < target.health &&
+                    Vector3.Dot(shootPoint.forward, (target.transform.position - transform.position).normalized) >= lookTreshold)
+                {
+                    Shoot();
+                    timer = attackSpeed;
+                }
+            }
         }
     }
+
     public virtual void Shoot()
     {
+        anim.SetTrigger("Shoot");
+        target.TryHit(projStats.damage);
+
         MagicProjectile bullet = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<MagicProjectile>();
-        bullet.Init(target, speed, damage);
-        target.TryHit(damage);
+        bullet.Init(target, projStats);
     }
 
     public virtual void SelectOrDeselectTower(bool select)

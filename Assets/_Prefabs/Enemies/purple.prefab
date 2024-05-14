@@ -183,7 +183,7 @@ MonoBehaviour:
   health: 10
   damage: 5
   incomingDamage: 0
-  moveSpeed: 6
+  moveSpeed: 3.5
   pointIndex: 0
   dir:
     x: 0

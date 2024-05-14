@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MagicProjectile : MonoBehaviour
 {
     public float size;
 
     public EnemyCore target;
-    public float damage;
-    public float speed;
+    public ProjectileStats projStats;
 
-    public void Init(EnemyCore _target, float _speed, float _damage)
+
+
+    public void Init(EnemyCore _target, ProjectileStats _s)
     {
         target = _target;
-        speed = _speed;
-        damage = _damage;
+        projStats = _s;
+
         StartCoroutine(TrackTargetLoop());
     }
 
@@ -30,13 +32,31 @@ public class MagicProjectile : MonoBehaviour
                 yield break;
             }
             
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, projStats.speed * Time.deltaTime);
             if (Vector3.Distance(transform.position, target.transform.position) < size)
             {
-                target.Hit(damage);
+                target.ApplyDamage(projStats.damage, projStats.damageOverTime, projStats.time);
+
                 Destroy(gameObject);
                 yield break;
             }
         }
     }
+
+}
+
+
+[System.Serializable]
+public class ProjectileStats
+{
+    public float speed;
+    public float damage;
+    public float damageOverTime;
+    public float time;
+
+
+    public bool splashDamage;
+    public int maxSplashHits;
+    public GameObject splashObject;
+    public float splashDuration;
 }

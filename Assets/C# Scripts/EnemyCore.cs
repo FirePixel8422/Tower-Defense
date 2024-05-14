@@ -38,14 +38,47 @@ public class EnemyCore : MonoBehaviour
     {
         incomingDamage += damage;
     }
-    public void Hit(float damage)
+    public void ApplyDamage(float damage, float damageOverTime, float time)
     {
         health -= damage;
         incomingDamage -= damage;
-        if (health < 0)
+        if (health <= 0)
         {
             WaveManager.Instance.spawnedObj.Remove(this);
             Destroy(gameObject);
+        }
+        else if(time != 0)
+        {
+            StartCoroutine(DamageOverTime(damageOverTime, time));
+        }
+    }
+
+    private IEnumerator DamageOverTime(float damage, float time)
+    {
+        //temporary void update loop to apply damage over time, deal damage every .25 seconds until time is over.
+        float timeLeft = time;
+        float timer = 0f;
+
+        damage = damage / time / 4;
+
+        while (timeLeft > 0)
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= 0.25f)
+            {
+                timer -= 0.25f;
+                timeLeft -= 0.25f;
+                health -= damage;
+                if (health <= 0)
+                {
+                    WaveManager.Instance.spawnedObj.Remove(this);
+                    Destroy(gameObject);
+                    yield break;
+                }
+            }
+
+            yield return null;
         }
     }
 }

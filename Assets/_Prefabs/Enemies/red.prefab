@@ -182,7 +182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 25
   damage: 5
-  moveSpeed: 1.5
+  incomingDamage: 0
+  moveSpeed: 1.25
   pointIndex: 0
   dir:
     x: 0
@@ -190,4 +191,4 @@ MonoBehaviour:
   progression: 0
   elements: 00000000
   immunityBarrier: 0
-  barrierShader: {fileID: 0}
+  barrierRenderer: {fileID: 0}
