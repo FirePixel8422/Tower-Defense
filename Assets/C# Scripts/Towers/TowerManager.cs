@@ -88,9 +88,9 @@ public class TowerManager : MonoBehaviour
             {
                 if (Vector3.Distance(spawnedTowerObj[i].transform.position, waveManager.spawnedObj[i2].transform.position) < spawnedTowerObj[i].range)
                 {
-                    if (waveManager.spawnedObj[i2].splineAnimator.ElapsedTime > progression)
+                    if (waveManager.spawnedObj[i2].progression > progression)
                     {
-                        progression = waveManager.spawnedObj[i2].splineAnimator.ElapsedTime;
+                        progression = waveManager.spawnedObj[i2].progression;
                         id = i2;
                     }
                 }

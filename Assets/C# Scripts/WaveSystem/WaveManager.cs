@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Splines;
 
 public class WaveManager : MonoBehaviour
 {
@@ -13,11 +12,7 @@ public class WaveManager : MonoBehaviour
     }
 
 
-    public Transform startPoint;
-    public Transform endPoint;
-
-    [HideInInspector]
-    public SplineContainer splineContainer;
+    public Transform[] points;
 
 
     public float preparationTime;
@@ -30,7 +25,6 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        splineContainer = GetComponent<SplineContainer>();
         StartCoroutine(SpawnLoop());
     }
 
@@ -46,10 +40,10 @@ public class WaveManager : MonoBehaviour
 
                 for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
                 {
-                    EnemyCore enemyCore = Instantiate(waves[i].waveParts[i2].enemy.gameObject, startPoint.position, Quaternion.identity).GetComponent<EnemyCore>();
+                    EnemyCore enemyCore = Instantiate(waves[i].waveParts[i2].enemy.gameObject, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
 
                     spawnedObj.Add(enemyCore);
-                    enemyCore.Init(splineContainer, waves[i].waveParts[i2].immunityBarrier);
+                    enemyCore.Init(waves[i].waveParts[i2].immunityBarrier);
                     yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                 }
             }
@@ -60,14 +54,26 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            spawnedObj[0].splineAnimator.ElapsedTime *= 0.5f;
-            spawnedObj[0].splineAnimator.Duration *= 0.5f;
-        }
+        //loop through all enemies and move them forward at all times.
+        //then rotate them towards the next points, making them turn.
         for (int i = 0; i < spawnedObj.Count; i++)
         {
-            if (Vector3.Distance(spawnedObj[i].transform.position, endPoint.position) < 0.1f)
+            //make a wa to get rotation between current point and next one, and calculate rotation speed with it
+            spawnedObj[i].transform.rotation = Quaternion.RotateTowards(spawnedObj[i].transform.rotation,
+                points[spawnedObj[i].pointIndex].rotation, spawnedObj[i].rotSpeed * Time.deltaTime);
+            spawnedObj[i].transform.position -= spawnedObj[i].moveSpeed * Time.deltaTime * spawnedObj[i].transform.forward;
+
+            spawnedObj[i].progression += Time.deltaTime * spawnedObj[i].moveSpeed;
+
+            if (Vector3.Distance(spawnedObj[i].transform.position, points[spawnedObj[i].pointIndex].position) < 0.1f)
+            {
+                 spawnedObj[i].pointIndex += 1;
+            }
+        }
+
+        for (int i = 0; i < spawnedObj.Count; i++)
+        {
+            if (Vector3.Distance(spawnedObj[i].transform.position, points[points.Length - 1].position) < 0.1f)
             {
                 Destroy(spawnedObj[i].gameObject);
                 spawnedObj.RemoveAt(i);
