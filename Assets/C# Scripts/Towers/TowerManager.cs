@@ -75,7 +75,7 @@ public class TowerManager : MonoBehaviour
     {
         for (int i = 0; i < spawnedTowerObj.Count; i++)
         {
-            if (spawnedTowerObj[i].towerCompleted == false || spawnedTowerObj[i].attackSpeed == 0)
+            if (spawnedTowerObj[i].towerCompleted == false || spawnedTowerObj[i].rotSpeed == 0)
             {
                 continue;
             }

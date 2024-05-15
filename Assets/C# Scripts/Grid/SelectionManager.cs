@@ -62,16 +62,17 @@ public class SelectionManager : MonoBehaviour
     public void TryPlaceTower()
     {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
         {
             GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
-            if (gridData.type == 0)
+
+            if ((gridData.type == 0 && selectedTower.placeOntrack == false) || (gridData.type == 1 && selectedTower.placeOntrack))
             {
                 selectedTower.transform.localPosition = Vector3.zero;
                 selectedTower = Instantiate(selectedTower.gameObject, gridData.worldPos, selectedTower.transform.rotation).GetComponent<TowerCore>();
 
                 towerManager.spawnedTowerObj.Add(selectedTower);
-                selectedTower.Init();
+                selectedTower.CoreInit();
 
                 gridManager.UpdateGridDataFieldType(gridData.gridPos, 2, selectedTower);
                 isPlacingTower = false;
@@ -81,7 +82,7 @@ public class SelectionManager : MonoBehaviour
     public void TrySelectTower()
     {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
         {
             GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
             if (gridData.tower != null)
@@ -136,10 +137,12 @@ public class SelectionManager : MonoBehaviour
         if (isPlacingTower)
         {
             Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
             {
                 GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
-                if (gridData.type == 0)
+
+                int onTrack = gridData.type;
+                if ((onTrack == 1 && selectedTower.placeOntrack) || (onTrack == 0 && selectedTower.placeOntrack == false))
                 {
                     selectedTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
                 }

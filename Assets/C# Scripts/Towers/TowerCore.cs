@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class TowerCore : MonoBehaviour
 {
+    [HideInInspector]
     public int amountOfDissolves;
+    [HideInInspector]
     public int cDissolves;
 
     public bool towerCompleted;
+
+    public bool placeOntrack;
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
@@ -37,9 +41,8 @@ public class TowerCore : MonoBehaviour
         towerPreviewRenderer.transform.localScale = Vector3.one * range;
         anim = GetComponent<Animator>();
     }
-    public virtual void Init()
+    public virtual void CoreInit()
     {
-        StartCoroutine(ShootLoop());
         DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
         amountOfDissolves = dissolves.Length;
 
@@ -49,6 +52,11 @@ public class TowerCore : MonoBehaviour
         }
 
         towerPreviewRenderer.enabled = false;
+        Init();
+    }
+    public virtual void Init()
+    {
+        StartCoroutine(ShootLoop());
     }
 
 
@@ -76,9 +84,9 @@ public class TowerCore : MonoBehaviour
     public virtual void Shoot()
     {
         anim.SetTrigger("Shoot");
-        target.TryHit(projStats.damage);
+        target.TryHit(projStats.damageType, projStats.damage);
 
-        MagicProjectile bullet = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<MagicProjectile>();
+        Projectile bullet = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<Projectile>();
         bullet.Init(target, projStats);
     }
 

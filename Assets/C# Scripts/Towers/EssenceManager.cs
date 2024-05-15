@@ -16,8 +16,8 @@ public class EssenceManager : MonoBehaviour
     }
 
 
-    private int lifeEssence;
-    public int LifeEssence
+    public float lifeEssence;
+    public float LifeEssence
     {
         get
         {
@@ -26,11 +26,16 @@ public class EssenceManager : MonoBehaviour
         set
         {
             lifeEssence = value;
+            float rounded = Mathf.Round(lifeEssence);
+            if (Mathf.Approximately(lifeEssence, rounded))
+            {
+                lifeEssence = rounded;
+            }
             OnEssenceChanged.Invoke();
         }
     }
-    private int arcaneEssence;
-    public int ArcaneEssence
+    public float arcaneEssence;
+    public float ArcaneEssence
     {
         get
         {
@@ -39,11 +44,16 @@ public class EssenceManager : MonoBehaviour
         set
         {
             arcaneEssence = value;
+            float rounded = Mathf.Round(arcaneEssence);
+            if (Mathf.Approximately(arcaneEssence, rounded))
+            {
+                arcaneEssence = rounded;
+            }
             OnEssenceChanged.Invoke();
         }
     }
-    private int emberEssence;
-    public int EmberEssence
+    public float emberEssence;
+    public float EmberEssence
     {
         get
         {
@@ -52,6 +62,11 @@ public class EssenceManager : MonoBehaviour
         set
         {
             emberEssence = value;
+            float rounded = Mathf.Round(emberEssence);
+            if (Mathf.Approximately(emberEssence, rounded))
+            {
+                emberEssence = rounded;
+            }
             OnEssenceChanged.Invoke();
         }
     }
@@ -71,9 +86,9 @@ public class EssenceManager : MonoBehaviour
     }
     public void UpdateEssenceUI()
     {
-        lifeEssenceTextObj.text = lifeEssence.ToString();
-        arcaneEssenceTextObj.text = arcaneEssence.ToString();
-        emberEssenceTextObj.text = emberEssence.ToString();
+        lifeEssenceTextObj.text =  ((int)LifeEssence).ToString();
+        arcaneEssenceTextObj.text = ((int)ArcaneEssence).ToString();
+        emberEssenceTextObj.text = ((int)EmberEssence).ToString();
     }
 
     public bool[] AllPossibleUpgradeOptions(int amount)
@@ -113,9 +128,31 @@ public class EssenceManager : MonoBehaviour
         return upgradesPossible.Contains(true);
     }
 
-    public void AddRemoveEssence(int amount, MagicType type)
+    public void AddRemoveEssence(float amount, MagicType type)
     {
         if (type == MagicType.Life)
+        {
+            LifeEssence += amount;
+        }
+        else if (type == MagicType.Arcane)
+        {
+            ArcaneEssence += amount;
+        }
+        else if (type == MagicType.Ember)
+        {
+            EmberEssence += amount;
+        }
+    }
+
+    public void GenerateEssenceFromEnemy(float amount, MagicType type)
+    {
+        if (type == MagicType.Neutral)
+        {
+            LifeEssence += amount / 3;
+            ArcaneEssence += amount / 3;
+            EmberEssence += amount / 3;
+        }
+        else if (type == MagicType.Life)
         {
             LifeEssence += amount;
         }
