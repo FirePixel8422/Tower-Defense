@@ -153,10 +153,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 731939135236587654}
+      addedObject: {fileID: 8876607160096023859}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8876607160096023859}
+      addedObject: {fileID: 731939135236587654}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4945212085555035090}
@@ -243,27 +243,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
   m_PrefabInstance: {fileID: 6729533284428017008}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &731939135236587654
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5883235000760061985}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2dc6369fa62d2344bb699d447f4481dc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8876607160096023859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,8 +283,31 @@ MonoBehaviour:
     splashObject: {fileID: 0}
     splashDuration: 0
   smart: 0
-  trapStayUpTime: 0
+  trapActivateTime: 0
+  trapDeActivateTime: 0
   enemiesOnTrap: 0
+  trapColl: {fileID: 0}
+--- !u!95 &731939135236587654
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883235000760061985}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2dc6369fa62d2344bb699d447f4481dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &4945212085555035090
 BoxCollider:
   m_ObjectHideFlags: 0
