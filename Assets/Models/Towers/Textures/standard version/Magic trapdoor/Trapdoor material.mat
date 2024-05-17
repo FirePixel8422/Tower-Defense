@@ -134,7 +134,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metalic_Value: 0
+    - _Metalic_Value: 1
     - _Metallic: 0
     - _Metallic_Smoothness: 0.5
     - _Noise_Scale: 50

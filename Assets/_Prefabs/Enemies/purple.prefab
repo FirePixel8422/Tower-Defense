@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   essenseOnDamage: 1
   essenceOnDeath: 5
-  health: 10
+  health: 1501.5
   damage: 5
   incomingDamage: 0
   moveSpeed: 4
