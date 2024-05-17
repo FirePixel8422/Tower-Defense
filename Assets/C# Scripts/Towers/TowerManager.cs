@@ -75,7 +75,7 @@ public class TowerManager : MonoBehaviour
     {
         for (int i = 0; i < spawnedTowerObj.Count; i++)
         {
-            if (spawnedTowerObj[i].towerCompleted == false || spawnedTowerObj[i].rotSpeed == 0)
+            if (spawnedTowerObj[i].towerCompleted == false)
             {
                 continue;
             }
@@ -96,14 +96,21 @@ public class TowerManager : MonoBehaviour
                     }
                 }
             }
+            
 
             if (id != -1)
             {
+                spawnedTowerObj[i].target = waveManager.spawnedObj[id];
+
+                if (spawnedTowerObj[i].rotSpeed == 0)
+                {
+                    continue;
+                }
+
                 Vector3 dir = spawnedTowerObj[i].rotPoint.position - waveManager.spawnedObj[id].transform.position;
                 float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
                 spawnedTowerObj[i].rotPoint.rotation = Quaternion.RotateTowards(spawnedTowerObj[i].rotPoint.rotation, Quaternion.Euler(0, angle, 0) * spawnedTowerObj[i].rotOffset, spawnedTowerObj[i].rotSpeed * Time.deltaTime);
-                spawnedTowerObj[i].target = waveManager.spawnedObj[id];
             }
             else
             {

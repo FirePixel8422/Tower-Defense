@@ -86,7 +86,10 @@ public class TowerCore : MonoBehaviour
         anim.SetTrigger("Shoot");
         target.TryHit(projStats.damageType, projStats.damage);
 
-        Projectile bullet = Instantiate(projectile, shootPoint.position, Quaternion.identity).GetComponent<Projectile>();
+        Vector3 dir = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+        Projectile bullet = Instantiate(projectile, shootPoint.position, Quaternion.Euler(0, angle, 0)).GetComponent<Projectile>();
         bullet.Init(target, projStats);
     }
 

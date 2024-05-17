@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float size;
-
     public EnemyCore target;
     public ProjectileStats projStats;
 
@@ -35,7 +33,7 @@ public class Projectile : MonoBehaviour
             }
 
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, projStats.speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, target.transform.position) < size)
+            if (Vector3.Distance(transform.position, target.transform.position) < projStats.projectileSize)
             {
                 //call virtual void "HitTarget()"
                 HitTarget();
@@ -60,7 +58,8 @@ public class Projectile : MonoBehaviour
     }
     public virtual void ApplySplashDamage()
     {
-
+        AIO_AreaEffect AIO_Effect = Instantiate(projStats.areaEffect, target.transform.position, Quaternion.identity);
+        AIO_Effect.Init(projStats);
     }
 }
 
@@ -68,8 +67,10 @@ public class Projectile : MonoBehaviour
 
 
 [System.Serializable]
-public class ProjectileStats
+public struct ProjectileStats
 {
+    public float projectileSize;
+
     public float speed;
     public MagicType damageType;
     public float damage;
@@ -77,9 +78,16 @@ public class ProjectileStats
     public float damageOverTime;
     public float time;
 
+    public AIO_AreaEffect areaEffect;
+    public float duration;
 
     public bool doSplashDamage;
+    public float areaEffectSize;
     public int maxSplashHits;
-    public GameObject splashObject;
-    public float splashDuration;
+
+    public MagicType AIO_damageType;
+    public float AIO_damage;
+    public MagicType AIO_damageOverTimeType;
+    public float AIO_damageOverTime;
+    public float AIO_time;
 }
