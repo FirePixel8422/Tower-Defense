@@ -20,12 +20,12 @@ MonoBehaviour:
     immunityBarrier: 0
   - startDelay: 5
     enemy: {fileID: -7427253877955255539, guid: df5886d1956c8be4a9cd5396401be8b9, type: 3}
-    spawnDelay: 0.3
-    amount: 5
+    spawnDelay: 1
+    amount: 1
     immunityBarrier: 0
   - startDelay: 3
     enemy: {fileID: -7427253877955255539, guid: b91b8823bd52a0d468182b2a9acc3d1c, type: 3}
-    spawnDelay: 0.2
-    amount: 10
+    spawnDelay: 0.01
+    amount: 280
     immunityBarrier: 0
   waveEndDelay: 3

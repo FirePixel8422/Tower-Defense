@@ -38,26 +38,29 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(preparationTime);
 
-        for (int i = 0; i < waves.Length; i++)
+        while (true)
         {
-            for (int i2 = 0; i2 < waves[i].waveParts.Length; i2++)
+            for (int i = 0; i < waves.Length; i++)
             {
-                yield return new WaitForSeconds(waves[i].waveParts[i2].startDelay);
-
-                for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
+                for (int i2 = 0; i2 < waves[i].waveParts.Length; i2++)
                 {
-                    EnemyCore target = Instantiate(waves[i].waveParts[i2].enemy.gameObject, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
+                    yield return new WaitForSeconds(waves[i].waveParts[i2].startDelay);
 
-                    spawnedObj.Add(target);
+                    for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
+                    {
+                        EnemyCore target = Instantiate(waves[i].waveParts[i2].enemy.gameObject, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
 
-                    UpdateTargetDir(target);
-                    target.Init(waves[i].waveParts[i2].immunityBarrier);
+                        spawnedObj.Add(target);
 
-                    yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
+                        UpdateTargetDir(target);
+                        target.Init(waves[i].waveParts[i2].immunityBarrier);
+
+                        yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
+                    }
                 }
-            }
 
-            yield return new WaitForSeconds(waves[i].waveEndDelay);
+                yield return new WaitForSeconds(waves[i].waveEndDelay);
+            }
         }
     }
 
