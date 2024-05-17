@@ -76,6 +76,7 @@ public class SelectionManager : MonoBehaviour
 
                 gridManager.UpdateGridDataFieldType(gridData.gridPos, 2, selectedTower);
                 isPlacingTower = false;
+                selectedTower.UpdatePreviewTower(false);
             }
         }
     }
@@ -123,6 +124,7 @@ public class SelectionManager : MonoBehaviour
         if (towerSelected)
         {
             selectedTower.towerPreviewRenderer.enabled = false;
+            selectedTower.UpdatePreviewTower(true);
             towerSelected = false;
             selectedTower.SelectOrDeselectTower(false);
         }

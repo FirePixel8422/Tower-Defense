@@ -102,6 +102,15 @@ public class TowerCore : MonoBehaviour
             d.dissolveMaterial.SetInt("_Selected", select ? 1 : 0);
         }
     }
+    public virtual void UpdatePreviewTower(bool preview)
+    {
+        DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
+
+        foreach (var d in dissolves)
+        {
+            d.dissolveMaterial.SetInt("_Preview", preview ? 1 : 0);
+        }
+    }
 
     public void DissolveCompleted()
     {
