@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     public Transform worldCenter;
 
     public float rotSpeed;
-    public float scrollSpeed;
+    public float scrollForMaxZoom;
 
     public int xAmount;
     public float[] dir;
@@ -57,6 +57,8 @@ public class CameraController : MonoBehaviour
 
     private void Scroll(float scrollDelta)
     {
-        print(scrollDelta);
+        float delta = scrollDelta / 120 / scrollForMaxZoom;
+        print(delta);
+        c.Evaluate(delta);
     }
 }
