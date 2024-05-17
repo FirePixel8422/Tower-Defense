@@ -1065,7 +1065,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 019c89565c500084fa0e7b212011c523, type: 3}
---- !u!1001 &4457293830860260862
+--- !u!1001 &8213180529091355201
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1073,49 +1073,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6044152404203646728, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
-      propertyPath: m_Name
-      value: Magic Crosbow arrow
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.933
+      value: 2.9736247
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.216
+      value: -0.36167672
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.055249
+      value: -4.130038
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6389187551429785010, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+    - target: {fileID: 89143623557091478, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 754180365172394540, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+      propertyPath: m_Name
+      value: Magic Crosbow arrow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1138,4 +1138,4 @@ SceneRoots:
   - {fileID: 2372109}
   - {fileID: 1716299809}
   - {fileID: 699958691}
-  - {fileID: 4457293830860260862}
+  - {fileID: 8213180529091355201}
