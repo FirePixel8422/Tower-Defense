@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class WaveManager : MonoBehaviour
 {
@@ -53,7 +52,8 @@ public class WaveManager : MonoBehaviour
                         spawnedObj.Add(target);
 
                         UpdateTargetDir(target);
-                        target.Init(waves[i].waveParts[i2].immunityBarrier);
+
+                        target.Init();
 
                         yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                     }

@@ -17,20 +17,16 @@ MonoBehaviour:
     enemy: {fileID: -7427253877955255539, guid: df5886d1956c8be4a9cd5396401be8b9, type: 3}
     spawnDelay: 1
     amount: 5
-    immunityBarrier: 0
   - startDelay: 1
     enemy: {fileID: -7427253877955255539, guid: df5886d1956c8be4a9cd5396401be8b9, type: 3}
     spawnDelay: 0.5
     amount: 10
-    immunityBarrier: 0
   - startDelay: 1
     enemy: {fileID: -7427253877955255539, guid: b91b8823bd52a0d468182b2a9acc3d1c, type: 3}
     spawnDelay: 1
     amount: 5
-    immunityBarrier: 0
   - startDelay: 1
     enemy: {fileID: -7427253877955255539, guid: b91b8823bd52a0d468182b2a9acc3d1c, type: 3}
     spawnDelay: 0.5
     amount: 10
-    immunityBarrier: 0
   waveEndDelay: 0

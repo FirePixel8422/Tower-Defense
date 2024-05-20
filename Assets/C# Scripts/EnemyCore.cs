@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyCore : MonoBehaviour
@@ -23,42 +20,67 @@ public class EnemyCore : MonoBehaviour
 
     public MagicType[] elements;
 
-    public MagicType immunityBarrier;
-    public Renderer barrierRenderer;
+    public bool smartBarrier;
+    public MagicType immunityBarrierType;
+
+    private ImmunityBarrier immunityBarrier;
+    [Header("% chance of enemy spawning with barrier")]
+    public float barrierChance;
+    [Header("How many seconds untill barrier health has disappeared")]
+    public float barrierHealthDrainTime;
+    public float barrierStartHealth;
 
     private bool dead;
 
 
-    public void Init(ImmunityBarrier _immunityBarrier)
+    public void Init()
     {
         gameObject.tag = "Enemy";
-
         maxHealth = health;
-        if (_immunityBarrier != ImmunityBarrier.None)
+
+        immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
+
+        if (barrierChance == 0 || UnityEngine.Random.Range(0, 100f) < barrierChance)
         {
-            if (_immunityBarrier == ImmunityBarrier.Smart)
+            if (smartBarrier)
             {
-                immunityBarrier = TowerManager.Instance.HighestMagicType();
+                immunityBarrierType = TowerManager.Instance.HighestMagicType();
             }
-            barrierRenderer.gameObject.SetActive(true);
+            if (immunityBarrierType != MagicType.Neutral)
+            {
+                immunityBarrier.gameObject.SetActive(true);
+                immunityBarrier.Init(barrierStartHealth, barrierHealthDrainTime);
+            }
         }
     }
 
-    public void TryHit(MagicType damageType, float damage)
+    public void TryHit(MagicType damageType, float damage, bool doSplashDamage, MagicType AIO_damageType, float AIO_damage)
     {
-        if (immunityBarrier == damageType && damageType != MagicType.Neutral)
+        if (immunityBarrierType == damageType && damageType != MagicType.Neutral)
         {
             damage = 0;
         }
-        incomingDamage += damage;
+        if (immunityBarrierType == AIO_damageType && AIO_damageType != MagicType.Neutral)
+        {
+            AIO_damage = 0;
+        }
+        incomingDamage += damage + (doSplashDamage ? AIO_damage : 0);
     }
     public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time)
     {
         if (dead) return;
 
-        if (immunityBarrier == damageType && damageType != MagicType.Neutral)
+        
+        if (immunityBarrier != null && immunityBarrier.barrierHealth > 0)
         {
-            damage = 0;
+            if (immunityBarrierType == damageType && damageType != MagicType.Neutral)
+            {
+                damage = 0;
+            }
+            incomingDamage -= damage;
+            //give direction unless direction "projectilePos" == Vcetor3.zero being no direction.
+            immunityBarrier.TakeDamage(damage);
+            return;
         }
 
         health -= damage;
@@ -85,9 +107,9 @@ public class EnemyCore : MonoBehaviour
 
     private IEnumerator DamageOverTime(MagicType damageType, float damage, float time)
     {
-        if (immunityBarrier == damageType && damageType != MagicType.Neutral)
+        if (immunityBarrier != null && immunityBarrier.barrierHealth > 0 && immunityBarrierType == damageType && damageType != MagicType.Neutral)
         {
-            damage = 0;
+            yield break;
         }
 
         //temporary void update loop to apply damage over time, deal damage every .25 seconds until time is over.
@@ -107,7 +129,15 @@ public class EnemyCore : MonoBehaviour
             {
                 timer -= 0.25f;
                 timeLeft -= 0.25f;
-                health -= damage;
+                if (immunityBarrier != null && immunityBarrier.barrierHealth > 0)
+                {
+                    //give direction unless direction "projectilePos" == Vcetor3.zero being no direction.
+                    immunityBarrier.TakeDamage(damage);
+                }
+                else
+                {
+                    health -= damage;
+                }
 
                 //generate essence
                 float percentDamage = (damage + (health < 0 ? health : 0)) / maxHealth;
@@ -126,5 +156,6 @@ public class EnemyCore : MonoBehaviour
 
             yield return null;
         }
+        incomingDamage -= damage;
     }
 }

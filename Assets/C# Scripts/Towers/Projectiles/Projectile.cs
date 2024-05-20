@@ -48,12 +48,9 @@ public class Projectile : MonoBehaviour
             //spawn collider to hit multiple bullets
             ApplySplashDamage();
         }
-        else
-        {
-            target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
-        }
+        target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
 
-        //damage and effects applies, destroy bullet
+        //damage and effects applied, destroy bullet
         Destroy(gameObject);
     }
     public virtual void ApplySplashDamage()

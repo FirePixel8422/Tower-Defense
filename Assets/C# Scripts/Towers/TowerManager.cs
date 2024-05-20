@@ -25,11 +25,11 @@ public class TowerManager : MonoBehaviour
         int[] magicValues = new int[4];
         foreach (TowerCore tower in spawnedTowerObj)
         {
-            if (tower.magicType.Contains(MagicType.Neutral))
+            /*if (tower.magicType.Contains(MagicType.Neutral))
             {
                 magicValues[0] += 1;
             }
-            else if (tower.magicType.Contains(MagicType.Arcane))
+            else */if (tower.magicType.Contains(MagicType.Arcane))
             {
                 magicValues[1] += 1;
             }

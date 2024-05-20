@@ -84,7 +84,7 @@ public class TowerCore : MonoBehaviour
     public virtual void Shoot()
     {
         anim.SetTrigger("Shoot");
-        target.TryHit(projStats.damageType, projStats.damage);
+        target.TryHit(projStats.damageType, projStats.damage, projStats.doSplashDamage, projStats.AIO_damageType, projStats.AIO_damage);
 
         Vector3 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;

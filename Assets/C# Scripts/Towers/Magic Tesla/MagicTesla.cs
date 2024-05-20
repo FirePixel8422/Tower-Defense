@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
-using static UnityEngine.GraphicsBuffer;
 
 public class MagicTesla : TowerCore
 {
+    private ParticleSystem pSystem;
+    private float maxEmisionRate;
     private VisualEffect effect;
 
     public float timePerCharge;
@@ -24,6 +23,8 @@ public class MagicTesla : TowerCore
     public override void Init()
     {
         maxCharges = charges;
+        pSystem = GetComponentInChildren<ParticleSystem>();
+        maxEmisionRate = pSystem.emission.rateOverTime.constant;
         effect = GetComponentInChildren<VisualEffect>();
         StartCoroutine(RechargePower());
         StartCoroutine(ShootLoop());
@@ -46,8 +47,12 @@ public class MagicTesla : TowerCore
             }
             if (timer < 0)
             {
-                charges += 1;
+                charges += 1;                
                 timer = timePerCharge;
+
+#pragma warning disable CS0618 // Type or member is obsolete
+                pSystem.emissionRate = maxEmisionRate / maxCharges * charges;
+#pragma warning restore CS0618 // Type or member is obsolete
             }
         }
     }
@@ -69,6 +74,11 @@ public class MagicTesla : TowerCore
                 {
                     Shoot();
                     charges -= 1;
+
+                    #pragma warning disable CS0618 // Type or member is obsolete
+                    pSystem.emissionRate = Mathf.Clamp(maxEmisionRate / maxCharges * charges, 1.5f, float.MaxValue);
+                    #pragma warning restore CS0618 // Type or member is obsolete
+
                     timeSinceLastAttack = 0;
                     timer = attackSpeed;
                 }
@@ -112,7 +122,7 @@ public class MagicTesla : TowerCore
             if (ids[i] != -1)
             {
                 targets.Add(WaveManager.Instance.spawnedObj[ids[i]]);
-                targets[targets.Count - 1].TryHit(projStats.damageType, projStats.damage);
+                targets[^1].TryHit(projStats.damageType, projStats.damage, projStats.doSplashDamage, projStats.AIO_damageType, projStats.AIO_damage);
             }
         }
 
