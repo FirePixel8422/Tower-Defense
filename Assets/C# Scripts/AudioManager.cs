@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,6 +10,41 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+
+    //all audio in scene
+    public AudioController[] audioControllers;
+
+
+    private void Start()
+    {
+        audioControllers = FindObjectsOfType<AudioController>();
+
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneloaded;
+    }
+
+    private void OnSceneloaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Thomas Main")
+        {
+            MusicManager.Instance.ChangeMusicTrack(false, 0.5f);
+        }
+        StartCoroutine(SceneChangedDelay());
+    }
+    private IEnumerator SceneChangedDelay()
+    {
+        yield return null;
+
+        audioControllers = FindObjectsOfType<AudioController>();
+        foreach (AudioController controller in audioControllers)
+        {
+            controller.UpdateVolume(menuData.audioMaster, menuData.audioSFX, menuData.audioMusic);
+            MusicManager.Instance.UpdateVolume(menuData.audioMaster, menuData.audioSFX, menuData.audioMusic);
+        }
     }
 
 
@@ -24,6 +60,12 @@ public class AudioManager : MonoBehaviour
         sliderMaster.value = data.audioMaster;
         sliderSFX.value = data.audioSFX;
         sliderMusic.value = data.audioMusic;
+
+        foreach (AudioController controller in audioControllers)
+        {
+            controller.UpdateVolume(data.audioMaster, data.audioSFX, data.audioMusic);
+            MusicManager.Instance.UpdateVolume(menuData.audioMaster, menuData.audioSFX, menuData.audioMusic);
+        }
     }
 
     public void SaveAudioDataToFile()
@@ -44,5 +86,6 @@ public class AudioManager : MonoBehaviour
     public void OnMusicChanged(float f)
     {
         menuData.audioMusic = f;
+        MusicManager.Instance.UpdateVolume(menuData.audioMaster, menuData.audioSFX, menuData.audioMusic);
     }
 }

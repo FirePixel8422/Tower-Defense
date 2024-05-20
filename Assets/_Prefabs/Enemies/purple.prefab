@@ -196,7 +196,7 @@ MonoBehaviour:
   elements: 00000000
   smartBarrier: 1
   immunityBarrierType: 1
-  barrierChance: 25
+  barrierChance: 15
   barrierHealthDrainTime: 8.5
   barrierStartHealth: 20
 --- !u!65 &-455576664256061854

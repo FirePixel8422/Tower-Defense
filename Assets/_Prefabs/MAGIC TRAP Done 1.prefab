@@ -94,7 +94,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       propertyPath: m_LocalPosition.y
@@ -102,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       propertyPath: m_LocalRotation.w
@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5412609ebe817904eaf1559d01f502be, type: 2}
+    - target: {fileID: -7493596028755563170, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.327
+      objectReference: {fileID: 0}
     - target: {fileID: 882129737928793925, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -159,6 +163,9 @@ PrefabInstance:
       addedObject: {fileID: 731939135236587654}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1902306021438909107}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4945212085555035090}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       insertIndex: -1
@@ -168,9 +175,6 @@ PrefabInstance:
       addedObject: {fileID: 5346284251489851412}
     - targetCorrespondingSourceObject: {fileID: 5148817236446094103, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2354411227893209455}
-    - targetCorrespondingSourceObject: {fileID: 5148817236446094103, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 151019618987843705}
   m_SourcePrefab: {fileID: 100100000, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
 --- !u!1 &1878105640719142503 stripped
@@ -178,27 +182,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5148817236446094103, guid: bfedbf2125e1eab41b247c709cad0ace, type: 3}
   m_PrefabInstance: {fileID: 6729533284428017008}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2354411227893209455
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878105640719142503}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.707276, y: 0.32597098, z: 0.64738387}
-  m_Center: {x: 0, y: -0.17735948, z: 0}
 --- !u!114 &151019618987843705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,21 +253,28 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 0.75
   lookTreshold: 0
-  attackSpeed: 3
+  attackSpeed: 3.5
   projStats:
+    projectileSize: 0
     speed: 0
-    damageType: 0
-    damage: 0
-    damageOverTimeType: 0
-    damageOverTime: 0
-    time: 0
+    damageType: 1
+    damage: 5
+    damageOverTimeType: 1
+    damageOverTime: 10
+    time: 3
+    areaEffect: {fileID: 0}
+    duration: 0
     doSplashDamage: 0
+    areaEffectSize: 0
     maxSplashHits: 0
-    splashObject: {fileID: 0}
-    splashDuration: 0
+    AIO_damageType: 0
+    AIO_damage: 0
+    AIO_damageOverTimeType: 0
+    AIO_damageOverTime: 0
+    AIO_time: 0
   smart: 0
-  trapActivateTime: 0
-  trapDeActivateTime: 0
+  trapActivateTime: 0.1
+  trapDeActivateTime: 0.55
   enemiesOnTrap: 0
   trapColl: {fileID: 0}
 --- !u!95 &731939135236587654
@@ -308,6 +298,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &1902306021438909107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883235000760061985}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.707276, y: 0.30154514, z: 0.64738387}
+  m_Center: {x: 0, y: 0.1584849, z: 0}
 --- !u!65 &4945212085555035090
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -88,6 +88,7 @@ public class MagicTesla : TowerCore
 
     public override void Shoot()
     {
+        audioController.Play();
         List<EnemyCore> targets = new List<EnemyCore>
         {
             target

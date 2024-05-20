@@ -1,6 +1,6 @@
-using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
+
 
 public class TowerCore : MonoBehaviour
 {
@@ -17,6 +17,8 @@ public class TowerCore : MonoBehaviour
     public SpriteRenderer towerPreviewRenderer;
     [HideInInspector]
     public Animator anim;
+
+    public AudioController audioController;
 
     public GameObject projectile;
     public Transform shootPoint;
@@ -40,6 +42,7 @@ public class TowerCore : MonoBehaviour
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
         towerPreviewRenderer.transform.localScale = Vector3.one * range;
         anim = GetComponent<Animator>();
+        audioController = GetComponent<AudioController>();
     }
     public virtual void CoreInit()
     {
@@ -84,6 +87,8 @@ public class TowerCore : MonoBehaviour
     public virtual void Shoot()
     {
         anim.SetTrigger("Shoot");
+        audioController.Play();
+
         target.TryHit(projStats.damageType, projStats.damage, projStats.doSplashDamage, projStats.AIO_damageType, projStats.AIO_damage);
 
         Vector3 dir = target.transform.position - transform.position;

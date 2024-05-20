@@ -38,6 +38,7 @@ public class MagicTrap : TowerCore
     public IEnumerator Attack()
     {
         anim.SetTrigger("Attack");
+        audioController.Play();
         yield return new WaitForSeconds(trapActivateTime);
         trapColl.enabled = true;
         yield return new WaitForSeconds(trapDeActivateTime);
