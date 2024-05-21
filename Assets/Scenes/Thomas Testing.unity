@@ -720,17 +720,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 944667449245491808, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
+      propertyPath: m_Time
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088188596474088936, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
+      propertyPath: m_Time
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3084879830394934899, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
       propertyPath: m_Name
       value: Fire Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 3947509374797139718, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880601201732128402, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880601201732128402, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 6927920584648630422, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8267521799970128634, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
       propertyPath: m_LocalPosition.x
