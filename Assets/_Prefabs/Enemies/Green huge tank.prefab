@@ -184,10 +184,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   essenseOnDamage: 10
   essenceOnDeath: 100
+  maxHealth: 500
   health: 500
   damage: 5
   incomingDamage: 0
-  moveSpeed: 0.5
+  moveSpeed: 1.5
   pointIndex: 0
   dir:
     x: 0
@@ -196,7 +197,8 @@ MonoBehaviour:
   elements: 00000000
   smartBarrier: 0
   immunityBarrierType: 0
-  immunityBarrier: {fileID: 0}
+  barrierChance: 0
+  barrierHealthDrainTime: 0
   barrierStartHealth: 0
 --- !u!65 &1590302630291245220
 BoxCollider:

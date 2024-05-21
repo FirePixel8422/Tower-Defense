@@ -33,10 +33,11 @@ public class AudioManager : MonoBehaviour
         {
             MusicManager.Instance.ChangeMusicTrack(false, 0.5f);
         }
-        StartCoroutine(SceneChangedDelay());
+        MusicManager.Instance.StartCoroutine(SceneChangedDelay());
     }
     private IEnumerator SceneChangedDelay()
     {
+        yield return new WaitForEndOfFrame();
         yield return null;
 
         audioControllers = FindObjectsOfType<AudioController>();

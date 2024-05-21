@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   essenseOnDamage: 1
   essenceOnDeath: 5
+  maxHealth: 10
   health: 10
   damage: 5
   incomingDamage: 0

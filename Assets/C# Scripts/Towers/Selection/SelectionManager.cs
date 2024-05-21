@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -11,7 +11,12 @@ public class SelectionManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        gfxRayCaster = FindObjectOfType<GraphicRaycaster>();
     }
+
+
+    public GraphicRaycaster gfxRayCaster;
+    public TowerUIController towerUiController;
 
     private GridManager gridManager;
     private TowerManager towerManager;
@@ -31,6 +36,7 @@ public class SelectionManager : MonoBehaviour
 
     private void Start()
     {
+        towerUiController = TowerUIController.Instance;
         gridManager = GridManager.Instance;
         towerManager = TowerManager.Instance;
         mainCam = Camera.main;
@@ -48,6 +54,17 @@ public class SelectionManager : MonoBehaviour
     {
         if (ctx.performed)
         {
+            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+            pointerEventData.position = Input.mousePosition;
+
+            var results = new List<RaycastResult>();
+            gfxRayCaster.Raycast(pointerEventData, results);
+
+            if (results.Count > 0)
+            {
+                return;
+            }
+
             if (isPlacingTower)
             {
                 TryPlaceTower();
@@ -91,16 +108,15 @@ public class SelectionManager : MonoBehaviour
                 //deselect older selected tower
                 if (towerSelected)
                 {
-                    selectedTower.towerPreviewRenderer.enabled = false;
                     selectedTower.SelectOrDeselectTower(false);
                 }
 
                 //select tower
                 selectedTower = gridData.tower;
-                selectedTower.towerPreviewRenderer.enabled = true;
 
                 towerSelected = true;
-                selectedTower.SelectOrDeselectTower(true);
+
+                towerUiController.SelectTower(selectedTower);
                 return;
             }
         }
@@ -108,10 +124,36 @@ public class SelectionManager : MonoBehaviour
         //deselect tower if clicked on empty space
         if (towerSelected)
         {
-            selectedTower.towerPreviewRenderer.enabled = false;
-            selectedTower.SelectOrDeselectTower(false);
+            towerUiController.DeSelectTower(selectedTower);
         }
         towerSelected = false;
+    }
+
+    public void UpdateSelectedTowerTargetMode(bool prev)
+    {
+        string targetModeString;
+        if (prev)
+        {
+            targetModeString = selectedTower.PreviousTargetMode();
+        }
+        else
+        {
+            targetModeString = selectedTower.NextTargetMode();
+        }
+        towerUiController.targetModeTextObj.text = targetModeString;
+    }
+
+    public void TryUpgradeTower(bool leftPath)
+    {
+        if (leftPath)
+        {
+            int cost = selectedTower.towerUIData.LU_essenseCost;
+            if (cost != 0 && EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.LU_essenseType))
+            {
+                towerManager.spawnedTowerObj.Remove(selectedTower);
+                selectedTower.UpgradeTower(true);
+            }
+        }
     }
 
 
@@ -123,10 +165,9 @@ public class SelectionManager : MonoBehaviour
         }
         if (towerSelected)
         {
-            selectedTower.towerPreviewRenderer.enabled = false;
-            selectedTower.UpdatePreviewTower(true);
             towerSelected = false;
-            selectedTower.SelectOrDeselectTower(false);
+            selectedTower.UpdatePreviewTower(true);
+            towerUiController.DeSelectTower(selectedTower);
         }
         selectedTower = _selectedTower;
         isPlacingTower = true;

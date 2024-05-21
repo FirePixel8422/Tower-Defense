@@ -109,23 +109,23 @@ public class EssenceManager : MonoBehaviour
         }
         return upgradesPossible;
     }
-    public bool UpgradePossibleWithType(int amount, MagicType type)
+    public bool UpgradePossibleWithType(out bool[] options, int amount, MagicType type)
     {
-        bool[] upgradesPossible = AllPossibleUpgradeOptions(amount);
+        options = AllPossibleUpgradeOptions(amount);
 
-        if (type == MagicType.Life && upgradesPossible[0])
+        if (type == MagicType.Life && options[0])
         {
             return true;
         }
-        if (type == MagicType.Arcane && upgradesPossible[1])
+        if (type == MagicType.Arcane && options[1])
         {
             return true;
         }
-        if (type == MagicType.Ember && upgradesPossible[2])
+        if (type == MagicType.Ember && options[2])
         {
             return true;
         }
-        return upgradesPossible.Contains(true);
+        return options.Contains(true);
     }
 
     public void AddRemoveEssence(float amount, MagicType type)

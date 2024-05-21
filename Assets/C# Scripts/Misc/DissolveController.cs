@@ -21,6 +21,10 @@ public class DissolveController : MonoBehaviour
         dissolveMaterial = GetComponent<Renderer>().material;
         StartCoroutine(Dissolve(core));
     }
+    public void Revert(TowerCore core)
+    {
+        StartCoroutine(RevertDissolve(core));
+    }
 
 
     private IEnumerator Dissolve(TowerCore core)
@@ -35,5 +39,15 @@ public class DissolveController : MonoBehaviour
             dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
         }
         core.DissolveCompleted();
+    }
+    private IEnumerator RevertDissolve(TowerCore core)
+    {
+        while (cDissolveEffectState < startDissolveEffectState)
+        {
+            yield return null;
+            cDissolveEffectState += Time.deltaTime * dissolveSpeed;
+            dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
+        }
+        core.RevertCompleted();
     }
 }

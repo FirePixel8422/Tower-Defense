@@ -80,7 +80,12 @@ public class TowerManager : MonoBehaviour
                 continue;
             }
 
-            float progression = -1;
+
+            float bestProgression = -1;
+            float leastProgression = int.MaxValue;
+            float mostDangerous = -1;
+            float mostMaxHealth = -1;
+
             int id = -1;
             for (int i2 = 0; i2 < waveManager.spawnedObj.Count; i2++)
             {
@@ -88,10 +93,47 @@ public class TowerManager : MonoBehaviour
                 {
                     if (waveManager.spawnedObj[i2].incomingDamage < waveManager.spawnedObj[i2].health)
                     {
-                        if (waveManager.spawnedObj[i2].progression > progression)
+                        //furthest progresse enemy
+                        if (waveManager.spawnedObj[i2].progression > bestProgression && spawnedTowerObj[i].targetMode == TargetMode.First)
                         {
-                            progression = waveManager.spawnedObj[i2].progression;
+                            bestProgression = waveManager.spawnedObj[i2].progression;
                             id = i2;
+                        }
+                        //least far progressed enemy
+                        else if (waveManager.spawnedObj[i2].progression < leastProgression && spawnedTowerObj[i].targetMode == TargetMode.Last)
+                        {
+                            leastProgression = waveManager.spawnedObj[i2].progression;
+                            id = i2;
+                        }
+                        //most dmg dealing furthest progressed enemy
+                        else if (waveManager.spawnedObj[i2].damage >= mostDangerous && spawnedTowerObj[i].targetMode == TargetMode.Dangerous)
+                        {
+                            if (waveManager.spawnedObj[i2].damage > mostDangerous)
+                            {
+                                mostDangerous = waveManager.spawnedObj[i2].damage;
+                                id = i2;
+                            }
+                            else if(waveManager.spawnedObj[i2].progression > bestProgression)
+                            {
+                                mostDangerous = waveManager.spawnedObj[i2].damage;
+                                id = i2;
+                            }
+                            bestProgression = waveManager.spawnedObj[i2].progression;
+                        }
+                        //tankiest furthest prgressed enemy
+                        else if (waveManager.spawnedObj[i2].maxHealth >= mostMaxHealth && spawnedTowerObj[i].targetMode == TargetMode.Tanky)
+                        {
+                            if (waveManager.spawnedObj[i2].maxHealth > mostMaxHealth)
+                            {
+                                mostMaxHealth = waveManager.spawnedObj[i2].maxHealth;
+                                id = i2;
+                            }
+                            else if (waveManager.spawnedObj[i2].progression > bestProgression)
+                            {
+                                mostMaxHealth = waveManager.spawnedObj[i2].maxHealth;
+                                id = i2;
+                            }
+                            bestProgression = waveManager.spawnedObj[i2].progression;
                         }
                     }
                 }

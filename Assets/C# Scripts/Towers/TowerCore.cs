@@ -1,4 +1,6 @@
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -9,6 +11,10 @@ public class TowerCore : MonoBehaviour
     [HideInInspector]
     public int cDissolves;
 
+    public TowerUIDataSO towerUIData;
+    public GameObject[] upgradePrefabs;
+
+    [HideInInspector]
     public bool towerCompleted;
 
     public bool placeOntrack;
@@ -18,12 +24,22 @@ public class TowerCore : MonoBehaviour
     [HideInInspector]
     public Animator anim;
 
+    [HideInInspector]
     public AudioController audioController;
 
     public GameObject projectile;
     public Transform shootPoint;
 
+    [HideInInspector]
     public EnemyCore target;
+    public TargetMode targetMode;
+    public bool specialTargetMode;
+
+    public TextMeshProUGUI targetModeTextObj;
+
+    private int targetId;
+    public string targetModeString;
+
 
     public MagicType[] magicType;
     public float rotSpeed;
@@ -100,6 +116,7 @@ public class TowerCore : MonoBehaviour
 
     public virtual void SelectOrDeselectTower(bool select)
     {
+        towerPreviewRenderer.enabled = select;
         DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
 
         foreach (var d in dissolves)
@@ -107,6 +124,52 @@ public class TowerCore : MonoBehaviour
             d.dissolveMaterial.SetInt("_Selected", select ? 1 : 0);
         }
     }
+
+    public string NextTargetMode()
+    {
+        targetId += 1;
+        if (targetId == 4)
+        {
+            targetId = 0;
+        }
+        targetModeString = UpdateTargetMode(targetId);
+        return specialTargetMode ? "Special" : targetModeString;
+    }
+    public string PreviousTargetMode()
+    {
+        targetId -= 1;
+        if (targetId == -1)
+        {
+            targetId = 3;
+        }
+        targetModeString = UpdateTargetMode(targetId);
+        return specialTargetMode ? "Special" : targetModeString;
+    }
+    private string UpdateTargetMode(int targetId)
+    {
+        if (targetId == 3)
+        {
+            targetMode = TargetMode.Tanky;
+            return "Tanky";
+        }
+        else if (targetId == 2)
+        {
+            targetMode = TargetMode.Dangerous;
+            return "Dangerous";
+        }
+        else if (targetId == 1)
+        {
+            targetMode = TargetMode.Last;
+            return "Last";
+        }
+        else
+        {
+            targetMode = TargetMode.First;
+            return "First";
+        }
+    }
+
+
     public virtual void UpdatePreviewTower(bool preview)
     {
         DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
@@ -117,6 +180,22 @@ public class TowerCore : MonoBehaviour
         }
     }
 
+
+
+    public void UpgradeTower(bool leftPath)
+    {
+        //spawn upgrade
+        TowerCore tower = Instantiate(upgradePrefabs[leftPath ? 0 : 1], transform.position, upgradePrefabs[leftPath ? 0 : 1].transform.rotation).GetComponent<TowerCore>();
+
+        //dissolve old (this) tower away
+        DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
+        foreach (var dissolve in dissolves)
+        {
+            dissolve.Revert(this);
+        }
+        tower.CoreInit();
+    }
+
     public void DissolveCompleted()
     {
         cDissolves += 1;
@@ -125,4 +204,20 @@ public class TowerCore : MonoBehaviour
             towerCompleted = true;
         }
     }
+    public void RevertCompleted()
+    {
+        cDissolves -= 1;
+        if (cDissolves == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
+
+public enum TargetMode
+{
+    First,
+    Last,
+    Dangerous,
+    Tanky
+};

@@ -7,7 +7,7 @@ public class EnemyCore : MonoBehaviour
     public float essenseOnDamage;
     public float essenceOnDeath;
 
-    private float maxHealth;
+    public float maxHealth;
     public float health;
     public float damage;
     public float incomingDamage;
@@ -36,7 +36,6 @@ public class EnemyCore : MonoBehaviour
     public void Init()
     {
         gameObject.tag = "Enemy";
-        maxHealth = health;
 
         immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
 
