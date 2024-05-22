@@ -15,6 +15,14 @@ public class EnemyCore : MonoBehaviour
     public float damage;
     public float incomingDamage;
 
+    public bool IsNotAboutToDie
+    {
+        get
+        {
+            return health > incomingDamage;
+        }
+    }
+
     public float moveSpeed;
 
     public int pointIndex;
@@ -38,7 +46,7 @@ public class EnemyCore : MonoBehaviour
 
 
 
-    private void Start()
+    private void Awake()
     {
         immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
         gameObject.tag = "Enemy";

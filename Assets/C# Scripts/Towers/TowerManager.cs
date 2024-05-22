@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class TowerManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class TowerManager : MonoBehaviour
         Instance = this;
     }
 
+    public float towerUpdateInterval;
+
 
     private WaveManager waveManager;
     public List<TowerCore> spawnedTowerObj;
@@ -18,6 +21,7 @@ public class TowerManager : MonoBehaviour
     private void Start()
     {
         waveManager = WaveManager.Instance;
+        StartCoroutine(UpdateTowersLoop());
     }
 
     public MagicType HighestMagicType()
@@ -71,92 +75,147 @@ public class TowerManager : MonoBehaviour
     }
 
 
-    private void Update()
+    private IEnumerator UpdateTowersLoop()
     {
+        while (true)
+        {
+            UpdateTowers();
+            yield return new WaitForSeconds(towerUpdateInterval);
+        }
+    }
+
+
+
+    #region Stashed Data
+    private int spawnedEnemyObjCount;
+
+    private float bestProgression;
+    private float leastProgression;
+    private float mostDangerous;
+    private float mostMaxHealth;
+    private int id;
+
+    private float towerRangeSquared;
+    private Vector3 towerpos;
+    private bool towerTargetModeIsFirst;
+    private bool towerTargetModeIsLast;
+    private bool towerTargetModeIsDangerous;
+    private bool towerTargetModeIsTanky;
+
+    private float enemyProgression;
+    private float enemyDamage;
+    private float enemyMaxHealth;
+    #endregion
+    private void UpdateTowers()
+    {
+        spawnedEnemyObjCount = waveManager.spawnedObj.Count;
         for (int i = 0; i < spawnedTowerObj.Count; i++)
         {
-            if (spawnedTowerObj[i].towerCompleted == false)
+            if (spawnedTowerObj[i].towerCompleted == false || spawnedTowerObj[i].attackSpeed == 0)
             {
                 continue;
             }
 
+            //all values stashed so acceses to references (enemyCore and TowerCore) is limited.
+            towerRangeSquared = spawnedTowerObj[i].range * spawnedTowerObj[i].range;
+            towerpos = spawnedTowerObj[i].transform.position;
 
-            float bestProgression = -1;
-            float leastProgression = int.MaxValue;
-            float mostDangerous = -1;
-            float mostMaxHealth = -1;
+            towerTargetModeIsFirst = spawnedTowerObj[i].targetMode == TargetMode.First;
+            towerTargetModeIsLast = spawnedTowerObj[i].targetMode == TargetMode.Last;
+            towerTargetModeIsDangerous = spawnedTowerObj[i].targetMode == TargetMode.Dangerous;
+            towerTargetModeIsTanky = spawnedTowerObj[i].targetMode == TargetMode.Tanky;
 
-            int id = -1;
-            for (int i2 = 0; i2 < waveManager.spawnedObj.Count; i2++)
+            //learn to use the "Switch" later
+
+
+            bestProgression = -1;
+            leastProgression = float.MaxValue;
+            mostDangerous = -1;
+            mostMaxHealth = -1;
+
+
+            id = -1;
+            for (int i2 = 0; i2 < spawnedEnemyObjCount; i2++)
             {
-                if (Vector3.Distance(spawnedTowerObj[i].transform.position, waveManager.spawnedObj[i2].transform.position) < spawnedTowerObj[i].range)
+                //stash even more data in private floats
+                enemyProgression = waveManager.spawnedObj[i2].progression;
+                enemyDamage = waveManager.spawnedObj[i2].damage;
+                enemyMaxHealth = waveManager.spawnedObj[i2].maxHealth;
+
+                if ((towerpos - waveManager.spawnedObj[i2].transform.position).sqrMagnitude < towerRangeSquared)
                 {
-                    if (waveManager.spawnedObj[i2].incomingDamage < waveManager.spawnedObj[i2].health)
+                    //check if enemy isnt going to die in next few frames from an already active dmg source > this way this tower wont shoot air.
+                    if (waveManager.spawnedObj[i2].IsNotAboutToDie)
                     {
-                        //furthest progresse enemy
-                        if (waveManager.spawnedObj[i2].progression > bestProgression && spawnedTowerObj[i].targetMode == TargetMode.First)
+                        //furthest progressed enemy
+                        if (towerTargetModeIsFirst && enemyProgression > bestProgression)
                         {
-                            bestProgression = waveManager.spawnedObj[i2].progression;
+                            bestProgression = enemyProgression;
                             id = i2;
                         }
                         //least far progressed enemy
-                        else if (waveManager.spawnedObj[i2].progression < leastProgression && spawnedTowerObj[i].targetMode == TargetMode.Last)
+                        else if (towerTargetModeIsLast && enemyProgression < leastProgression)
                         {
-                            leastProgression = waveManager.spawnedObj[i2].progression;
+                            leastProgression = enemyProgression;
                             id = i2;
                         }
                         //most dmg dealing furthest progressed enemy
-                        else if (waveManager.spawnedObj[i2].damage >= mostDangerous && spawnedTowerObj[i].targetMode == TargetMode.Dangerous)
+                        else if (towerTargetModeIsDangerous && enemyDamage >= mostDangerous)
                         {
-                            if (waveManager.spawnedObj[i2].damage > mostDangerous)
-                            {
-                                mostDangerous = waveManager.spawnedObj[i2].damage;
+                            if (enemyDamage > mostDangerous)
+                            {   
+                                mostDangerous = enemyDamage;
                                 id = i2;
                             }
-                            else if(waveManager.spawnedObj[i2].progression > bestProgression)
+                            if (enemyProgression > bestProgression)
                             {
-                                mostDangerous = waveManager.spawnedObj[i2].damage;
+                                mostDangerous = enemyDamage;
+                                bestProgression = enemyProgression;
                                 id = i2;
                             }
-                            bestProgression = waveManager.spawnedObj[i2].progression;
                         }
                         //tankiest furthest prgressed enemy
-                        else if (waveManager.spawnedObj[i2].maxHealth >= mostMaxHealth && spawnedTowerObj[i].targetMode == TargetMode.Tanky)
+                        else if (towerTargetModeIsTanky && enemyMaxHealth >= mostMaxHealth)
                         {
-                            if (waveManager.spawnedObj[i2].maxHealth > mostMaxHealth)
+                            if (enemyMaxHealth > mostMaxHealth)
                             {
-                                mostMaxHealth = waveManager.spawnedObj[i2].maxHealth;
+                                mostMaxHealth = enemyMaxHealth;
                                 id = i2;
                             }
-                            else if (waveManager.spawnedObj[i2].progression > bestProgression)
+                            if (enemyProgression > bestProgression)
                             {
-                                mostMaxHealth = waveManager.spawnedObj[i2].maxHealth;
+                                mostMaxHealth = enemyMaxHealth;
+                                bestProgression = enemyProgression;
                                 id = i2;
                             }
-                            bestProgression = waveManager.spawnedObj[i2].progression;
                         }
                     }
                 }
             }
-            
 
-            if (id != -1)
+            //if id is "-1" (no target found with specified rules like inrange etc), return.
+            if (id == -1)
             {
-                spawnedTowerObj[i].target = waveManager.spawnedObj[id];
-
-                if (spawnedTowerObj[i].rotSpeed == 0)
-                {
-                    continue;
-                }
-
-                Vector3 dir = spawnedTowerObj[i].rotPoint.position - waveManager.spawnedObj[id].transform.position;
-                float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-
-                spawnedTowerObj[i].rotPoint.rotation = Quaternion.RotateTowards(spawnedTowerObj[i].rotPoint.rotation, Quaternion.Euler(0, angle, 0) * spawnedTowerObj[i].rotOffset, spawnedTowerObj[i].rotSpeed * Time.deltaTime);
+                spawnedTowerObj[i].target = null;
+                continue;
             }
             else
             {
-                spawnedTowerObj[i].target = null;
+                spawnedTowerObj[i].target = waveManager.spawnedObj[id];
+
+                if (spawnedTowerObj[i].rotSpeed != 0)
+                {
+                    //update tower rotation
+                    Vector3 dir = spawnedTowerObj[i].rotPoint.position - waveManager.spawnedObj[id].transform.position;
+                    float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+                    //apply rotation
+                    spawnedTowerObj[i].rotPoint.rotation =
+                        Quaternion.RotateTowards(
+                            spawnedTowerObj[i].rotPoint.rotation,
+                            Quaternion.Euler(0, angle, 0) * spawnedTowerObj[i].rotOffset,
+                            spawnedTowerObj[i].rotSpeed * Time.deltaTime);
+                }
             }
         }
     }

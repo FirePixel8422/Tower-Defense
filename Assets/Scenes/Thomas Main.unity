@@ -1169,10 +1169,10 @@ MonoBehaviour:
   rotMultiplier: 1.2
   preparationTime: 0
   waves:
+  - {fileID: 11400000, guid: 7cb2a413742f65544b26fc258fa15189, type: 2}
   - {fileID: 11400000, guid: 6485c35baf3aed8409bcb983d9dacc4d, type: 2}
   - {fileID: 11400000, guid: e4787b9e47501a14a92064c33da8e105, type: 2}
   - {fileID: 11400000, guid: 52d1d1090e845ca48a8295acbc871233, type: 2}
-  - {fileID: 11400000, guid: 7cb2a413742f65544b26fc258fa15189, type: 2}
   spawnedObj: []
 --- !u!4 &146782329
 Transform:
@@ -3406,6 +3406,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &456250016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 456250018}
+  - component: {fileID: 456250017}
+  m_Layer: 0
+  m_Name: PerformanceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &456250017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456250016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af88bbe2a9eaf3459c4f3054993c711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMovementFPS: 0
+  towerUpdateFPS: 60
+--- !u!4 &456250018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456250016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457632482
 GameObject:
   m_ObjectHideFlags: 0
@@ -10868,6 +10914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ccf5b9dd989f5408d05bc7d5561733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerUpdateInterval: 0
   spawnedTowerObj: []
 --- !u!114 &1352799225
 MonoBehaviour:
@@ -17719,7 +17766,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ea4088adbe62de94a977f150ae7f6986, type: 2}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: lookTreshold
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: projStats.speed
@@ -21704,7 +21751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3229214753010939610, guid: 019c89565c500084fa0e7b212011c523, type: 3}
       propertyPath: lookTreshold
-      value: 1
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 3229214753010939610, guid: 019c89565c500084fa0e7b212011c523, type: 3}
       propertyPath: projStats.speed
@@ -21815,6 +21862,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 700871596}
     m_Modifications:
+    - target: {fileID: 1902306021438909107, guid: 83ab9526ce56f9c448ee1e41846b880b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5000540139529748526, guid: 83ab9526ce56f9c448ee1e41846b880b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -26387,3 +26438,4 @@ SceneRoots:
   - {fileID: 4999432171100147853}
   - {fileID: 700871596}
   - {fileID: 30873803}
+  - {fileID: 456250018}

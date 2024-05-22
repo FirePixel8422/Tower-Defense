@@ -30,7 +30,7 @@ public class TowerCore : MonoBehaviour
     public Projectile projectile;
     public Transform shootPoint;
 
-    [HideInInspector]
+    //[HideInInspector]
     public EnemyCore target;
     public TargetMode targetMode;
     public bool specialTargetMode;
@@ -90,7 +90,7 @@ public class TowerCore : MonoBehaviour
             if (timer < 0)
             {
                 if (target != null &&
-                    target.incomingDamage < target.health &&
+                    target.IsNotAboutToDie &&
                     Vector3.Dot(shootPoint.forward, (target.transform.position - transform.position).normalized) >= lookTreshold)
                 {
                     Shoot();

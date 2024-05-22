@@ -52,6 +52,7 @@ public class CameraController : MonoBehaviour
         camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, camCenter.localPosition + camCenter.TransformDirection(camMoveDir), moveSpeed * Time.deltaTime);
 
 
+        
         # region Move camera down/up rotating upwards/downwards following a smooth animation curve
 
         Vector3 camRot = cam.localEulerAngles;

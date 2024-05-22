@@ -47,40 +47,51 @@ public class WaveManager : MonoBehaviour
 
                     for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
                     {
-                        EnemyCore target = EnemyPooling.Instance.GetPulledObj(waves[i].waveParts[i2].enemy.enemyId, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
-
-                        spawnedObj.Add(target);
-
-                        UpdateTargetDir(target);
-
-                        target.Init();
-
+                        SpawnEnemy(waves[i].waveParts[i2].enemy.enemyId);
                         yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                     }
                 }
-
-
                 yield return new WaitForSeconds(waves[i].waveEndDelay);
             }
         }
     }
+    private void SpawnEnemy(int id)
+    {
+        EnemyCore target = EnemyPooling.Instance.GetPulledObj(id, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
+
+        spawnedObj.Add(target);
+
+        UpdateTargetDir(target);
+
+        target.Init();
+    }
+
+
+
+
+    private Vector3 pos;
+    private int pointIndex;
+    private int rotPointDiff;
+    private float targetSpeed;
+    private Vector3 movement;
+    private float dist;
+
 
     private void Update()
     {
         //loop through all enemies and move them forward at all times.
         //then rotate them towards the next points, making them turn.
-        for (int i = 0; i < spawnedObj.Count; i++)
+        for (int i = spawnedObj.Count - 1; i >= 0; i--)
         {
-            //make a way to get rotation between current point and next one, and calculate rotation speed with it
-
+            //get rotation between current point and next one, and calculate rotation speed.
             EnemyCore target = spawnedObj[i];
             int pointIndex = target.pointIndex;
 
             int rotPointDiff = Mathf.RoundToInt(Quaternion.Angle(points[Mathf.Max(0, pointIndex - 1)].rotation, points[pointIndex].rotation) / 90);
             float targetSpeed = (target.moveSpeed * 90 + Mathf.Max(0, rotPointDiff - 1) * 45) * rotMultiplier * Time.deltaTime;
 
-            Vector3 movement =  target.moveSpeed * Time.deltaTime * target.transform.forward;
-
+            //calculate movement and check distance to point.
+            Vector3 movement = target.moveSpeed * Time.deltaTime * target.transform.forward;
             float dist = movement.x + movement.y + movement.z;
             if (Vector3.Distance(target.transform.position, points[pointIndex].position) < dist)
             {
@@ -88,11 +99,11 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
-                target.transform.position = target.transform.position - movement;
+                target.transform.position -= movement;
             }
 
+            //rotate towards the next point.
             target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, points[pointIndex].rotation, targetSpeed);
-
 
             //retrieve int2 direction and lock its position in those 2 angles (x-1,x1,z-1,z1)
             Vector3 pos = target.transform.position;
