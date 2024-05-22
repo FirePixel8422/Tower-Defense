@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class pauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
             {
@@ -21,7 +21,7 @@ public class pauseMenu : MonoBehaviour
                 Pause();
             }
         }
-       
+
 
     }
     public void Resume()
@@ -35,6 +35,6 @@ public class pauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        GameIsPaused=true;
+        GameIsPaused = true;
     }
 }
