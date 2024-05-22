@@ -142,7 +142,10 @@ public class MagicTesla : TowerCore
         yield return new WaitForSeconds(damageDelay);
         foreach (EnemyCore target in targets)
         {
-            target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
+            if (target.health > 0)
+            {
+                target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
+            }
         }
     }
 }

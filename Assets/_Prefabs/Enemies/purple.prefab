@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee2c164db7e18d439225a200a575896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyId: 1
   essenseOnDamage: 1
   essenceOnDeath: 5
   maxHealth: 10
@@ -198,8 +199,8 @@ MonoBehaviour:
   smartBarrier: 1
   immunityBarrierType: 1
   barrierChance: 15
-  barrierHealthDrainTime: 8.5
-  barrierStartHealth: 20
+  barrierHealthDrainTime: 10
+  barrierStartHealth: 30
 --- !u!65 &-455576664256061854
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class ImmunityBarrier : MonoBehaviour
     {
         maxBarrierHealth = _barrierHealth;
         barrierHealth = _barrierHealth;
+        transform.localScale = Vector3.one * 2;
 
         barrierShader = GetComponent<Renderer>().material;
         barrierShader.SetColor("_FrontColor", frontColor);
@@ -47,7 +48,7 @@ public class ImmunityBarrier : MonoBehaviour
         }
         if (barrierHealth <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -58,7 +59,7 @@ public class ImmunityBarrier : MonoBehaviour
         transform.localScale = Vector3.one * 2 - Vector3.one * (1 - (barrierHealth / maxBarrierHealth));
         if (barrierHealth <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

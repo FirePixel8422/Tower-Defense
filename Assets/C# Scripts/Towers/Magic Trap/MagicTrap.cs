@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class MagicTrap : TowerCore
@@ -22,6 +23,7 @@ public class MagicTrap : TowerCore
 
     private IEnumerator AttackLoop()
     {
+        yield return new WaitUntil(() => towerCompleted);
         while (true)
         {
             timer -= Time.deltaTime;

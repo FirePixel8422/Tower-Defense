@@ -47,7 +47,7 @@ public class WaveManager : MonoBehaviour
 
                     for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
                     {
-                        EnemyCore target = Instantiate(waves[i].waveParts[i2].enemy.gameObject, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
+                        EnemyCore target = EnemyPooling.Instance.GetPulledObj(waves[i].waveParts[i2].enemy.enemyId, points[0].position, Quaternion.identity).GetComponent<EnemyCore>();
 
                         spawnedObj.Add(target);
 
@@ -58,6 +58,7 @@ public class WaveManager : MonoBehaviour
                         yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                     }
                 }
+
 
                 yield return new WaitForSeconds(waves[i].waveEndDelay);
             }
@@ -93,7 +94,7 @@ public class WaveManager : MonoBehaviour
             target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, points[pointIndex].rotation, targetSpeed);
 
 
-            //retrive int2 direction and lock its position in those 2 angles (x-1,x1,z-1,z1)
+            //retrieve int2 direction and lock its position in those 2 angles (x-1,x1,z-1,z1)
             Vector3 pos = target.transform.position;
             int2 dir = target.dir;
             if (dir.x == 1)
@@ -136,7 +137,7 @@ public class WaveManager : MonoBehaviour
                 
                 if (target.pointIndex == points.Count)
                 {
-                    Destroy(spawnedObj[i].gameObject);
+                    spawnedObj[i].gameObject.SetActive(false);
                     spawnedObj.RemoveAt(i);
                 }
                 else

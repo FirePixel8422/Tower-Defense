@@ -27,7 +27,7 @@ public class TowerCore : MonoBehaviour
     [HideInInspector]
     public AudioController audioController;
 
-    public GameObject projectile;
+    public Projectile projectile;
     public Transform shootPoint;
 
     [HideInInspector]
@@ -110,7 +110,7 @@ public class TowerCore : MonoBehaviour
         Vector3 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
-        Projectile bullet = Instantiate(projectile, shootPoint.position, Quaternion.Euler(0, angle, 0)).GetComponent<Projectile>();
+        Projectile bullet = ProjectilePooling.Instance.GetPulledObj(projectile.projectileId, shootPoint.position, Quaternion.Euler(0, angle, 0)).GetComponent<Projectile>();
         bullet.Init(target, projStats);
     }
 

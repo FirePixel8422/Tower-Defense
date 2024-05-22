@@ -37,6 +37,7 @@ public class MusicManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         clipIndex = Random.Range(0, battleFieldClips.Length);
+        ChangeMusicTrack(true, 0.5f);
     }
 
     public void ChangeMusicTrack(bool mainMenu, float fadeSpeed)
@@ -61,7 +62,7 @@ public class MusicManager : MonoBehaviour
             queClip = battleFieldClips[clipIndex];
         }
         StartCoroutine(FadeChangeMusicTrack(clip, fadeSpeed));
-        queNextTrackCO = StartCoroutine(QueNextTracktimer(queClip, 3, mainMenu));
+        queNextTrackCO = StartCoroutine(QueNextTracktimer(queClip, queClip.length, mainMenu));
     }
 
     private IEnumerator QueNextTracktimer(AudioClip clip, float delay, bool mainMenu)
@@ -79,7 +80,7 @@ public class MusicManager : MonoBehaviour
                 clipIndex = 0;
             }
         }
-        queNextTrackCO = StartCoroutine(QueNextTracktimer(clip, 3, mainMenu));
+        queNextTrackCO = StartCoroutine(QueNextTracktimer(clip, clip.length, mainMenu));
     }
 
     private IEnumerator FadeChangeMusicTrack(AudioClip audioClip, float fadeSpeed)

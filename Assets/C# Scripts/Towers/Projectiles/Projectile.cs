@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public int projectileId;
     public EnemyCore target;
     public ProjectileStats projStats;
 
@@ -24,10 +25,10 @@ public class Projectile : MonoBehaviour
         while (true)
         {
             yield return null;
-            if (target == null)
+            if (target.gameObject.activeInHierarchy == false)
             {
                 //tracked target died, destroy bullet
-                Destroy(gameObject);
+                gameObject.SetActive(false);
                 print("killed self");
                 yield break;
             }
@@ -50,8 +51,8 @@ public class Projectile : MonoBehaviour
         }
         target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
 
-        //damage and effects applied, destroy bullet
-        Destroy(gameObject);
+        //damage and effects applied, destroy bullet (disable to get it back to the pool system
+        gameObject.SetActive(false);
     }
     public virtual void ApplySplashDamage()
     {

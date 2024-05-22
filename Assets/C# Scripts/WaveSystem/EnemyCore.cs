@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class EnemyCore : MonoBehaviour
 {
+    public int enemyId;
+
     public float essenseOnDamage;
     public float essenceOnDeath;
 
     public float maxHealth;
+    [HideInInspector]
     public float health;
     public float damage;
     public float incomingDamage;
@@ -33,13 +36,22 @@ public class EnemyCore : MonoBehaviour
     private bool dead;
 
 
+
+
+    private void Start()
+    {
+        immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
+        gameObject.tag = "Enemy";
+    }
     public void Init()
     {
-        gameObject.tag = "Enemy";
+        pointIndex = 0;
+        health = maxHealth;
+        incomingDamage = 0;
+        progression = 0;
+        dead = false;
 
-        immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
-
-        if (barrierChance == 0 || UnityEngine.Random.Range(0, 100f) < barrierChance)
+        if (immunityBarrier != null && (barrierChance == 0 || UnityEngine.Random.Range(0, 100f) < barrierChance))
         {
             if (smartBarrier)
             {
@@ -97,7 +109,7 @@ public class EnemyCore : MonoBehaviour
             EssenceManager.Instance.GenerateEssenceFromEnemy(essenceOnDeath, damageType);
             
             dead = true;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if (time != 0)
         {
@@ -149,7 +161,7 @@ public class EnemyCore : MonoBehaviour
                     EssenceManager.Instance.GenerateEssenceFromEnemy(essenceOnDeath, damageType);
                     
                     dead = true;
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                     yield break;
                 }
             }

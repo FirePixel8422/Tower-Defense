@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee2c164db7e18d439225a200a575896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyId: 2
   essenseOnDamage: 6
   essenceOnDeath: 20
   maxHealth: 100

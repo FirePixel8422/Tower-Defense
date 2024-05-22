@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6943e03c332142e4092810255760379c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileId: 1
   target: {fileID: 0}
   projStats:
     projectileSize: 0

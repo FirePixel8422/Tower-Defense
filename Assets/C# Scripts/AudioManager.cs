@@ -38,7 +38,24 @@ public class AudioManager : MonoBehaviour
     private IEnumerator SceneChangedDelay()
     {
         yield return new WaitForEndOfFrame();
-        yield return null;
+        yield return new WaitForSeconds(0.25f);
+
+        GameObject audioParent = GameObject.FindWithTag("AudioManager");
+        if (audioParent == null)
+        {
+            print("null");
+        }
+        Slider[] sliders = audioParent.GetComponentsInChildren<Slider>();
+
+        sliderMaster = sliders[0];
+        sliderSFX = sliders[1];
+        sliderMusic = sliders[2];
+        sliderMaster.onValueChanged.AddListener((value) => OnMasterChanged(value));
+        sliderSFX.onValueChanged.AddListener((value) => OnMasterChanged(value));
+        sliderMusic.onValueChanged.AddListener((value) => OnMasterChanged(value));
+
+        audioParent.transform.localPosition = new Vector3(0, 0, 0);
+        audioParent.SetActive(false);
 
         audioControllers = FindObjectsOfType<AudioController>();
         foreach (AudioController controller in audioControllers)
@@ -79,6 +96,7 @@ public class AudioManager : MonoBehaviour
     public void OnMasterChanged(float f)
     {
         menuData.audioMaster = f;
+        MusicManager.Instance.UpdateVolume(menuData.audioMaster, menuData.audioSFX, menuData.audioMusic);
     }
     public void OnSFXChanged(float f)
     {

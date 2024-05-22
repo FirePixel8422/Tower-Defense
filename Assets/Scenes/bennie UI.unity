@@ -1701,11 +1701,11 @@ MonoBehaviour:
   musicPlayer: {fileID: 456118267}
   musicPlayerAlt: {fileID: 456118266}
   altMusicPlayerActive: 0
-  mainMenuClip: {fileID: 8300000, guid: add68fae075c2b94cabc53e9e816e849, type: 3}
+  mainMenuClip: {fileID: 8300000, guid: 6255f888f470aac4097431131b01ca5a, type: 3}
   battleFieldClips:
-  - {fileID: 8300000, guid: 6de7d859f73460d4c9cf4a57c5e51bbd, type: 3}
-  - {fileID: 8300000, guid: c70b84a1175e94846bc5d97fc3d04538, type: 3}
-  - {fileID: 8300000, guid: 7a3d869d748b3a44896dde6025f1371d, type: 3}
+  - {fileID: 8300000, guid: 019aac0bb2566d54886c3729acc70fba, type: 3}
+  - {fileID: 8300000, guid: 16a8ded17f1fb24428443427771c7ed1, type: 3}
+  - {fileID: 8300000, guid: 7241091b72ba5824da810fada316715f, type: 3}
 --- !u!4 &456118269
 Transform:
   m_ObjectHideFlags: 0
