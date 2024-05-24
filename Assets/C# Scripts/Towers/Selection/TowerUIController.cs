@@ -33,6 +33,10 @@ public class TowerUIController : MonoBehaviour
 
     public void SelectTower(TowerCore tower)
     {
+        if(tower.towerUIData == null)
+        {
+            return;
+        }
         //select tower and open and configure UI equal to that towers SO info
         towerUI.SetActive(true);
 

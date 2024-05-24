@@ -7,24 +7,22 @@ using UnityEngine.VFX;
 public class MagicTesla : TowerCore
 {
     private ParticleSystem pSystem;
-    private float maxEmisionRate;
+    public float maxCoilEmisionRate;
     private VisualEffect effect;
 
     public float timePerCharge;
     public float rechargePowerDelay;
     private float timeSinceLastAttack;
 
-    private int maxCharges;
-    public int charges;
+    public int maxCharges;
+    private int charges;
     public int amountOfTargets;
 
     public float damageDelay;
 
     public override void Init()
     {
-        maxCharges = charges;
         pSystem = GetComponentInChildren<ParticleSystem>();
-        maxEmisionRate = pSystem.emission.rateOverTime.constant;
         effect = GetComponentInChildren<VisualEffect>();
         StartCoroutine(RechargePower());
         StartCoroutine(ShootLoop());
@@ -32,6 +30,7 @@ public class MagicTesla : TowerCore
 
     private IEnumerator RechargePower()
     {
+        yield return new WaitUntil(() => towerCompleted == true);
         float timer = 0;
         while (true)
         {
@@ -51,7 +50,7 @@ public class MagicTesla : TowerCore
                 timer = timePerCharge;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-                pSystem.emissionRate = maxEmisionRate / maxCharges * charges;
+                pSystem.emissionRate = maxCoilEmisionRate / maxCharges * charges;
 #pragma warning restore CS0618 // Type or member is obsolete
             }
         }
@@ -76,7 +75,7 @@ public class MagicTesla : TowerCore
                     charges -= 1;
 
                     #pragma warning disable CS0618 // Type or member is obsolete
-                    pSystem.emissionRate = Mathf.Clamp(maxEmisionRate / maxCharges * charges, 1.5f, float.MaxValue);
+                    pSystem.emissionRate = Mathf.Clamp(maxCoilEmisionRate / maxCharges * charges, 1.5f, float.MaxValue);
                     #pragma warning restore CS0618 // Type or member is obsolete
 
                     timeSinceLastAttack = 0;

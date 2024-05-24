@@ -53,6 +53,7 @@ public class GridManager : MonoBehaviour
                 {
                     gridPos = new Vector2Int(x, z),
                     worldPos = _worldPos,
+                    coreType = _type,
                     type = _type,
                 };
             }

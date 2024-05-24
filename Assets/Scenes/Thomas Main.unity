@@ -9190,7 +9190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83f784bc5a5f18458f1a525bff0b73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMasterGizmos: 0
+  drawMasterGizmos: 1
   drawTileGizmos: 1
   drawTileDataGizmos: 0
   gridPosition: {x: 0, y: 0, z: 0.5}
@@ -19304,7 +19304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939473104603984782, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7144104401718785468, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
       propertyPath: m_Name
@@ -19321,6 +19321,10 @@ PrefabInstance:
     - target: {fileID: 7226231447601723010, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
       propertyPath: targets
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226231447601723010, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
+      propertyPath: maxCharges
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7226231447601723010, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
       propertyPath: attackSpeed
@@ -19357,6 +19361,10 @@ PrefabInstance:
     - target: {fileID: 7226231447601723010, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
       propertyPath: targetModeString
       value: First
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226231447601723010, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
+      propertyPath: maxCoilEmisionRate
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7226231447601723010, guid: 6e5c86262e2d3db48b9d3c38af46be29, type: 3}
       propertyPath: rechargePowerDelay
