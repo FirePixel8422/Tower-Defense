@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,7 +6,6 @@ public class CameraController : MonoBehaviour
 {
     public AnimationCurve zoom_RotationCurve;
     public AnimationCurve zoom_PositionCurve;
-
 
     public Transform camCenter;
     public Transform cam;
@@ -18,10 +18,20 @@ public class CameraController : MonoBehaviour
     public float scrollForMaxZoom;
     public float cScroll;
 
-    public float centerRotY;
-    public Vector3 camMoveDir;
+    private float centerRotY;
+    private Vector3 camMoveDir;
 
+    public bool animatePanChanged;
+        
 
+    //detect input for reset of camera
+    public void OnResetCam(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            StartCoroutine(ResetCamera());
+        }
+    }
 
     //detect scroll input for zooming in and out on the field
     public void OnScroll(InputAction.CallbackContext ctx)
@@ -45,16 +55,48 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        //rotate camera horizontally around middlePoint with Q/E
-        camCenter.Rotate(new Vector3(0, centerRotY * centerRotSpeed * Time.deltaTime, 0));
+        // check for inputs this frame
+        if (Mathf.Abs(centerRotY) > 0.01f)
+        {
+            RotateCam();
+        }
 
-        //move camCenterPoint with Directional WASD Input, because camCenter moves, the rotation center point for horizontally rotating changes too.
-        camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, camCenter.localPosition + camCenter.TransformDirection(camMoveDir), moveSpeed * Time.deltaTime);
+        if (camMoveDir.sqrMagnitude > 0.01f)
+        {
+            MoveCam();
+        }
 
+        if (animatePanChanged)
+        {
+            AnimatePanCam();
+        }
+    }
 
-        
-        # region Move camera down/up rotating upwards/downwards following a smooth animation curve
+    private IEnumerator ResetCamera()
+    {
+        while (true)
+        {
+            yield return null;
+            camCenter.rotation = Quaternion.RotateTowards(camCenter.rotation, Quaternion.identity, centerRotSpeed);
+        }
+    }
 
+    //rotate camera horizontally around middlePoint with Q/E
+    private void RotateCam()
+    {
+        camCenter.Rotate(0, centerRotY * centerRotSpeed * Time.deltaTime, 0);
+    }
+
+    //move camCenterPoint with Directional WASD Input, because camCenter moves, the rotation center point for horizontally rotating changes too.
+    private void MoveCam()
+    {
+        Vector3 targetPosition = camCenter.localPosition + camCenter.TransformDirection(camMoveDir);
+        camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, targetPosition, moveSpeed * Time.deltaTime);
+    }
+
+    //move camera down/up rotating upwards/downwards following a smooth animation curve
+    private void AnimatePanCam()
+    {
         Vector3 camRot = cam.localEulerAngles;
         camRot.x = zoom_RotationCurve.Evaluate(cScroll);
 
@@ -62,16 +104,20 @@ public class CameraController : MonoBehaviour
         camPos.y = zoom_PositionCurve.Evaluate(cScroll);
 
         cam.localRotation = Quaternion.Lerp(cam.localRotation, Quaternion.Euler(camRot), zoomSpeed * Time.deltaTime);
-
         cam.localPosition = Vector3.Lerp(cam.localPosition, camPos, zoomSpeed * Time.deltaTime);
-        #endregion
+
+        if(cam.localPosition == camPos && cam.localRotation == Quaternion.Euler(camRot))
+        {
+            animatePanChanged = false;
+        }
     }
 
+    //use scroll input and add that to cScroll float clamp between 0 and 1 for the animationCurve
     private void Scroll(float scrollDelta)
     {
-        //use scroll input and add that to currentScroll float clamped between 0 and 1 for the animation curve percentages
-        //120 = 1 scroll move
-        scrollDelta /= 120;
+        scrollDelta /= 120; // 120 = 1 scroll move
         cScroll = Mathf.Clamp(cScroll + scrollDelta / scrollForMaxZoom, 0, 1);
+
+        animatePanChanged = true;
     }
 }

@@ -10,16 +10,17 @@ public class EnemyCore : MonoBehaviour
     public float essenceOnDeath;
 
     public float maxHealth;
-    [HideInInspector]
+    //[HideInInspector]
     public float health;
     public float damage;
     public float incomingDamage;
+    public float takenDamage;
 
     public bool IsNotAboutToDie
     {
         get
         {
-            return health > incomingDamage;
+            return health > incomingDamage && dead == false;
         }
     }
 
@@ -56,6 +57,7 @@ public class EnemyCore : MonoBehaviour
         pointIndex = 0;
         health = maxHealth;
         incomingDamage = 0;
+        takenDamage = 0;
         progression = 0;
         dead = false;
 
@@ -88,6 +90,7 @@ public class EnemyCore : MonoBehaviour
     }
     public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time)
     {
+        takenDamage += damage;
         if (dead) return;
 
         
@@ -104,13 +107,12 @@ public class EnemyCore : MonoBehaviour
         }
 
         health -= damage;
+        incomingDamage -= damage;
 
         //generate essence
         float percentDamage = (damage + (health < 0 ? health : 0)) / maxHealth;
         EssenceManager.Instance.GenerateEssenceFromEnemy(percentDamage * essenseOnDamage, damageType);
 
-
-        incomingDamage -= damage;
         if (health <= 0)
         {
             WaveManager.Instance.spawnedObj.Remove(this);

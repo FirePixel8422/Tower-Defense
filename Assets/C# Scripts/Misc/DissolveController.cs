@@ -15,8 +15,11 @@ public class DissolveController : MonoBehaviour
 
 
 
-
-    public void Init(TowerCore core)
+    private void Start()
+    {
+        dissolveMaterial = GetComponent<Renderer>().material;
+    }
+    public void StartDissolve(TowerCore core)
     {
         dissolveMaterial = GetComponent<Renderer>().material;
         StartCoroutine(Dissolve(core));

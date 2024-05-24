@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class TowerManager : MonoBehaviour
@@ -12,7 +11,9 @@ public class TowerManager : MonoBehaviour
         Instance = this;
     }
 
-    public float towerUpdateInterval;
+    public float towerTargetUpdateInterval;
+    public float towerRotationUpdateInterval;
+    public float projectileTrackTargetUpdateInterval;
 
 
     private WaveManager waveManager;
@@ -21,7 +22,8 @@ public class TowerManager : MonoBehaviour
     private void Start()
     {
         waveManager = WaveManager.Instance;
-        StartCoroutine(UpdateTowersLoop());
+        StartCoroutine(UpdateTowerTargetsLoop());
+        StartCoroutine(UpdateTowerRotationsLoop());
     }
 
     public MagicType HighestMagicType()
@@ -33,7 +35,8 @@ public class TowerManager : MonoBehaviour
             {
                 magicValues[0] += 1;
             }
-            else */if (tower.magicType.Contains(MagicType.Arcane))
+            else */
+            if (tower.magicType.Contains(MagicType.Arcane))
             {
                 magicValues[1] += 1;
             }
@@ -75,12 +78,20 @@ public class TowerManager : MonoBehaviour
     }
 
 
-    private IEnumerator UpdateTowersLoop()
+    private IEnumerator UpdateTowerTargetsLoop()
     {
         while (true)
         {
-            UpdateTowers();
-            yield return new WaitForSeconds(towerUpdateInterval);
+            UpdateTowerTargets();
+            yield return new WaitForSeconds(towerTargetUpdateInterval);
+        }
+    }
+    private IEnumerator UpdateTowerRotationsLoop()
+    {
+        while (true)
+        {
+            UpdateTowerRotations();
+            yield return new WaitForSeconds(towerRotationUpdateInterval);
         }
     }
 
@@ -106,12 +117,12 @@ public class TowerManager : MonoBehaviour
     private float enemyDamage;
     private float enemyMaxHealth;
     #endregion
-    private void UpdateTowers()
+    private void UpdateTowerTargets()
     {
         spawnedEnemyObjCount = waveManager.spawnedObj.Count;
-        for (int i = 0; i < spawnedTowerObj.Count; i++)
+        for (int i = spawnedTowerObj.Count - 1; i >= 0; i--)
         {
-            if (spawnedTowerObj[i].towerCompleted == false || spawnedTowerObj[i].attackSpeed == 0)
+            if (spawnedTowerObj[i].towerCompleted == false)
             {
                 continue;
             }
@@ -163,7 +174,7 @@ public class TowerManager : MonoBehaviour
                         else if (towerTargetModeIsDangerous && enemyDamage >= mostDangerous)
                         {
                             if (enemyDamage > mostDangerous)
-                            {   
+                            {
                                 mostDangerous = enemyDamage;
                                 id = i2;
                             }
@@ -202,21 +213,29 @@ public class TowerManager : MonoBehaviour
             else
             {
                 spawnedTowerObj[i].target = waveManager.spawnedObj[id];
-
-                if (spawnedTowerObj[i].rotSpeed != 0)
-                {
-                    //update tower rotation
-                    Vector3 dir = spawnedTowerObj[i].rotPoint.position - waveManager.spawnedObj[id].transform.position;
-                    float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-
-                    //apply rotation
-                    spawnedTowerObj[i].rotPoint.rotation =
-                        Quaternion.RotateTowards(
-                            spawnedTowerObj[i].rotPoint.rotation,
-                            Quaternion.Euler(0, angle, 0) * spawnedTowerObj[i].rotOffset,
-                            spawnedTowerObj[i].rotSpeed * Time.deltaTime);
-                }
             }
+        }
+    }
+
+    private void UpdateTowerRotations()
+    {
+        foreach (TowerCore tower in spawnedTowerObj)
+        {
+            if (tower.rotSpeed == 0 || tower.target == null || tower.target.IsNotAboutToDie == false)
+            {
+                continue;
+            }
+            
+            //update tower rotation
+            Vector3 dir = tower.rotPoint.position - tower.target.transform.position;
+            float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+            //apply rotation
+            tower.rotPoint.rotation =
+                Quaternion.RotateTowards(
+                    tower.rotPoint.rotation,
+                    Quaternion.Euler(0, angle, 0) * tower.rotOffset,
+                    tower.rotSpeed * towerRotationUpdateInterval);
         }
     }
 }

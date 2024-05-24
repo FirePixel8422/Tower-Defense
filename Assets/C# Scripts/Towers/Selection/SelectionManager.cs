@@ -88,12 +88,14 @@ public class SelectionManager : MonoBehaviour
                 selectedTower.transform.localPosition = Vector3.zero;
                 selectedTower = Instantiate(selectedTower.gameObject, gridData.worldPos, selectedTower.transform.rotation).GetComponent<TowerCore>();
 
-                towerManager.spawnedTowerObj.Add(selectedTower);
+                if (selectedTower.attackSpeed > 0) 
+                {
+                    towerManager.spawnedTowerObj.Add(selectedTower);
+                }
                 selectedTower.CoreInit();
 
                 gridManager.UpdateGridDataFieldType(gridData.gridPos, 2, selectedTower);
                 isPlacingTower = false;
-                selectedTower.UpdatePreviewTower(false);
             }
         }
     }
@@ -143,17 +145,50 @@ public class SelectionManager : MonoBehaviour
         towerUiController.targetModeTextObj.text = targetModeString;
     }
 
-    public void TryUpgradeTower(bool leftPath)
+    public void TryUpgradeTower(bool leftPath, MagicType chosenType)
     {
         if (leftPath)
         {
             int cost = selectedTower.towerUIData.LU_essenseCost;
             if (cost != 0 && EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.LU_essenseType))
             {
+                if(selectedTower.towerUIData.LU_essenseType == MagicType.Neutral)
+                {
+                    if (options[0] == true && chosenType == MagicType.Life)
+                    {
+                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
+                    }
+                    else if (options[1] == true && chosenType == MagicType.Arcane)
+                    {
+                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
+                    }
+                    else if (options[2] == true && chosenType == MagicType.Ember)
+                    {
+                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
+                    }
+                }
+                else
+                {
+                    EssenceManager.Instance.AddRemoveEssence(-cost, selectedTower.towerUIData.LU_essenseType);
+                }
+
                 towerManager.spawnedTowerObj.Remove(selectedTower);
                 selectedTower.UpgradeTower(true);
             }
         }
+    }
+
+    public void SellTower()
+    {
+        EssenceManager.Instance.AddRemoveEssence(selectedTower.towerCost, selectedTower.costType);
+
+        GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
+        GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, 0, null);
+
+        TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
+        Destroy(selectedTower.gameObject);
+        towerSelected = false;
+        selectedTower = null;
     }
 
 
@@ -188,10 +223,12 @@ public class SelectionManager : MonoBehaviour
                 if ((onTrack == 1 && selectedTower.placeOntrack) || (onTrack == 0 && selectedTower.placeOntrack == false))
                 {
                     selectedTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+                    selectedTower.DisplayColorOfTowerPreview(Color.white);
                 }
                 else
                 {
                     selectedTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
+                    selectedTower.DisplayColorOfTowerPreview(Color.red);
                 }
                 selectedTower.transform.position = gridData.worldPos;
             }

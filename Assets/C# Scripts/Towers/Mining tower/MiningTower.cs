@@ -25,7 +25,6 @@ public class MiningTower : TowerCore
 
     public override void Init()
     {
-        base.Init();
         essenceManager = EssenceManager.Instance;
     }
     public override void Shoot()
@@ -46,9 +45,13 @@ public class MiningTower : TowerCore
         {
             return;
         }
-        Color col = Color.Lerp(magicColormaterial.GetColor("_Base_Color"), magicColors[colorIndex], colorSwapSpeed * Time.deltaTime);
-        magicColormaterial.SetColor("_Base_Color", col);
-        towerPreviewRenderer.color = col;
+
+        if (towerPreviewRenderer.color != magicColors[colorIndex])
+        {
+            Color col = Color.Lerp(magicColormaterial.GetColor("_Base_Color"), magicColors[colorIndex], colorSwapSpeed * Time.deltaTime);
+            magicColormaterial.SetColor("_Base_Color", col);
+            towerPreviewRenderer.color = col;
+        }
 
         generatedEssence += generationPower * Time.deltaTime;
 

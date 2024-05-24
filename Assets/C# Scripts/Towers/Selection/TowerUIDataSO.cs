@@ -10,6 +10,7 @@ public class TowerUIDataSO : ScriptableObject
     public string towerName;
     public string towerPopup;
 
+    [Header("")]
 
     public TowerUIDataSO leftUpgrade;
     public int LU_essenseCost;
@@ -17,6 +18,8 @@ public class TowerUIDataSO : ScriptableObject
     [Header("1 for first upgrade, 2 for second")]
     public int LU_upgradeNumber;
 
+    [Header("")]
+    
     public TowerUIDataSO rightUpgrade;
     public int RU_essenseCost;
     public MagicType RU_essenseType;

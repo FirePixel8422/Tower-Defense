@@ -42,9 +42,10 @@ public class ProjectilePooling : MonoBehaviour
     {
         foreach (Projectile obj in pooledList[index])
         {
-            if (obj.gameObject.activeInHierarchy == false)
+            if (obj.readyForSpawn)
             {
                 obj.gameObject.SetActive(true);
+                obj.readyForSpawn = false;
                 obj.transform.SetPositionAndRotation(pos, rot);
                 return obj.gameObject;
             }
@@ -56,6 +57,7 @@ public class ProjectilePooling : MonoBehaviour
         GameObject spawnedObj = Instantiate(pooledPrefabs[index].projectilePrefab, pos, rot);
         Projectile projectile = spawnedObj.GetComponent<Projectile>();
         pooledList[index].Add(projectile);
+        projectile.readyForSpawn = false;
         pooledPrefabs[index].amount += 1;
         return spawnedObj;
     }

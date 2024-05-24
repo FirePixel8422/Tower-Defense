@@ -142,6 +142,12 @@ public class EssenceManager : MonoBehaviour
         {
             EmberEssence += amount;
         }
+        else
+        {
+            EmberEssence += amount / 3;
+            ArcaneEssence += amount / 3;
+            LifeEssence += amount / 3;
+        }
     }
 
     public void GenerateEssenceFromEnemy(float amount, MagicType type)

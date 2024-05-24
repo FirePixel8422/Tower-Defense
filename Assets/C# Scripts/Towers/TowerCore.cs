@@ -6,10 +6,15 @@ using UnityEngine;
 
 public class TowerCore : MonoBehaviour
 {
+    public DissolveController[] dissolves;
+
     [HideInInspector]
     public int amountOfDissolves;
     [HideInInspector]
     public int cDissolves;
+
+    public float towerCost;
+    public MagicType costType;
 
     public TowerUIDataSO towerUIData;
     public GameObject[] upgradePrefabs;
@@ -55,6 +60,8 @@ public class TowerCore : MonoBehaviour
 
     public virtual void Start()
     {
+        dissolves = GetComponentsInChildren<DissolveController>();
+
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
         towerPreviewRenderer.transform.localScale = Vector3.one * range;
         anim = GetComponent<Animator>();
@@ -62,13 +69,13 @@ public class TowerCore : MonoBehaviour
     }
     public virtual void CoreInit()
     {
-        DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
         amountOfDissolves = dissolves.Length;
-
         foreach (var dissolve in dissolves)
         {
-            dissolve.Init(this);
+            dissolve.StartDissolve(this);
         }
+
+        UpdatePreviewTower(false);
 
         towerPreviewRenderer.enabled = false;
         Init();
@@ -117,7 +124,6 @@ public class TowerCore : MonoBehaviour
     public virtual void SelectOrDeselectTower(bool select)
     {
         towerPreviewRenderer.enabled = select;
-        DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
 
         foreach (var d in dissolves)
         {
@@ -172,11 +178,17 @@ public class TowerCore : MonoBehaviour
 
     public virtual void UpdatePreviewTower(bool preview)
     {
-        DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
-
         foreach (var d in dissolves)
         {
             d.dissolveMaterial.SetInt("_Preview", preview ? 1 : 0);
+        }
+    }
+
+    public void DisplayColorOfTowerPreview(Color color)
+    {
+        foreach (var d in dissolves)
+        {
+            d.dissolveMaterial.SetColor("_PreviewColor", color);
         }
     }
 

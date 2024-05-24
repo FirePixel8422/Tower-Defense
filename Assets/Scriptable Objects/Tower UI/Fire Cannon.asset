@@ -16,6 +16,10 @@ MonoBehaviour:
   towerName: Fire Cannon
   towerPopup: Fire Cannon info
   leftUpgrade: {fileID: 0}
+  LU_essenseCost: 0
+  LU_essenseType: 3
   LU_upgradeNumber: 0
   rightUpgrade: {fileID: 0}
+  RU_essenseCost: 0
+  RU_essenseType: 0
   RU_upgradeNumber: 0

@@ -16,6 +16,10 @@ MonoBehaviour:
   towerName: Cannon
   towerPopup: The cannon is a standard high damage neuteral tower
   leftUpgrade: {fileID: 11400000, guid: f7d447413d432904ab35604947766adc, type: 2}
+  LU_essenseCost: 100
+  LU_essenseType: 0
   LU_upgradeNumber: 0
   rightUpgrade: {fileID: 11400000, guid: 9902f2c90e294ac489c0bd00b7558f9f, type: 2}
+  RU_essenseCost: 0
+  RU_essenseType: 0
   RU_upgradeNumber: 0

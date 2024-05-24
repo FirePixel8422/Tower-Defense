@@ -276,12 +276,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30873801}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1524239067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &30873804
 MonoBehaviour:
@@ -298,8 +298,10 @@ MonoBehaviour:
   pooledPrefabs:
   - projectilePrefab: {fileID: 6691617337945683247, guid: 90b2e13ffabbcd34484ffe885c206d3d, type: 3}
     amount: 10
-  - projectilePrefab: {fileID: 6516386251519749293, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
-    amount: 50
+  - projectilePrefab: {fileID: 479924040819817569, guid: 6e6d1617d0de69849ab48917d013cd74, type: 3}
+    amount: 10
+  - projectilePrefab: {fileID: 3947509374797139718, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
+    amount: 10
   dynamicRefillOnEmpty: 1
 --- !u!1 &46792869
 GameObject:
@@ -507,8 +509,7 @@ MonoBehaviour:
   zoomSpeed: 6
   scrollForMaxZoom: 10
   cScroll: 0
-  centerRotY: 0
-  camMoveDir: {x: 0, y: 0, z: 0}
+  animatePanChanged: 0
 --- !u!1 &91114934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +1136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f19547c55c6db4dad9a38a0c2f21bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyMovementUpdateInterval: 0
   points:
   - {fileID: 2068478320}
   - {fileID: 968342602}
@@ -1166,7 +1168,7 @@ MonoBehaviour:
   - {fileID: 331120836}
   - {fileID: 1177682340}
   smoothValue: 0.225
-  rotMultiplier: 1.2
+  rotMultiplier: 1.25
   preparationTime: 0
   waves:
   - {fileID: 11400000, guid: 7cb2a413742f65544b26fc258fa15189, type: 2}
@@ -3435,8 +3437,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af88bbe2a9eaf3459c4f3054993c711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMovementFPS: 0
-  towerUpdateFPS: 60
+  enemyMovementUpdateFPS: 60
+  towerTargetUpdateFPS: 30
+  towerRotationUpdateFPS: 60
+  projectileTrackTargetUpdateFPS: 60
 --- !u!4 &456250018
 Transform:
   m_ObjectHideFlags: 0
@@ -3445,12 +3449,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456250016}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1524239067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457632482
 GameObject:
@@ -9186,7 +9190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83f784bc5a5f18458f1a525bff0b73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMasterGizmos: 1
+  drawMasterGizmos: 0
   drawTileGizmos: 1
   drawTileDataGizmos: 0
   gridPosition: {x: 0, y: 0, z: 0.5}
@@ -9201,7 +9205,7 @@ Transform:
   m_GameObject: {fileID: 1130031767}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10914,7 +10918,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ccf5b9dd989f5408d05bc7d5561733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerUpdateInterval: 0
+  towerTargetUpdateInterval: 0
+  towerRotationUpdateInterval: 0
+  projectileTrackTargetUpdateInterval: 0
   spawnedTowerObj: []
 --- !u!114 &1352799225
 MonoBehaviour:
@@ -12622,6 +12628,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 456250018}
+  - {fileID: 30873803}
   - {fileID: 146782329}
   - {fileID: 1130031769}
   - {fileID: 1352799222}
@@ -17750,12 +17758,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: range
-      value: 2.25
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 5852997858576090439, guid: 90b2e13ffabbcd34484ffe885c206d3d, type: 3}
+      objectReference: {fileID: 3965655925716303268, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: attackSpeed
       value: 2
@@ -17766,15 +17774,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ea4088adbe62de94a977f150ae7f6986, type: 2}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: lookTreshold
-      value: 0.9
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: projStats.speed
-      value: 8.5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: projStats.damage
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2907617426948363495, guid: f9d8bee1f80dcdd43b444b53e209805b, type: 3}
       propertyPath: targetModeString
@@ -21744,7 +21752,7 @@ PrefabInstance:
     - target: {fileID: 3229214753010939610, guid: 019c89565c500084fa0e7b212011c523, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 1270926058920790054, guid: 8c5e817c64b99a24fb8db4ce3a2b98eb, type: 3}
+      objectReference: {fileID: 1765200225478486042, guid: 6e6d1617d0de69849ab48917d013cd74, type: 3}
     - target: {fileID: 3229214753010939610, guid: 019c89565c500084fa0e7b212011c523, type: 3}
       propertyPath: attackSpeed
       value: 0.15
@@ -24417,8 +24425,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2e41a424001ac47810039df0613f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
+  towerCost: 0
+  costType: 0
   towerUIData: {fileID: 11400000, guid: ea4088adbe62de94a977f150ae7f6986, type: 2}
   upgradePrefabs: []
   towerCompleted: 0
@@ -24426,7 +24437,7 @@ MonoBehaviour:
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
   audioController: {fileID: 0}
-  projectile: {fileID: 3947509374797139718, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
+  projectile: {fileID: 3965655925716303268, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
   shootPoint: {fileID: 0}
   target: {fileID: 0}
   targetMode: 0
@@ -25837,7 +25848,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8048759429465823497}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1352799223}
+        m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
+        m_MethodName: SellTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8242612849242433205}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &8505523732351541313
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26437,5 +26472,3 @@ SceneRoots:
   - {fileID: 1554707214}
   - {fileID: 4999432171100147853}
   - {fileID: 700871596}
-  - {fileID: 30873803}
-  - {fileID: 456250018}
