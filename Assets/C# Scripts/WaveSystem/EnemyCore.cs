@@ -71,7 +71,7 @@ public class EnemyCore : MonoBehaviour
             if (immunityBarrierType != MagicType.Neutral)
             {
                 immunityBarrier.gameObject.SetActive(true);
-                immunityBarrier.Init(barrierStartHealth, barrierHealthDrainTime);
+                immunityBarrier.Init(barrierStartHealth, barrierHealthDrainTime, (int)immunityBarrierType - 1);
             }
         }
     }

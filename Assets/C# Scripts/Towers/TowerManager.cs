@@ -51,29 +51,29 @@ public class TowerManager : MonoBehaviour
         }
 
         int highest = -1;
-        int id = -1;
+        int targetEnemyIndex = -1;
         for (int i = 0; i < magicValues.Length; i++)
         {
             if (magicValues[i] > highest)
             {
                 highest = magicValues[i];
-                id = i;
+                targetEnemyIndex = i;
             }
         }
 
-        if (id == 1)
+        if (targetEnemyIndex == 1)
         {
             return MagicType.Arcane;
         }
-        else if (id == 2)
+        else if (targetEnemyIndex == 2)
         {
             return MagicType.Ember;
         }
-        else if (id == 3)
+        else if (targetEnemyIndex == 3)
         {
             return MagicType.Life;
         }
-        //id == 0
+        //targetEnemyIndex == 0
         return MagicType.Neutral;
     }
 
@@ -98,13 +98,12 @@ public class TowerManager : MonoBehaviour
 
 
     #region Stashed Data
-    private int spawnedEnemyObjCount;
 
     private float bestProgression;
     private float leastProgression;
     private float mostDangerous;
     private float mostMaxHealth;
-    private int id;
+    private int targetEnemyIndex;
 
     private float towerRangeSquared;
     private Vector3 towerpos;
@@ -113,13 +112,38 @@ public class TowerManager : MonoBehaviour
     private bool towerTargetModeIsDangerous;
     private bool towerTargetModeIsTanky;
 
-    private float enemyProgression;
-    private float enemyDamage;
-    private float enemyMaxHealth;
+    private int enemyDataIndex;
+
     #endregion
+
+    public EnemyData[] enemyData;
+    public struct EnemyData
+    {
+        public float enemyProgression;
+        public float enemyDamage;
+        public float enemyMaxHealth;
+        public Vector3 position;
+        public bool IsNotAboutToDie;
+    }
+    
+
     private void UpdateTowerTargets()
     {
-        spawnedEnemyObjCount = waveManager.spawnedObj.Count;
+        //stash all enemyCore required data to struct and read that later.
+        enemyData = new EnemyData[waveManager.spawnedObj.Count];
+
+        enemyDataIndex = 0;
+        foreach (EnemyCore enemy in waveManager.spawnedObj)
+        {
+            enemyData[enemyDataIndex].enemyProgression = enemy.progression;
+            enemyData[enemyDataIndex].enemyDamage = enemy.damage;
+            enemyData[enemyDataIndex].enemyMaxHealth = enemy.maxHealth;
+            enemyData[enemyDataIndex].position = enemy.transform.position;
+            enemyData[enemyDataIndex].IsNotAboutToDie = enemy.IsNotAboutToDie;
+            enemyDataIndex += 1;
+        }
+
+
         for (int i = spawnedTowerObj.Count - 1; i >= 0; i--)
         {
             if (spawnedTowerObj[i].towerCompleted == false)
@@ -145,74 +169,71 @@ public class TowerManager : MonoBehaviour
             mostMaxHealth = -1;
 
 
-            id = -1;
-            for (int i2 = 0; i2 < spawnedEnemyObjCount; i2++)
+            targetEnemyIndex = -1;
+            enemyDataIndex = 0;
+            foreach (EnemyData enemyData in enemyData)
             {
-                //stash even more data in private floats
-                enemyProgression = waveManager.spawnedObj[i2].progression;
-                enemyDamage = waveManager.spawnedObj[i2].damage;
-                enemyMaxHealth = waveManager.spawnedObj[i2].maxHealth;
-
-                if ((towerpos - waveManager.spawnedObj[i2].transform.position).sqrMagnitude < towerRangeSquared)
+                if ((towerpos - enemyData.position).sqrMagnitude < towerRangeSquared)
                 {
                     //check if enemy isnt going to die in next few frames from an already active dmg source > this way this tower wont shoot air.
-                    if (waveManager.spawnedObj[i2].IsNotAboutToDie)
+                    if (enemyData.IsNotAboutToDie)
                     {
                         //furthest progressed enemy
-                        if (towerTargetModeIsFirst && enemyProgression > bestProgression)
+                        if (towerTargetModeIsFirst && enemyData.enemyProgression > bestProgression)
                         {
-                            bestProgression = enemyProgression;
-                            id = i2;
+                            bestProgression = enemyData.enemyProgression;
+                            targetEnemyIndex = enemyDataIndex;
                         }
                         //least far progressed enemy
-                        else if (towerTargetModeIsLast && enemyProgression < leastProgression)
+                        else if (towerTargetModeIsLast && enemyData.enemyProgression < leastProgression)
                         {
-                            leastProgression = enemyProgression;
-                            id = i2;
+                            leastProgression = enemyData.enemyProgression;
+                            targetEnemyIndex = enemyDataIndex;
                         }
                         //most dmg dealing furthest progressed enemy
-                        else if (towerTargetModeIsDangerous && enemyDamage >= mostDangerous)
+                        else if (towerTargetModeIsDangerous && enemyData.enemyDamage >= mostDangerous)
                         {
-                            if (enemyDamage > mostDangerous)
+                            if (enemyData.enemyDamage > mostDangerous)
                             {
-                                mostDangerous = enemyDamage;
-                                id = i2;
+                                mostDangerous = enemyData.enemyDamage;
+                                targetEnemyIndex = enemyDataIndex;
                             }
-                            if (enemyProgression > bestProgression)
+                            if (enemyData.enemyProgression > bestProgression)
                             {
-                                mostDangerous = enemyDamage;
-                                bestProgression = enemyProgression;
-                                id = i2;
+                                mostDangerous = enemyData.enemyDamage;
+                                bestProgression = enemyData.enemyProgression;
+                                targetEnemyIndex = enemyDataIndex;
                             }
                         }
                         //tankiest furthest prgressed enemy
-                        else if (towerTargetModeIsTanky && enemyMaxHealth >= mostMaxHealth)
+                        else if (towerTargetModeIsTanky && enemyData.enemyMaxHealth >= mostMaxHealth)
                         {
-                            if (enemyMaxHealth > mostMaxHealth)
+                            if (enemyData.enemyMaxHealth > mostMaxHealth)
                             {
-                                mostMaxHealth = enemyMaxHealth;
-                                id = i2;
+                                mostMaxHealth = enemyData.enemyMaxHealth;
+                                targetEnemyIndex = enemyDataIndex;
                             }
-                            if (enemyProgression > bestProgression)
+                            if (enemyData.enemyProgression > bestProgression)
                             {
-                                mostMaxHealth = enemyMaxHealth;
-                                bestProgression = enemyProgression;
-                                id = i2;
+                                mostMaxHealth = enemyData.enemyMaxHealth;
+                                bestProgression = enemyData.enemyProgression;
+                                targetEnemyIndex = enemyDataIndex;
                             }
                         }
                     }
                 }
+                enemyDataIndex += 1;
             }
 
-            //if id is "-1" (no target found with specified rules like inrange etc), return.
-            if (id == -1)
+            //if targetEnemyIndex is "-1" (no target found with specified rules like inrange etc), return.
+            if (targetEnemyIndex == -1)
             {
                 spawnedTowerObj[i].target = null;
                 continue;
             }
             else
             {
-                spawnedTowerObj[i].target = waveManager.spawnedObj[id];
+                spawnedTowerObj[i].target = waveManager.spawnedObj[targetEnemyIndex];
             }
         }
     }

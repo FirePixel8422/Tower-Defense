@@ -70,22 +70,30 @@ public class WaveManager : MonoBehaviour
     private EnemyCore target;
     private IEnumerator UpdateEnemyMovementsLoop()
     {
+        float elapsedTime = 0;
         while (true)
         {
-            if (syncedEmenySpawnedPool.Count > 0)
+            yield return null;
+            elapsedTime += Time.deltaTime;
+
+            if (elapsedTime > enemyMovementUpdateInterval)
             {
-                target = syncedEmenySpawnedPool[0];
-                target.Init();
 
-                spawnedObj.Add(target);
+                if (syncedEmenySpawnedPool.Count > 0)
+                {
+                    target = syncedEmenySpawnedPool[0];
+                    target.Init();
 
-                UpdateTargetDir(out target.dir, target.transform.position, startPointPos);
+                    spawnedObj.Add(target);
 
-                syncedEmenySpawnedPool.RemoveAt(0);
-            }
-            UpdateEnemyMovements();
+                    UpdateTargetDir(out target.dir, target.transform.position, startPointPos);
 
-            yield return new WaitForSeconds(enemyMovementUpdateInterval);
+                    syncedEmenySpawnedPool.RemoveAt(0);
+                }
+                UpdateEnemyMovements(elapsedTime);
+
+                elapsedTime = 0;
+            }        
         }
     }
     
@@ -95,12 +103,12 @@ public class WaveManager : MonoBehaviour
     private int pointIndex;
     private Vector3 pointPos;
     private Quaternion pointRot;
-    private float targetSpeed;
+    private float targetRotSpeed;
     private Vector3 movement;
     private float dist;
 
 
-    private void UpdateEnemyMovements()
+    private void UpdateEnemyMovements(float enemyMovementUpdateInterval)
     {
         //loop through all enemies and move them forward at all times.
         //then rotate them towards the next points, making them turn.
@@ -113,7 +121,7 @@ public class WaveManager : MonoBehaviour
             pointPos = points[pointIndex].position;
             pointRot = points[pointIndex].rotation;
 
-            targetSpeed = target.moveSpeed * 90 * rotMultiplier * enemyMovementUpdateInterval;
+            targetRotSpeed = target.moveSpeed * 90 * rotMultiplier * enemyMovementUpdateInterval;
 
 
             //calculate movement and check distance to point.
@@ -131,7 +139,7 @@ public class WaveManager : MonoBehaviour
             }
 
             //rotate towards the next point.
-            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, pointRot, targetSpeed);
+            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, pointRot, targetRotSpeed);
 
             #region retrieve int2 direction and lock targets position in those 2 angles (x-1,x1,z-1,z1)
             pos = target.transform.position;

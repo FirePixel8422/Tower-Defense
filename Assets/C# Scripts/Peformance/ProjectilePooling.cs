@@ -31,10 +31,9 @@ public class ProjectilePooling : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject obj = Instantiate(pooledPrefabs[index].projectilePrefab, Vector3.zero, Quaternion.identity);
+            GameObject obj = Instantiate(pooledPrefabs[index].projectilePrefab, Vector3.zero, Quaternion.identity, transform);
             pooledList[index].Add(obj.GetComponent<Projectile>());
             obj.SetActive(false);
-            obj.transform.SetParent(transform, true);
         }
     }
 
@@ -54,7 +53,7 @@ public class ProjectilePooling : MonoBehaviour
         {
             return null;
         }
-        GameObject spawnedObj = Instantiate(pooledPrefabs[index].projectilePrefab, pos, rot);
+        GameObject spawnedObj = Instantiate(pooledPrefabs[index].projectilePrefab, pos, rot, transform);
         Projectile projectile = spawnedObj.GetComponent<Projectile>();
         pooledList[index].Add(projectile);
         projectile.readyForSpawn = false;

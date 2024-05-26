@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class ImmunityBarrier : MonoBehaviour
 {
@@ -12,25 +9,25 @@ public class ImmunityBarrier : MonoBehaviour
     public Material barrierShader;
 
     [ColorUsage(true, true)]
-    public Color frontColor;
+    public Color[] frontColors;
 
     [ColorUsage(true, true)]
-    public Color backColor;
+    public Color[] backColors;
 
     [ColorUsage(true, true)]
-    public Color fresnelColor;
+    public Color[] fresnelColors;
 
 
-    public void Init(float _barrierHealth, float healthDrainTime)
+    public void Init(float _barrierHealth, float healthDrainTime, int immunityBarrierIndex)
     {
         maxBarrierHealth = _barrierHealth;
         barrierHealth = _barrierHealth;
         transform.localScale = Vector3.one * 2;
 
         barrierShader = GetComponent<Renderer>().material;
-        barrierShader.SetColor("_FrontColor", frontColor);
-        barrierShader.SetColor("_BackColor", backColor);
-        barrierShader.SetColor("_FresnelColor", fresnelColor);
+        barrierShader.SetColor("_FrontColor", frontColors[immunityBarrierIndex]);
+        barrierShader.SetColor("_BackColor", backColors[immunityBarrierIndex]);
+        barrierShader.SetColor("_FresnelColor", fresnelColors[immunityBarrierIndex]);
 
         if(healthDrainTime > 0)
         {

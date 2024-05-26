@@ -663,6 +663,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosionVFXGraph
       objectReference: {fileID: 0}
+    - target: {fileID: 3797844995348983411, guid: 3380726dd5a2a7742a8d177878c08fc5, type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7981227367287254042, guid: 3380726dd5a2a7742a8d177878c08fc5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6
@@ -803,11 +807,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6880601201732128402, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.11
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 6880601201732128402, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.05
+      value: 1.57
       objectReference: {fileID: 0}
     - target: {fileID: 6927920584648630422, guid: 4f57306e20b7e1843a5866acc8da107b, type: 3}
       propertyPath: m_Enabled

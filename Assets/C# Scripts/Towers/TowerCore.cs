@@ -19,7 +19,7 @@ public class TowerCore : MonoBehaviour
     public TowerUIDataSO towerUIData;
     public GameObject[] upgradePrefabs;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool towerCompleted;
 
     public bool placeOntrack;

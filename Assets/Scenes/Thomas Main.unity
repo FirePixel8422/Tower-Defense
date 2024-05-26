@@ -260,13 +260,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledPrefabs:
   - enemyPrefab: {fileID: 4634640182298528768, guid: df5886d1956c8be4a9cd5396401be8b9, type: 3}
-    amount: 25
+    amount: 35
   - enemyPrefab: {fileID: 4634640182298528768, guid: b91b8823bd52a0d468182b2a9acc3d1c, type: 3}
-    amount: 20
+    amount: 50
   - enemyPrefab: {fileID: 4634640182298528768, guid: 34f6443fd0aaf534cbd091eeb7a3081a, type: 3}
-    amount: 12
+    amount: 30
   - enemyPrefab: {fileID: 4634640182298528768, guid: 9703099193ade464abc4e7dd7bba8c6f, type: 3}
-    amount: 12
+    amount: 13
   dynamicRefillOnEmpty: 1
 --- !u!4 &30873803
 Transform:
@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f19547c55c6db4dad9a38a0c2f21bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMovementUpdateInterval: 0
+  enemyMovementUpdateInterval: 1
   points:
   - {fileID: 2068478320}
   - {fileID: 968342602}
@@ -3437,7 +3437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af88bbe2a9eaf3459c4f3054993c711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMovementUpdateFPS: 60
+  enemyMovementUpdateFPS: 240
   towerTargetUpdateFPS: 30
   towerRotationUpdateFPS: 60
   projectileTrackTargetUpdateFPS: 60

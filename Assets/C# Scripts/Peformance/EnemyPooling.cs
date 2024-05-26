@@ -31,10 +31,9 @@ public class EnemyPooling : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject obj = Instantiate(pooledPrefabs[index].enemyPrefab, Vector3.zero, Quaternion.identity);
+            GameObject obj = Instantiate(pooledPrefabs[index].enemyPrefab, Vector3.zero, Quaternion.identity, transform);
             pooledList[index].Add(obj.GetComponent<EnemyCore>());
             obj.SetActive(false);
-            obj.transform.SetParent(transform, true);
         }
     }
 
@@ -53,7 +52,7 @@ public class EnemyPooling : MonoBehaviour
         {
             return null;
         }
-        GameObject spawnedObj = Instantiate(pooledPrefabs[index].enemyPrefab, pos, rot);
+        GameObject spawnedObj = Instantiate(pooledPrefabs[index].enemyPrefab, pos, rot, transform);
         EnemyCore enemy = spawnedObj.GetComponent<EnemyCore>();
         pooledList[index].Add(enemy);
         pooledPrefabs[index].amount += 1;
