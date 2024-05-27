@@ -19,16 +19,13 @@ public class TowerUIController : MonoBehaviour
     public Image towerImage;
     public TextMeshProUGUI towerName;
     public TextMeshProUGUI towerPopup;
+    public TextMeshProUGUI towerCost;
 
-    public Image LU_towerImage;
-    public TextMeshProUGUI LU_towerCost;
-    public TextMeshProUGUI LU_towerName;
-    public TextMeshProUGUI LU_towerPopup;
-
-    public Image RU_towerImage;
-    public TextMeshProUGUI RU_towerCost;
-    public TextMeshProUGUI RU_towerName;
-    public TextMeshProUGUI RU_towerPopup;
+    public Image[] towerUpgradeImages;
+    public TextMeshProUGUI[] towerUpgradeNames;
+    public TextMeshProUGUI[] towerUpgradePopups;
+    public TextMeshProUGUI[] towerUpgradeCosts;
+    
 
 
     public void SelectTower(TowerCore tower)
@@ -37,46 +34,37 @@ public class TowerUIController : MonoBehaviour
         {
             return;
         }
+        TowerUIDataSO towerUiData = tower.towerUIData;
+
         //select tower and open and configure UI equal to that towers SO info
         towerUI.SetActive(true);
 
         targetModeTextObj.text = tower.targetModeString;
 
-        towerImage.sprite = tower.towerUIData.towerImage;
-        towerName.text = tower.towerUIData.towerName;
-        towerPopup.text = tower.towerUIData.towerPopup;
+        towerImage.sprite = towerUiData.towerImage;
+        towerName.text = towerUiData.towerName;
+        towerPopup.text = towerUiData.towerPopup;
+        towerCost.text = towerUiData.essenseCost.ToString();
 
-        if (tower.towerUIData.leftUpgrade != null)
+        for (int i = 0; i < 3; i++)
         {
-            //LU_towerImage.sprite = tower.towerUIData.leftUpgrade.towerImage;
-            //LU_towerCost.text = tower.towerUIData.LU_essenseCost.ToString();
-            LU_towerName.text = tower.towerUIData.leftUpgrade.towerName;
-            LU_towerPopup.text = tower.towerUIData.leftUpgrade.towerPopup;
+            if (i == towerUiData.upgrades.Length)
+            {
+                towerUpgradeImages[i].gameObject.SetActive(false);
+                break;
+            }
+            towerUpgradeImages[i].gameObject.SetActive(true);
+
+            towerUpgradeImages[i].sprite = towerUiData.upgrades[i].towerImage;
+            towerUpgradeNames[i].text = towerUiData.upgrades[i].towerName;
+            towerUpgradePopups[i].text = towerUiData.upgrades[i].towerPopup;
+            towerUpgradeCosts[i].text = towerUiData.upgrades[i].essenseCost.ToString();
         }
-        else
-        {
-            LU_towerImage.sprite = null;
-            LU_towerCost.text = "";
-            LU_towerName.text = "";
-            LU_towerPopup.text = "";
-        }
-        if (tower.towerUIData.rightUpgrade != null)
-        {
-            //RU_towerImage.sprite = tower.towerUIData.rightUpgrade.towerImage;
-            //RU_towerCost.text = tower.towerUIData.RU_essenseCost.ToString();
-            RU_towerName.text = tower.towerUIData.rightUpgrade.towerName;
-            RU_towerPopup.text = tower.towerUIData.rightUpgrade.towerPopup;
-        }
-        else
-        {
-            RU_towerImage.sprite = null;
-            RU_towerCost.text = "";
-            RU_towerName.text = "";
-            RU_towerPopup.text = "";
-        }
+        
 
         tower.SelectOrDeselectTower(true);
     }
+
     public void DeSelectTower(TowerCore tower)
     {
         towerUI.SetActive(false);

@@ -91,7 +91,7 @@ public class EssenceManager : MonoBehaviour
         emberEssenceTextObj.text = ((int)EmberEssence).ToString();
     }
 
-    public bool[] AllPossibleUpgradeOptions(int amount)
+    public bool[] AllPossibleUpgradeOptions(float amount)
     {
         bool[] upgradesPossible = new bool[3];
 
@@ -109,7 +109,7 @@ public class EssenceManager : MonoBehaviour
         }
         return upgradesPossible;
     }
-    public bool UpgradePossibleWithType(out bool[] options, int amount, MagicType type)
+    public bool UpgradePossibleWithType(out bool[] options, float amount, MagicType type)
     {
         options = AllPossibleUpgradeOptions(amount);
 

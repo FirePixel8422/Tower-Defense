@@ -82,7 +82,6 @@ public class SelectionManager : MonoBehaviour
             towerSelected = false;
             selectedTower = null;
             selectedTower.SelectOrDeselectTower(false);
-            selectedTower.UpdatePreviewTower(false);
             towerUiController.DeSelectTower(selectedTower);
         }
     }
@@ -100,7 +99,7 @@ public class SelectionManager : MonoBehaviour
                 selectedTower.DisplayColorOfTowerPreview(Color.white);
 
                 selectedTower.transform.localPosition = Vector3.zero;
-                selectedTower = Instantiate(selectedTower.gameObject, gridData.worldPos, selectedTower.transform.rotation).GetComponent<TowerCore>();
+                selectedTower = Instantiate(selectedTower.prefab, gridData.worldPos, selectedTower.transform.rotation).GetComponent<TowerCore>();
 
                 if (selectedTower.attackSpeed > 0) 
                 {
@@ -159,43 +158,18 @@ public class SelectionManager : MonoBehaviour
         towerUiController.targetModeTextObj.text = targetModeString;
     }
 
-    public void TryUpgradeTower(bool leftPath, MagicType chosenType)
+    public void TryUpgradeTower(int path, MagicType chosenType)
     {
-        if (leftPath)
+        for (int i = 0; i < 3; i++)
         {
-            int cost = selectedTower.towerUIData.LU_essenseCost;
-            if (cost != 0 && EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.LU_essenseType))
+            if (path != i)
             {
-                if (selectedTower.towerUIData.LU_essenseType == MagicType.Neutral)
-                {
-                    if (options[0] == true && chosenType == MagicType.Life)
-                    {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
-                    }
-                    else if (options[1] == true && chosenType == MagicType.Arcane)
-                    {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
-                    }
-                    else if (options[2] == true && chosenType == MagicType.Ember)
-                    {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
-                    }
-                }
-                else
-                {
-                    EssenceManager.Instance.AddRemoveEssence(-cost, selectedTower.towerUIData.LU_essenseType);
-                }
-
-                towerManager.spawnedTowerObj.Remove(selectedTower);
-                selectedTower.UpgradeTower(true);
+                continue;
             }
-        }
-        else
-        {
-            int cost = selectedTower.towerUIData.RU_essenseCost;
-            if (cost != 0 && EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.RU_essenseType))
+            float cost = selectedTower.towerUIData.upgrades[i].essenseCost;
+            if (cost != 0 && EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.upgrades[i].essenseType))
             {
-                if (selectedTower.towerUIData.RU_essenseType == MagicType.Neutral)
+                if (selectedTower.towerUIData.upgrades[i].essenseType == MagicType.Neutral)
                 {
                     if (options[0] == true && chosenType == MagicType.Life)
                     {
@@ -212,7 +186,7 @@ public class SelectionManager : MonoBehaviour
                 }
                 else
                 {
-                    EssenceManager.Instance.AddRemoveEssence(-cost, selectedTower.towerUIData.RU_essenseType);
+                    EssenceManager.Instance.AddRemoveEssence(-cost, selectedTower.towerUIData.upgrades[i].essenseType);
                 }
 
                 towerManager.spawnedTowerObj.Remove(selectedTower);
@@ -244,7 +218,6 @@ public class SelectionManager : MonoBehaviour
         if (towerSelected)
         {
             towerSelected = false;
-            selectedTower.UpdatePreviewTower(true);
             towerUiController.DeSelectTower(selectedTower);
         }
         selectedTower = _selectedTower;

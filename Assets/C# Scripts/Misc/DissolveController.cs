@@ -15,7 +15,7 @@ public class DissolveController : MonoBehaviour
 
 
 
-    private void Start()
+    private void Awake()
     {
         dissolveMaterial = GetComponent<Renderer>().material;
     }

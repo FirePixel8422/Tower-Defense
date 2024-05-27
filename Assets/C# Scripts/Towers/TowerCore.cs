@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class TowerCore : MonoBehaviour
 {
+    //[HideInInspector]
     public DissolveController[] dissolves;
-
     [HideInInspector]
     public int amountOfDissolves;
     [HideInInspector]
@@ -17,6 +17,7 @@ public class TowerCore : MonoBehaviour
     public MagicType costType;
 
     public TowerUIDataSO towerUIData;
+    public GameObject prefab;
     public GameObject[] upgradePrefabs;
 
     //[HideInInspector]
@@ -57,11 +58,25 @@ public class TowerCore : MonoBehaviour
 
     public ProjectileStats projStats;
 
+    public bool isPreviewTower;
+
 
     public virtual void Start()
     {
-        dissolves = GetComponentsInChildren<DissolveController>();
+        if (isPreviewTower)
+        {
+            dissolves = GetComponentsInChildren<DissolveController>();
+            foreach (var d in dissolves)
+            {
+                d.dissolveMaterial.SetInt("_Preview", true ? 1 : 0);
+            }
+            SetupTower();
+        }
+    }
 
+    private void SetupTower()
+    {
+        dissolves = GetComponentsInChildren<DissolveController>();
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
         towerPreviewRenderer.transform.localScale = Vector3.one * range;
         anim = GetComponent<Animator>();
@@ -69,13 +84,13 @@ public class TowerCore : MonoBehaviour
     }
     public virtual void CoreInit()
     {
+        SetupTower();
+
         amountOfDissolves = dissolves.Length;
         foreach (var dissolve in dissolves)
         {
             dissolve.StartDissolve(this);
         }
-
-        UpdatePreviewTower(false);
 
         towerPreviewRenderer.enabled = false;
         Init();
@@ -175,14 +190,6 @@ public class TowerCore : MonoBehaviour
         }
     }
 
-
-    public virtual void UpdatePreviewTower(bool preview)
-    {
-        foreach (var d in dissolves)
-        {
-            d.dissolveMaterial.SetInt("_Preview", preview ? 1 : 0);
-        }
-    }
 
     public void DisplayColorOfTowerPreview(Color color)
     {

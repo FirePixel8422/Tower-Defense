@@ -141,7 +141,7 @@ Material:
     - _Normal_Strength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Preview: 1
+    - _Preview: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
