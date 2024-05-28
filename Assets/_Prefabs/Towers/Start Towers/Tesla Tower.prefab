@@ -99,7 +99,7 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.5
+  dissolveSpeed: 0.6
   endDisolveValue: -1
 --- !u!1 &896390320384905955
 GameObject:
@@ -231,7 +231,7 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.5
+  dissolveSpeed: 0.6
   endDisolveValue: -1
 --- !u!1 &2816387756748161719
 GameObject:
@@ -5299,7 +5299,7 @@ Transform:
   m_GameObject: {fileID: 6574523575169489725}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: -2.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5326,11 +5326,10 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
-  towerUIData: {fileID: 0}
+  towerUIData: {fileID: 11400000, guid: ce084e22b8c604f448b6348a0eae0ef7, type: 2}
   prefab: {fileID: 0}
-  upgradePrefabs: []
+  upgradePrefabs:
+  - {fileID: 7998683090948771889, guid: 916880e0ef5b6da4ea9713e293cb1255, type: 3}
   towerCompleted: 0
   placeOntrack: 0
   towerPreviewRenderer: {fileID: 0}
@@ -5340,24 +5339,24 @@ MonoBehaviour:
   shootPoint: {fileID: 5259189839188913942}
   target: {fileID: 0}
   targetMode: 0
+  exludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: First
-  magicType: 02000000
+  magicType: 00000000
   rotSpeed: 0
   rotPoint: {fileID: 0}
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 1.8
   lookTreshold: -10
-  attackSpeed: 0.15
+  attackSpeed: 0.2
   projStats:
     projectileSize: 0
     speed: 0
-    damageType: 2
+    damageType: 0
     damage: 10
-    damageOverTimeType: 2
+    damageOverTimeType: 0
     damageOverTime: 7.5
-    time: 2
+    time: 1.5
     areaEffect: {fileID: 0}
     duration: 0
     doSplashDamage: 0
@@ -5368,6 +5367,7 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+  isPreviewTower: 0
   maxCoilEmisionRate: 12
   timePerCharge: 0.4
   rechargePowerDelay: 0.1

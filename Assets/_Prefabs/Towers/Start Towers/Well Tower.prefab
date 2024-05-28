@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 2444301092445039954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.75, y: 0, z: -4.75}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -136,9 +136,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
-  towerUIData: {fileID: 0}
+  towerUIData: {fileID: 11400000, guid: ce084e22b8c604f448b6348a0eae0ef7, type: 2}
   prefab: {fileID: 0}
   upgradePrefabs: []
   towerCompleted: 0
@@ -150,8 +148,8 @@ MonoBehaviour:
   shootPoint: {fileID: 0}
   target: {fileID: 0}
   targetMode: 0
+  exludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: 
   magicType: 
   rotSpeed: 540
@@ -178,6 +176,7 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+  isPreviewTower: 0
   magicColormaterial: {fileID: 0}
   magicColors:
   - {r: 0.9118147, g: 0, b: 1, a: 1}
@@ -307,8 +306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
   startDelay: 0
-  startDissolveEffectState: 0.4
-  dissolveSpeed: 0.525
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.6
   endDisolveValue: -1
 --- !u!1 &5007982391476056574
 GameObject:
@@ -408,8 +407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
   startDelay: 0
-  startDissolveEffectState: 0.5
-  dissolveSpeed: 0.525
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.6
   endDisolveValue: -1
 --- !u!1 &7408156765160139269
 GameObject:
@@ -509,6 +508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
   startDelay: 0
-  startDissolveEffectState: 0.5
-  dissolveSpeed: 0.525
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.6
   endDisolveValue: -1

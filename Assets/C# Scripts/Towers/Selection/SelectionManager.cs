@@ -16,7 +16,6 @@ public class SelectionManager : MonoBehaviour
 
 
     public GraphicRaycaster gfxRayCaster;
-    public TowerUIController towerUiController;
 
     private GridManager gridManager;
     private TowerManager towerManager;
@@ -36,7 +35,6 @@ public class SelectionManager : MonoBehaviour
 
     private void Start()
     {
-        towerUiController = TowerUIController.Instance;
         gridManager = GridManager.Instance;
         towerManager = TowerManager.Instance;
         mainCam = Camera.main;
@@ -81,8 +79,7 @@ public class SelectionManager : MonoBehaviour
         {
             towerSelected = false;
             selectedTower = null;
-            selectedTower.SelectOrDeselectTower(false);
-            towerUiController.DeSelectTower(selectedTower);
+            TowerUIController.Instance.DeSelectTower(selectedTower);
         }
     }
 
@@ -101,11 +98,12 @@ public class SelectionManager : MonoBehaviour
                 selectedTower.transform.localPosition = Vector3.zero;
                 selectedTower = Instantiate(selectedTower.prefab, gridData.worldPos, selectedTower.transform.rotation).GetComponent<TowerCore>();
 
-                if (selectedTower.attackSpeed > 0) 
+                selectedTower.CoreInit();
+
+                if (selectedTower.excludeTargetUpdates == false) 
                 {
                     towerManager.spawnedTowerObj.Add(selectedTower);
                 }
-                selectedTower.CoreInit();
 
                 gridManager.UpdateGridDataFieldType(gridData.gridPos, 2, selectedTower);
                 isPlacingTower = false;
@@ -131,7 +129,7 @@ public class SelectionManager : MonoBehaviour
 
                 towerSelected = true;
 
-                towerUiController.SelectTower(selectedTower);
+                TowerUIController.Instance.SelectTower(selectedTower);
                 return;
             }
         }
@@ -139,7 +137,7 @@ public class SelectionManager : MonoBehaviour
         //deselect tower if clicked on empty space
         if (towerSelected)
         {
-            towerUiController.DeSelectTower(selectedTower);
+            TowerUIController.Instance.DeSelectTower(selectedTower);
         }
         towerSelected = false;
     }
@@ -155,11 +153,12 @@ public class SelectionManager : MonoBehaviour
         {
             targetModeString = selectedTower.NextTargetMode();
         }
-        towerUiController.targetModeTextObj.text = targetModeString;
+        TowerUIController.Instance.targetModeTextObj.text = targetModeString;
     }
 
-    public void TryUpgradeTower(int path, MagicType chosenType)
+    public void TryUpgradeTower(int path)
     {
+        MagicType chosenType = MagicType.Ember;
         for (int i = 0; i < 3; i++)
         {
             if (path != i)
@@ -167,7 +166,7 @@ public class SelectionManager : MonoBehaviour
                 continue;
             }
             float cost = selectedTower.towerUIData.upgrades[i].essenseCost;
-            if (cost != 0 && EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.upgrades[i].essenseType))
+            if (EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.upgrades[i].essenseType))
             {
                 if (selectedTower.towerUIData.upgrades[i].essenseType == MagicType.Neutral)
                 {
@@ -183,6 +182,10 @@ public class SelectionManager : MonoBehaviour
                     {
                         EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
                 else
                 {
@@ -190,14 +193,18 @@ public class SelectionManager : MonoBehaviour
                 }
 
                 towerManager.spawnedTowerObj.Remove(selectedTower);
-                selectedTower.UpgradeTower(true);
+                selectedTower.UpgradeTower(path);
+
+                TowerUIController.Instance.DeSelectTower(selectedTower);
+                towerSelected = false;
+                selectedTower = null;
             }
         }
     }
 
     public void SellTower()
     {
-        EssenceManager.Instance.AddRemoveEssence(selectedTower.towerCost, selectedTower.costType);
+        EssenceManager.Instance.AddRemoveEssence(selectedTower.towerUIData.essenseCost, selectedTower.towerUIData.essenseType);
 
         GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
         GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, gridData.coreType, null);
@@ -218,7 +225,7 @@ public class SelectionManager : MonoBehaviour
         if (towerSelected)
         {
             towerSelected = false;
-            towerUiController.DeSelectTower(selectedTower);
+            TowerUIController.Instance.DeSelectTower(selectedTower);
         }
         selectedTower = _selectedTower;
         isPlacingTower = true;

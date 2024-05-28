@@ -32,6 +32,7 @@ public class DissolveController : MonoBehaviour
 
     private IEnumerator Dissolve(TowerCore core)
     {
+        dissolveMaterial.SetFloat("_Disolve_Active", startDissolveEffectState);
         yield return new WaitForSeconds(startDelay);
 
         cDissolveEffectState = startDissolveEffectState;
@@ -48,7 +49,7 @@ public class DissolveController : MonoBehaviour
         while (cDissolveEffectState < startDissolveEffectState)
         {
             yield return null;
-            cDissolveEffectState += Time.deltaTime * dissolveSpeed;
+            cDissolveEffectState += Time.deltaTime * dissolveSpeed * 1.5f;
             dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
         }
         core.RevertCompleted();

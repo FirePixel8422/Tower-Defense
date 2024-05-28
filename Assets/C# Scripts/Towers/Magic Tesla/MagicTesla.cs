@@ -20,24 +20,28 @@ public class MagicTesla : TowerCore
 
     public float damageDelay;
 
+    private int propertyId;
+
     public override void Init()
     {
         pSystem = GetComponentInChildren<ParticleSystem>();
         effect = GetComponentInChildren<VisualEffect>();
+
+        propertyId = Shader.PropertyToID("Pos");
+
         StartCoroutine(RechargePower());
         StartCoroutine(ShootLoop());
     }
 
     private IEnumerator RechargePower()
     {
-        yield return new WaitUntil(() => towerCompleted == true);
         float timer = 0;
         while (true)
         {
             timer -= Time.deltaTime;
 
             yield return null;
-            yield return new WaitUntil(() => charges != maxCharges);
+            yield return new WaitUntil(() => charges < maxCharges);
 
             while (timeSinceLastAttack < rechargePowerDelay)
             {
@@ -68,8 +72,7 @@ public class MagicTesla : TowerCore
             {
                 if (target != null &&
                     charges != 0 &&
-                    target.incomingDamage < target.health &&
-                    Vector3.Dot(shootPoint.forward, (target.transform.position - transform.position).normalized) >= lookTreshold)
+                    target.incomingDamage < target.health)
                 {
                     Shoot();
                     charges -= 1;
@@ -133,7 +136,7 @@ public class MagicTesla : TowerCore
     {
         foreach (EnemyCore target in targets)
         {
-            effect.SetVector3(Shader.PropertyToID("Pos"), target.transform.position);
+            effect.SetVector3(propertyId, target.transform.position);
             effect.Play();
             yield return null;
         }

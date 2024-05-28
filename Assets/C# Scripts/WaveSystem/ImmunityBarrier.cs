@@ -40,7 +40,6 @@ public class ImmunityBarrier : MonoBehaviour
         {
             yield return null;
             barrierHealth -= maxBarrierHealth / healthDrainTime * Time.deltaTime;
-            barrierShader.SetFloat("_KillValue", -(1 - barrierHealth / maxBarrierHealth) * 4 + 1);
             transform.localScale = Vector3.one * 2 - Vector3.one * (1 - (barrierHealth / maxBarrierHealth));
         }
         if (barrierHealth <= 0)
@@ -51,7 +50,6 @@ public class ImmunityBarrier : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        barrierShader.SetFloat("_KillValue", -(1 - barrierHealth / maxBarrierHealth) * 4 + 1);
         barrierHealth -= damage;
         transform.localScale = Vector3.one * 2 - Vector3.one * (1 - (barrierHealth / maxBarrierHealth));
         if (barrierHealth <= 0)

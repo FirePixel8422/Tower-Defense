@@ -16,6 +16,8 @@ public class MagicTrap : TowerCore
 
     public override void Init()
     {
+        specialTargetMode = true;
+        excludeTargetUpdates = true;
         trapColl = GetComponent<BoxCollider>();
         StartCoroutine(AttackLoop());
     }

@@ -129,10 +129,8 @@ public class EnemyCore : MonoBehaviour
 
     private IEnumerator DamageOverTime(MagicType damageType, float damage, float time)
     {
-        if (immunityBarrier != null && immunityBarrier.barrierHealth > 0 && immunityBarrierType == damageType && damageType != MagicType.Neutral)
-        {
-            yield break;
-        }
+        bool useImmunityBarrier = immunityBarrier != null && immunityBarrierType == damageType && damageType != MagicType.Neutral;
+
 
         //temporary void update loop to apply damage over time, deal damage every .25 seconds until time is over.
         float timeLeft = time;
@@ -151,7 +149,7 @@ public class EnemyCore : MonoBehaviour
             {
                 timer -= 0.25f;
                 timeLeft -= 0.25f;
-                if (immunityBarrier != null && immunityBarrier.barrierHealth > 0)
+                if (useImmunityBarrier && immunityBarrier.barrierHealth > 0)
                 {
                     //give direction unless direction "projectilePos" == Vcetor3.zero being no direction.
                     immunityBarrier.TakeDamage(damage);

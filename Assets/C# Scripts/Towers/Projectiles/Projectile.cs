@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Projectile : MonoBehaviour
 {
+    [HideInInspector]
     public bool readyForSpawn;
-    public TrailRenderer trail;
-    public GameObject child;
+    private TrailRenderer trail;
+    private GameObject child;
+
+    public int onHitEffectIndex = -1;
 
     public float trackTargetUpdateInterval;
     public int projectileId;
@@ -66,7 +70,7 @@ public class Projectile : MonoBehaviour
                 {
                     child.SetActive(false);
                     trail.emitting = false;
-                    yield return new WaitForSeconds(trail.time);
+                    yield return new WaitForSeconds(trail.time * 2);
                     child.SetActive(true);
                 }
                 gameObject.SetActive(false);
@@ -74,12 +78,21 @@ public class Projectile : MonoBehaviour
                 yield break;
             }
 
+
+            //move projectile and lookat target.
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, projStats.speed * trackTargetUpdateInterval);
             transform.LookAt(target.transform);
             if (Vector3.Distance(transform.position, target.transform.position) < projStats.projectileSize)
             {
                 //call virtual void "HitTarget()"
                 HitTarget();
+
+
+                //onHit effect (explosions and stuff)
+                if (onHitEffectIndex != -1)
+                {
+                    OnHitVFXPooling.Instance.GetPulledObj(onHitEffectIndex, transform.position, transform.rotation);
+                }
 
                 //destroy (disable for pool) bullet and let trail live for its duration
                 if (trail != null)
@@ -102,10 +115,8 @@ public class Projectile : MonoBehaviour
             //spawn collider to hit multiple bullets
             ApplySplashDamage();
         }
-        target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
 
-        //damage and effects applied, destroy bullet (disable to get it back to the pool system
-        gameObject.SetActive(false);
+        target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
     }
     public virtual void ApplySplashDamage()
     {

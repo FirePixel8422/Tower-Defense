@@ -15,12 +15,15 @@ public class MiningTower : TowerCore
     public float generationPower;
     public float generatedEssence;
 
+    private Color materialColor;
+
 
 
     public override void Start()
     {
         base.Start();
         magicColormaterial = transform.GetChild(0).GetComponent<Renderer>().material;
+        materialColor = magicColormaterial.GetColor("_Base_Color");
     }
 
     public override void Init()
@@ -39,6 +42,7 @@ public class MiningTower : TowerCore
         generatedEssence = 0;
     }
 
+
     private void Update()
     {
         if (towerCompleted == false || generationType == MagicType.Neutral || essenceManager == null)
@@ -48,15 +52,29 @@ public class MiningTower : TowerCore
 
         if (towerPreviewRenderer.color != magicColors[colorIndex])
         {
-            Color col = Color.Lerp(magicColormaterial.GetColor("_Base_Color"), magicColors[colorIndex], colorSwapSpeed * Time.deltaTime);
-            magicColormaterial.SetColor("_Base_Color", col);
-            towerPreviewRenderer.color = col;
+            materialColor = LinearColorLerp(materialColor, magicColors[colorIndex], colorSwapSpeed * Time.deltaTime);
+            magicColormaterial.SetColor("_Base_Color", materialColor);
+            towerPreviewRenderer.color = materialColor;
         }
 
         generatedEssence += generationPower * Time.deltaTime;
 
-        essenceManager.AddRemoveEssence((int)generatedEssence, generationType);
+        if((int)generatedEssence != 0)
+        {
+            essenceManager.AddRemoveEssence((int)generatedEssence, generationType);
 
-        generatedEssence -= (int)generatedEssence;
+            generatedEssence -= (int)generatedEssence;
+        }
+    }
+
+
+    private Color LinearColorLerp(Color a, Color b, float maxStep)
+    {
+        a = new Color(
+            Mathf.MoveTowards(a.r, b.r, maxStep),
+            Mathf.MoveTowards(a.g, b.g, maxStep),
+            Mathf.MoveTowards(a.b, b.b, maxStep),
+            Mathf.MoveTowards(a.a, b.a, maxStep));
+        return a;
     }
 }

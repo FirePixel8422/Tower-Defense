@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readyForSpawn: 1
+  onHitEffectIndex: 0
   trackTargetUpdateInterval: 0
   projectileId: 2
   target: {fileID: 0}
@@ -262,7 +263,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2.5
+  m_Time: 0.12
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -408,7 +409,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Time: 2
+  m_Time: 0.095
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3

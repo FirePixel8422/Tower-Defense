@@ -23,11 +23,11 @@ public class ProjectilePooling : MonoBehaviour
         for (int i = 0; i < pooledPrefabs.Length; i++)
         {
             pooledList.Add(new List<Projectile>(1000));
-            AddEnemyToPool(i, pooledPrefabs[i].amount);
+            AddProjectileToPool(i, pooledPrefabs[i].amount);
         }
     }
 
-    private void AddEnemyToPool(int index, int amount)
+    private void AddProjectileToPool(int index, int amount)
     {
         for (int i = 0; i < amount; i++)
         {

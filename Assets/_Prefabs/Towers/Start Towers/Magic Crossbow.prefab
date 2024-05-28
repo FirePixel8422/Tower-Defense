@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1096776524929605025}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.25, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55,9 +55,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
-  towerUIData: {fileID: 0}
+  towerUIData: {fileID: 11400000, guid: ce084e22b8c604f448b6348a0eae0ef7, type: 2}
   prefab: {fileID: 0}
   upgradePrefabs: []
   towerCompleted: 0
@@ -69,8 +67,8 @@ MonoBehaviour:
   shootPoint: {fileID: 8653778047871257800}
   target: {fileID: 0}
   targetMode: 0
+  exludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: First
   magicType: 
   rotSpeed: 360
@@ -97,6 +95,7 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+  isPreviewTower: 0
 --- !u!95 &1147535295158520521
 Animator:
   serializedVersion: 5
@@ -522,8 +521,8 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.5
-  endDisolveValue: -1
+  dissolveSpeed: 0.6
+  endDisolveValue: -0.925
 --- !u!1 &4637931114679744465
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,8 +706,8 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.5
-  endDisolveValue: -1
+  dissolveSpeed: 0.6
+  endDisolveValue: -0.925
 --- !u!1 &6195109396227585773
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,8 +842,8 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.5
-  endDisolveValue: -1
+  dissolveSpeed: 0.6
+  endDisolveValue: -0.925
 --- !u!1 &7649580768098879363
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,5 +974,5 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.5
-  endDisolveValue: -1
+  dissolveSpeed: 0.6
+  endDisolveValue: -0.925

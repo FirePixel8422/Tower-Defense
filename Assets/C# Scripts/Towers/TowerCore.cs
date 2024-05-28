@@ -6,21 +6,18 @@ using UnityEngine;
 
 public class TowerCore : MonoBehaviour
 {
-    //[HideInInspector]
+    [HideInInspector]
     public DissolveController[] dissolves;
     [HideInInspector]
     public int amountOfDissolves;
     [HideInInspector]
     public int cDissolves;
 
-    public float towerCost;
-    public MagicType costType;
-
     public TowerUIDataSO towerUIData;
     public GameObject prefab;
     public GameObject[] upgradePrefabs;
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool towerCompleted;
 
     public bool placeOntrack;
@@ -39,9 +36,10 @@ public class TowerCore : MonoBehaviour
     //[HideInInspector]
     public EnemyCore target;
     public TargetMode targetMode;
+    [HideInInspector]
+    public bool excludeTargetUpdates;
+    [HideInInspector] 
     public bool specialTargetMode;
-
-    public TextMeshProUGUI targetModeTextObj;
 
     private int targetId;
     public string targetModeString;
@@ -201,16 +199,23 @@ public class TowerCore : MonoBehaviour
 
 
 
-    public void UpgradeTower(bool leftPath)
+    public void UpgradeTower(int path)
     {
-        //spawn upgrade
-        TowerCore tower = Instantiate(upgradePrefabs[leftPath ? 0 : 1], transform.position, upgradePrefabs[leftPath ? 0 : 1].transform.rotation).GetComponent<TowerCore>();
+        StopAllCoroutines();
 
         //dissolve old (this) tower away
         DissolveController[] dissolves = GetComponentsInChildren<DissolveController>();
         foreach (var dissolve in dissolves)
         {
             dissolve.Revert(this);
+        }
+
+        //spawn upgrade
+        TowerCore tower = Instantiate(upgradePrefabs[path], transform.position, upgradePrefabs[path].transform.rotation).GetComponent<TowerCore>();
+
+        if (excludeTargetUpdates == false)
+        {
+            TowerManager.Instance.spawnedTowerObj.Add(tower);
         }
         tower.CoreInit();
     }

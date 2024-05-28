@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readyForSpawn: 1
-  trail: {fileID: 0}
-  child: {fileID: 0}
+  onHitEffectIndex: -1
   trackTargetUpdateInterval: 0
   projectileId: 1
   target: {fileID: 0}
