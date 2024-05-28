@@ -190,7 +190,8 @@ MonoBehaviour:
   damage: 5
   incomingDamage: 0
   takenDamage: 0
-  moveSpeed: 1.5
+  confused: 0
+  moveSpeed: 8
   pointIndex: 0
   dir:
     x: 0

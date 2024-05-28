@@ -28,6 +28,7 @@ public class SelectionManager : MonoBehaviour
     public GameObject towerUIHolder;
 
     public TowerCore selectedTower;
+    public TowerPreview selectedPreviewTower;
 
     public bool isPlacingTower;
     public bool towerSelected;
@@ -40,7 +41,7 @@ public class SelectionManager : MonoBehaviour
         mainCam = Camera.main;
 
         Button[] buttons = towerUIHolder.GetComponentsInChildren<Button>();
-        TowerCore[] towers = preSpawnedTowerHolder.GetComponentsInChildren<TowerCore>();
+        TowerPreview[] towers = preSpawnedTowerHolder.GetComponentsInChildren<TowerPreview>();
         for (int i = 0; i < buttons.Length; i++)
         {
             int index = i;
@@ -90,13 +91,13 @@ public class SelectionManager : MonoBehaviour
         {
             GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
 
-            if ((gridData.type == 0 && selectedTower.placeOntrack == false) || (gridData.type == 1 && selectedTower.placeOntrack))
+            if ((gridData.type == 0 && selectedPreviewTower.placeOntrack == false) || (gridData.type == 1 && selectedPreviewTower.placeOntrack))
             {
-                selectedTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-                selectedTower.DisplayColorOfTowerPreview(Color.white);
+                selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+                selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
 
-                selectedTower.transform.localPosition = Vector3.zero;
-                selectedTower = Instantiate(selectedTower.prefab, gridData.worldPos, selectedTower.transform.rotation).GetComponent<TowerCore>();
+                selectedPreviewTower.transform.localPosition = Vector3.zero;
+                selectedTower = Instantiate(selectedPreviewTower.towerPrefab, gridData.worldPos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
 
                 selectedTower.CoreInit();
 
@@ -216,18 +217,19 @@ public class SelectionManager : MonoBehaviour
     }
 
 
-    public void StartTowerPreview(TowerCore _selectedTower)
+    public void StartTowerPreview(TowerPreview _selectedTower)
     {
         if (isPlacingTower)
         {
-            selectedTower.transform.localPosition = Vector3.zero;
+            selectedPreviewTower.transform.localPosition = Vector3.zero;
         }
         if (towerSelected)
         {
             towerSelected = false;
             TowerUIController.Instance.DeSelectTower(selectedTower);
         }
-        selectedTower = _selectedTower;
+        selectedTower = null;
+        selectedPreviewTower = _selectedTower;
         isPlacingTower = true;
     }
 
@@ -243,17 +245,17 @@ public class SelectionManager : MonoBehaviour
                 GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
 
                 int onTrack = gridData.type;
-                if ((onTrack == 1 && selectedTower.placeOntrack) || (onTrack == 0 && selectedTower.placeOntrack == false))
+                if ((onTrack == 1 && selectedPreviewTower.placeOntrack) || (onTrack == 0 && selectedPreviewTower.placeOntrack == false))
                 {
-                    selectedTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-                    selectedTower.DisplayColorOfTowerPreview(Color.white);
+                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+                    selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
                 }
                 else
                 {
-                    selectedTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
-                    selectedTower.DisplayColorOfTowerPreview(Color.red);
+                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
+                    selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
                 }
-                selectedTower.transform.position = gridData.worldPos;
+                selectedPreviewTower.transform.position = gridData.worldPos;
             }
         }
     }

@@ -36,15 +36,15 @@ public class TowerManager : MonoBehaviour
                 magicValues[0] += 1;
             }
             else */
-            if (tower.magicType.Contains(MagicType.Arcane))
+            if (tower.magicType == MagicType.Arcane)
             {
                 magicValues[1] += 1;
             }
-            else if (tower.magicType.Contains(MagicType.Ember))
+            else if (tower.magicType == MagicType.Ember)
             {
                 magicValues[2] += 1;
             }
-            else if (tower.magicType.Contains(MagicType.Life))
+            else if (tower.magicType == MagicType.Life)
             {
                 magicValues[3] += 1;
             }

@@ -16,6 +16,8 @@ public class EnemyCore : MonoBehaviour
     public float incomingDamage;
     public float takenDamage;
 
+    public bool confused;
+
     public bool IsNotAboutToDie
     {
         get
@@ -76,7 +78,7 @@ public class EnemyCore : MonoBehaviour
         }
     }
 
-    public void TryHit(MagicType damageType, float damage, bool doSplashDamage, MagicType AIO_damageType, float AIO_damage)
+    public void TryHit(MagicType damageType, float damage, MagicType AIO_damageType, float AIO_damage)
     {
         if (immunityBarrierType == damageType && damageType != MagicType.Neutral)
         {
@@ -86,7 +88,7 @@ public class EnemyCore : MonoBehaviour
         {
             AIO_damage = 0;
         }
-        incomingDamage += damage + (doSplashDamage ? AIO_damage : 0);
+        incomingDamage += damage + AIO_damage;
     }
     public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time)
     {

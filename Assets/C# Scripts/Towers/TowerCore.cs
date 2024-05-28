@@ -1,6 +1,4 @@
 using System.Collections;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -14,13 +12,10 @@ public class TowerCore : MonoBehaviour
     public int cDissolves;
 
     public TowerUIDataSO towerUIData;
-    public GameObject prefab;
     public GameObject[] upgradePrefabs;
 
     [HideInInspector]
     public bool towerCompleted;
-
-    public bool placeOntrack;
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
@@ -45,7 +40,7 @@ public class TowerCore : MonoBehaviour
     public string targetModeString;
 
 
-    public MagicType[] magicType;
+    public MagicType magicType;
     public float rotSpeed;
     public Transform rotPoint;
     public Quaternion rotOffset;
@@ -56,20 +51,10 @@ public class TowerCore : MonoBehaviour
 
     public ProjectileStats projStats;
 
-    public bool isPreviewTower;
-
 
     public virtual void Start()
     {
-        if (isPreviewTower)
-        {
-            dissolves = GetComponentsInChildren<DissolveController>();
-            foreach (var d in dissolves)
-            {
-                d.dissolveMaterial.SetInt("_Preview", true ? 1 : 0);
-            }
-            SetupTower();
-        }
+        SetupTower();
     }
 
     private void SetupTower()
@@ -125,7 +110,7 @@ public class TowerCore : MonoBehaviour
         anim.SetTrigger("Shoot");
         audioController.Play();
 
-        target.TryHit(projStats.damageType, projStats.damage, projStats.doSplashDamage, projStats.AIO_damageType, projStats.AIO_damage);
+        target.TryHit(projStats.damageType, projStats.damage, projStats.AIO_damageType, projStats.AIO_damage);
 
         Vector3 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
@@ -189,7 +174,7 @@ public class TowerCore : MonoBehaviour
     }
 
 
-    public void DisplayColorOfTowerPreview(Color color)
+    public void UpdateTowerPreviewColor(Color color)
     {
         foreach (var d in dissolves)
         {

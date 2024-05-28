@@ -110,7 +110,7 @@ public class Projectile : MonoBehaviour
     }
     public virtual void HitTarget()
     {
-        if (projStats.doSplashDamage)
+        if (projStats.areaEffect != null)
         {
             //spawn collider to hit multiple bullets
             ApplySplashDamage();
@@ -140,12 +140,13 @@ public struct ProjectileStats
     public float damageOverTime;
     public float time;
 
+    [Header("Area effect on hit")]
     public AIO_AreaEffect areaEffect;
-    public float duration;
+    public float AIO_duration;
 
-    public bool doSplashDamage;
-    public float areaEffectSize;
-    public int maxSplashHits;
+    [Header("X cord for sphere radius")]
+    public Vector3 AIO_areaEffectSize;
+    public int AIO_maxSplashHits;
 
     public MagicType AIO_damageType;
     public float AIO_damage;

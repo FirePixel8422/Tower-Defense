@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PlaceHolder
   m_EditorClassIdentifier: 
   essenseCost: 25
-  essenseType: 2
+  essenseType: 0
   towerImage: {fileID: 21300000, guid: 608f6dcb365c7e94d8274b27792e4486, type: 3}
   towerName: PlaceHolder
   towerPopup: Placeholder till UI is Fully done
   upgrades:
+  - {fileID: 11400000}
   - {fileID: 11400000}

@@ -309,7 +309,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5148,7 +5148,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -10094,10 +10094,8 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   towerUIData: {fileID: 0}
-  prefab: {fileID: 0}
   upgradePrefabs: []
   towerCompleted: 0
-  placeOntrack: 0
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
   audioController: {fileID: 0}
@@ -10108,7 +10106,7 @@ MonoBehaviour:
   excludeTargetUpdates: 0
   specialTargetMode: 0
   targetModeString: First
-  magicType: 02000000
+  magicType: 2000000
   rotSpeed: 0
   rotPoint: {fileID: 0}
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
@@ -10124,16 +10122,14 @@ MonoBehaviour:
     damageOverTime: 10
     time: 1.25
     areaEffect: {fileID: 0}
-    duration: 0
-    doSplashDamage: 0
-    areaEffectSize: 0
-    maxSplashHits: 0
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
     AIO_damageType: 0
     AIO_damage: 0
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
-  isPreviewTower: 0
   maxCoilEmisionRate: 12
   timePerCharge: 0.4
   rechargePowerDelay: 0.1

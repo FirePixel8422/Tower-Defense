@@ -544,8 +544,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
-      minScalar: 0.2
+      scalar: 0.65
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5327,11 +5327,9 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   towerUIData: {fileID: 11400000, guid: ce084e22b8c604f448b6348a0eae0ef7, type: 2}
-  prefab: {fileID: 0}
   upgradePrefabs:
   - {fileID: 7998683090948771889, guid: 916880e0ef5b6da4ea9713e293cb1255, type: 3}
   towerCompleted: 0
-  placeOntrack: 0
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
   audioController: {fileID: 0}
@@ -5339,7 +5337,7 @@ MonoBehaviour:
   shootPoint: {fileID: 5259189839188913942}
   target: {fileID: 0}
   targetMode: 0
-  exludeTargetUpdates: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
   targetModeString: First
   magicType: 00000000
@@ -5367,8 +5365,7 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
-  isPreviewTower: 0
-  maxCoilEmisionRate: 12
+  maxCoilEmisionRate: 10
   timePerCharge: 0.4
   rechargePowerDelay: 0.1
   maxCharges: 5

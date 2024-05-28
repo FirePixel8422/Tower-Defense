@@ -125,7 +125,7 @@ public class MagicTesla : TowerCore
             if (ids[i] != -1)
             {
                 targets.Add(WaveManager.Instance.spawnedObj[ids[i]]);
-                targets[^1].TryHit(projStats.damageType, projStats.damage, projStats.doSplashDamage, projStats.AIO_damageType, projStats.AIO_damage);
+                targets[^1].TryHit(projStats.damageType, projStats.damage, projStats.AIO_damageType, projStats.AIO_damage);
             }
         }
 

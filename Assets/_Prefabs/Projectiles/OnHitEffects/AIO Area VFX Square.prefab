@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 120830272411038541}
-  - component: {fileID: 1806728044606326186}
+  - component: {fileID: -6798140249207291444}
   - component: {fileID: -486316183412146740}
   - component: {fileID: 7172611797961575754}
   m_Layer: 0
-  m_Name: AIO AreaEffect
+  m_Name: AIO Area VFX Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,14 +28,14 @@ Transform:
   m_GameObject: {fileID: 3063951306145481518}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.741339, y: 0.6514218, z: -1.0184824}
-  m_LocalScale: {x: 1, y: 0.25001252, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1806728044606326186
-SphereCollider:
+--- !u!65 &-6798140249207291444
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -51,9 +51,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-486316183412146740
 Rigidbody:
@@ -94,3 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31eed43a7fe9da438a7babc2d431623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereColl: {fileID: 0}
+  boxColl: {fileID: -6798140249207291444}
+  splashHitsLeft: 0

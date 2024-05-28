@@ -138,8 +138,15 @@ public class WaveManager : MonoBehaviour
                 target.transform.position -= movement;
             }
 
-            //rotate towards the next point.
-            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, pointRot, targetRotSpeed);
+            //rotate towards the next point unless movement is backwards, confused effect
+            if (target.moveSpeed > 0)
+            {
+                target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, pointRot, targetRotSpeed);
+            }
+            else
+            {
+                target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation * Quaternion.Euler(0, 180, 0), pointRot, targetRotSpeed);
+            }
 
             #region retrieve int2 direction and lock targets position in those 2 angles (x-1,x1,z-1,z1)
             pos = target.transform.position;
@@ -182,6 +189,7 @@ public class WaveManager : MonoBehaviour
             if (Vector3.Distance(pos, pointPos) < 0.035f)
             {
                 target.pointIndex += 1;
+                target.confused = false;
                 pointIndex += 1;
                 if (pointIndex == points.Count)
                 {
