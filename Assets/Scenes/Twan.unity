@@ -629,8 +629,6 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
   towerUIData: {fileID: 0}
   prefab: {fileID: 0}
   upgradePrefabs: []
@@ -643,8 +641,8 @@ MonoBehaviour:
   shootPoint: {fileID: 164479300}
   target: {fileID: 0}
   targetMode: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: 
   magicType: 
   rotSpeed: 360
@@ -11519,8 +11517,6 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
   towerUIData: {fileID: 0}
   prefab: {fileID: 0}
   upgradePrefabs: []
@@ -11533,8 +11529,8 @@ MonoBehaviour:
   shootPoint: {fileID: 1672718377}
   target: {fileID: 0}
   targetMode: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: 
   magicType: 
   rotSpeed: 360
@@ -11677,8 +11673,6 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
   towerUIData: {fileID: 0}
   prefab: {fileID: 0}
   upgradePrefabs: []
@@ -11691,8 +11685,8 @@ MonoBehaviour:
   shootPoint: {fileID: 1103511564}
   target: {fileID: 0}
   targetMode: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: 
   magicType: 02000000
   rotSpeed: 0
@@ -12108,7 +12102,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.3, y: 0, z: 0}
-  m_LocalScale: {x: 3.73, y: 2, z: 1}
+  m_LocalScale: {x: 5.18, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -12486,6 +12480,71 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!1001 &1412379671
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.025684
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.8774345
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 029d24be2e3a32341a4dda814f340a53, type: 2}
+    - target: {fileID: 919132149155446097, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Name
+      value: Crossbow upgrade (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 029d24be2e3a32341a4dda814f340a53, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
 --- !u!1 &1422640759
 GameObject:
   m_ObjectHideFlags: 0
@@ -12994,8 +13053,6 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
   towerUIData: {fileID: 0}
   prefab: {fileID: 0}
   upgradePrefabs: []
@@ -13008,8 +13065,8 @@ MonoBehaviour:
   shootPoint: {fileID: 0}
   target: {fileID: 0}
   targetMode: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: 
   magicType: 
   rotSpeed: 540
@@ -13098,6 +13155,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1288113915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1699950180
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.695534
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.8772035
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76380429cb02ccd43a9bedd21967c221, type: 2}
+    - target: {fileID: 919132149155446097, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Name
+      value: Crossbow upgrade (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 76380429cb02ccd43a9bedd21967c221, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
 --- !u!1001 &1716299809
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13308,6 +13430,71 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1001 &1773736413
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.488367
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.2204453e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.9322271
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc512a870bebe694bbf8df365e8329e1, type: 2}
+    - target: {fileID: 919132149155446097, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Name
+      value: Crossbow upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bc512a870bebe694bbf8df365e8329e1, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05e038353ddc1144f9989e7e9f18d016, type: 3}
 --- !u!1001 &1883074556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13613,8 +13800,6 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerCost: 0
-  costType: 0
   towerUIData: {fileID: 0}
   prefab: {fileID: 0}
   upgradePrefabs: []
@@ -13627,8 +13812,8 @@ MonoBehaviour:
   shootPoint: {fileID: 0}
   target: {fileID: 0}
   targetMode: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
-  targetModeTextObj: {fileID: 0}
   targetModeString: 
   magicType: 
   rotSpeed: 0
@@ -14350,3 +14535,6 @@ SceneRoots:
   - {fileID: 17555166}
   - {fileID: 1326209692}
   - {fileID: 1918687764}
+  - {fileID: 1773736413}
+  - {fileID: 1412379671}
+  - {fileID: 1699950180}
