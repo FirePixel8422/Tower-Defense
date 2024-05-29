@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd7e4d90d255f4d44a127cad36ec07e8, type: 3}
-  m_Name: Fire Cannon
+  m_Name: tesla base
   m_EditorClassIdentifier: 
-  essenseCost: 250
-  essenseType: 3
+  essenseCost: 300
+  essenseType: 0
   towerImage: {fileID: 21300000, guid: b6e7a6b5af6ddaa4a811fe2920397cfd, type: 3}
-  towerName: Fire Cannon
-  towerPopup: Fire Cannon info
-  upgrades: []
+  towerName: Cannon
+  towerPopup: The cannon is a standard high damage neuteral tower
+  upgrades:
+  - {fileID: 11400000, guid: c99f827a5ff86874ab9a05bff6a5b5d8, type: 2}
+  - {fileID: 11400000, guid: 10e08f755d1d0ac4fb59da1b35ce511a, type: 2}
+  - {fileID: 11400000, guid: bc630b8718af9d642bfcbffb8f4e1b51, type: 2}

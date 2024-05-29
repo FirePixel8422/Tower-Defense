@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd7e4d90d255f4d44a127cad36ec07e8, type: 3}
-  m_Name: Fire Cannon
+  m_Name: trap upgrade poision
   m_EditorClassIdentifier: 
-  essenseCost: 250
-  essenseType: 3
+  essenseCost: 200
+  essenseType: 1
   towerImage: {fileID: 21300000, guid: b6e7a6b5af6ddaa4a811fe2920397cfd, type: 3}
-  towerName: Fire Cannon
-  towerPopup: Fire Cannon info
+  towerName: Cannon
+  towerPopup: The cannon is a standard high damage neuteral tower
   upgrades: []
