@@ -6,7 +6,9 @@ public class MiningTower : TowerCore
 {
     private EssenceManager essenceManager;
 
-    public Material magicColormaterial;
+    public GameObject[] waters;
+    private Material[] magicColormaterial = new Material[2];
+
     public Color[] magicColors;
     public float colorSwapSpeed;
     public int colorIndex;
@@ -22,8 +24,9 @@ public class MiningTower : TowerCore
     public override void Start()
     {
         base.Start();
-        magicColormaterial = transform.GetChild(0).GetComponent<Renderer>().material;
-        materialColor = magicColormaterial.GetColor("_Base_Color");
+        magicColormaterial[0] = waters[0].GetComponent<Renderer>().material;
+        magicColormaterial[1] = waters[1].GetComponent<Renderer>().material;
+        materialColor = magicColormaterial[0].GetColor("_Water_Color");
     }
 
     public override void Init()
@@ -53,7 +56,8 @@ public class MiningTower : TowerCore
         if (towerPreviewRenderer.color != magicColors[colorIndex])
         {
             materialColor = LinearColorLerp(materialColor, magicColors[colorIndex], colorSwapSpeed * Time.deltaTime);
-            magicColormaterial.SetColor("_Base_Color", materialColor);
+            magicColormaterial[0].SetColor("_Water_Color", materialColor);
+            magicColormaterial[1].SetColor("_Water_Color", materialColor);
             towerPreviewRenderer.color = materialColor;
         }
 

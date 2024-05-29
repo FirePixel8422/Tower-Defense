@@ -165,7 +165,7 @@ MonoBehaviour:
     speed: 0
     damageType: 0
     damage: 5
-    damageOverTimeType: 0
+    damageOverTimeType: 1
     damageOverTime: 15
     time: 2
     areaEffect: {fileID: 2476679845236905568, guid: 51958aa941fbb7140b78c5bb4726bfaf, type: 3}

@@ -32,7 +32,7 @@ public class MagicTrap : TowerCore
             timer -= Time.deltaTime;
             yield return null;
 
-            if (timer < 0 &&  smart == false)
+            if (timer < 0 && smart == false)
             {
                 timer = attackSpeed;
                 StartCoroutine(Attack());
@@ -55,8 +55,8 @@ public class MagicTrap : TowerCore
     {
         if (obj.transform.TryGetComponent(out EnemyCore target))
         {
-            target.ApplyDamage(projStats.damageType, projStats.damage,projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
-            if(confusionTime > 0)
+            target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
+            if (confusionTime > 0)
             {
                 StartCoroutine(ConfuseEnemyTimer(target));
             }
@@ -65,24 +65,14 @@ public class MagicTrap : TowerCore
 
     private IEnumerator ConfuseEnemyTimer(EnemyCore target)
     {
-        float timeLeft = confusionTime;
-
-        target.confused = true;
-        target.pointIndex -= 1;
+        target.moveSpeed = 0;
         while (true)
         {
-            yield return new WaitForSeconds(0.25f);
-            timeLeft -= 0.25f;
+            yield return new WaitForSeconds(confusionTime);
 
-            if (timeLeft < 0)
-            {
-                if (target.confused)
-                {
-                    target.confused = false;
-                    target.pointIndex += 1;
-                }
-                yield break;
-            }
+            target.moveSpeed = target.startMoveSpeed;
+
+            yield break;
         }
     }
 

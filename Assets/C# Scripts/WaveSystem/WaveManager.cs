@@ -114,6 +114,12 @@ public class WaveManager : MonoBehaviour
         //then rotate them towards the next points, making them turn.
         for (int i = spawnedObj.Count - 1; i >= 0; i--)
         {
+            if (spawnedObj[i].moveSpeed == 0)
+            {
+                continue;
+            }
+
+
             //get rotation between current point and next one, and calculate rotation speed.
             EnemyCore target = spawnedObj[i];
             pointIndex = target.pointIndex;
@@ -138,15 +144,8 @@ public class WaveManager : MonoBehaviour
                 target.transform.position -= movement;
             }
 
-            //rotate towards the next point unless movement is backwards, confused effect
-            if (target.moveSpeed > 0)
-            {
-                target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, pointRot, targetRotSpeed);
-            }
-            else
-            {
-                target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation * Quaternion.Euler(0, 180, 0), pointRot, targetRotSpeed);
-            }
+            //rotate towards the next point 
+            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, pointRot, targetRotSpeed);
 
             #region retrieve int2 direction and lock targets position in those 2 angles (x-1,x1,z-1,z1)
             pos = target.transform.position;
@@ -189,7 +188,6 @@ public class WaveManager : MonoBehaviour
             if (Vector3.Distance(pos, pointPos) < 0.035f)
             {
                 target.pointIndex += 1;
-                target.confused = false;
                 pointIndex += 1;
                 if (pointIndex == points.Count)
                 {

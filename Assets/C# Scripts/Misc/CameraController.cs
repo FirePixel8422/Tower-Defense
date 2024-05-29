@@ -51,6 +51,18 @@ public class CameraController : MonoBehaviour
     {
         camMoveDir = ctx.ReadValue<Vector3>();
     }
+    //if shift is held camera moves twice as fast
+    public void OnFastMoveHeld(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            moveSpeed *= 2;
+        }
+        if (ctx.canceled)
+        {
+            moveSpeed /= 2;
+        }
+    }
 
 
     private void Update()
