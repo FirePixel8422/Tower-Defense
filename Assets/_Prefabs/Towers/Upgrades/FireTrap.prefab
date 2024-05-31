@@ -140,7 +140,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerUIData: {fileID: 0}
+  towerUIData: {fileID: 11400000, guid: d0e32431aea1eab40ad7adcee84cc2ba, type: 2}
   upgradePrefabs: []
   towerCompleted: 0
   towerPreviewRenderer: {fileID: 0}
@@ -180,6 +180,7 @@ MonoBehaviour:
   smart: 0
   trapActivateTime: 0.1
   trapDeActivateTime: 0.4
+  confusionTime: 0
 --- !u!95 &1588095959630771979
 Animator:
   serializedVersion: 5

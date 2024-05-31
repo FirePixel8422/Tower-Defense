@@ -83,6 +83,14 @@ public class EssenceManager : MonoBehaviour
     private void Start()
     {
         OnEssenceChanged.AddListener(UpdateEssenceUI);
+
+        if(UpgradePossibleWithType(out bool[] options, 25, MagicType.Ember))
+        {
+            for (int i = 0; i < options.Length; i++)
+            {
+                print(i + " = " + options[i]);
+            }
+        }
     }
     public void UpdateEssenceUI()
     {

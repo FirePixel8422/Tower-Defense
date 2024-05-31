@@ -21,8 +21,15 @@ public class CameraController : MonoBehaviour
     private float centerRotY;
     private Vector3 camMoveDir;
 
-    public bool animatePanChanged;
-        
+
+    private Quaternion startRot;
+    private bool animatePanChanged;
+
+
+    private void Start()
+    {
+        startRot = camCenter.localRotation;
+    }
 
     //detect input for reset of camera
     public void OnResetCam(InputAction.CallbackContext ctx)
@@ -89,14 +96,19 @@ public class CameraController : MonoBehaviour
         while (true)
         {
             yield return null;
-            camCenter.rotation = Quaternion.RotateTowards(camCenter.rotation, Quaternion.identity, centerRotSpeed);
+            camCenter.localRotation = Quaternion.RotateTowards(camCenter.localRotation, startRot, centerRotSpeed * Time.deltaTime);
+            if (camCenter.localRotation == startRot)
+            {
+                print("d");
+                yield break;
+            }
         }
     }
 
     //rotate camera horizontally around middlePoint with Q/E
     private void RotateCam()
     {
-        camCenter.Rotate(0, centerRotY * centerRotSpeed * Time.deltaTime, 0);
+        camCenter.Rotate(0, centerRotY * -centerRotSpeed * Time.deltaTime, 0);
     }
 
     //move camCenterPoint with Directional WASD Input, because camCenter moves, the rotation center point for horizontally rotating changes too.

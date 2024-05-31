@@ -5326,7 +5326,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerUIData: {fileID: 11400000, guid: ce084e22b8c604f448b6348a0eae0ef7, type: 2}
+  towerUIData: {fileID: 11400000, guid: 276cb46b4686fb34997bd6d52632a373, type: 2}
   upgradePrefabs:
   - {fileID: 7998683090948771889, guid: 916880e0ef5b6da4ea9713e293cb1255, type: 3}
   towerCompleted: 0
@@ -5340,7 +5340,7 @@ MonoBehaviour:
   excludeTargetUpdates: 0
   specialTargetMode: 0
   targetModeString: First
-  magicType: 00000000
+  magicType: 0
   rotSpeed: 0
   rotPoint: {fileID: 0}
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
@@ -5356,10 +5356,9 @@ MonoBehaviour:
     damageOverTime: 7.5
     time: 1.5
     areaEffect: {fileID: 0}
-    duration: 0
-    doSplashDamage: 0
-    areaEffectSize: 0
-    maxSplashHits: 0
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
     AIO_damageType: 0
     AIO_damage: 0
     AIO_damageOverTimeType: 0

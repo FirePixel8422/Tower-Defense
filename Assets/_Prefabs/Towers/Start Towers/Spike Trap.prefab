@@ -242,7 +242,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerUIData: {fileID: 11400000, guid: ce084e22b8c604f448b6348a0eae0ef7, type: 2}
+  towerUIData: {fileID: 11400000, guid: 3247656ff2b20c947b5eaebd9882c939, type: 2}
   upgradePrefabs:
   - {fileID: 5538157176212337038, guid: 3fabf82b847fc7c42a343f22797d406a, type: 3}
   - {fileID: 2200535057880192268, guid: ccf0cc11b66974f43bb7a367d98f638f, type: 3}
@@ -284,6 +284,7 @@ MonoBehaviour:
   smart: 0
   trapActivateTime: 0.1
   trapDeActivateTime: 0.4
+  confusionTime: 0
 --- !u!95 &382787204331481901
 Animator:
   serializedVersion: 5

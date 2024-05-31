@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -157,12 +158,28 @@ public class SelectionManager : MonoBehaviour
         TowerUIController.Instance.targetModeTextObj.text = targetModeString;
     }
 
-    public void TryUpgradeTower(int path)
+
+
+    public int pathId;
+    public GameObject essenceChooseMenuObj;
+    public GameObject[] essenceTypes;
+    public void SetPathId(int id)
     {
-        MagicType chosenType = MagicType.Ember;
+        pathId = id;
+        if (selectedTower.towerUIData.upgrades[id].essenseType == MagicType.Neutral)
+        {
+            essenceChooseMenuObj.SetActive(true);
+        }
+        else
+        {
+            TryUpgradeTower(0);
+        }
+    }
+    public void TryUpgradeTower(int chosenType)
+    {
         for (int i = 0; i < 3; i++)
         {
-            if (path != i)
+            if (pathId != i || selectedTower == null || selectedTower.upgradePrefabs.Length <= pathId)
             {
                 continue;
             }
@@ -171,17 +188,17 @@ public class SelectionManager : MonoBehaviour
             {
                 if (selectedTower.towerUIData.upgrades[i].essenseType == MagicType.Neutral)
                 {
-                    if (options[0] == true && chosenType == MagicType.Life)
+                    if (options[0] == true && chosenType == 1)
                     {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
+                        EssenceManager.Instance.AddRemoveEssence(-cost, MagicType.Life);
                     }
-                    else if (options[1] == true && chosenType == MagicType.Arcane)
+                    else if (options[1] == true && chosenType == 2)
                     {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
+                        EssenceManager.Instance.AddRemoveEssence(-cost, MagicType.Arcane);
                     }
-                    else if (options[2] == true && chosenType == MagicType.Ember)
+                    else if (options[2] == true && chosenType == 3)
                     {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, chosenType);
+                        EssenceManager.Instance.AddRemoveEssence(-cost, MagicType.Ember);
                     }
                     else
                     {
@@ -194,7 +211,7 @@ public class SelectionManager : MonoBehaviour
                 }
 
                 towerManager.spawnedTowerObj.Remove(selectedTower);
-                selectedTower.UpgradeTower(path);
+                selectedTower.UpgradeTower(pathId);
 
                 TowerUIController.Instance.DeSelectTower(selectedTower);
                 towerSelected = false;

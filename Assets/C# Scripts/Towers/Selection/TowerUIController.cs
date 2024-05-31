@@ -19,7 +19,6 @@ public class TowerUIController : MonoBehaviour
     public Image towerImage;
     public TextMeshProUGUI towerName;
     public TextMeshProUGUI towerPopup;
-    public TextMeshProUGUI towerCost;
 
     public Image[] towerUpgradeImages;
     public TextMeshProUGUI[] towerUpgradeNames;

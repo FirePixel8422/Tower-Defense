@@ -55,11 +55,9 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerUIData: {fileID: 11400000, guid: ce084e22b8c604f448b6348a0eae0ef7, type: 2}
-  prefab: {fileID: 0}
+  towerUIData: {fileID: 11400000, guid: 264fc7931da91624cb20d80d7a195f68, type: 2}
   upgradePrefabs: []
   towerCompleted: 0
-  placeOntrack: 0
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
   audioController: {fileID: 0}
@@ -67,10 +65,10 @@ MonoBehaviour:
   shootPoint: {fileID: 8653778047871257800}
   target: {fileID: 0}
   targetMode: 0
-  exludeTargetUpdates: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
   targetModeString: First
-  magicType: 
+  magicType: 0
   rotSpeed: 360
   rotPoint: {fileID: 5375237914136127411}
   rotOffset: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -86,16 +84,14 @@ MonoBehaviour:
     damageOverTime: 0
     time: 0
     areaEffect: {fileID: 0}
-    duration: 0
-    doSplashDamage: 0
-    areaEffectSize: 0
-    maxSplashHits: 0
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
     AIO_damageType: 0
     AIO_damage: 0
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
-  isPreviewTower: 0
 --- !u!95 &1147535295158520521
 Animator:
   serializedVersion: 5
