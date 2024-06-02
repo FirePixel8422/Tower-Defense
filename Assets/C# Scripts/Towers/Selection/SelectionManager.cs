@@ -18,8 +18,6 @@ public class SelectionManager : MonoBehaviour
 
     public GraphicRaycaster gfxRayCaster;
 
-    private GridManager gridManager;
-    private TowerManager towerManager;
     private Camera mainCam;
 
     public LayerMask floor;
@@ -34,11 +32,12 @@ public class SelectionManager : MonoBehaviour
     public bool isPlacingTower;
     public bool towerSelected;
 
+    private GridObjectData selectedGridTileData;
+    private Vector3 mousePos;
+
 
     private void Start()
     {
-        gridManager = GridManager.Instance;
-        towerManager = TowerManager.Instance;
         mainCam = Camera.main;
 
         Button[] buttons = towerUIHolder.GetComponentsInChildren<Button>();
@@ -67,7 +66,7 @@ public class SelectionManager : MonoBehaviour
 
             if (isPlacingTower)
             {
-                TryPlaceTower();
+                TryPlaceTower(-1);
             }
             else
             {
@@ -85,39 +84,62 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    public void TryPlaceTower()
+    public void TryPlaceTower(int chosenType)
     {
-        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
+        //place tower system
+        if ((selectedGridTileData.type == 0 && selectedPreviewTower.placeOntrack == false) || (selectedGridTileData.type == 1 && selectedPreviewTower.placeOntrack))
         {
-            GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
-
-            if ((gridData.type == 0 && selectedPreviewTower.placeOntrack == false) || (gridData.type == 1 && selectedPreviewTower.placeOntrack))
+            if (selectedPreviewTower.essenceType == MagicType.Neutral && chosenType == -1)
             {
-                selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-                selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
-
-                selectedPreviewTower.transform.localPosition = Vector3.zero;
-                selectedTower = Instantiate(selectedPreviewTower.towerPrefab, gridData.worldPos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
-
-                selectedTower.CoreInit();
-
-                if (selectedTower.excludeTargetUpdates == false) 
-                {
-                    towerManager.spawnedTowerObj.Add(selectedTower);
-                }
-
-                gridManager.UpdateGridDataFieldType(gridData.gridPos, 2, selectedTower);
-                isPlacingTower = false;
+                essenceChooseMenuObj.SetActive(true);
+                selectedPreviewTower.locked = true;
+                return;
+            }
+            else if (EssenceManager.Instance.TryPurchase(selectedPreviewTower.essenceCost, selectedPreviewTower.essenceType, (MagicType)(chosenType + 1)))
+            {
+                essenceChooseMenuObj.SetActive(false);
+                PlaceTower();
+            }
+            else
+            {
+                //say that there is not enough essence
+                CancelTowerPlacement();
             }
         }
     }
+    public void CancelTowerPlacement()
+    {
+        essenceChooseMenuObj.SetActive(false);
+
+        selectedPreviewTower.transform.localPosition = Vector3.zero;
+        selectedPreviewTower.locked = false;
+        isPlacingTower = false;
+    }
+    private void PlaceTower()
+    {
+        selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+        selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
+
+        selectedPreviewTower.transform.localPosition = Vector3.zero;
+        selectedTower = Instantiate(selectedPreviewTower.towerPrefab, selectedGridTileData.worldPos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
+
+        selectedTower.CoreInit();
+
+        if (selectedTower.excludeTargetUpdates == false)
+        {
+            TowerManager.Instance.spawnedTowerObj.Add(selectedTower);
+        }
+
+        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 2, selectedTower);
+        isPlacingTower = false;
+    }
+
     public void TrySelectTower()
     {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
         {
-            GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
+            GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
             if (gridData.tower != null && gridData.tower.towerCompleted)
             {
                 //deselect older selected tower
@@ -166,7 +188,7 @@ public class SelectionManager : MonoBehaviour
     public void SetPathId(int id)
     {
         pathId = id;
-        if (selectedTower.towerUIData.upgrades[id].essenseType == MagicType.Neutral)
+        if (selectedTower.towerUIData.upgrades[id].essenceType == MagicType.Neutral)
         {
             essenceChooseMenuObj.SetActive(true);
         }
@@ -183,34 +205,10 @@ public class SelectionManager : MonoBehaviour
             {
                 continue;
             }
-            float cost = selectedTower.towerUIData.upgrades[i].essenseCost;
-            if (EssenceManager.Instance.UpgradePossibleWithType(out bool[] options, cost, selectedTower.towerUIData.upgrades[i].essenseType))
-            {
-                if (selectedTower.towerUIData.upgrades[i].essenseType == MagicType.Neutral)
-                {
-                    if (options[0] == true && chosenType == 1)
-                    {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, MagicType.Life);
-                    }
-                    else if (options[1] == true && chosenType == 2)
-                    {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, MagicType.Arcane);
-                    }
-                    else if (options[2] == true && chosenType == 3)
-                    {
-                        EssenceManager.Instance.AddRemoveEssence(-cost, MagicType.Ember);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                else
-                {
-                    EssenceManager.Instance.AddRemoveEssence(-cost, selectedTower.towerUIData.upgrades[i].essenseType);
-                }
 
-                towerManager.spawnedTowerObj.Remove(selectedTower);
+            if (EssenceManager.Instance.TryPurchase(selectedTower.towerUIData.upgrades[i].essenceCost, selectedTower.towerUIData.upgrades[i].essenceType, (MagicType)chosenType))
+            {
+                TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
                 selectedTower.UpgradeTower(pathId);
 
                 TowerUIController.Instance.DeSelectTower(selectedTower);
@@ -222,7 +220,7 @@ public class SelectionManager : MonoBehaviour
 
     public void SellTower()
     {
-        EssenceManager.Instance.AddRemoveEssence(selectedTower.towerUIData.essenseCost, selectedTower.towerUIData.essenseType);
+        EssenceManager.Instance.AddRemoveEssence(selectedTower.towerUIData.essenceCost, selectedTower.towerUIData.essenceType);
 
         GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
         GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, gridData.coreType, null);
@@ -239,6 +237,7 @@ public class SelectionManager : MonoBehaviour
         if (isPlacingTower)
         {
             selectedPreviewTower.transform.localPosition = Vector3.zero;
+            selectedPreviewTower.locked = false;
         }
         if (towerSelected)
         {
@@ -254,14 +253,16 @@ public class SelectionManager : MonoBehaviour
     private void Update()
     {
         //give player preview of selectedTower
-        if (isPlacingTower)
+        if (isPlacingTower && Input.mousePosition != mousePos && selectedPreviewTower.locked == false)
         {
-            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+            mousePos = Input.mousePosition;
+            Ray ray = mainCam.ScreenPointToRay(mousePos);
+
             if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
             {
-                GridObjectData gridData = gridManager.GridObjectFromWorldPoint(hitInfo.point);
+                selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-                int onTrack = gridData.type;
+                int onTrack = selectedGridTileData.type;
                 if ((onTrack == 1 && selectedPreviewTower.placeOntrack) || (onTrack == 0 && selectedPreviewTower.placeOntrack == false))
                 {
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
@@ -272,7 +273,7 @@ public class SelectionManager : MonoBehaviour
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
                     selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
                 }
-                selectedPreviewTower.transform.position = gridData.worldPos;
+                selectedPreviewTower.transform.position = selectedGridTileData.worldPos;
             }
         }
     }

@@ -66,10 +66,26 @@ public class MagicTrap : TowerCore
     private IEnumerator ConfuseEnemyTimer(EnemyCore target)
     {
         target.moveSpeed = 0;
+
+        if (target.confusionTime > 0)
+        {
+            target.confusionTime += confusionTime;
+            yield break;
+        }
+        else
+        {
+            target.confusionTime += confusionTime;
+        }
+
         while (true)
         {
-            yield return new WaitForSeconds(confusionTime);
+            while (target.confusionTime > 0)
+            {
+                yield return new WaitForSeconds(confusionTime);
+                target.confusionTime -= confusionTime;
+            }
 
+            target.confusionTime = 0;
             target.moveSpeed = target.startMoveSpeed;
 
             yield break;

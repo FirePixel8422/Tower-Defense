@@ -43,7 +43,7 @@ public class TowerUIController : MonoBehaviour
         towerImage.sprite = towerUiData.towerImage;
         towerName.text = towerUiData.towerName;
         towerPopup.text = towerUiData.towerPopup;
-        //towerCost.text = towerUiData.essenseCost.ToString();
+        //towerCost.text = towerUiData.essenceCost.ToString();
 
         for (int i = 0; i < 3; i++)
         {
@@ -60,7 +60,7 @@ public class TowerUIController : MonoBehaviour
             towerUpgradeImages[i].sprite = towerUiData.upgrades[i].towerImage;
             towerUpgradeNames[i].text = towerUiData.upgrades[i].towerName;
             towerUpgradePopups[i].text = towerUiData.upgrades[i].towerPopup;
-            towerUpgradeCosts[i].text = towerUiData.upgrades[i].essenseCost.ToString();
+            towerUpgradeCosts[i].text = towerUiData.upgrades[i].essenceCost.ToString();
         }
         
 

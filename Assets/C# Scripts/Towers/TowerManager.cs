@@ -73,7 +73,6 @@ public class TowerManager : MonoBehaviour
         {
             return MagicType.Life;
         }
-        //targetEnemyIndex == 0
         return MagicType.Neutral;
     }
 

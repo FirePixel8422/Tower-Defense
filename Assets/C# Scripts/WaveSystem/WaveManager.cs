@@ -51,7 +51,11 @@ public class WaveManager : MonoBehaviour
 
                     for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
                     {
-                        PrepareSpawnEnemy(waves[i].waveParts[i2].enemy.enemyId);
+                        target = EnemyPooling.Instance.GetPulledObj(waves[i].waveParts[i2].enemy.enemyId, startPointPos, Quaternion.identity).GetComponent<EnemyCore>();
+                        target.Init();
+                        spawnedObj.Add(target);
+                        UpdateTargetDir(out target.dir, target.transform.position, startPointPos);
+
                         yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                     }
                 }
@@ -59,14 +63,8 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
-    private void PrepareSpawnEnemy(int id)
-    {
-        EnemyCore target = EnemyPooling.Instance.GetPulledObj(id, startPointPos, Quaternion.identity).GetComponent<EnemyCore>();
-        syncedEmenySpawnedPool.Add(target);
-    }
 
 
-    private List<EnemyCore> syncedEmenySpawnedPool = new List<EnemyCore>();
     private EnemyCore target;
     private IEnumerator UpdateEnemyMovementsLoop()
     {
@@ -78,27 +76,15 @@ public class WaveManager : MonoBehaviour
 
             if (elapsedTime > enemyMovementUpdateInterval)
             {
-
-                if (syncedEmenySpawnedPool.Count > 0)
-                {
-                    target = syncedEmenySpawnedPool[0];
-                    target.Init();
-
-                    spawnedObj.Add(target);
-
-                    UpdateTargetDir(out target.dir, target.transform.position, startPointPos);
-
-                    syncedEmenySpawnedPool.RemoveAt(0);
-                }
                 UpdateEnemyMovements(elapsedTime);
 
                 elapsedTime = 0;
             }        
         }
     }
-    
 
 
+    private Transform targetTransform;
     private Vector3 pos;
     private int pointIndex;
     private Vector3 pointPos;
@@ -121,7 +107,8 @@ public class WaveManager : MonoBehaviour
 
 
             //get rotation between current point and next one, and calculate rotation speed.
-            EnemyCore target = spawnedObj[i];
+            target = spawnedObj[i];
+            targetTransform = target.transform;
             pointIndex = target.pointIndex;
 
             pointPos = points[pointIndex].position;
@@ -131,57 +118,51 @@ public class WaveManager : MonoBehaviour
 
 
             //calculate movement and check distance to point.
-            pos = target.transform.position;
-            movement = target.moveSpeed * enemyMovementUpdateInterval * target.transform.forward;
+            pos = targetTransform.position;
+            movement = target.moveSpeed * enemyMovementUpdateInterval * targetTransform.forward;
             dist = movement.x + movement.y + movement.z;
 
             if (Vector3.Distance(pos, pointPos) < dist)
             {
-                target.transform.position = pointPos;
+                targetTransform.position = pointPos;
             }
             else
             {
-                target.transform.position -= movement;
+                targetTransform.position -= movement;
             }
 
             //rotate towards the next point 
-            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, pointRot, targetRotSpeed);
+            if (targetTransform.rotation.y != pointRot.y)
+            {
+                targetTransform.rotation = Quaternion.RotateTowards(targetTransform.rotation, pointRot, targetRotSpeed);
+            }
 
             #region retrieve int2 direction and lock targets position in those 2 angles (x-1,x1,z-1,z1)
-            pos = target.transform.position;
+            pos = targetTransform.position;
             int2 dir = target.dir;
-            if (dir.x == 1)
+            if (dir.x == 1 && pos.x < pointPos.x)
             {
-                if (pos.x < pointPos.x)
-                {
-                    pos.x = pointPos.x;
-                }
+                pos.x = pointPos.x;
             }
-            if (dir.x == -1)
+            if (dir.x == -1 && pos.x > pointPos.x)
             {
-                if (pos.x > pointPos.x)
-                {
-                    pos.x = pointPos.x;
-                }
+                pos.x = pointPos.x;
             }
-            if (dir.y == 1)
+            if (dir.y == 1 && pos.z < pointPos.z)
             {
-                if(pos.z < pointPos.z)
-                {
-                    pos.z = pointPos.z;
-                }
+                pos.z = pointPos.z;
             }
-            if (dir.y == -1)
+            if (dir.y == -1 && pos.z > pointPos.z)
             {
-                if (pos.z > pointPos.z)
-                {
-                    pos.z = pointPos.z;
-                }
+                pos.z = pointPos.z;
             }
-            target.transform.position = pos;
+            targetTransform.position = pos;
             #endregion
 
-            target.progression += enemyMovementUpdateInterval * target.moveSpeed;
+            if (target.confusionTime == 0)
+            {
+                target.progression += enemyMovementUpdateInterval * target.moveSpeed;
+            }
 
 
             //update targetPoint to target and give new dir with UpdateTargetDir

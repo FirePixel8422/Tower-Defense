@@ -43,6 +43,7 @@ public class EnemyCore : MonoBehaviour
     public float barrierHealthDrainTime;
     public float barrierStartHealth;
 
+    public float confusionTime;
     private bool dead;
 
 

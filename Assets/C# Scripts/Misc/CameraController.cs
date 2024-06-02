@@ -11,8 +11,10 @@ public class CameraController : MonoBehaviour
     public Transform cam;
     public Transform worldCenter;
 
-    public float centerRotSpeed;
+    public float rotSpeed;
     public float moveSpeed;
+    public Vector3 camConfinementOffset;
+    public Vector3 camConfinementSize;
     public float zoomSpeed;
 
     public float scrollForMaxZoom;
@@ -21,53 +23,68 @@ public class CameraController : MonoBehaviour
     private float centerRotY;
     private Vector3 camMoveDir;
 
-
-    private Quaternion startRot;
     private bool animatePanChanged;
 
+    public bool control;
 
-    private void Start()
-    {
-        startRot = camCenter.localRotation;
-    }
+
 
     //detect input for reset of camera
     public void OnResetCam(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            StartCoroutine(ResetCamera());
+            if (control)
+            {
+                camMoveDir = Vector3.zero;
+                centerRotY = 0;
+                control = false;
+                StartCoroutine(ResetCamera());
+            }
         }
     }
 
     //detect scroll input for zooming in and out on the field
     public void OnScroll(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (control)
         {
-            Scroll(ctx.ReadValue<Vector2>().y);
+            if (ctx.performed)
+            {
+                Scroll(ctx.ReadValue<Vector2>().y);
+            }
         }
     }
     //detect Q/E Input for rotation of Camera left and right
     public void OnRotate(InputAction.CallbackContext ctx)
     {
-        centerRotY = ctx.ReadValue<Vector2>().x;
+        if (control)
+        {
+            centerRotY = ctx.ReadValue<Vector2>().x;
+        }
     }
     //detect WASD movement Input for movement of the camera
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        camMoveDir = ctx.ReadValue<Vector3>();
+
+        if (control)
+        {
+            camMoveDir = ctx.ReadValue<Vector3>();
+        }
     }
     //if shift is held camera moves twice as fast
     public void OnFastMoveHeld(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (control)
         {
-            moveSpeed *= 2;
-        }
-        if (ctx.canceled)
-        {
-            moveSpeed /= 2;
+            if (ctx.performed)
+            {
+                moveSpeed *= 2;
+            }
+            if (ctx.canceled)
+            {
+                moveSpeed /= 2;
+            }
         }
     }
 
@@ -93,13 +110,23 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator ResetCamera()
     {
+        float _rotSpeed = Mathf.Abs(camCenter.localRotation.y) * 360;
+        float _moveSpeed = camCenter.localPosition.magnitude * 2;
         while (true)
         {
             yield return null;
-            camCenter.localRotation = Quaternion.RotateTowards(camCenter.localRotation, startRot, centerRotSpeed * Time.deltaTime);
-            if (camCenter.localRotation == startRot)
+
+            camCenter.localRotation = Quaternion.RotateTowards(camCenter.localRotation, Quaternion.identity, _rotSpeed * Time.deltaTime);
+
+            camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, Vector3.zero, _moveSpeed * Time.deltaTime);
+
+            animatePanChanged = true;
+            cScroll = 0;
+
+
+            if (camCenter.localRotation == Quaternion.identity && camCenter.localPosition == Vector3.zero)
             {
-                print("d");
+                control = true;
                 yield break;
             }
         }
@@ -108,14 +135,16 @@ public class CameraController : MonoBehaviour
     //rotate camera horizontally around middlePoint with Q/E
     private void RotateCam()
     {
-        camCenter.Rotate(0, centerRotY * -centerRotSpeed * Time.deltaTime, 0);
+        camCenter.Rotate(0, centerRotY * -rotSpeed * Time.deltaTime, 0);
     }
 
     //move camCenterPoint with Directional WASD Input, because camCenter moves, the rotation center point for horizontally rotating changes too.
     private void MoveCam()
     {
         Vector3 targetPosition = camCenter.localPosition + camCenter.TransformDirection(camMoveDir);
-        camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, targetPosition, moveSpeed * Time.deltaTime);
+        camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, targetPosition, -moveSpeed * Time.deltaTime);
+
+        camCenter.localPosition = VectorLogic.Clamp(camCenter.localPosition, -camConfinementSize, camConfinementSize);
     }
 
     //move camera down/up rotating upwards/downwards following a smooth animation curve
@@ -143,5 +172,10 @@ public class CameraController : MonoBehaviour
         cScroll = Mathf.Clamp(cScroll + scrollDelta / scrollForMaxZoom, 0, 1);
 
         animatePanChanged = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position + camConfinementOffset, camConfinementSize);
     }
 }

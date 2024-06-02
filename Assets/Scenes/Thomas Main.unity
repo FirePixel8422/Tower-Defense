@@ -500,12 +500,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 7.7499943
-      inSlope: -2.6834388
-      outSlope: -2.6834388
+      inSlope: -1.2293371
+      outSlope: -1.2293371
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.15514185
+      outWeight: 0.84397167
     - serializedVersion: 3
       time: 1
       value: 0.9998934
@@ -521,11 +521,14 @@ MonoBehaviour:
   camCenter: {fileID: 142480706}
   cam: {fileID: 963194228}
   worldCenter: {fileID: 54021387}
-  centerRotSpeed: 90
-  moveSpeed: -3
+  rotSpeed: 90
+  moveSpeed: 3
+  camConfinementOffset: {x: 0, y: 0, z: 0.5}
+  camConfinementSize: {x: 7, y: 2, z: 7}
   zoomSpeed: 6
   scrollForMaxZoom: 10
   cScroll: 0
+  control: 1
 --- !u!1 &91114934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3422,7 +3425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af88bbe2a9eaf3459c4f3054993c711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMovementUpdateFPS: 45
+  enemyMovementUpdateFPS: 60
   towerTargetUpdateFPS: 30
   towerRotationUpdateFPS: 60
   projectileTrackTargetUpdateFPS: 60
@@ -5420,7 +5423,7 @@ Transform:
   m_GameObject: {fileID: 700871595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -4.99, z: 3.75}
+  m_LocalPosition: {x: -0.5, y: 21.28, z: 3.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7254,7 +7257,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: '50
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 50d6e41b304d9db4e85e3f828cad0615, type: 2}
   m_sharedMaterial: {fileID: -4252152819570648220, guid: 50d6e41b304d9db4e85e3f828cad0615, type: 2}
@@ -8953,7 +8958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83f784bc5a5f18458f1a525bff0b73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMasterGizmos: 1
+  drawMasterGizmos: 0
   drawTileGizmos: 1
   drawTileDataGizmos: 0
   gridPosition: {x: 0, y: 0, z: 0.5}
@@ -10722,6 +10727,7 @@ GameObject:
   - component: {fileID: 1352799222}
   - component: {fileID: 1352799224}
   - component: {fileID: 1352799223}
+  - component: {fileID: 1352799225}
   m_Layer: 0
   m_Name: TowerManager
   m_TagString: Untagged
@@ -10770,7 +10776,7 @@ MonoBehaviour:
   isPlacingTower: 0
   towerSelected: 0
   pathId: 0
-  essenceChooseMenuObj: {fileID: 883532602055967834}
+  essenceChooseMenuObj: {fileID: 1568698384}
   essenceTypes: []
 --- !u!114 &1352799224
 MonoBehaviour:
@@ -10788,6 +10794,27 @@ MonoBehaviour:
   towerRotationUpdateInterval: 0
   projectileTrackTargetUpdateInterval: 0
   spawnedTowerObj: []
+--- !u!114 &1352799225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352799221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90def6d52402a34db96cb5de8eab165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeEssence: 0
+  arcaneEssence: 0
+  emberEssence: 50
+  OnEssenceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  lifeEssenceTextObj: {fileID: 289614197}
+  arcaneEssenceTextObj: {fileID: 1060135915}
+  emberEssenceTextObj: {fileID: 906981831}
 --- !u!1 &1369257121
 GameObject:
   m_ObjectHideFlags: 0
@@ -12056,6 +12083,138 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490363844}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1490968611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1490968612}
+  - component: {fileID: 1490968614}
+  - component: {fileID: 1490968613}
+  - component: {fileID: 1490968615}
+  m_Layer: 5
+  m_Name: empty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1490968612
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490968611}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1568698385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.7995625, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1490968613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490968611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1490968614
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490968611}
+  m_CullTransparentMesh: 1
+--- !u!114 &1490968615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490968611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1490968613}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1352799223}
+        m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
+        m_MethodName: CancelTowerPlacement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1512339317
 GameObject:
   m_ObjectHideFlags: 0
@@ -12651,6 +12810,43 @@ Transform:
   - {fileID: 1418837307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1568698384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1568698385}
+  m_Layer: 5
+  m_Name: Choose Essence type (Parent)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1568698385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568698384}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1490968612}
+  - {fileID: 7569216259704993006}
+  m_Father: {fileID: 3366126708289194311}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1583217157
 GameObject:
   m_ObjectHideFlags: 0
@@ -15293,6 +15489,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865051461}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1873173746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1873173747}
+  m_Layer: 5
+  m_Name: empty DONTDELETE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1873173747
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873173746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1569210504302267097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1885630530
 GameObject:
   m_ObjectHideFlags: 0
@@ -15491,7 +15722,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1923634242}
   - component: {fileID: 1923634243}
-  - component: {fileID: 1923634244}
   m_Layer: 5
   m_Name: EssenceDisplayHolder
   m_TagString: Untagged
@@ -15511,9 +15741,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 289614196}
-  - {fileID: 1060135914}
   - {fileID: 906981830}
+  - {fileID: 1060135914}
+  - {fileID: 289614196}
   m_Father: {fileID: 3366126708289194311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.89255565}
@@ -15545,62 +15775,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &1923634244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1923634241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b90def6d52402a34db96cb5de8eab165, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeEssence: 50
-  arcaneEssence: 50
-  emberEssence: 50
-  OnEssenceChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  lifeEssenceTextObj: {fileID: 289614197}
-  arcaneEssenceTextObj: {fileID: 1060135915}
-  emberEssenceTextObj: {fileID: 906981831}
---- !u!1 &1924049172
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1924049173}
-  m_Layer: 5
-  m_Name: empty
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1924049173
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924049172}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1569210504302267097}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1964605561
 GameObject:
   m_ObjectHideFlags: 0
@@ -17483,7 +17657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpText: {fileID: 6281857628703126666}
-  PopDownText: {fileID: 1924049172}
+  PopDownText: {fileID: 1873173746}
 --- !u!1 &125294172392215801
 GameObject:
   m_ObjectHideFlags: 0
@@ -19062,7 +19236,7 @@ GameObject:
   - component: {fileID: 6765020172795807466}
   - component: {fileID: 8041473674087047283}
   m_Layer: 5
-  m_Name: essence cost
+  m_Name: choose essence type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19530,7 +19704,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1352799223}
         m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
-        m_MethodName: TryUpgradeTower
+        m_MethodName: TryPlaceTower
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19818,7 +19992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpText: {fileID: 8718315256992347260}
-  PopDownText: {fileID: 1924049172}
+  PopDownText: {fileID: 1873173746}
 --- !u!1 &1469805507571146666
 GameObject:
   m_ObjectHideFlags: 0
@@ -19949,8 +20123,7 @@ RectTransform:
   - {fileID: 3077672425891136812}
   - {fileID: 1529790764742128196}
   - {fileID: 4017252004397478610}
-  - {fileID: 7569216259704993006}
-  - {fileID: 1924049173}
+  - {fileID: 1873173747}
   m_Father: {fileID: 3366126708289194311}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -20306,7 +20479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpText: {fileID: 493335333508982729}
-  PopDownText: {fileID: 1924049172}
+  PopDownText: {fileID: 1873173746}
 --- !u!114 &1852170010754141001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22210,6 +22383,7 @@ RectTransform:
   m_Children:
   - {fileID: 693574094}
   - {fileID: 1923634242}
+  - {fileID: 1568698385}
   - {fileID: 1569210504302267097}
   - {fileID: 2556900577787746167}
   - {fileID: 8149008521643425309}
@@ -23448,6 +23622,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 3121982159860668862, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
   placeOntrack: 0
+  essenceCost: 0
+  essenceType: 0
+  locked: 0
   dissolves: []
   towerPreviewRenderer: {fileID: 0}
 --- !u!224 &4325376320422660369
@@ -24066,7 +24243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: choose essence type
+  m_text: 'choose essence type:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 50d6e41b304d9db4e85e3f828cad0615, type: 2}
   m_sharedMaterial: {fileID: -4252152819570648220, guid: 50d6e41b304d9db4e85e3f828cad0615, type: 2}
@@ -24093,7 +24270,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.95
+  m_fontSize: 45.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -29112,12 +29289,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1352799223}
         m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
-        m_MethodName: TryUpgradeTower
+        m_MethodName: TryPlaceTower
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -30622,10 +30799,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 37.05
   m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -30754,10 +30931,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
+  m_fontSize: 37.05
   m_fontSizeBase: 28
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -31311,6 +31488,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 8788322348412090861, guid: 2e1775a7cb28d5840a65237f02d156b9, type: 3}
   placeOntrack: 0
+  essenceCost: 0
+  essenceType: 0
+  locked: 0
   dissolves: []
   towerPreviewRenderer: {fileID: 0}
 --- !u!114 &6458686930466093874
@@ -32589,15 +32769,15 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5137562432341014516}
-  - {fileID: 1384885001607656368}
-  - {fileID: 3392919345825021056}
   - {fileID: 208733956485337032}
-  m_Father: {fileID: 1569210504302267097}
+  - {fileID: 3392919345825021056}
+  - {fileID: 1384885001607656368}
+  m_Father: {fileID: 1568698385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -770.00006, y: 100.00003}
-  m_SizeDelta: {x: 320, y: -820}
+  m_AnchoredPosition: {x: -0.00012207031, y: 100.00003}
+  m_SizeDelta: {x: -1200, y: -800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7603031165975146656
 CanvasRenderer:
@@ -32825,7 +33005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpText: {fileID: 6043738919970306418}
-  PopDownText: {fileID: 1924049172}
+  PopDownText: {fileID: 1873173746}
 --- !u!114 &7774848129820567991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33203,7 +33383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopUpText: {fileID: 2132497688451892839}
-  PopDownText: {fileID: 1924049172}
+  PopDownText: {fileID: 1873173746}
 --- !u!114 &8041473674087047283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33375,12 +33555,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1352799223}
         m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
-        m_MethodName: TryUpgradeTower
+        m_MethodName: TryPlaceTower
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -33787,6 +33967,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 7496668795908692920, guid: 5ccba48b53ac2e649b73e4318ee7e81a, type: 3}
   placeOntrack: 0
+  essenceCost: 0
+  essenceType: 0
+  locked: 0
   dissolves: []
   towerPreviewRenderer: {fileID: 0}
 --- !u!1 &8468173947584987449
@@ -34471,6 +34654,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 8554528532812103905, guid: 038145b1b7e9ee24b89eafb3bc046dec, type: 3}
   placeOntrack: 0
+  essenceCost: 0
+  essenceType: 0
+  locked: 0
   dissolves: []
   towerPreviewRenderer: {fileID: 0}
 --- !u!114 &8974462025622355701
@@ -34594,6 +34780,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 248233111131588184, guid: 628bfa8cfc5e2434baf4c3272196c869, type: 3}
   placeOntrack: 1
+  essenceCost: 0
+  essenceType: 0
+  locked: 0
   dissolves: []
   towerPreviewRenderer: {fileID: 0}
 --- !u!114 &9054237902840462792

@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEditor.Rendering;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,7 @@ public class EssenceManager : MonoBehaviour
     {
         Instance = this;
     }
+
 
 
     public float lifeEssence;
@@ -78,19 +80,12 @@ public class EssenceManager : MonoBehaviour
     public TextMeshProUGUI arcaneEssenceTextObj;
     public TextMeshProUGUI emberEssenceTextObj;
 
+    private const float zeroPointThree = 1 / 3;
 
 
     private void Start()
     {
         OnEssenceChanged.AddListener(UpdateEssenceUI);
-
-        if(UpgradePossibleWithType(out bool[] options, 25, MagicType.Ember))
-        {
-            for (int i = 0; i < options.Length; i++)
-            {
-                print(i + " = " + options[i]);
-            }
-        }
     }
     public void UpdateEssenceUI()
     {
@@ -99,41 +94,68 @@ public class EssenceManager : MonoBehaviour
         emberEssenceTextObj.text = ((int)EmberEssence).ToString();
     }
 
-    public bool[] AllPossibleUpgradeOptions(float amount)
-    {
-        bool[] upgradesPossible = new bool[3];
 
-        if (lifeEssence >= amount)
+
+    public bool TryPurchase(float cost, MagicType essenceType, MagicType chosenEssenceType)
+    {
+        if (PurchaseOptions(out bool[] purchaseOptions, cost))
+        {
+            if (essenceType == MagicType.Neutral)
+            {
+                if (chosenEssenceType == MagicType.Life && purchaseOptions[0])
+                {
+                    AddRemoveEssence(-cost, chosenEssenceType);
+                    return true;
+                }
+                else if(chosenEssenceType == MagicType.Arcane && purchaseOptions[1])
+                {
+                    AddRemoveEssence(-cost, chosenEssenceType);
+                    return true;
+                }
+                else if (chosenEssenceType == MagicType.Ember && purchaseOptions[2])
+                {
+                    AddRemoveEssence(-cost, chosenEssenceType);
+                    return true;
+                }
+                return false;
+            }
+
+
+            else if (essenceType == MagicType.Life && purchaseOptions[0])
+            {
+                AddRemoveEssence(-cost, essenceType);
+                return true;
+            }
+            else if (essenceType == MagicType.Arcane && purchaseOptions[1])
+            {
+                AddRemoveEssence(-cost, essenceType);
+                return true;
+            }
+            else if (essenceType == MagicType.Ember && purchaseOptions[2])
+            {
+                AddRemoveEssence(-cost, essenceType);
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool PurchaseOptions(out bool[] upgradesPossible, float cost)
+    {
+        upgradesPossible = new bool[3];
+
+        if (lifeEssence >= cost)
         {
             upgradesPossible[0] = true;
         }
-        if (arcaneEssence >= amount)
+        if (arcaneEssence >= cost)
         {
             upgradesPossible[1] = true;
         }
-        if (emberEssence >= amount)
+        if (emberEssence >= cost)
         {
             upgradesPossible[2] = true;
         }
-        return upgradesPossible;
-    }
-    public bool UpgradePossibleWithType(out bool[] options, float amount, MagicType type)
-    {
-        options = AllPossibleUpgradeOptions(amount);
-
-        if (type == MagicType.Life && options[0])
-        {
-            return true;
-        }
-        if (type == MagicType.Arcane && options[1])
-        {
-            return true;
-        }
-        if (type == MagicType.Ember && options[2])
-        {
-            return true;
-        }
-        return options.Contains(true);
+        return upgradesPossible.Contains(true);
     }
 
     public void AddRemoveEssence(float amount, MagicType type)
@@ -152,9 +174,9 @@ public class EssenceManager : MonoBehaviour
         }
         else
         {
-            EmberEssence += amount / 3;
-            ArcaneEssence += amount / 3;
-            LifeEssence += amount / 3;
+            EmberEssence += amount *= zeroPointThree;
+            ArcaneEssence += amount *= zeroPointThree;
+            LifeEssence += amount *= zeroPointThree;
         }
     }
 
@@ -162,9 +184,9 @@ public class EssenceManager : MonoBehaviour
     {
         if (type == MagicType.Neutral)
         {
-            LifeEssence += amount / 3;
-            ArcaneEssence += amount / 3;
-            EmberEssence += amount / 3;
+            LifeEssence += amount *= zeroPointThree;
+            ArcaneEssence += amount *= zeroPointThree;
+            EmberEssence += amount *= zeroPointThree;
         }
         else if (type == MagicType.Life)
         {

@@ -9,6 +9,7 @@ public class MiningTower : TowerCore
     public GameObject[] waters;
     private Material[] magicColormaterial = new Material[2];
 
+    [ColorUsage(true,true)]
     public Color[] magicColors;
     public float colorSwapSpeed;
     public int colorIndex;

@@ -279,11 +279,11 @@ MonoBehaviour:
   - {fileID: 6029443064615527679}
   - {fileID: 1304542574004555913}
   magicColors:
-  - {r: 0.9118147, g: 0, b: 1, a: 1}
-  - {r: 0, g: 0.7224126, b: 1, a: 1}
-  - {r: 1, g: 0.0020326534, b: 0, a: 1}
+  - {r: 1.8236294, g: 0, b: 2, a: 1}
+  - {r: 0, g: 1.4448252, b: 2, a: 1}
+  - {r: 2.9960783, g: 0, b: 0, a: 1}
   colorSwapSpeed: 1
-  colorIndex: 0
+  colorIndex: 2
   generationType: 1
   generationPower: 1.25
   generatedEssence: 0
