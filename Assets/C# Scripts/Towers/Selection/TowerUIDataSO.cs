@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DefTowerUIData", menuName = "TowerUI")]
 public class TowerUIDataSO : ScriptableObject
 {
-    public float essenceCost;
+    public float buildCost;
     public MagicType essenceType;
 
     public Sprite towerImage;

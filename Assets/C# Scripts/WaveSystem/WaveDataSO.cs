@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Wave", menuName = "WaveSystem")]
 public class WaveDataSO : ScriptableObject
 {
+    public float waveEndDelay;
+    public float scrapForThisWave;
+
     public WavePart[] waveParts;
 
     [System.Serializable]
@@ -17,7 +20,6 @@ public class WaveDataSO : ScriptableObject
         public float spawnDelay;
         public int amount;
     }
-    public float waveEndDelay;
 }
 
 public enum MagicType

@@ -9,8 +9,6 @@ public class MagicTrap : TowerCore
     public float trapActivateTime;
     public float trapDeActivateTime;
 
-    public float confusionTime;
-
     private BoxCollider trapColl;
 
     private float timer = 0;
@@ -55,40 +53,7 @@ public class MagicTrap : TowerCore
     {
         if (obj.transform.TryGetComponent(out EnemyCore target))
         {
-            target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
-            if (confusionTime > 0)
-            {
-                StartCoroutine(ConfuseEnemyTimer(target));
-            }
-        }
-    }
-
-    private IEnumerator ConfuseEnemyTimer(EnemyCore target)
-    {
-        target.moveSpeed = 0;
-
-        if (target.confusionTime > 0)
-        {
-            target.confusionTime += confusionTime;
-            yield break;
-        }
-        else
-        {
-            target.confusionTime += confusionTime;
-        }
-
-        while (true)
-        {
-            while (target.confusionTime > 0)
-            {
-                yield return new WaitForSeconds(confusionTime);
-                target.confusionTime -= confusionTime;
-            }
-
-            target.confusionTime = 0;
-            target.moveSpeed = target.startMoveSpeed;
-
-            yield break;
+            target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time, projStats.confusionTime);
         }
     }
 

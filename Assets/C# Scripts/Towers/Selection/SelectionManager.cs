@@ -66,7 +66,7 @@ public class SelectionManager : MonoBehaviour
 
             if (isPlacingTower)
             {
-                TryPlaceTower(-1);
+                TryPlaceTower();
             }
             else
             {
@@ -84,18 +84,12 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    public void TryPlaceTower(int chosenType)
+    public void TryPlaceTower()
     {
         //place tower system
         if ((selectedGridTileData.type == 0 && selectedPreviewTower.placeOntrack == false) || (selectedGridTileData.type == 1 && selectedPreviewTower.placeOntrack))
         {
-            if (selectedPreviewTower.essenceType == MagicType.Neutral && chosenType == -1)
-            {
-                essenceChooseMenuObj.SetActive(true);
-                selectedPreviewTower.locked = true;
-                return;
-            }
-            else if (EssenceManager.Instance.TryPurchase(selectedPreviewTower.essenceCost, selectedPreviewTower.essenceType, (MagicType)(chosenType + 1)))
+            if (ResourceManager.Instance.TryBuildTower(selectedPreviewTower.scrapCost))
             {
                 essenceChooseMenuObj.SetActive(false);
                 PlaceTower();
@@ -206,7 +200,7 @@ public class SelectionManager : MonoBehaviour
                 continue;
             }
 
-            if (EssenceManager.Instance.TryPurchase(selectedTower.towerUIData.upgrades[i].essenceCost, selectedTower.towerUIData.upgrades[i].essenceType, (MagicType)chosenType))
+            if (ResourceManager.Instance.TryUpgradeTower(selectedTower.towerUIData.upgrades[i].buildCost, selectedTower.towerUIData.upgrades[i].essenceType, (MagicType)chosenType))
             {
                 TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
                 selectedTower.UpgradeTower(pathId);
@@ -220,7 +214,7 @@ public class SelectionManager : MonoBehaviour
 
     public void SellTower()
     {
-        EssenceManager.Instance.AddRemoveEssence(selectedTower.towerUIData.essenceCost, selectedTower.towerUIData.essenceType);
+        ResourceManager.Instance.AddRemoveEssence(selectedTower.towerUIData.buildCost, selectedTower.towerUIData.essenceType);
 
         GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
         GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, gridData.coreType, null);

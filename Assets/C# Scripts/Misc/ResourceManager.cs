@@ -2,21 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor;
-using UnityEditor.Rendering;
-using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EssenceManager : MonoBehaviour
+public class ResourceManager : MonoBehaviour
 {
-    public static EssenceManager Instance;
+    public static ResourceManager Instance;
     private void Awake()
     {
         Instance = this;
     }
 
 
+
+    public float scrap;
+    public float Scrap
+    {
+        get
+        {
+            return scrap;
+        }
+        set
+        {
+            scrap = value;
+            float rounded = Mathf.Round(scrap);
+            if (Mathf.Approximately(scrap, rounded))
+            {
+                scrap = rounded;
+            }
+            OnResourceChanged.Invoke();
+        }
+    }
 
     public float lifeEssence;
     public float LifeEssence
@@ -33,7 +49,7 @@ public class EssenceManager : MonoBehaviour
             {
                 lifeEssence = rounded;
             }
-            OnEssenceChanged.Invoke();
+            OnResourceChanged.Invoke();
         }
     }
     public float arcaneEssence;
@@ -51,7 +67,7 @@ public class EssenceManager : MonoBehaviour
             {
                 arcaneEssence = rounded;
             }
-            OnEssenceChanged.Invoke();
+            OnResourceChanged.Invoke();
         }
     }
     public float emberEssence;
@@ -69,12 +85,14 @@ public class EssenceManager : MonoBehaviour
             {
                 emberEssence = rounded;
             }
-            OnEssenceChanged.Invoke();
+            OnResourceChanged.Invoke();
         }
     }
 
 
-    public UnityEvent OnEssenceChanged;
+    public UnityEvent OnResourceChanged;
+
+    public TextMeshProUGUI scrapTextObj;
 
     public TextMeshProUGUI lifeEssenceTextObj;
     public TextMeshProUGUI arcaneEssenceTextObj;
@@ -85,10 +103,12 @@ public class EssenceManager : MonoBehaviour
 
     private void Start()
     {
-        OnEssenceChanged.AddListener(UpdateEssenceUI);
+        OnResourceChanged.AddListener(UpdateResourceUI);
     }
-    public void UpdateEssenceUI()
+    public void UpdateResourceUI()
     {
+        scrapTextObj.text = "Scrap: " + ((int)Scrap).ToString();
+
         lifeEssenceTextObj.text =  ((int)LifeEssence).ToString();
         arcaneEssenceTextObj.text = ((int)ArcaneEssence).ToString();
         emberEssenceTextObj.text = ((int)EmberEssence).ToString();
@@ -96,7 +116,17 @@ public class EssenceManager : MonoBehaviour
 
 
 
-    public bool TryPurchase(float cost, MagicType essenceType, MagicType chosenEssenceType)
+    public bool TryBuildTower(float cost)
+    {
+        if (Scrap >= cost)
+        {
+            Scrap -= cost;
+            return true;
+        }
+        return false;
+    }
+
+    public bool TryUpgradeTower(float cost, MagicType essenceType, MagicType chosenEssenceType)
     {
         if (PurchaseOptions(out bool[] purchaseOptions, cost))
         {
@@ -174,31 +204,9 @@ public class EssenceManager : MonoBehaviour
         }
         else
         {
-            EmberEssence += amount *= zeroPointThree;
-            ArcaneEssence += amount *= zeroPointThree;
-            LifeEssence += amount *= zeroPointThree;
-        }
-    }
-
-    public void GenerateEssenceFromEnemy(float amount, MagicType type)
-    {
-        if (type == MagicType.Neutral)
-        {
             LifeEssence += amount *= zeroPointThree;
             ArcaneEssence += amount *= zeroPointThree;
             EmberEssence += amount *= zeroPointThree;
-        }
-        else if (type == MagicType.Life)
-        {
-            LifeEssence += amount;
-        }
-        else if (type == MagicType.Arcane)
-        {
-            ArcaneEssence += amount;
-        }
-        else if (type == MagicType.Ember)
-        {
-            EmberEssence += amount;
         }
     }
 }

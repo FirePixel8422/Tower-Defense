@@ -116,7 +116,7 @@ public class Projectile : MonoBehaviour
             ApplySplashDamage();
         }
 
-        target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time);
+        target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time, projStats.confusionTime);
     }
     public virtual void ApplySplashDamage()
     {
@@ -139,6 +139,8 @@ public struct ProjectileStats
     public MagicType damageOverTimeType;
     public float damageOverTime;
     public float time;
+
+    public float confusionTime;
 
     [Header("Area effect on hit")]
     public AIO_AreaEffect areaEffect;

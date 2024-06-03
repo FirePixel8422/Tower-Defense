@@ -89,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 3755995962353762576}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -302,11 +302,9 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   towerUIData: {fileID: 11400000, guid: ea4088adbe62de94a977f150ae7f6986, type: 2}
-  prefab: {fileID: 0}
   upgradePrefabs:
   - {fileID: 1506645175717679946, guid: 07d70de18dd57d54b8b56aed73035902, type: 3}
   towerCompleted: 0
-  placeOntrack: 0
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
   audioController: {fileID: 0}
@@ -314,10 +312,10 @@ MonoBehaviour:
   shootPoint: {fileID: 884606491859348916}
   target: {fileID: 0}
   targetMode: 0
-  exludeTargetUpdates: 0
+  excludeTargetUpdates: 0
   specialTargetMode: 0
   targetModeString: First
-  magicType: 00000000
+  magicType: 0
   rotSpeed: 360
   rotPoint: {fileID: 3709808225691513436}
   rotOffset: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -333,16 +331,14 @@ MonoBehaviour:
     damageOverTime: 0
     time: 0
     areaEffect: {fileID: 0}
-    duration: 0.2
-    doSplashDamage: 0
-    areaEffectSize: 0
-    maxSplashHits: 0
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
     AIO_damageType: 0
     AIO_damage: 0
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
-  isPreviewTower: 0
 --- !u!95 &1118212001989696395
 Animator:
   serializedVersion: 5

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 551404837566107381}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -284,7 +284,7 @@ MonoBehaviour:
   - {r: 2.9960783, g: 0, b: 0, a: 1}
   colorSwapSpeed: 1
   colorIndex: 2
-  generationType: 1
+  generationType: 3
   generationPower: 1.25
   generatedEssence: 0
 --- !u!95 &3133865725307941159

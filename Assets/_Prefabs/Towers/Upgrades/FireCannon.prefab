@@ -200,7 +200,7 @@ MonoBehaviour:
   excludeTargetUpdates: 0
   specialTargetMode: 0
   targetModeString: First
-  magicType: 0
+  magicType: 3
   rotSpeed: 360
   rotPoint: {fileID: 1720268331796712155}
   rotOffset: {x: 0, y: 1, z: 0, w: -0.00000004371139}
@@ -486,7 +486,7 @@ Transform:
   m_GameObject: {fileID: 3781490187130273740}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

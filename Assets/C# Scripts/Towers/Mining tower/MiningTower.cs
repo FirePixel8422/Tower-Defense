@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MiningTower : TowerCore
 {
-    private EssenceManager essenceManager;
+    private ResourceManager essenceManager;
 
     public GameObject[] waters;
     private Material[] magicColormaterial = new Material[2];
@@ -25,6 +25,10 @@ public class MiningTower : TowerCore
     public override void Start()
     {
         base.Start();
+
+        specialTargetMode = true;
+        excludeTargetUpdates = true;
+
         magicColormaterial[0] = waters[0].GetComponent<Renderer>().material;
         magicColormaterial[1] = waters[1].GetComponent<Renderer>().material;
         materialColor = magicColormaterial[0].GetColor("_Water_Color");
@@ -32,7 +36,7 @@ public class MiningTower : TowerCore
 
     public override void Init()
     {
-        essenceManager = EssenceManager.Instance;
+        essenceManager = ResourceManager.Instance;
     }
     public override void Shoot()
     {

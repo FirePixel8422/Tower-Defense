@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1971471074631531283}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 5538157176212337038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.540093, y: 0, z: -3.8684745}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -166,10 +166,11 @@ MonoBehaviour:
     damageType: 0
     damage: 5
     damageOverTimeType: 1
-    damageOverTime: 15
+    damageOverTime: 10
     time: 2
-    areaEffect: {fileID: 2476679845236905568, guid: 51958aa941fbb7140b78c5bb4726bfaf, type: 3}
-    AIO_duration: 2
+    confusionTime: 1
+    areaEffect: {fileID: 0}
+    AIO_duration: 0
     AIO_areaEffectSize: {x: 0.8, y: 0.8, z: 0.8}
     AIO_maxSplashHits: 0
     AIO_damageType: 0
@@ -180,7 +181,6 @@ MonoBehaviour:
   smart: 0
   trapActivateTime: 0.1
   trapDeActivateTime: 0.4
-  confusionTime: 5
 --- !u!95 &5919304492338803308
 Animator:
   serializedVersion: 5

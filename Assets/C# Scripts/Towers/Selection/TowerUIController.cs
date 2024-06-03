@@ -20,7 +20,7 @@ public class TowerUIController : MonoBehaviour
     public TextMeshProUGUI towerName;
     public TextMeshProUGUI towerPopup;
 
-    public Image[] towerUpgradeImages;
+    //public Image[] towerUpgradeImages;
     public TextMeshProUGUI[] towerUpgradeNames;
     public TextMeshProUGUI[] towerUpgradePopups;
     public TextMeshProUGUI[] towerUpgradeCosts;
@@ -49,18 +49,12 @@ public class TowerUIController : MonoBehaviour
         {
             if (i == towerUiData.upgrades.Length)
             {
-                towerUpgradeImages[i].gameObject.SetActive(false);
                 break;
             }
-            //DELETE ON FIX
-            break;
 
-            towerUpgradeImages[i].gameObject.SetActive(true);
-
-            towerUpgradeImages[i].sprite = towerUiData.upgrades[i].towerImage;
             towerUpgradeNames[i].text = towerUiData.upgrades[i].towerName;
             towerUpgradePopups[i].text = towerUiData.upgrades[i].towerPopup;
-            towerUpgradeCosts[i].text = towerUiData.upgrades[i].essenceCost.ToString();
+            towerUpgradeCosts[i].text = towerUiData.upgrades[i].buildCost.ToString();
         }
         
 

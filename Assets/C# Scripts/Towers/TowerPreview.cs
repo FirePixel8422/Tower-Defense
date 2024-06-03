@@ -7,8 +7,7 @@ public class TowerPreview : MonoBehaviour
     public TowerCore towerPrefab;
     public bool placeOntrack;
 
-    public float essenceCost;
-    public MagicType essenceType;
+    public float scrapCost;
 
     public bool locked;
 
@@ -22,8 +21,7 @@ public class TowerPreview : MonoBehaviour
 
     private void Start()
     {
-        essenceCost = towerPrefab.towerUIData.essenceCost;
-        essenceType = towerPrefab.towerUIData.essenceType;
+        scrapCost = towerPrefab.towerUIData.buildCost;
 
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
         towerPreviewRenderer.transform.localScale = Vector3.one * towerPrefab.range;

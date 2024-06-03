@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2321579876990063748}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5000008, y: 0.49999928, z: -0.49999928, w: 0.5000008}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9978,7 +9978,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 54faacde4649f9f44ae3efa276b44573, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.553
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54faacde4649f9f44ae3efa276b44573, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9986,7 +9986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54faacde4649f9f44ae3efa276b44573, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.735
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54faacde4649f9f44ae3efa276b44573, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10022,7 +10022,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 641a1d0951ea7e148b2af327b0a8ddd4, type: 2}
     - target: {fileID: 919132149155446097, guid: 54faacde4649f9f44ae3efa276b44573, type: 3}
       propertyPath: m_Name
-      value: Chain Tesla
+      value: ChainTesla
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10106,7 +10106,7 @@ MonoBehaviour:
   excludeTargetUpdates: 0
   specialTargetMode: 0
   targetModeString: First
-  magicType: 2000000
+  magicType: 2
   rotSpeed: 0
   rotPoint: {fileID: 0}
   rotOffset: {x: 0, y: 0, z: 0, w: 0}

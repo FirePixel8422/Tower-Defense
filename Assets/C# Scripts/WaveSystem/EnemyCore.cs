@@ -91,7 +91,7 @@ public class EnemyCore : MonoBehaviour
         }
         incomingDamage += damage + AIO_damage;
     }
-    public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time)
+    public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time, float confusionTime)
     {
         takenDamage += damage;
         if (dead) return;
@@ -114,19 +114,26 @@ public class EnemyCore : MonoBehaviour
 
         //generate essence
         float percentDamage = (damage + (health < 0 ? health : 0)) / maxHealth;
-        EssenceManager.Instance.GenerateEssenceFromEnemy(percentDamage * essenseOnDamage, damageType);
+        ResourceManager.Instance.AddRemoveEssence(percentDamage * essenseOnDamage, damageType);
 
         if (health <= 0)
         {
             WaveManager.Instance.spawnedObj.Remove(this);
-            EssenceManager.Instance.GenerateEssenceFromEnemy(essenceOnDeath, damageType);
-            
+            ResourceManager.Instance.AddRemoveEssence(essenceOnDeath, damageType);
+
             dead = true;
             gameObject.SetActive(false);
         }
-        else if (time != 0)
+        else
         {
-            StartCoroutine(DamageOverTime(damageOverTimeType, damageOverTime, time));
+            if (time != 0)
+            {
+                StartCoroutine(DamageOverTime(damageOverTimeType, damageOverTime, time));
+            }
+            if(confusionTime != 0)
+            {
+                StartCoroutine(ConfusionTimer(confusionTime));
+            }
         }
     }
 
@@ -164,12 +171,12 @@ public class EnemyCore : MonoBehaviour
 
                 //generate essence
                 float percentDamage = (damage + (health < 0 ? health : 0)) / maxHealth;
-                EssenceManager.Instance.GenerateEssenceFromEnemy(percentDamage * essenseOnDamage, damageType);
+                ResourceManager.Instance.AddRemoveEssence(percentDamage * essenseOnDamage, damageType);
 
                 if (health <= 0)
                 {
                     WaveManager.Instance.spawnedObj.Remove(this);
-                    EssenceManager.Instance.GenerateEssenceFromEnemy(essenceOnDeath, damageType);
+                    ResourceManager.Instance.AddRemoveEssence(essenceOnDeath, damageType);
                     
                     dead = true;
                     gameObject.SetActive(false);
@@ -180,5 +187,35 @@ public class EnemyCore : MonoBehaviour
             yield return null;
         }
         incomingDamage -= damage;
+    }
+
+
+    private IEnumerator ConfusionTimer(float _confusionTime)
+    {
+        moveSpeed = 0;
+
+        if (confusionTime > 0)
+        {
+            confusionTime += _confusionTime;
+            yield break;
+        }
+        else
+        {
+            confusionTime += _confusionTime;
+        }
+
+        while (true)
+        {
+            while (confusionTime > 0)
+            {
+                yield return new WaitForSeconds(confusionTime);
+                confusionTime -= _confusionTime;
+            }
+
+            confusionTime = 0;
+            moveSpeed = startMoveSpeed;
+
+            yield break;
+        }
     }
 }
