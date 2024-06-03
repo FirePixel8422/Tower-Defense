@@ -125,6 +125,7 @@ Material:
     - _Metallic: 0
     - _Noise_Scale: 50
     - _OcclusionStrength: 1
+    - _OverrideTransparancy: 0
     - _Parallax: 0.005
     - _Preview: 0
     - _QueueControl: 0

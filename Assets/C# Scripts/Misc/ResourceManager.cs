@@ -125,6 +125,10 @@ public class ResourceManager : MonoBehaviour
         }
         return false;
     }
+    public void AddScrap(float amount)
+    {
+        Scrap += amount;
+    }
 
     public bool TryUpgradeTower(float cost, MagicType essenceType, MagicType chosenEssenceType)
     {

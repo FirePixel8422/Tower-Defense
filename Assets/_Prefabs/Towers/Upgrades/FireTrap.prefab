@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6477141380923463041}
   - component: {fileID: 1588095959630771979}
   - component: {fileID: 3839803988348367703}
+  - component: {fileID: 2930485585708687282}
   - component: {fileID: 6524432674666441350}
   - component: {fileID: 8371722084377343288}
   - component: {fileID: 7353184688621727326}
@@ -168,6 +169,7 @@ MonoBehaviour:
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0
+    confusionTime: 0
     areaEffect: {fileID: 7172611797961575754, guid: 137fd68c89c5dd64c981b09fd0b31281, type: 3}
     AIO_duration: 2
     AIO_areaEffectSize: {x: 0.8, y: 0.8, z: 0.8}
@@ -180,7 +182,6 @@ MonoBehaviour:
   smart: 0
   trapActivateTime: 0.1
   trapDeActivateTime: 0.4
-  confusionTime: 0
 --- !u!95 &1588095959630771979
 Animator:
   serializedVersion: 5
@@ -223,6 +224,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.707276, y: 0.30154514, z: 0.64738387}
   m_Center: {x: 0, y: 0.1584849, z: 0}
+--- !u!65 &2930485585708687282
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2200535057880192268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.42750257, z: 1}
+  m_Center: {x: 0, y: 0.2862487, z: 0}
 --- !u!54 &6524432674666441350
 Rigidbody:
   m_ObjectHideFlags: 0

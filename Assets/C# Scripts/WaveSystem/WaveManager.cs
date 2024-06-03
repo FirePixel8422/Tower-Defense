@@ -60,6 +60,7 @@ public class WaveManager : MonoBehaviour
                     }
                 }
                 yield return new WaitForSeconds(waves[i].waveEndDelay);
+                ResourceManager.Instance.AddScrap(waves[i].scrapForThisWave);
             }
         }
     }

@@ -14,7 +14,6 @@ public class EnemyCore : MonoBehaviour
     public float health;
     public float damage;
     public float incomingDamage;
-    public float takenDamage;
 
     public bool IsNotAboutToDie
     {
@@ -60,7 +59,6 @@ public class EnemyCore : MonoBehaviour
         pointIndex = 0;
         health = maxHealth;
         incomingDamage = 0;
-        takenDamage = 0;
         progression = 0;
         dead = false;
 
@@ -93,8 +91,7 @@ public class EnemyCore : MonoBehaviour
     }
     public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time, float confusionTime)
     {
-        takenDamage += damage;
-        if (dead) return;
+        if (dead || (gameObject.activeInHierarchy == false)) return;
 
         
         if (immunityBarrier != null && immunityBarrier.barrierHealth > 0)

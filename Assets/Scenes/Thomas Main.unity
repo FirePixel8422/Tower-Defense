@@ -1019,6 +1019,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 837bc9e802deb6d499dc34e9f768565e, type: 3}
+--- !u!1001 &43999870
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746911213888049831, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2444301092445039954, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
+      propertyPath: m_Name
+      value: Well Tower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d683cfbc511c994f8075160e364d11a, type: 3}
 --- !u!1 &46792869
 GameObject:
   m_ObjectHideFlags: 0
@@ -7864,7 +7921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83f784bc5a5f18458f1a525bff0b73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawMasterGizmos: 1
+  drawMasterGizmos: 0
   drawTileGizmos: 1
   drawTileDataGizmos: 0
   gridPosition: {x: 0, y: 0, z: 0.5}
@@ -18925,7 +18982,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2605667002283127431}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1352799223}
+        m_TargetAssemblyTypeName: SelectionManager, Assembly-CSharp
+        m_MethodName: SellTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4001760404140668812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30661,3 +30730,4 @@ SceneRoots:
   - {fileID: 3366126708289194311}
   - {fileID: 298691224}
   - {fileID: 37482464}
+  - {fileID: 43999870}
