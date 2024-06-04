@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mapwater
-  m_Shader: {fileID: -6465566751694194690, guid: 243fe5e57e3a7784f8492b86a1449124, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 626103bf6d6ca014a911a3bede753ad5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -127,11 +127,11 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Edge_Color: {r: 0, g: 0.7529412, b: 16, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MoveSpeed: {r: 0.02, g: 0.02, b: 0, a: 0}
+    - _MoveSpeed: {r: 0.2, g: 0.1, b: 0, a: 0}
     - _PreviewColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tilling: {r: 5, g: 5, b: 0, a: 0}
-    - _Water_Color: {r: 0.69230676, g: 0.97743833, b: 1.3182849, a: 1}
+    - _Water_Color: {r: 0.23893186, g: 0.57922834, b: 1.0641508, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5344401300137740220
 MonoBehaviour:

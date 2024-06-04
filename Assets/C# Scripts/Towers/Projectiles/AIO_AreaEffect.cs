@@ -9,40 +9,41 @@ public class AIO_AreaEffect : MonoBehaviour
     public SphereCollider sphereColl;
     public BoxCollider boxColl;
 
-    private ProjectileStats projStats;
+    private ProjectileStats p;
     private int splashHitsLeft;
 
-    public void Init(ProjectileStats _projStats)
+    public void Init(ProjectileStats _p)
     {
         if (sphereColl != null)
         {
             sphereColl.enabled = true;
-            sphereColl.radius = projStats.AIO_areaEffectSize.x / 2;
+            sphereColl.radius = p.AIO_areaEffectSize.x / 2;
         }
         else
         {
             boxColl.enabled = true;
-            boxColl.size = projStats.AIO_areaEffectSize;
+            boxColl.size = p.AIO_areaEffectSize;
         }
 
 
 
-        projStats = _projStats;
+        p = _p;
 
-        splashHitsLeft = projStats.AIO_maxSplashHits;
+        splashHitsLeft = p.AIO_maxSplashHits;
         if (splashHitsLeft == 0)
         {
             splashHitsLeft = -1;
         }
 
-        if (projStats.AIO_duration != 0)
+        if (p.AIO_duration != 0)
         {
-            Destroy(gameObject, projStats.AIO_duration);
+            Destroy(gameObject, p.AIO_duration);
         }
     }
 
     private void OnTriggerEnter(Collider obj)
     {
+        print(splashHitsLeft);
         if (splashHitsLeft != 0 && obj.TryGetComponent(out EnemyCore target))
         {
             splashHitsLeft -= 1;
@@ -53,7 +54,7 @@ public class AIO_AreaEffect : MonoBehaviour
     public virtual void OnHitTarget(EnemyCore target)
     {
         print(target.health);
-        target.ApplyDamage(projStats.AIO_damageType, projStats.AIO_damage, projStats.AIO_damageOverTimeType, projStats.AIO_damageOverTime, projStats.AIO_time, projStats.confusionTime);
+        target.ApplyDamage(p.AIO_damageType, p.AIO_damage, p.AIO_damageOverTimeType, p.AIO_damageOverTime, p.AIO_time, p.confusionTime, p.slownessPercentage, p.slownessTime);
         print(target.health);
     }
 }

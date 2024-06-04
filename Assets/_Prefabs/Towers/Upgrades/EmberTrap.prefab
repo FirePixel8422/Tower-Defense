@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 7353184688621727326}
   - component: {fileID: 6718663461389494389}
   m_Layer: 0
-  m_Name: FireTrap
+  m_Name: EmberTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,13 +167,13 @@ MonoBehaviour:
     damageType: 0
     damage: 5
     damageOverTimeType: 0
-    damageOverTime: 0
+    damageOverTime: 7.5
     time: 0
     confusionTime: 0
     areaEffect: {fileID: 7172611797961575754, guid: 137fd68c89c5dd64c981b09fd0b31281, type: 3}
-    AIO_duration: 2
+    AIO_duration: 2.5
     AIO_areaEffectSize: {x: 0.8, y: 0.8, z: 0.8}
-    AIO_maxSplashHits: 10
+    AIO_maxSplashHits: 5
     AIO_damageType: 3
     AIO_damage: 0
     AIO_damageOverTimeType: 3

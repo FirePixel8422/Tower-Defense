@@ -11,4 +11,8 @@ public struct GridObjectData
     public bool full;
     public int coreType;
     public int type;
+
+    public float scrap;
+    public float essence;
+    public MagicType essenceType;
 }

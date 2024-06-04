@@ -22,6 +22,7 @@ public class SelectionManager : MonoBehaviour
 
     public LayerMask floor;
     public LayerMask path;
+    public LayerMask water;
 
     public GameObject preSpawnedTowerHolder;
     public GameObject towerUIHolder;
@@ -87,7 +88,7 @@ public class SelectionManager : MonoBehaviour
     public void TryPlaceTower()
     {
         //place tower system
-        if ((selectedGridTileData.type == 0 && selectedPreviewTower.placeOntrack == false) || (selectedGridTileData.type == 1 && selectedPreviewTower.placeOntrack))
+        if (selectedGridTileData.type == selectedPreviewTower.placementIndex)
         {
             if (ResourceManager.Instance.TryBuildTower(selectedPreviewTower.scrapCost))
             {
@@ -124,7 +125,8 @@ public class SelectionManager : MonoBehaviour
             TowerManager.Instance.spawnedTowerObj.Add(selectedTower);
         }
 
-        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 2, selectedTower);
+        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 3, selectedTower);
+        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, selectedTower.towerUIData.buildCost, selectedTower.towerUIData.essenceType);
         isPlacingTower = false;
     }
 
@@ -148,6 +150,9 @@ public class SelectionManager : MonoBehaviour
                 towerSelected = true;
 
                 TowerUIController.Instance.SelectTower(selectedTower);
+
+                //refresh targetMode text
+                UpdateSelectedTowerTargetMode(0);
                 return;
             }
         }
@@ -160,18 +165,9 @@ public class SelectionManager : MonoBehaviour
         towerSelected = false;
     }
 
-    public void UpdateSelectedTowerTargetMode(bool prev)
+    public void UpdateSelectedTowerTargetMode(int direction)
     {
-        string targetModeString;
-        if (prev)
-        {
-            targetModeString = selectedTower.PreviousTargetMode();
-        }
-        else
-        {
-            targetModeString = selectedTower.NextTargetMode();
-        }
-        TowerUIController.Instance.targetModeTextObj.text = targetModeString;
+        TowerUIController.Instance.targetModeTextObj.text = selectedTower.UpdateTargetMode(direction);
     }
 
 
@@ -202,6 +198,9 @@ public class SelectionManager : MonoBehaviour
 
             if (ResourceManager.Instance.TryUpgradeTower(selectedTower.towerUIData.upgrades[i].buildCost, selectedTower.towerUIData.upgrades[i].essenceType, (MagicType)chosenType))
             {
+                GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
+                GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, selectedTower.towerUIData.upgrades[pathId].buildCost, selectedTower.towerUIData.upgrades[pathId].essenceType);
+
                 TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
                 selectedTower.UpgradeTower(pathId);
 
@@ -257,7 +256,7 @@ public class SelectionManager : MonoBehaviour
                 selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
                 int onTrack = selectedGridTileData.type;
-                if ((onTrack == 1 && selectedPreviewTower.placeOntrack) || (onTrack == 0 && selectedPreviewTower.placeOntrack == false))
+                if (onTrack == selectedPreviewTower.placementIndex)
                 {
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
                     selectedPreviewTower.UpdateTowerPreviewColor(Color.white);

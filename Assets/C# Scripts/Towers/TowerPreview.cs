@@ -5,7 +5,7 @@ using UnityEngine;
 public class TowerPreview : MonoBehaviour
 {
     public TowerCore towerPrefab;
-    public bool placeOntrack;
+    public int placementIndex;
 
     public float scrapCost;
 

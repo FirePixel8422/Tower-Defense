@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 1304542574004555913}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.2531, z: 0}
+  m_LocalPosition: {x: -0.0203, y: 0.2531, z: -0.0107}
   m_LocalScale: {x: 0.010999996, y: 0.011, z: 0.010999996}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -258,7 +258,7 @@ MonoBehaviour:
   range: 0.6
   lookTreshold: 0
   attackSpeed: 0
-  projStats:
+  p:
     projectileSize: 0
     speed: 0
     damageType: 0
@@ -266,6 +266,9 @@ MonoBehaviour:
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0
+    confusionTime: 0
+    slownessPercentage: 0
+    slownessTime: 0
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}
@@ -285,7 +288,7 @@ MonoBehaviour:
   colorSwapSpeed: 1
   colorIndex: 2
   generationType: 3
-  generationPower: 1.25
+  generationPower: 500
   generatedEssence: 0
 --- !u!95 &3133865725307941159
 Animator:
@@ -640,7 +643,7 @@ Transform:
   m_GameObject: {fileID: 7408156765160139269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.36564, z: 0}
+  m_LocalPosition: {x: 0, y: 0.36564, z: 0}
   m_LocalScale: {x: 1, y: 0.4543936, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

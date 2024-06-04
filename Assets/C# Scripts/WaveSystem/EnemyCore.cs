@@ -1,9 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class EnemyCore : MonoBehaviour
 {
+    private Animator anim;
+
     public int enemyId;
 
     public float essenseOnDamage;
@@ -24,7 +27,32 @@ public class EnemyCore : MonoBehaviour
     }
 
     public float startMoveSpeed;
-    public float moveSpeed;
+
+
+    [SerializeField]
+    private float moveSpeed;
+    public float MoveSpeed
+    {
+        get
+        {
+            float lowestPercentage = 100;
+            foreach(int percentage in slownessEffectsList)
+            {
+                if (percentage < lowestPercentage)
+                {
+                    lowestPercentage = percentage;
+                }
+            }
+
+            return moveSpeed * 0.01f * lowestPercentage;
+        }
+        set
+        {
+            moveSpeed = value;
+        }
+    }
+    public List<int> slownessEffectsList;
+
 
     public int pointIndex;
     public int2 dir;
@@ -50,6 +78,9 @@ public class EnemyCore : MonoBehaviour
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
+        anim.speed = MoveSpeed / 2;
+
         startMoveSpeed = moveSpeed;
         immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
         gameObject.tag = "Enemy";
@@ -89,11 +120,11 @@ public class EnemyCore : MonoBehaviour
         }
         incomingDamage += damage + AIO_damage;
     }
-    public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time, float confusionTime)
+    public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time, float confusionTime, int slownessPercentage, float slownessTime)
     {
         if (dead || (gameObject.activeInHierarchy == false)) return;
 
-        
+
         if (immunityBarrier != null && immunityBarrier.barrierHealth > 0)
         {
             if (immunityBarrierType == damageType && damageType != MagicType.Neutral)
@@ -127,9 +158,13 @@ public class EnemyCore : MonoBehaviour
             {
                 StartCoroutine(DamageOverTime(damageOverTimeType, damageOverTime, time));
             }
-            if(confusionTime != 0)
+            if (confusionTime != 0)
             {
                 StartCoroutine(ConfusionTimer(confusionTime));
+            }
+            if (slownessPercentage != 0)
+            {
+                StartCoroutine(SlownessTimer(slownessPercentage, slownessTime));
             }
         }
     }
@@ -214,5 +249,15 @@ public class EnemyCore : MonoBehaviour
 
             yield break;
         }
+    }
+    private IEnumerator SlownessTimer(int slownessPercentage, float slownessTime)
+    {
+        slownessEffectsList.Add(slownessPercentage); 
+        anim.speed = MoveSpeed / 2;
+
+        yield return new WaitForSeconds(slownessTime);
+
+        slownessEffectsList.Remove(slownessPercentage);
+        anim.speed = MoveSpeed / 2;
     }
 }

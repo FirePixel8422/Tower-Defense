@@ -86,6 +86,7 @@ public class WaveManager : MonoBehaviour
 
 
     private Transform targetTransform;
+    private float targetMoveSpeed;
     private Vector3 pos;
     private int pointIndex;
     private Vector3 pointPos;
@@ -101,7 +102,8 @@ public class WaveManager : MonoBehaviour
         //then rotate them towards the next points, making them turn.
         for (int i = spawnedObj.Count - 1; i >= 0; i--)
         {
-            if (spawnedObj[i].moveSpeed == 0)
+            targetMoveSpeed = spawnedObj[i].MoveSpeed;
+            if (targetMoveSpeed == 0)
             {
                 continue;
             }
@@ -115,12 +117,12 @@ public class WaveManager : MonoBehaviour
             pointPos = points[pointIndex].position;
             pointRot = points[pointIndex].rotation;
 
-            targetRotSpeed = target.moveSpeed * 90 * rotMultiplier * enemyMovementUpdateInterval;
+            targetRotSpeed = targetMoveSpeed * 90 * rotMultiplier * enemyMovementUpdateInterval;
 
 
             //calculate movement and check distance to point.
             pos = targetTransform.position;
-            movement = target.moveSpeed * enemyMovementUpdateInterval * targetTransform.forward;
+            movement = targetMoveSpeed * enemyMovementUpdateInterval * targetTransform.forward;
             dist = movement.x + movement.y + movement.z;
 
             if (Vector3.Distance(pos, pointPos) < dist)
@@ -162,7 +164,7 @@ public class WaveManager : MonoBehaviour
 
             if (target.confusionTime == 0)
             {
-                target.progression += enemyMovementUpdateInterval * target.moveSpeed;
+                target.progression += enemyMovementUpdateInterval * targetMoveSpeed;
             }
 
 

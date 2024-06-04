@@ -48,6 +48,10 @@ public class GridManager : MonoBehaviour
                 {
                     _type = 1;
                 }
+                else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, SelectionManager.Instance.water))
+                {
+                    _type = 2;
+                }
 
                 grid[x, z] = new GridObjectData()
                 {
@@ -87,6 +91,17 @@ public class GridManager : MonoBehaviour
     public void UpdateGridDataFieldType(Vector2Int gridPos, int newType)
     {
         grid[gridPos.x, gridPos.y].type = newType;
+    }
+    public void UpdateGridDataFieldType(Vector2Int gridPos, float addedScrapOrEssence, MagicType essenceType)
+    {
+        if(essenceType == MagicType.Neutral)
+        {
+            grid[gridPos.x, gridPos.y].scrap += addedScrapOrEssence;
+            return;
+        }
+        
+        grid[gridPos.x, gridPos.y].essence += addedScrapOrEssence;
+        grid[gridPos.x, gridPos.y].essenceType = essenceType;
     }
     public void UpdateGridDataFieldType(Vector2Int gridPos, int newType, TowerCore tower)
     {

@@ -165,9 +165,9 @@ MonoBehaviour:
     projectileSize: 0
     speed: 0
     damageType: 0
-    damage: 5
+    damage: 12.5
     damageOverTimeType: 1
-    damageOverTime: 10
+    damageOverTime: 5
     time: 2
     confusionTime: 1
     areaEffect: {fileID: 0}

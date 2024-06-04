@@ -37,6 +37,7 @@ public class TowerCore : MonoBehaviour
     public bool specialTargetMode;
 
     private int targetId;
+    [HideInInspector]
     public string targetModeString;
 
 
@@ -49,7 +50,7 @@ public class TowerCore : MonoBehaviour
     public float lookTreshold;
     public float attackSpeed;
 
-    public ProjectileStats projStats;
+    public ProjectileStats p;
 
 
     public virtual void Start()
@@ -110,13 +111,13 @@ public class TowerCore : MonoBehaviour
         anim.SetTrigger("Shoot");
         audioController.Play();
 
-        target.TryHit(projStats.damageType, projStats.damage, projStats.AIO_damageType, projStats.AIO_damage);
+        target.TryHit(p.damageType, p.damage, p.AIO_damageType, p.AIO_damage);
 
         Vector3 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
 
         Projectile bullet = ProjectilePooling.Instance.GetPulledObj(projectile.projectileId, shootPoint.position, Quaternion.Euler(0, angle, 0)).GetComponent<Projectile>();
-        bullet.Init(target, projStats);
+        bullet.Init(target, p);
     }
 
     public virtual void SelectOrDeselectTower(bool select)
@@ -129,48 +130,45 @@ public class TowerCore : MonoBehaviour
         }
     }
 
-    public string NextTargetMode()
+    public string UpdateTargetMode(int direction)
     {
-        targetId += 1;
+        targetId += direction;
         if (targetId == 4)
         {
             targetId = 0;
         }
-        targetModeString = UpdateTargetMode(targetId);
-        return specialTargetMode ? "Special" : targetModeString;
-    }
-    public string PreviousTargetMode()
-    {
-        targetId -= 1;
         if (targetId == -1)
         {
             targetId = 3;
         }
-        targetModeString = UpdateTargetMode(targetId);
-        return specialTargetMode ? "Special" : targetModeString;
-    }
-    private string UpdateTargetMode(int targetId)
-    {
+
+        string targetModeString;
+        if (specialTargetMode)
+        {
+            return "Special";
+        }
         if (targetId == 3)
         {
             targetMode = TargetMode.Tanky;
-            return "Tanky";
+            targetModeString = "Tanky";
         }
         else if (targetId == 2)
         {
             targetMode = TargetMode.Dangerous;
-            return "Dangerous";
+            targetModeString = "Dangerous";
         }
         else if (targetId == 1)
         {
             targetMode = TargetMode.Last;
-            return "Last";
+            targetModeString = "Last";
         }
         else
         {
             targetMode = TargetMode.First;
-            return "First";
+            targetModeString = "First";
         }
+
+        return targetModeString;
     }
 
 

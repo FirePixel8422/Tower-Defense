@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
     public float trackTargetUpdateInterval;
     public int projectileId;
     public EnemyCore target;
-    public ProjectileStats projStats;
+    public ProjectileStats p;
 
 
     private void Start()
@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
             child.SetActive(true);
         }
         target = _target;
-        projStats = _s;
+        p = _s;
         trackTargetUpdateInterval = TowerManager.Instance.projectileTrackTargetUpdateInterval;
 
         //move projectile towards target, so it cant "miss"
@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
             yield return wait;
             if (target.gameObject.activeInHierarchy == false)
             {
-                target.incomingDamage -= projStats.damage;
+                target.incomingDamage -= p.damage;
                 Debug.LogWarning("killed self");
 
                 //tracked target died, destroy (disable for pool) bullet
@@ -80,9 +80,9 @@ public class Projectile : MonoBehaviour
 
 
             //move projectile and lookat target.
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, projStats.speed * trackTargetUpdateInterval);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, p.speed * trackTargetUpdateInterval);
             transform.LookAt(target.transform);
-            if (Vector3.Distance(transform.position, target.transform.position) < projStats.projectileSize)
+            if (Vector3.Distance(transform.position, target.transform.position) < p.projectileSize)
             {
                 //call virtual void "HitTarget()"
                 HitTarget();
@@ -110,18 +110,18 @@ public class Projectile : MonoBehaviour
     }
     public virtual void HitTarget()
     {
-        if (projStats.areaEffect != null)
+        if (p.areaEffect != null)
         {
             //spawn collider to hit multiple bullets
             ApplySplashDamage();
         }
 
-        target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time, projStats.confusionTime);
+        target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime);
     }
     public virtual void ApplySplashDamage()
     {
-        AIO_AreaEffect AIO_Effect = Instantiate(projStats.areaEffect, target.transform.position, Quaternion.identity);
-        AIO_Effect.Init(projStats);
+        AIO_AreaEffect AIO_Effect = Instantiate(p.areaEffect, target.transform.position, Quaternion.identity);
+        AIO_Effect.Init(p);
     }
 }
 
@@ -141,6 +141,8 @@ public struct ProjectileStats
     public float time;
 
     public float confusionTime;
+    public int slownessPercentage;
+    public float slownessTime;
 
     [Header("Area effect on hit")]
     public AIO_AreaEffect areaEffect;

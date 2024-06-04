@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class MagicTrap : TowerCore
 {
@@ -42,10 +41,24 @@ public class MagicTrap : TowerCore
     {
         anim.SetTrigger("Attack");
         audioController.Play();
+
         yield return new WaitForSeconds(trapActivateTime);
+
         trapColl.enabled = true;
+        if (p.areaEffect != null)
+        {
+            ApplySplashDamage();
+        }
+
         yield return new WaitForSeconds(trapDeActivateTime);
+
         trapColl.enabled = false;
+    }
+
+    private void ApplySplashDamage()
+    {
+        AIO_AreaEffect AIO_Effect = Instantiate(p.areaEffect, transform.position, Quaternion.identity);
+        AIO_Effect.Init(p);
     }
 
 
@@ -53,7 +66,7 @@ public class MagicTrap : TowerCore
     {
         if (obj.transform.TryGetComponent(out EnemyCore target))
         {
-            target.ApplyDamage(projStats.damageType, projStats.damage, projStats.damageOverTimeType, projStats.damageOverTime, projStats.time, projStats.confusionTime);
+            target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime);
         }
     }
 
