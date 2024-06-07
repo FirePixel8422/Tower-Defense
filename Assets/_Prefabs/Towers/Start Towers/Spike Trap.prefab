@@ -269,9 +269,9 @@ MonoBehaviour:
     projectileSize: 0
     speed: 0
     damageType: 0
-    damage: 0
+    damage: 5
     damageOverTimeType: 0
-    damageOverTime: 0
+    damageOverTime: 7.5
     time: 0
     confusionTime: 0
     slownessPercentage: 0

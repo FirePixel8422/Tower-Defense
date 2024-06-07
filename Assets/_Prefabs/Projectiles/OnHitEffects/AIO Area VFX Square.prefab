@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 120830272411038541}
+  - component: {fileID: 7172611797961575754}
   - component: {fileID: -6798140249207291444}
   - component: {fileID: -486316183412146740}
-  - component: {fileID: 7172611797961575754}
   m_Layer: 0
   m_Name: AIO Area VFX Square
   m_TagString: Untagged
@@ -34,6 +34,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7172611797961575754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3063951306145481518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31eed43a7fe9da438a7babc2d431623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaEffectId: 1
+  sphereColl: {fileID: 0}
+  boxColl: {fileID: -6798140249207291444}
+  p:
+    projectileSize: 0
+    speed: 0
+    damageType: 0
+    damage: 0
+    damageOverTimeType: 0
+    damageOverTime: 0
+    time: 0
+    confusionTime: 0
+    slownessPercentage: 0
+    slownessTime: 0
+    areaEffect: {fileID: 0}
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
+    AIO_damageType: 0
+    AIO_damage: 0
+    AIO_damageOverTimeType: 0
+    AIO_damageOverTime: 0
+    AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
 --- !u!65 &-6798140249207291444
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51,7 +89,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -82,18 +120,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!114 &7172611797961575754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3063951306145481518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c31eed43a7fe9da438a7babc2d431623, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereColl: {fileID: 0}
-  boxColl: {fileID: -6798140249207291444}
-  splashHitsLeft: 0

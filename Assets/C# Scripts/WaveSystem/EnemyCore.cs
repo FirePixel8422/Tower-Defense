@@ -12,11 +12,17 @@ public class EnemyCore : MonoBehaviour
     public float essenseOnDamage;
     public float essenceOnDeath;
 
+    public float startStunEffectMultiplier;
+    [SerializeField]
+    private float stunEffectMultiplier;
+    public float stunEffectDecrease;
+
     public float maxHealth;
     //[HideInInspector]
     public float health;
     public float damage;
     public float incomingDamage;
+
 
     public bool IsNotAboutToDie
     {
@@ -35,6 +41,11 @@ public class EnemyCore : MonoBehaviour
     {
         get
         {
+            if (confused)
+            {
+                return 0;
+            }
+
             float lowestPercentage = 100;
             foreach(int percentage in slownessEffectsList)
             {
@@ -63,13 +74,14 @@ public class EnemyCore : MonoBehaviour
     public bool smartBarrier;
     public MagicType immunityBarrierType;
 
-    private ImmunityBarrier immunityBarrier;
+    public ImmunityBarrier immunityBarrier;
     [Header("% chance of enemy spawning with barrier")]
     public float barrierChance;
     [Header("How many seconds untill barrier health has disappeared")]
     public float barrierHealthDrainTime;
     public float barrierStartHealth;
 
+    public bool confused;
     public float confusionTime;
     private bool dead;
 
@@ -78,8 +90,8 @@ public class EnemyCore : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
-        anim.speed = MoveSpeed / 2;
+        anim = GetComponentInChildren<Animator>();
+        anim.speed = MoveSpeed;
 
         startMoveSpeed = moveSpeed;
         immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
@@ -87,17 +99,33 @@ public class EnemyCore : MonoBehaviour
     }
     public void Init()
     {
+        if (anim != null)
+        {
+            anim.speed = MoveSpeed;
+        }
+        if (immunityBarrier == null)
+        {
+            immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
+        }
+
+        confused = false;
+        confusionTime = 0;
+        stunEffectMultiplier = startStunEffectMultiplier;
+
+        slownessEffectsList.Clear();
+
         pointIndex = 0;
         health = maxHealth;
         incomingDamage = 0;
         progression = 0;
         dead = false;
 
-        if (immunityBarrier != null && (barrierChance == 0 || UnityEngine.Random.Range(0, 100f) < barrierChance))
+        if (immunityBarrier != null && UnityEngine.Random.Range(0, 100f) <= barrierChance)
         {
             if (smartBarrier)
             {
                 MagicType highestMagicType = TowerManager.Instance.HighestMagicType();
+                print(highestMagicType);
                 immunityBarrierType = highestMagicType != MagicType.Neutral ? highestMagicType : immunityBarrierType;
             }
             if (immunityBarrierType != MagicType.Neutral)
@@ -222,42 +250,40 @@ public class EnemyCore : MonoBehaviour
     }
 
 
+    private float deltaTime;
     private IEnumerator ConfusionTimer(float _confusionTime)
     {
-        moveSpeed = 0;
-
-        if (confusionTime > 0)
+        if (confused == true)
         {
-            confusionTime += _confusionTime;
+            confusionTime += _confusionTime * Mathf.Max(stunEffectMultiplier, 0);
             yield break;
         }
         else
         {
-            confusionTime += _confusionTime;
+            confused = true;
+            confusionTime += _confusionTime * Mathf.Max(stunEffectMultiplier, 0);
         }
 
-        while (true)
+        while (confusionTime > 0)
         {
-            while (confusionTime > 0)
-            {
-                yield return new WaitForSeconds(confusionTime);
-                confusionTime -= _confusionTime;
-            }
+            yield return null;
+            deltaTime = Time.deltaTime;
 
-            confusionTime = 0;
-            moveSpeed = startMoveSpeed;
-
-            yield break;
+            confusionTime -= deltaTime;
+            stunEffectMultiplier -= deltaTime * stunEffectDecrease;
         }
+        confusionTime = 0;
+        confused = false;
+        yield break;
     }
     private IEnumerator SlownessTimer(int slownessPercentage, float slownessTime)
     {
         slownessEffectsList.Add(slownessPercentage); 
-        anim.speed = MoveSpeed / 2;
+        anim.speed = MoveSpeed;
 
         yield return new WaitForSeconds(slownessTime);
 
         slownessEffectsList.Remove(slownessPercentage);
-        anim.speed = MoveSpeed / 2;
+        anim.speed = MoveSpeed;
     }
 }

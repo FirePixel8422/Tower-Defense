@@ -56,7 +56,10 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   towerUIData: {fileID: 11400000, guid: 264fc7931da91624cb20d80d7a195f68, type: 2}
-  upgradePrefabs: []
+  upgradePrefabs:
+  - {fileID: 1536371639034263773, guid: 446ae7ae31df14b4687d256624482f98, type: 3}
+  - {fileID: 1021228725536201537, guid: 5e51a5bebcb5064459d8f3f67d42ac3f, type: 3}
+  - {fileID: 1219494928676782444, guid: db80bb036fe59e84bb84c6c3d13acee9, type: 3}
   towerCompleted: 0
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
@@ -75,14 +78,17 @@ MonoBehaviour:
   range: 3.65
   lookTreshold: 0.95
   attackSpeed: 0.15
-  projStats:
-    projectileSize: 0.1
-    speed: 16
+  p:
+    projectileSize: 0.2
+    speed: 12
     damageType: 0
-    damage: 1.3
+    damage: 3
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0
+    confusionTime: 0
+    slownessPercentage: 0
+    slownessTime: 0
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}

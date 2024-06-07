@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readyForSpawn: 1
-  onHitEffectIndex: -1
+  onHitEffectIndex: 3
   trackTargetUpdateInterval: 0
   projectileId: 1
   target: {fileID: 0}
-  projStats:
+  p:
     projectileSize: 0
     speed: 0
     damageType: 0
@@ -58,16 +58,21 @@ MonoBehaviour:
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0
+    confusionTime: 0
+    slownessPercentage: 0
+    slownessTime: 0
     areaEffect: {fileID: 0}
-    duration: 0
-    doSplashDamage: 0
-    areaEffectSize: 0
-    maxSplashHits: 0
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
     AIO_damageType: 0
     AIO_damage: 0
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
 --- !u!1 &8893991694999643130
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,10 @@ public class ImmunityBarrier : MonoBehaviour
     private float maxBarrierHealth;
     public float barrierHealth;
 
+    public Vector3 startScale;
+    public Vector3 killScale;
+    private Vector3 scaleIncrement;
+
     public Material barrierShader;
 
     [ColorUsage(true, true)]
@@ -17,12 +21,17 @@ public class ImmunityBarrier : MonoBehaviour
     [ColorUsage(true, true)]
     public Color[] fresnelColors;
 
+    private void Start()
+    {
+        scaleIncrement = startScale - killScale;
+    }
+
 
     public void Init(float _barrierHealth, float healthDrainTime, int immunityBarrierIndex)
     {
         maxBarrierHealth = _barrierHealth;
         barrierHealth = _barrierHealth;
-        transform.localScale = Vector3.one * 2;
+        transform.localScale = startScale;
 
         barrierShader = GetComponent<Renderer>().material;
         barrierShader.SetColor("_FrontColor", frontColors[immunityBarrierIndex]);
@@ -40,7 +49,7 @@ public class ImmunityBarrier : MonoBehaviour
         {
             yield return null;
             barrierHealth -= maxBarrierHealth / healthDrainTime * Time.deltaTime;
-            transform.localScale = Vector3.one * 2 - Vector3.one * (1 - (barrierHealth / maxBarrierHealth));
+            transform.localScale = startScale - scaleIncrement * (1 - (barrierHealth / maxBarrierHealth));
         }
         if (barrierHealth <= 0)
         {
@@ -51,7 +60,7 @@ public class ImmunityBarrier : MonoBehaviour
     public void TakeDamage(float damage)
     {
         barrierHealth -= damage;
-        transform.localScale = Vector3.one * 2 - Vector3.one * (1 - (barrierHealth / maxBarrierHealth));
+        transform.localScale = startScale - Vector3.one * (1 - (barrierHealth / maxBarrierHealth));
         if (barrierHealth <= 0)
         {
             gameObject.SetActive(false);

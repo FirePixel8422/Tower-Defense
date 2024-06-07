@@ -252,7 +252,7 @@ MonoBehaviour:
   specialTargetMode: 0
   targetModeString: 
   magicType: 0
-  rotSpeed: 540
+  rotSpeed: 0
   rotPoint: {fileID: 0}
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 0.6
@@ -278,6 +278,9 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
   waters:
   - {fileID: 6029443064615527679}
   - {fileID: 1304542574004555913}

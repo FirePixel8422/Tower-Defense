@@ -202,7 +202,7 @@ public class SelectionManager : MonoBehaviour
                 GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, selectedTower.towerUIData.upgrades[pathId].buildCost, selectedTower.towerUIData.upgrades[pathId].essenceType);
 
                 TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
-                selectedTower.UpgradeTower(pathId);
+                selectedTower.UpgradeTower(pathId, gridData.gridPos);
 
                 TowerUIController.Instance.DeSelectTower(selectedTower);
                 towerSelected = false;

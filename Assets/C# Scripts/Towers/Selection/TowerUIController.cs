@@ -16,6 +16,8 @@ public class TowerUIController : MonoBehaviour
     public GameObject towerUI;
     public TextMeshProUGUI targetModeTextObj;
 
+    public UIPop[] uiPopupControllers;
+
     public Image towerImage;
     public TextMeshProUGUI towerName;
     public TextMeshProUGUI towerPopup;
@@ -29,11 +31,15 @@ public class TowerUIController : MonoBehaviour
 
     public void SelectTower(TowerCore tower)
     {
-        if(tower.towerUIData == null)
+        if (tower.towerUIData == null)
         {
             return;
         }
         TowerUIDataSO towerUiData = tower.towerUIData;
+        foreach(UIPop uiPop in uiPopupControllers)
+        {
+            uiPop.OnPointerExit(null);
+        }
 
         //select tower and open and configure UI equal to that towers SO info
         towerUI.SetActive(true);

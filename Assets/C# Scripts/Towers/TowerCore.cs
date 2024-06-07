@@ -55,6 +55,10 @@ public class TowerCore : MonoBehaviour
 
     public virtual void Start()
     {
+        if (magicType != MagicType.Neutral)
+        {
+            TowerManager.Instance.magicValues[(int)magicType - 1] += 1;
+        }
         SetupTower();
     }
 
@@ -182,7 +186,7 @@ public class TowerCore : MonoBehaviour
 
 
 
-    public void UpgradeTower(int path)
+    public void UpgradeTower(int path, Vector2Int gridPos)
     {
         StopAllCoroutines();
 
@@ -201,6 +205,7 @@ public class TowerCore : MonoBehaviour
             TowerManager.Instance.spawnedTowerObj.Add(tower);
         }
         tower.CoreInit();
+        GridManager.Instance.UpdateGridDataFieldType(gridPos, 3, tower);
     }
 
     public void DissolveCompleted()
@@ -217,6 +222,14 @@ public class TowerCore : MonoBehaviour
         if (cDissolves == 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (magicType != MagicType.Neutral)
+        {
+            TowerManager.Instance.magicValues[(int)magicType - 1] -= 1;
         }
     }
 }

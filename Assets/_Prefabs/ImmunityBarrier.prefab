@@ -9,12 +9,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22,15 +34,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
-      propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
-      propertyPath: m_LocalRotation.y
+      propertyPath: m_LocalRotation.x
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4150aaefead721343b032622b851b4f5, type: 3}
       propertyPath: m_LocalRotation.z
@@ -55,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4150aaefead721343b032622b851b4f5, type: 3}
       propertyPath: m_Name
       value: ImmunityBarrier
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4150aaefead721343b032622b851b4f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82,8 +98,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrierHealth: 0
+  startScale: {x: 0.8, y: 0.8, z: 0.8}
+  killScale: {x: 0.5, y: 0.5, z: 0.5}
   barrierShader: {fileID: 0}
-  barrierRipples: {fileID: 0}
-  frontColor: {r: 0, g: 0, b: 0, a: 0}
-  backColor: {r: 0, g: 0, b: 0, a: 0}
-  fresnelColor: {r: 0, g: 0, b: 0, a: 0}
+  frontColors:
+  - {r: 6.5164, g: 0.6609693, b: 8.982417, a: 1}
+  - {r: 9.537256, g: 19.387142, b: 95.874504, a: 1}
+  - {r: 22.6, g: 0, b: 0.07, a: 1}
+  backColors:
+  - {r: 0.101960786, g: 0.011764706, b: 0.16078432, a: 1}
+  - {r: 0.011764706, g: 0.03529412, b: 0.16078432, a: 1}
+  - {r: 0.5019608, g: 0.007843138, b: 0.003921569, a: 1}
+  fresnelColors:
+  - {r: 0.42745098, g: 0.078431375, b: 0.5764706, a: 1}
+  - {r: 0.078431375, g: 0.13333334, b: 0.5764706, a: 1}
+  - {r: 0.5764706, g: 0.078431375, b: 0.078431375, a: 1}

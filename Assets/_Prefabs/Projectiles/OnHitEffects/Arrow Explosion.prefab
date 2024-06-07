@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3797844995348983411}
   - component: {fileID: 3877767531895294746}
   m_Layer: 0
-  m_Name: CannonExplosion
+  m_Name: Arrow Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,16 +51,16 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.15
+      - m_Value: 0.1
         m_Name: SizeMultiplier
         m_Overridden: 1
-      - m_Value: 1.25
+      - m_Value: 2.2
         m_Name: SparkSizeMultiplier
         m_Overridden: 1
-      - m_Value: 0.8
+      - m_Value: 0.6
         m_Name: SparksLifeTimeMultiplier
         m_Overridden: 1
-      - m_Value: 0.4
+      - m_Value: 0.3
         m_Name: SparksVelocityMultiplier
         m_Overridden: 1
     m_Vector2f:
@@ -69,10 +69,10 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 27.894344, y: 2.148959, z: 1.0223061, w: 0}
+      - m_Value: {x: 1.796226, y: 0.48482212, z: 0, w: 1}
         m_Name: Color
         m_Overridden: 1
-      - m_Value: {x: 0.01, y: 0.01, z: 0.01, w: 0}
+      - m_Value: {x: 0.16981131, y: 0.03765002, z: 0.01121393, w: 1}
         m_Name: SmokeColor
         m_Overridden: 1
     m_Uint:

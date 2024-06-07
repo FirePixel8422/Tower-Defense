@@ -5369,12 +5369,15 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
   maxCoilEmisionRate: 10
   timePerCharge: 0.3
   rechargePowerDelay: 0.1
   maxCharges: 4
   amountOfTargets: 1
-  damageDelay: 0.3
+  damageDelay: 0.2
 --- !u!114 &626888678691555837
 MonoBehaviour:
   m_ObjectHideFlags: 0

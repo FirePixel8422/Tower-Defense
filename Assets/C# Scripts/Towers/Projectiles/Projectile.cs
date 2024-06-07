@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class Projectile : MonoBehaviour
 {
@@ -120,8 +119,7 @@ public class Projectile : MonoBehaviour
     }
     public virtual void ApplySplashDamage()
     {
-        AIO_AreaEffect AIO_Effect = Instantiate(p.areaEffect, target.transform.position, Quaternion.identity);
-        AIO_Effect.Init(p);
+        AIO_AreaEffectPooling.Instance.GetPulledObj(p.areaEffect.areaEffectId, target.transform.position, Quaternion.identity, p);
     }
 }
 
@@ -157,4 +155,8 @@ public struct ProjectileStats
     public MagicType AIO_damageOverTimeType;
     public float AIO_damageOverTime;
     public float AIO_time;
+
+    public float AIO_confusionTime;
+    public int AIO_slownessPercentage;
+    public float AIO_slownessTime;
 }

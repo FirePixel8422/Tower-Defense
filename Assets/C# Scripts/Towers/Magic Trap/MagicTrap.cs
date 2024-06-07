@@ -57,8 +57,7 @@ public class MagicTrap : TowerCore
 
     private void ApplySplashDamage()
     {
-        AIO_AreaEffect AIO_Effect = Instantiate(p.areaEffect, transform.position, Quaternion.identity);
-        AIO_Effect.Init(p);
+        AIO_AreaEffectPooling.Instance.GetPulledObj(p.areaEffect.areaEffectId, transform.position, Quaternion.identity, p);
     }
 
 

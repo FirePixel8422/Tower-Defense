@@ -160,7 +160,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Edge_Color: {r: 0, g: 0.7529412, b: 16, a: 1}
+    - _Edge_Color: {r: 5.7390356, g: 0, b: 12.307817, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emission_Color: {r: 1, g: 1, b: 1, a: 0}
     - _PreviewColor: {r: 1, g: 1, b: 1, a: 1}

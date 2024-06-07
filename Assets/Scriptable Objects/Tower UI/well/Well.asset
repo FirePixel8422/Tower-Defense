@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7e4d90d255f4d44a127cad36ec07e8, type: 3}
   m_Name: Well
   m_EditorClassIdentifier: 
-  essenceCost: 0
+  buildCost: 0
   essenceType: 0
-  towerImage: {fileID: 21300000, guid: b6e7a6b5af6ddaa4a811fe2920397cfd, type: 3}
+  towerImage: {fileID: 21300000, guid: 1f28f76c7cfcd0344b1424abefb25072, type: 3}
   towerName: Well
   towerPopup: Well info
   upgrades: []

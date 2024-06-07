@@ -124,12 +124,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BackColor: {r: 0.103281274, g: 0.011764704, b: 0.16078432, a: 1}
+    - _BackColor: {r: 0.011764706, g: 0.03529412, b: 0.16078432, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.42694592, g: 0.07734425, b: 0.5773585, a: 1}
-    - _FrontColor: {r: 21.477442, g: 3.1479661, b: 32.714165, a: 1}
+    - _FresnelColor: {r: 0.078431375, g: 0.13333334, b: 0.5764706, a: 1}
+    - _FrontColor: {r: 9.537256, g: 19.387142, b: 95.874504, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SphereCenter: {r: 0, g: 0, b: 0, a: 0}
     - _VertexAmount: {r: 0.15, g: 0.15, b: 0.15, a: 0}

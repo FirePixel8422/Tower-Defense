@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3947509374797139718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.109, y: 0, z: 0.234}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -51,7 +51,7 @@ MonoBehaviour:
   trackTargetUpdateInterval: 0
   projectileId: 2
   target: {fileID: 0}
-  projStats:
+  p:
     projectileSize: 0
     speed: 0
     damageType: 0
@@ -59,16 +59,21 @@ MonoBehaviour:
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0
+    confusionTime: 0
+    slownessPercentage: 0
+    slownessTime: 0
     areaEffect: {fileID: 0}
-    duration: 0
-    doSplashDamage: 0
-    areaEffectSize: 0
-    maxSplashHits: 0
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
     AIO_damageType: 0
     AIO_damage: 0
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
 --- !u!1 &7487160074307622753
 GameObject:
   m_ObjectHideFlags: 0
