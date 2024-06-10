@@ -16,5 +16,5 @@ MonoBehaviour:
   essenceType: 3
   towerImage: {fileID: 0}
   towerName: Ember
-  towerPopup: BOOOOm Cannon
+  towerPopup: Ember cannon balls now deal extra fire damage over time to enemies
   upgrades: []

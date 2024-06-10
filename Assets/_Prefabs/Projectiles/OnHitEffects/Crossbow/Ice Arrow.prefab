@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3797844995348983411}
   - component: {fileID: 3877767531895294746}
   m_Layer: 0
-  m_Name: Ice Explosion
+  m_Name: Ice Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,17 +51,20 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.15
+      - m_Value: 0.06
         m_Name: SizeMultiplier
         m_Overridden: 1
-      - m_Value: 1.25
+      - m_Value: 1
         m_Name: SparkSizeMultiplier
         m_Overridden: 1
-      - m_Value: 0.8
+      - m_Value: 1
         m_Name: SparksLifeTimeMultiplier
         m_Overridden: 1
-      - m_Value: 0.4
+      - m_Value: 1
         m_Name: SparksVelocityMultiplier
+        m_Overridden: 1
+      - m_Value: 0.7
+        m_Name: FireSmokeLifeTimeMultiplier
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -69,7 +72,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.6571962, y: 1.5901111, z: 13.947174, w: 0}
+      - m_Value: {x: 1.1683501, y: 20.11828, z: 27.894344, w: 0}
         m_Name: Color
         m_Overridden: 1
       - m_Value: {x: 0.01, y: 0.01, z: 0.01, w: 0}
@@ -78,7 +81,19 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: MinSparks
+        m_Overridden: 1
+      - m_Value: 0
+        m_Name: MaxSparks
+        m_Overridden: 1
+      - m_Value: 10
+        m_Name: MinFire
+        m_Overridden: 1
+      - m_Value: 12
+        m_Name: MaxFire
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:

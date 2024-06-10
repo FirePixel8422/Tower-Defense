@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7e4d90d255f4d44a127cad36ec07e8, type: 3}
   m_Name: Trap
   m_EditorClassIdentifier: 
-  buildCost: 0
+  buildCost: 100
   essenceType: 0
   towerImage: {fileID: 21300000, guid: ad87e518a72eda645a9960da256e4e95, type: 3}
   towerName: Trap

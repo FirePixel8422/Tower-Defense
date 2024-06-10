@@ -36,6 +36,8 @@ public class SelectionManager : MonoBehaviour
     private GridObjectData selectedGridTileData;
     private Vector3 mousePos;
 
+    public bool canAffordTower;
+
 
     private void Start()
     {
@@ -177,6 +179,10 @@ public class SelectionManager : MonoBehaviour
     public GameObject[] essenceTypes;
     public void SetPathId(int id)
     {
+        if (selectedTower.upgradePrefabs.Length <= id)
+        {
+            return;
+        }
         pathId = id;
         if (selectedTower.towerUIData.upgrades[id].essenceType == MagicType.Neutral)
         {
@@ -240,6 +246,8 @@ public class SelectionManager : MonoBehaviour
         selectedTower = null;
         selectedPreviewTower = _selectedTower;
         isPlacingTower = true;
+
+        canAffordTower = ResourceManager.Instance.Scrap >= selectedPreviewTower.scrapCost;
     }
 
 
@@ -256,7 +264,7 @@ public class SelectionManager : MonoBehaviour
                 selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
                 int onTrack = selectedGridTileData.type;
-                if (onTrack == selectedPreviewTower.placementIndex)
+                if (onTrack == selectedPreviewTower.placementIndex && canAffordTower)
                 {
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
                     selectedPreviewTower.UpdateTowerPreviewColor(Color.white);

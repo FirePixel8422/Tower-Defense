@@ -10100,6 +10100,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 0}
+  onHitEffectIndex: -1
   shootPoint: {fileID: 9007887400343475101}
   target: {fileID: 0}
   targetMode: 0
@@ -10121,9 +10122,9 @@ MonoBehaviour:
     damageOverTimeType: 1
     damageOverTime: 30
     time: 2
-    confusionTime: 1.75
-    slownessPercentage: 75
-    slownessTime: 3
+    confusionTime: 1.25
+    slownessPercentage: 35
+    slownessTime: 2.5
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}
@@ -10137,7 +10138,7 @@ MonoBehaviour:
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
   maxCoilEmisionRate: 12
-  timePerCharge: 0.75
+  timePerCharge: 1
   rechargePowerDelay: 0.1
   maxCharges: 3
   amountOfTargets: 2
@@ -10155,7 +10156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
-  startDelay: 0
+  startDelay: 0.5
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.5
   endDisolveValue: -1

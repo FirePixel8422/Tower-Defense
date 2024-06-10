@@ -112,6 +112,14 @@ public class ResourceManager : MonoBehaviour
         lifeEssenceTextObj.text =  ((int)LifeEssence).ToString();
         arcaneEssenceTextObj.text = ((int)ArcaneEssence).ToString();
         emberEssenceTextObj.text = ((int)EmberEssence).ToString();
+
+        if (SelectionManager.Instance.selectedPreviewTower != null)
+        {
+            SelectionManager.Instance.canAffordTower = Scrap >= SelectionManager.Instance.selectedPreviewTower.scrapCost;
+
+            SelectionManager.Instance.selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+            SelectionManager.Instance.selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
+        }
     }
 
 

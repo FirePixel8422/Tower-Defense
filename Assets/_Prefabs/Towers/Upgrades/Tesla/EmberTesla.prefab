@@ -10095,6 +10095,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 0}
+  onHitEffectIndex: -1
   shootPoint: {fileID: 8775298873361741705}
   target: {fileID: 0}
   targetMode: 0
@@ -10150,7 +10151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
-  startDelay: 0
+  startDelay: 0.5
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.5
   endDisolveValue: -1

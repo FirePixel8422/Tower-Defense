@@ -311,6 +311,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 5852997858576090439, guid: 90b2e13ffabbcd34484ffe885c206d3d, type: 3}
+  onHitEffectIndex: 7
   shootPoint: {fileID: 884606491859348916}
   target: {fileID: 0}
   targetMode: 0
@@ -344,6 +345,9 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
 --- !u!95 &1118212001989696395
 Animator:
   serializedVersion: 5

@@ -163,6 +163,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 1765200225478486042, guid: 6e6d1617d0de69849ab48917d013cd74, type: 3}
+  onHitEffectIndex: 6
   shootPoint: {fileID: 2652344980884261304}
   target: {fileID: 0}
   targetMode: 0

@@ -41,23 +41,14 @@ public class EnemyCore : MonoBehaviour
     {
         get
         {
-            if (confused)
+            float speed = 100;
+            foreach (float slowness in slownessEffectsList)
             {
-                return 0;
+                speed -= slowness;
             }
-
-            float lowestPercentage = 100;
-            foreach(int percentage in slownessEffectsList)
-            {
-                if (percentage < lowestPercentage)
-                {
-                    lowestPercentage = percentage;
-                }
-            }
-
-            return moveSpeed * 0.01f * lowestPercentage;
+            return moveSpeed * speed * 0.01f;
         }
-        set
+        private set
         {
             moveSpeed = value;
         }
@@ -125,7 +116,6 @@ public class EnemyCore : MonoBehaviour
             if (smartBarrier)
             {
                 MagicType highestMagicType = TowerManager.Instance.HighestMagicType();
-                print(highestMagicType);
                 immunityBarrierType = highestMagicType != MagicType.Neutral ? highestMagicType : immunityBarrierType;
             }
             if (immunityBarrierType != MagicType.Neutral)
@@ -278,7 +268,12 @@ public class EnemyCore : MonoBehaviour
     }
     private IEnumerator SlownessTimer(int slownessPercentage, float slownessTime)
     {
-        slownessEffectsList.Add(slownessPercentage); 
+
+        if (slownessEffectsList.Contains(slownessPercentage) == false)
+        {
+            slownessEffectsList.Add(slownessPercentage);
+        }
+
         anim.speed = MoveSpeed;
 
         yield return new WaitForSeconds(slownessTime);

@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     private TrailRenderer trail;
     private GameObject child;
 
+    [HideInInspector]
     public int onHitEffectIndex = -1;
 
     public float trackTargetUpdateInterval;
@@ -35,8 +36,9 @@ public class Projectile : MonoBehaviour
         }
         child = transform.GetChild(0).gameObject;
     }
-    public void Init(EnemyCore _target, ProjectileStats _s)
+    public void Init(EnemyCore _target, ProjectileStats _s, int _onHitEffectIndex)
     {
+        onHitEffectIndex = _onHitEffectIndex;
         if (trail != null)
         {
             trail.emitting = true;

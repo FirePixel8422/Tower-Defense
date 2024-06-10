@@ -1298,7 +1298,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 15
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5336,6 +5336,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 0}
+  onHitEffectIndex: -1
   shootPoint: {fileID: 5259189839188913942}
   target: {fileID: 0}
   targetMode: 0

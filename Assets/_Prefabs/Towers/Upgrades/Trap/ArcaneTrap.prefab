@@ -268,6 +268,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 0}
+  onHitEffectIndex: -1
   shootPoint: {fileID: 0}
   target: {fileID: 0}
   targetMode: 0
@@ -290,7 +291,7 @@ MonoBehaviour:
     damageOverTime: 0
     time: 0
     confusionTime: 0
-    slownessPercentage: 50
+    slownessPercentage: 25
     slownessTime: 2
     areaEffect: {fileID: 0}
     AIO_duration: 0
@@ -301,6 +302,9 @@ MonoBehaviour:
     AIO_damageOverTimeType: 0
     AIO_damageOverTime: 0
     AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
   smart: 0
   trapActivateTime: 0.1
   trapDeActivateTime: 0.4
