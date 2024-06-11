@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyCore : MonoBehaviour
@@ -41,6 +42,11 @@ public class EnemyCore : MonoBehaviour
     {
         get
         {
+            if (confused)
+            {
+                return 0;
+            }
+
             float speed = 100;
             foreach (float slowness in slownessEffectsList)
             {
@@ -138,7 +144,7 @@ public class EnemyCore : MonoBehaviour
         }
         incomingDamage += damage + AIO_damage;
     }
-    public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time, float confusionTime, int slownessPercentage, float slownessTime)
+    public void ApplyDamage(MagicType damageType, float damage, MagicType damageOverTimeType, float damageOverTime, float time, float confusionTime, int slownessPercentage, float slownessTime, int maxSlowStacks)
     {
         if (dead || (gameObject.activeInHierarchy == false)) return;
 
@@ -182,7 +188,7 @@ public class EnemyCore : MonoBehaviour
             }
             if (slownessPercentage != 0)
             {
-                StartCoroutine(SlownessTimer(slownessPercentage, slownessTime));
+                StartCoroutine(SlownessTimer(slownessPercentage, slownessTime, maxSlowStacks));
             }
         }
     }
@@ -260,19 +266,31 @@ public class EnemyCore : MonoBehaviour
             deltaTime = Time.deltaTime;
 
             confusionTime -= deltaTime;
+            print(deltaTime * stunEffectDecrease);
             stunEffectMultiplier -= deltaTime * stunEffectDecrease;
         }
         confusionTime = 0;
         confused = false;
         yield break;
     }
-    private IEnumerator SlownessTimer(int slownessPercentage, float slownessTime)
+    private IEnumerator SlownessTimer(int slownessPercentage, float slownessTime, int maxStacks)
     {
-
-        if (slownessEffectsList.Contains(slownessPercentage) == false)
+        int amount = 0;
+        foreach (float slownessEffect in slownessEffectsList)
         {
-            slownessEffectsList.Add(slownessPercentage);
+            if (slownessEffect == slownessPercentage)
+            {
+                amount += 1;
+                if (amount == maxStacks)
+                {
+                    yield break;
+                }
+            }
         }
+
+
+
+        slownessEffectsList.Add(slownessPercentage);
 
         anim.speed = MoveSpeed;
 

@@ -117,7 +117,7 @@ public class Projectile : MonoBehaviour
             ApplySplashDamage();
         }
 
-        target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime);
+        target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime, p.maxSlowStacks);
     }
     public virtual void ApplySplashDamage()
     {
@@ -143,6 +143,7 @@ public struct ProjectileStats
     public float confusionTime;
     public int slownessPercentage;
     public float slownessTime;
+    public int maxSlowStacks;
 
     [Header("Area effect on hit")]
     public AIO_AreaEffect areaEffect;
@@ -161,4 +162,5 @@ public struct ProjectileStats
     public float AIO_confusionTime;
     public int AIO_slownessPercentage;
     public float AIO_slownessTime;
+    public int AIO_maxSlowStacks;
 }

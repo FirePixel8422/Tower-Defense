@@ -10,24 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0d6fff890941044fb8d074a908159ca, type: 3}
-  m_Name: Second Wave
+  m_Name: Fourth Wave
   m_EditorClassIdentifier: 
   waveEndDelay: 3
   scrapForThisWave: 50
   waveParts:
   - startDelay: 0
-    enemy: {fileID: 3704580758801229996, guid: 52aac14bd8217c449886a0ba3577df75, type: 3}
-    spawnDelay: 2
-    amount: 2
-  - startDelay: 1.5
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
-    spawnDelay: 1
-    amount: 3
+    spawnDelay: 0.75
+    amount: 12
+  - startDelay: 5
+    enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
+    spawnDelay: 0.3
+    amount: 15
+  - startDelay: 4
+    enemy: {fileID: 5576476361995142429, guid: 767852faca6697e4d9b03aa331511e2a, type: 3}
+    spawnDelay: 0.3
+    amount: 4
   - startDelay: 3
-    enemy: {fileID: 3704580758801229996, guid: 52aac14bd8217c449886a0ba3577df75, type: 3}
-    spawnDelay: 1
-    amount: 2
-  - startDelay: 0
+    enemy: {fileID: 3704580758801229996, guid: 3b53c680e61d66449bf74454c6d2f4d2, type: 3}
+    spawnDelay: 0.4
+    amount: 10
+  - startDelay: 1
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
-    spawnDelay: 0.6
-    amount: 5
+    spawnDelay: 1.5
+    amount: 15

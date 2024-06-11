@@ -148,6 +148,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 0}
+  onHitEffectIndex: -1
   shootPoint: {fileID: 0}
   target: {fileID: 0}
   targetMode: 0
@@ -160,26 +161,31 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 0.75
   lookTreshold: 0
-  attackSpeed: 4.5
-  projStats:
+  attackSpeed: 3
+  p:
     projectileSize: 0
     speed: 0
-    damageType: 0
+    damageType: 3
     damage: 5
-    damageOverTimeType: 0
-    damageOverTime: 7.5
-    time: 0
+    damageOverTimeType: 3
+    damageOverTime: 40
+    time: 2
     confusionTime: 0
-    areaEffect: {fileID: 7172611797961575754, guid: 137fd68c89c5dd64c981b09fd0b31281, type: 3}
-    AIO_duration: 2.5
-    AIO_areaEffectSize: {x: 0.8, y: 0.8, z: 0.8}
-    AIO_maxSplashHits: 5
-    AIO_damageType: 3
+    slownessPercentage: 0
+    slownessTime: 0
+    areaEffect: {fileID: 0}
+    AIO_duration: 0
+    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_maxSplashHits: 0
+    AIO_damageType: 0
     AIO_damage: 0
-    AIO_damageOverTimeType: 3
-    AIO_damageOverTime: 20
-    AIO_time: 1.5
-  smart: 0
+    AIO_damageOverTimeType: 0
+    AIO_damageOverTime: 0
+    AIO_time: 0
+    AIO_confusionTime: 0
+    AIO_slownessPercentage: 0
+    AIO_slownessTime: 0
+  smart: 1
   trapActivateTime: 0.1
   trapDeActivateTime: 0.4
 --- !u!95 &1588095959630771979
@@ -610,7 +616,7 @@ Transform:
   m_GameObject: {fileID: 7362350461173907362}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

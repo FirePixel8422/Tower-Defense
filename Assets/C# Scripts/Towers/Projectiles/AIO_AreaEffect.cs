@@ -63,6 +63,6 @@ public class AIO_AreaEffect : MonoBehaviour
 
     public virtual void OnHitTarget(EnemyCore target)
     {
-        target.ApplyDamage(p.AIO_damageType, p.AIO_damage, p.AIO_damageOverTimeType, p.AIO_damageOverTime, p.AIO_time, p.confusionTime, p.slownessPercentage, p.slownessTime);
+        target.ApplyDamage(p.AIO_damageType, p.AIO_damage, p.AIO_damageOverTimeType, p.AIO_damageOverTime, p.AIO_time, p.AIO_confusionTime, p.AIO_slownessPercentage, p.AIO_slownessTime, p.AIO_maxSlowStacks);
     }
 }

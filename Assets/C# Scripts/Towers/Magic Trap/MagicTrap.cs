@@ -65,7 +65,7 @@ public class MagicTrap : TowerCore
     {
         if (obj.transform.TryGetComponent(out EnemyCore target))
         {
-            target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime);
+            target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime, p.maxSlowStacks);
         }
     }
 

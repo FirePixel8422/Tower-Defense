@@ -317,6 +317,7 @@ MonoBehaviour:
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: First
   magicType: 0
   rotSpeed: 360
@@ -329,7 +330,7 @@ MonoBehaviour:
     projectileSize: 0.1
     speed: 10
     damageType: 0
-    damage: 25
+    damage: 20
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0

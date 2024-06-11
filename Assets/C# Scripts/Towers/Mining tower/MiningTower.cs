@@ -76,6 +76,37 @@ public class MiningTower : TowerCore
         }
     }
 
+    public override string UpdateTargetMode(int direction)
+    {
+        colorIndex += direction;
+        if (colorIndex == 3)
+        {
+            colorIndex = 0;
+        }
+        if (colorIndex == -1)
+        {
+            colorIndex = 2;
+        }
+
+        string targetModeString;
+        if (colorIndex == 2)
+        {
+            targetModeString = "Ember";
+            ChangeGenerationType(MagicType.Ember);
+        }
+        else if (colorIndex == 1)
+        {
+            targetModeString = "Arcane"; 
+            ChangeGenerationType(MagicType.Arcane);
+        }
+        else
+        {
+            targetModeString = "Life";
+            ChangeGenerationType(MagicType.Life);
+        }
+
+        return targetModeString;
+    }
 
     private Color LinearColorLerp(Color a, Color b, float maxStep)
     {

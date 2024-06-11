@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 
 public class GridManager : MonoBehaviour
@@ -102,6 +103,14 @@ public class GridManager : MonoBehaviour
         
         grid[gridPos.x, gridPos.y].essence += addedScrapOrEssence;
         grid[gridPos.x, gridPos.y].essenceType = essenceType;
+    }
+    public void ResetGridDataFieldType(Vector2Int gridPos)
+    {
+        grid[gridPos.x, gridPos.y].scrap = 0;
+        grid[gridPos.x, gridPos.y].essence = 0;
+
+        grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;
+        grid[gridPos.x, gridPos.y].tower = null;
     }
     public void UpdateGridDataFieldType(Vector2Int gridPos, int newType, TowerCore tower)
     {

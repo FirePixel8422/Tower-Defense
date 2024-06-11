@@ -245,11 +245,13 @@ MonoBehaviour:
   anim: {fileID: 0}
   audioController: {fileID: 0}
   projectile: {fileID: 0}
+  onHitEffectIndex: -1
   shootPoint: {fileID: 0}
   target: {fileID: 0}
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: 
   magicType: 0
   rotSpeed: 0
@@ -269,6 +271,7 @@ MonoBehaviour:
     confusionTime: 0
     slownessPercentage: 0
     slownessTime: 0
+    maxSlowStacks: 0
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}
@@ -281,17 +284,18 @@ MonoBehaviour:
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
+    AIO_maxSlowStacks: 0
   waters:
   - {fileID: 6029443064615527679}
   - {fileID: 1304542574004555913}
   magicColors:
-  - {r: 1.8236294, g: 0, b: 2, a: 1}
-  - {r: 0, g: 1.4448252, b: 2, a: 1}
-  - {r: 2.9960783, g: 0, b: 0, a: 1}
+  - {r: 7.294517, g: 0, b: 7.9999995, a: 1}
+  - {r: 0, g: 5.7793, b: 7.9999995, a: 1}
+  - {r: 11.984313, g: 0, b: 0, a: 1}
   colorSwapSpeed: 1
   colorIndex: 2
   generationType: 3
-  generationPower: 500
+  generationPower: 2.75
   generatedEssence: 0
 --- !u!95 &3133865725307941159
 Animator:

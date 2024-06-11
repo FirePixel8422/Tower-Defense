@@ -144,11 +144,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyId: 0
-  essenseOnDamage: 2
-  essenceOnDeath: 5
+  essenseOnDamage: 3
+  essenceOnDeath: 10
   startStunEffectMultiplier: 1
-  stunEffectMultiplier: 0
-  stunEffectDecrease: 0.1
+  stunEffectMultiplier: 1
+  stunEffectDecrease: 0
   maxHealth: 25
   health: 25
   damage: 5
@@ -165,9 +165,9 @@ MonoBehaviour:
   smartBarrier: 1
   immunityBarrierType: 0
   immunityBarrier: {fileID: 0}
-  barrierChance: 25
-  barrierHealthDrainTime: 20
-  barrierStartHealth: 25
+  barrierChance: 0
+  barrierHealthDrainTime: 0
+  barrierStartHealth: 0
   confused: 0
   confusionTime: 0
 --- !u!65 &751855711249831110

@@ -219,15 +219,22 @@ public class SelectionManager : MonoBehaviour
 
     public void SellTower()
     {
-        ResourceManager.Instance.AddRemoveEssence(selectedTower.towerUIData.buildCost, selectedTower.towerUIData.essenceType);
-
         GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
-        GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, gridData.coreType, null);
+        GridManager.Instance.ResetGridDataFieldType(gridData.gridPos);
+
+        ResourceManager.Instance.AddRemoveEssence(gridData.essence, gridData.essenceType);
+        ResourceManager.Instance.AddScrap(gridData.scrap);
 
         TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
+
+        TowerUIController.Instance.DeSelectTower(selectedTower);
+
         Destroy(selectedTower.gameObject);
+
         towerSelected = false;
         selectedTower = null;
+
+        towerSelected = false;
     }
 
 
@@ -256,26 +263,31 @@ public class SelectionManager : MonoBehaviour
         //give player preview of selectedTower
         if (isPlacingTower && Input.mousePosition != mousePos && selectedPreviewTower.locked == false)
         {
-            mousePos = Input.mousePosition;
-            Ray ray = mainCam.ScreenPointToRay(mousePos);
+            UpdateTowerPlacementPreview();
+        }
+    }
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
+    public void UpdateTowerPlacementPreview()
+    {
+        mousePos = Input.mousePosition;
+        Ray ray = mainCam.ScreenPointToRay(mousePos);
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))
+        {
+            selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
+
+            int onTrack = selectedGridTileData.type;
+            if (onTrack == selectedPreviewTower.placementIndex && canAffordTower)
             {
-                selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
-
-                int onTrack = selectedGridTileData.type;
-                if (onTrack == selectedPreviewTower.placementIndex && canAffordTower)
-                {
-                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-                    selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
-                }
-                else
-                {
-                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
-                    selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
-                }
-                selectedPreviewTower.transform.position = selectedGridTileData.worldPos;
+                selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+                selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
             }
+            else
+            {
+                selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
+                selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
+            }
+            selectedPreviewTower.transform.position = selectedGridTileData.worldPos;
         }
     }
 }

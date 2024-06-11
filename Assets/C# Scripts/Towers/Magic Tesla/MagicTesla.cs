@@ -146,7 +146,7 @@ public class MagicTesla : TowerCore
         {
             if (target.health > 0)
             {
-                target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime);
+                target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime, p.maxSlowStacks);
                 yield return new WaitForSeconds(0.1f);
             }
         }

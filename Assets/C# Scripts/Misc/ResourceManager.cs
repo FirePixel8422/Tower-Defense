@@ -98,7 +98,7 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI arcaneEssenceTextObj;
     public TextMeshProUGUI emberEssenceTextObj;
 
-    private const float zeroPointThree = 1 / 3;
+    private const float zeroPointThree = 1f / 3;
 
 
     private void Start()
@@ -113,12 +113,14 @@ public class ResourceManager : MonoBehaviour
         arcaneEssenceTextObj.text = ((int)ArcaneEssence).ToString();
         emberEssenceTextObj.text = ((int)EmberEssence).ToString();
 
-        if (SelectionManager.Instance.selectedPreviewTower != null)
+        if (SelectionManager.Instance.isPlacingTower)
         {
             SelectionManager.Instance.canAffordTower = Scrap >= SelectionManager.Instance.selectedPreviewTower.scrapCost;
 
-            SelectionManager.Instance.selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-            SelectionManager.Instance.selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
+            if (SelectionManager.Instance.canAffordTower)
+            {
+                SelectionManager.Instance.UpdateTowerPlacementPreview();
+            }
         }
     }
 
@@ -216,9 +218,11 @@ public class ResourceManager : MonoBehaviour
         }
         else
         {
-            LifeEssence += amount *= zeroPointThree;
-            ArcaneEssence += amount *= zeroPointThree;
-            EmberEssence += amount *= zeroPointThree;
+            print(amount * zeroPointThree);
+            print(zeroPointThree);
+            LifeEssence += amount * zeroPointThree;
+            ArcaneEssence += amount * zeroPointThree;
+            EmberEssence += amount * zeroPointThree;
         }
     }
 }

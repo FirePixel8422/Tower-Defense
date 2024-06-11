@@ -37,7 +37,8 @@ public class TowerCore : MonoBehaviour
     [HideInInspector] 
     public bool specialTargetMode;
 
-    private int targetId;
+    [HideInInspector]
+    public int targetId;
     [HideInInspector]
     public string targetModeString;
 
@@ -135,7 +136,7 @@ public class TowerCore : MonoBehaviour
         }
     }
 
-    public string UpdateTargetMode(int direction)
+    public virtual string UpdateTargetMode(int direction)
     {
         targetId += direction;
         if (targetId == 4)
