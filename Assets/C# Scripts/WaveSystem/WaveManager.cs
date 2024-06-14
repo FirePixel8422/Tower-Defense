@@ -59,6 +59,8 @@ public class WaveManager : MonoBehaviour
                         spawnedObj.Add(target);
                         UpdateTargetDir(out target.dir, target.transform.position, startPointPos);
 
+                        ResourceManager.Instance.AddScrap(waves[i].waveParts[i2].scrapForThisWavePart);
+
                         yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                     }
                 }

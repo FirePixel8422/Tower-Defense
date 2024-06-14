@@ -13,6 +13,8 @@ public class WaveDataSO : ScriptableObject
     [System.Serializable]
     public class WavePart
     {
+        public float scrapForThisWavePart;
+
         public float startDelay;
         public EnemyCore enemy;
 

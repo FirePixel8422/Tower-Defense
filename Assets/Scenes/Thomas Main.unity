@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveScaleHealthDelay: 0
-  healthScaleMultiplier: 1.05
+  healthScaleMultiplier: 1.075
   cHealthScale: 1
   enemyMovementUpdateInterval: 1
   points:

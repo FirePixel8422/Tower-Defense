@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class Projectile : MonoBehaviour
 {
@@ -19,9 +20,15 @@ public class Projectile : MonoBehaviour
 
     public int piercesDone;
 
+    private Rigidbody rb;
+    private Collider coll;
+
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
+
         TrailRenderer[] trails = GetComponentsInChildren<TrailRenderer>();
         if (trails.Length != 0)
         {
@@ -40,6 +47,7 @@ public class Projectile : MonoBehaviour
     }
     public void Init(EnemyCore _target, ProjectileStats _s, int _onHitEffectIndex)
     {
+        piercesDone = 0;
         onHitEffectIndex = _onHitEffectIndex;
         if (trail != null)
         {
@@ -55,20 +63,29 @@ public class Projectile : MonoBehaviour
     }
 
 
+    private float elapsedTime;
+    private float speedThisCycle;
     private IEnumerator TrackTargetLoop()
     {
         //loop and move bullet towards target. then check distance between this projectile and target and check if they collided (Vector3.Distance)
-
-        WaitForSeconds wait = new WaitForSeconds(trackTargetUpdateInterval);
         while (true)
         {
-            yield return wait;
+            yield return null;
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime < trackTargetUpdateInterval)
+            {
+                continue;
+            }
+            speedThisCycle = elapsedTime;
+            elapsedTime = 0;
+
+
             if (target.gameObject.activeInHierarchy == false)
             {
 
                 if (p.pierce != 0)
                 {
-                    GetComponent<Collider>().enabled = true;
+                    StartCoroutine(StartPierceLogic());
                     yield break;
                 }
 
@@ -78,10 +95,7 @@ public class Projectile : MonoBehaviour
                 //tracked target died, destroy (disable for pool) bullet
                 if (trail != null)
                 {
-                    child.SetActive(false);
-                    trail.emitting = false;
-                    yield return new WaitForSeconds(trail.time * 2);
-                    child.SetActive(true);
+                    StartCoroutine(FadeTrail());
                 }
                 gameObject.SetActive(false);
                 readyForSpawn = true;
@@ -92,7 +106,7 @@ public class Projectile : MonoBehaviour
             //move projectile and lookat target.
             Vector3 targetPos = target.transform.position + new Vector3(0, target.transform.localScale.y / 3, 0);
 
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, p.speed * trackTargetUpdateInterval);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, p.speed * speedThisCycle);
             transform.LookAt(targetPos);
 
             if (Vector3.Distance(transform.position, targetPos) < p.projectileSize)
@@ -109,18 +123,14 @@ public class Projectile : MonoBehaviour
 
                 if (p.pierce != 0)
                 {
-                    transform.rotation = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
-                    GetComponent<Collider>().enabled = true;
+                    StartCoroutine(StartPierceLogic());
                     yield break;
                 }
 
                 //destroy (disable for pool) bullet and let trail live for its duration
                 if (trail != null)
                 {
-                    child.SetActive(false);
-                    trail.emitting = false;
-                    yield return new WaitForSeconds(trail.time);
-                    child.SetActive(true);
+                    StartCoroutine(FadeTrail());
                 }
                 gameObject.SetActive(false);
                 readyForSpawn = true;
@@ -145,20 +155,66 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (piercesDone != p.pierce && other.gameObject.TryGetComponent(out EnemyCore target))
+        if (piercesDone == p.pierce)
+        {
+            if (trail != null)
+            {
+                StartCoroutine(FadeTrail());
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                readyForSpawn = true;
+                coll.enabled = false;
+            }
+            rb.velocity = Vector3.zero;
+        }
+
+        if (other.gameObject.TryGetComponent(out EnemyCore target))
         {
             piercesDone += 1;
 
-            target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime, p.maxSlowStacks);
+
+            if (onHitEffectIndex != -1)
+            {
+                OnHitVFXPooling.Instance.GetPulledObj(onHitEffectIndex, transform.position, transform.rotation);
+            }
 
             if (p.areaEffect != null)
             {
                 //spawn collider to hit multiple bullets
                 ApplySplashDamage(target);
             }
+            target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime, p.maxSlowStacks);
         }
     }
+
+    private IEnumerator StartPierceLogic()
+    {
+        transform.localRotation = Quaternion.Euler(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
+        coll.enabled = true;
+        rb.velocity = transform.forward * p.speed;
+
+        yield return new WaitForSeconds(20 / p.speed);
+
+        if (trail != null)
+        {
+            yield return StartCoroutine(FadeTrail());
+        }
+        gameObject.SetActive(false);
+        readyForSpawn = true;
+        coll.enabled = false;
+        rb.velocity = Vector3.zero;
+    }
+    private IEnumerator FadeTrail()
+    {
+        child.SetActive(false);
+        trail.emitting = false;
+        yield return new WaitForSeconds(trail.time);
+        child.SetActive(true);
+    }
 }
+
 
 
 
