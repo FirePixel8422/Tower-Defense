@@ -10106,6 +10106,7 @@ MonoBehaviour:
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: First
   magicType: 1
   rotSpeed: 0
@@ -10122,9 +10123,11 @@ MonoBehaviour:
     damageOverTimeType: 1
     damageOverTime: 30
     time: 2
-    confusionTime: 1.25
-    slownessPercentage: 35
-    slownessTime: 2.5
+    pierce: 0
+    confusionTime: 0.4
+    slownessPercentage: 0
+    slownessTime: 0
+    maxSlowStacks: 0
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}
@@ -10137,11 +10140,12 @@ MonoBehaviour:
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
+    AIO_maxSlowStacks: 0
   maxCoilEmisionRate: 12
   timePerCharge: 1
   rechargePowerDelay: 0.1
   maxCharges: 3
-  amountOfTargets: 2
+  amountOfTargets: 1
   damageDelay: 0.15
 --- !u!114 &4224226794888131043
 MonoBehaviour:

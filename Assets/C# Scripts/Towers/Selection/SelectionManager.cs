@@ -84,6 +84,13 @@ public class SelectionManager : MonoBehaviour
             towerSelected = false;
             selectedTower = null;
             TowerUIController.Instance.DeSelectTower(selectedTower);
+
+            if (isPlacingTower)
+            {
+                selectedPreviewTower.transform.localPosition = Vector3.zero;
+                selectedPreviewTower.locked = false;
+                isPlacingTower = false;
+            }
         }
     }
 
@@ -94,7 +101,6 @@ public class SelectionManager : MonoBehaviour
         {
             if (ResourceManager.Instance.TryBuildTower(selectedPreviewTower.scrapCost))
             {
-                essenceChooseMenuObj.SetActive(false);
                 PlaceTower();
             }
             else
@@ -106,8 +112,6 @@ public class SelectionManager : MonoBehaviour
     }
     public void CancelTowerPlacement()
     {
-        essenceChooseMenuObj.SetActive(false);
-
         selectedPreviewTower.transform.localPosition = Vector3.zero;
         selectedPreviewTower.locked = false;
         isPlacingTower = false;
@@ -174,46 +178,25 @@ public class SelectionManager : MonoBehaviour
 
 
 
-    public int pathId;
-    public GameObject essenceChooseMenuObj;
     public GameObject[] essenceTypes;
-    public void SetPathId(int id)
+    public void TryUpgradeTower(int chosenType)
     {
-        if (selectedTower.upgradePrefabs.Length <= id)
+        if (selectedTower == null || selectedTower.upgradePrefabs.Length <= chosenType)
         {
             return;
         }
-        pathId = id;
-        if (selectedTower.towerUIData.upgrades[id].essenceType == MagicType.Neutral)
-        {
-            essenceChooseMenuObj.SetActive(true);
-        }
-        else
-        {
-            TryUpgradeTower(0);
-        }
-    }
-    public void TryUpgradeTower(int chosenType)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            if (pathId != i || selectedTower == null || selectedTower.upgradePrefabs.Length <= pathId)
-            {
-                continue;
-            }
 
-            if (ResourceManager.Instance.TryUpgradeTower(selectedTower.towerUIData.upgrades[i].buildCost, selectedTower.towerUIData.upgrades[i].essenceType, (MagicType)chosenType))
-            {
-                GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
-                GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, selectedTower.towerUIData.upgrades[pathId].buildCost, selectedTower.towerUIData.upgrades[pathId].essenceType);
+        if (ResourceManager.Instance.TryUpgradeTower(selectedTower.towerUIData.upgrades[chosenType].buildCost, selectedTower.towerUIData.upgrades[chosenType].essenceType, (MagicType)chosenType))
+        {
+            GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
+            GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, selectedTower.towerUIData.upgrades[chosenType].buildCost, selectedTower.towerUIData.upgrades[chosenType].essenceType);
 
-                TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
-                selectedTower.UpgradeTower(pathId, gridData.gridPos);
+            TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
+            selectedTower.UpgradeTower(chosenType, gridData.gridPos);
 
-                TowerUIController.Instance.DeSelectTower(selectedTower);
-                towerSelected = false;
-                selectedTower = null;
-            }
+            TowerUIController.Instance.DeSelectTower(selectedTower);
+            towerSelected = false;
+            selectedTower = null;
         }
     }
 

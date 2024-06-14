@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Second Wave
   m_EditorClassIdentifier: 
   waveEndDelay: 3
-  scrapForThisWave: 50
+  scrapForThisWave: 25
   waveParts:
   - startDelay: 0
     enemy: {fileID: 3704580758801229996, guid: 52aac14bd8217c449886a0ba3577df75, type: 3}

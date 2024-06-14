@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fourth Wave
   m_EditorClassIdentifier: 
   waveEndDelay: 3
-  scrapForThisWave: 50
+  scrapForThisWave: 25
   waveParts:
   - startDelay: 0
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}

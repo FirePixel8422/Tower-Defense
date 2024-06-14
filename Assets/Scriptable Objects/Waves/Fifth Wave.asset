@@ -13,5 +13,21 @@ MonoBehaviour:
   m_Name: Fifth Wave
   m_EditorClassIdentifier: 
   waveEndDelay: 3
-  scrapForThisWave: 50
-  waveParts: []
+  scrapForThisWave: 25
+  waveParts:
+  - startDelay: 0
+    enemy: {fileID: 6013184689902231836, guid: e74a92c7688bb7a45be2073607786d25, type: 3}
+    spawnDelay: 0.5
+    amount: 1
+  - startDelay: 8
+    enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
+    spawnDelay: 0.2
+    amount: 30
+  - startDelay: 3
+    enemy: {fileID: 5576476361995142429, guid: 767852faca6697e4d9b03aa331511e2a, type: 3}
+    spawnDelay: 0.2
+    amount: 12
+  - startDelay: 5
+    enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
+    spawnDelay: 0.15
+    amount: 50

@@ -186,7 +186,7 @@ MonoBehaviour:
     damageOverTimeType: 1
     damageOverTime: 0
     time: 0
-    confusionTime: 0.1
+    confusionTime: 0.065
     slownessPercentage: 0
     slownessTime: 0
     maxSlowStacks: 0

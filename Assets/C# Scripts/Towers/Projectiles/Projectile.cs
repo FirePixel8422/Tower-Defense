@@ -17,6 +17,8 @@ public class Projectile : MonoBehaviour
     public EnemyCore target;
     public ProjectileStats p;
 
+    public int piercesDone;
+
 
     private void Start()
     {
@@ -63,6 +65,13 @@ public class Projectile : MonoBehaviour
             yield return wait;
             if (target.gameObject.activeInHierarchy == false)
             {
+
+                if (p.pierce != 0)
+                {
+                    GetComponent<Collider>().enabled = true;
+                    yield break;
+                }
+
                 target.incomingDamage -= p.damage;
                 Debug.LogWarning("killed self");
 
@@ -81,9 +90,12 @@ public class Projectile : MonoBehaviour
 
 
             //move projectile and lookat target.
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, p.speed * trackTargetUpdateInterval);
-            transform.LookAt(target.transform);
-            if (Vector3.Distance(transform.position, target.transform.position) < p.projectileSize)
+            Vector3 targetPos = target.transform.position + new Vector3(0, target.transform.localScale.y / 3, 0);
+
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, p.speed * trackTargetUpdateInterval);
+            transform.LookAt(targetPos);
+
+            if (Vector3.Distance(transform.position, targetPos) < p.projectileSize)
             {
                 //call virtual void "HitTarget()"
                 HitTarget();
@@ -93,6 +105,13 @@ public class Projectile : MonoBehaviour
                 if (onHitEffectIndex != -1)
                 {
                     OnHitVFXPooling.Instance.GetPulledObj(onHitEffectIndex, transform.position, transform.rotation);
+                }
+
+                if (p.pierce != 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
+                    GetComponent<Collider>().enabled = true;
+                    yield break;
                 }
 
                 //destroy (disable for pool) bullet and let trail live for its duration
@@ -114,14 +133,30 @@ public class Projectile : MonoBehaviour
         if (p.areaEffect != null)
         {
             //spawn collider to hit multiple bullets
-            ApplySplashDamage();
+            ApplySplashDamage(target);
         }
 
         target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime, p.maxSlowStacks);
     }
-    public virtual void ApplySplashDamage()
+    public virtual void ApplySplashDamage(EnemyCore target)
     {
         AIO_AreaEffectPooling.Instance.GetPulledObj(p.areaEffect.areaEffectId, target.transform.position, Quaternion.identity, p);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (piercesDone != p.pierce && other.gameObject.TryGetComponent(out EnemyCore target))
+        {
+            piercesDone += 1;
+
+            target.ApplyDamage(p.damageType, p.damage, p.damageOverTimeType, p.damageOverTime, p.time, p.confusionTime, p.slownessPercentage, p.slownessTime, p.maxSlowStacks);
+
+            if (p.areaEffect != null)
+            {
+                //spawn collider to hit multiple bullets
+                ApplySplashDamage(target);
+            }
+        }
     }
 }
 
@@ -139,6 +174,8 @@ public struct ProjectileStats
     public MagicType damageOverTimeType;
     public float damageOverTime;
     public float time;
+
+    public int pierce;
 
     public float confusionTime;
     public int slownessPercentage;

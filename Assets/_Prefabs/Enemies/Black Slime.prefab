@@ -124,7 +124,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7961556412087786354}
@@ -144,13 +144,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyId: 1
-  essenseOnDamage: 10
-  essenceOnDeath: 15
+  essenseOnDamage: 3
+  essenceOnDeath: 10
   startStunEffectMultiplier: 1
   stunEffectMultiplier: 1
   stunEffectDecrease: 0
-  maxHealth: 50
-  health: 50
+  maxHealth: 150
+  health: 150
   damage: 5
   incomingDamage: 0
   startMoveSpeed: 0

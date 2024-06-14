@@ -213,6 +213,7 @@ MonoBehaviour:
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: First
   magicType: 1
   rotSpeed: 360
@@ -229,9 +230,10 @@ MonoBehaviour:
     damageOverTimeType: 1
     damageOverTime: 15
     time: 1
-    confusionTime: 0.5
+    confusionTime: 0.4
     slownessPercentage: 0
     slownessTime: 0
+    maxSlowStacks: 0
     areaEffect: {fileID: 7172611797961575754, guid: 49a3ff96115c2254389cb3c11628849f, type: 3}
     AIO_duration: 0.1
     AIO_areaEffectSize: {x: 0.5, y: 0.5, z: 0.5}
@@ -244,6 +246,7 @@ MonoBehaviour:
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
+    AIO_maxSlowStacks: 0
 --- !u!95 &9102218188538843676
 Animator:
   serializedVersion: 5

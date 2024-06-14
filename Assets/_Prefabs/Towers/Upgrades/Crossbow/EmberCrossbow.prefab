@@ -61,13 +61,14 @@ MonoBehaviour:
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
   audioController: {fileID: 0}
-  projectile: {fileID: 1765200225478486042, guid: 6e6d1617d0de69849ab48917d013cd74, type: 3}
+  projectile: {fileID: 1765200225478486042, guid: 10f985f589b2f564d947338f23270862, type: 3}
   onHitEffectIndex: 4
   shootPoint: {fileID: 1183745284268724496}
   target: {fileID: 0}
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: First
   magicType: 3
   rotSpeed: 360
@@ -79,26 +80,29 @@ MonoBehaviour:
   p:
     projectileSize: 0.2
     speed: 12
-    damageType: 3
-    damage: 7.5
+    damageType: 0
+    damage: 2.5
     damageOverTimeType: 3
     damageOverTime: 0
     time: 0
+    pierce: 3
     confusionTime: 0
     slownessPercentage: 0
     slownessTime: 0
-    areaEffect: {fileID: 0}
-    AIO_duration: 0
-    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    maxSlowStacks: 0
+    areaEffect: {fileID: 7172611797961575754, guid: 49a3ff96115c2254389cb3c11628849f, type: 3}
+    AIO_duration: 0.1
+    AIO_areaEffectSize: {x: 0.2, y: 0, z: 0}
     AIO_maxSplashHits: 0
     AIO_damageType: 0
     AIO_damage: 0
-    AIO_damageOverTimeType: 0
-    AIO_damageOverTime: 0
-    AIO_time: 0
+    AIO_damageOverTimeType: 3
+    AIO_damageOverTime: 7.5
+    AIO_time: 1
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
+    AIO_maxSlowStacks: 0
 --- !u!95 &176145529167465786
 Animator:
   serializedVersion: 5

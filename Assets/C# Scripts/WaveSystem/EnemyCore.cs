@@ -52,7 +52,7 @@ public class EnemyCore : MonoBehaviour
             {
                 speed -= slowness;
             }
-            return moveSpeed * speed * 0.01f;
+            return Mathf.Max(moveSpeed * 0.3f, moveSpeed * speed * 0.01f);
         }
         private set
         {
@@ -94,8 +94,10 @@ public class EnemyCore : MonoBehaviour
         immunityBarrier = GetComponentInChildren<ImmunityBarrier>(true);
         gameObject.tag = "Enemy";
     }
-    public void Init()
+    public void Init(float healthScale)
     {
+        health = maxHealth * healthScale;
+
         if (anim != null)
         {
             anim.speed = MoveSpeed;
@@ -112,7 +114,6 @@ public class EnemyCore : MonoBehaviour
         slownessEffectsList.Clear();
 
         pointIndex = 0;
-        health = maxHealth;
         incomingDamage = 0;
         progression = 0;
         dead = false;

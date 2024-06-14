@@ -274,6 +274,7 @@ MonoBehaviour:
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: Special
   magicType: 2
   rotSpeed: 0
@@ -291,8 +292,9 @@ MonoBehaviour:
     damageOverTime: 0
     time: 0
     confusionTime: 0
-    slownessPercentage: 25
+    slownessPercentage: 16
     slownessTime: 2
+    maxSlowStacks: 1
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}
@@ -305,6 +307,7 @@ MonoBehaviour:
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
+    AIO_maxSlowStacks: 0
   smart: 0
   trapActivateTime: 0.1
   trapDeActivateTime: 0.4

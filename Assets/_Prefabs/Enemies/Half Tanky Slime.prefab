@@ -200,13 +200,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyId: 3
-  essenseOnDamage: 15
-  essenceOnDeath: 50
+  essenseOnDamage: 8
+  essenceOnDeath: 20
   startStunEffectMultiplier: 1
   stunEffectMultiplier: 1
-  stunEffectDecrease: 0
-  maxHealth: 100
-  health: 100
+  stunEffectDecrease: 0.1
+  maxHealth: 300
+  health: 300
   damage: 5
   incomingDamage: 0
   startMoveSpeed: 0

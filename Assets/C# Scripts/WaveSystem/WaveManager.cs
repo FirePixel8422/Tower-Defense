@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -12,6 +11,10 @@ public class WaveManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    public int waveScaleHealthDelay;
+    public float healthScaleMultiplier;
+    public float cHealthScale = 1;
 
     public float enemyMovementUpdateInterval;
 
@@ -52,7 +55,7 @@ public class WaveManager : MonoBehaviour
                     for (int i3 = 0; i3 < waves[i].waveParts[i2].amount; i3++)
                     {
                         target = EnemyPooling.Instance.GetPulledObj(waves[i].waveParts[i2].enemy.enemyId, startPointPos, Quaternion.identity).GetComponent<EnemyCore>();
-                        target.Init();
+                        target.Init(cHealthScale);
                         spawnedObj.Add(target);
                         UpdateTargetDir(out target.dir, target.transform.position, startPointPos);
 
@@ -60,6 +63,7 @@ public class WaveManager : MonoBehaviour
                     }
                 }
                 yield return new WaitForSeconds(waves[i].waveEndDelay);
+                cHealthScale += healthScaleMultiplier - 1;
                 ResourceManager.Instance.AddScrap(waves[i].scrapForThisWave);
             }
         }

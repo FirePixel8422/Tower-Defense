@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TESTWAVE
   m_EditorClassIdentifier: 
   waveEndDelay: 5
-  scrapForThisWave: 50
+  scrapForThisWave: 25
   waveParts:
   - startDelay: 0
     enemy: {fileID: 6013184689902231836, guid: e74a92c7688bb7a45be2073607786d25, type: 3}
