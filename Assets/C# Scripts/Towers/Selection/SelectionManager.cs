@@ -81,12 +81,9 @@ public class SelectionManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if (towerSelected)
-            {
-                towerSelected = false;
-                TowerUIController.Instance.DeSelectTower(selectedTower); 
-                selectedTower = null;
-            }
+            towerSelected = false;
+            selectedTower = null;
+            TowerUIController.Instance.DeSelectTower(selectedTower);
 
             if (isPlacingTower)
             {
