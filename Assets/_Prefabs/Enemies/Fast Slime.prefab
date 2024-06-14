@@ -296,7 +296,7 @@ MonoBehaviour:
   damage: 5
   incomingDamage: 0
   startMoveSpeed: 0
-  moveSpeed: 4
+  moveSpeed: 3.75
   slownessEffectsList: 
   pointIndex: 0
   dir:
@@ -307,9 +307,9 @@ MonoBehaviour:
   smartBarrier: 1
   immunityBarrierType: 0
   immunityBarrier: {fileID: 0}
-  barrierChance: 0
-  barrierHealthDrainTime: 0
-  barrierStartHealth: 0
+  barrierChance: 25
+  barrierHealthDrainTime: 12
+  barrierStartHealth: 100
   confused: 0
   confusionTime: 0
 --- !u!65 &7770744847820629106

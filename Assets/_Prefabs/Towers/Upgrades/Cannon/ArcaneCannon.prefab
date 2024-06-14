@@ -85,22 +85,22 @@ MonoBehaviour:
     time: 0.6
     pierce: 0
     confusionTime: 0
-    slownessPercentage: 40
-    slownessTime: 1.65
-    maxSlowStacks: 1
+    slownessPercentage: 0
+    slownessTime: 0
+    maxSlowStacks: 0
     areaEffect: {fileID: 7172611797961575754, guid: 49a3ff96115c2254389cb3c11628849f, type: 3}
     AIO_duration: 0
-    AIO_areaEffectSize: {x: 0, y: 0, z: 0}
+    AIO_areaEffectSize: {x: 0.4, y: 0.4, z: 0.4}
     AIO_maxSplashHits: 0
-    AIO_damageType: 0
+    AIO_damageType: 2
     AIO_damage: 0
-    AIO_damageOverTimeType: 0
+    AIO_damageOverTimeType: 2
     AIO_damageOverTime: 0
     AIO_time: 0
     AIO_confusionTime: 0
-    AIO_slownessPercentage: 0
-    AIO_slownessTime: 0
-    AIO_maxSlowStacks: 0
+    AIO_slownessPercentage: 40
+    AIO_slownessTime: 1.65
+    AIO_maxSlowStacks: 1
 --- !u!95 &679368592438362629
 Animator:
   serializedVersion: 5

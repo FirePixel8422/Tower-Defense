@@ -101,9 +101,9 @@ MonoBehaviour:
   smartBarrier: 1
   immunityBarrierType: 0
   immunityBarrier: {fileID: 0}
-  barrierChance: 0
-  barrierHealthDrainTime: 0
-  barrierStartHealth: 0
+  barrierChance: 25
+  barrierHealthDrainTime: 12
+  barrierStartHealth: 100
   confused: 0
   confusionTime: 0
 --- !u!65 &5652353086620119081
