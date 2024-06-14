@@ -200,6 +200,7 @@ MonoBehaviour:
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: First
   magicType: 3
   rotSpeed: 360
@@ -207,18 +208,20 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   range: 2.35
   lookTreshold: 1
-  attackSpeed: 1.85
+  attackSpeed: 1.5
   p:
     projectileSize: 0.1
     speed: 12
-    damageType: 0
-    damage: 15
-    damageOverTimeType: 0
-    damageOverTime: 0
+    damageType: 3
+    damage: 65
+    damageOverTimeType: 3
+    damageOverTime: 15
     time: 0.1
+    pierce: 0
     confusionTime: 0
     slownessPercentage: 0
     slownessTime: 0
+    maxSlowStacks: 0
     areaEffect: {fileID: 7172611797961575754, guid: 49a3ff96115c2254389cb3c11628849f, type: 3}
     AIO_duration: 0.1
     AIO_areaEffectSize: {x: 0.4, y: 0.4, z: 0.4}
@@ -231,6 +234,7 @@ MonoBehaviour:
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
+    AIO_maxSlowStacks: 0
 --- !u!95 &7635142801512669530
 Animator:
   serializedVersion: 5

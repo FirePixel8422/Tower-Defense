@@ -10101,6 +10101,7 @@ MonoBehaviour:
   targetMode: 0
   excludeTargetUpdates: 0
   specialTargetMode: 0
+  targetId: 0
   targetModeString: First
   magicType: 3
   rotSpeed: 0
@@ -10108,18 +10109,20 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 1.8
   lookTreshold: 0
-  attackSpeed: 0.125
+  attackSpeed: 0.3
   p:
     projectileSize: 0
     speed: 0
     damageType: 3
-    damage: 5
+    damage: 15
     damageOverTimeType: 3
-    damageOverTime: 15
+    damageOverTime: 5
     time: 1
+    pierce: 0
     confusionTime: 0
     slownessPercentage: 0
     slownessTime: 0
+    maxSlowStacks: 0
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}
@@ -10132,6 +10135,7 @@ MonoBehaviour:
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
+    AIO_maxSlowStacks: 0
   maxCoilEmisionRate: 12
   timePerCharge: 0.3
   rechargePowerDelay: 0.1

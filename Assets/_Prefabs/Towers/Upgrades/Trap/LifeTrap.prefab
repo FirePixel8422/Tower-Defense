@@ -162,15 +162,16 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 0.75
   lookTreshold: 0
-  attackSpeed: 2.5
+  attackSpeed: 3
   p:
     projectileSize: 0
     speed: 0
-    damageType: 0
-    damage: 12.5
+    damageType: 1
+    damage: 80
     damageOverTimeType: 1
-    damageOverTime: 5
+    damageOverTime: 20
     time: 0
+    pierce: 0
     confusionTime: 0.25
     slownessPercentage: 0
     slownessTime: 0

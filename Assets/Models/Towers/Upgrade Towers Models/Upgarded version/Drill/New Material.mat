@@ -121,9 +121,9 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metalic_Value: 0.703
+    - _Metalic_Value: 0.774
     - _Metallic: 0
-    - _Metallic_Smoothness: 0.775
+    - _Metallic_Smoothness: 0.317
     - _Noise_Scale: 50
     - _Normal_Strength: 1
     - _OcclusionStrength: 1

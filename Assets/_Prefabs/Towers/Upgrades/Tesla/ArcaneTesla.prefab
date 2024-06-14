@@ -10114,19 +10114,20 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 2.2
   lookTreshold: 0
-  attackSpeed: 0.15
+  attackSpeed: 0.2
   p:
     projectileSize: 0
     speed: 0
     damageType: 2
-    damage: 5
+    damage: 8
     damageOverTimeType: 2
-    damageOverTime: 2.5
+    damageOverTime: 4
     time: 0
+    pierce: 0
     confusionTime: 0
-    slownessPercentage: 6
+    slownessPercentage: 20
     slownessTime: 1
-    maxSlowStacks: 2
+    maxSlowStacks: 3
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}
