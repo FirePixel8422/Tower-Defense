@@ -79,9 +79,9 @@ MonoBehaviour:
   attackSpeed: 0.4
   p:
     projectileSize: 0.2
-    speed: 12
+    speed: 10
     damageType: 3
-    damage: 16
+    damage: 8
     damageOverTimeType: 3
     damageOverTime: 0
     time: 0

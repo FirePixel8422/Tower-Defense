@@ -291,8 +291,8 @@ MonoBehaviour:
   startStunEffectMultiplier: 1
   stunEffectMultiplier: 1
   stunEffectDecrease: 0
-  maxHealth: 25
-  health: 25
+  maxHealth: 15
+  health: 15
   damage: 5
   incomingDamage: 0
   startMoveSpeed: 0
