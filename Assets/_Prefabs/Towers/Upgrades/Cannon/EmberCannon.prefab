@@ -213,7 +213,7 @@ MonoBehaviour:
     projectileSize: 0.1
     speed: 12
     damageType: 3
-    damage: 25
+    damage: 65
     damageOverTimeType: 3
     damageOverTime: 15
     time: 0.1
@@ -224,7 +224,7 @@ MonoBehaviour:
     maxSlowStacks: 0
     areaEffect: {fileID: 7172611797961575754, guid: 49a3ff96115c2254389cb3c11628849f, type: 3}
     AIO_duration: 0.1
-    AIO_areaEffectSize: {x: 0, y: 0.4, z: 0.4}
+    AIO_areaEffectSize: {x: 0.4, y: 0.4, z: 0.4}
     AIO_maxSplashHits: 0
     AIO_damageType: 3
     AIO_damage: 5

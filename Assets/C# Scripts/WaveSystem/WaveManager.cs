@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using System.Linq;
 using UnityEngine;
-using UnityEditor;
 
 public class WaveManager : MonoBehaviour
 {
@@ -14,7 +13,6 @@ public class WaveManager : MonoBehaviour
     }
 
     public int waveScaleHealthDelay;
-    public int waveId;
     public float healthScaleMultiplier;
     public float cHealthScale = 1;
 
@@ -46,16 +44,10 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(preparationTime);
 
-        bool startWaveDone = false;
         while (true)
         {
             for (int i = 0; i < waves.Length; i++)
             {
-                if (startWaveDone == true && i == 0)
-                {
-                    continue;
-                }
-
                 for (int i2 = 0; i2 < waves[i].waveParts.Length; i2++)
                 {
                     yield return new WaitForSeconds(waves[i].waveParts[i2].startDelay);
@@ -67,20 +59,15 @@ public class WaveManager : MonoBehaviour
                         spawnedObj.Add(target);
                         UpdateTargetDir(out target.dir, target.transform.position, startPointPos);
 
+                        ResourceManager.Instance.AddScrap(waves[i].waveParts[i2].scrapForThisWavePart);
 
                         yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                     }
-                    ResourceManager.Instance.AddScrap(waves[i].waveParts[i2].scrapForThisWavePart);
                 }
                 yield return new WaitForSeconds(waves[i].waveEndDelay);
-                waveId += 1;
-                if (waveId > waveScaleHealthDelay)
-                {
-                    cHealthScale += healthScaleMultiplier - 1;
-                }
+                cHealthScale += healthScaleMultiplier - 1;
                 ResourceManager.Instance.AddScrap(waves[i].scrapForThisWave);
             }
-            startWaveDone = true;
         }
     }
 
