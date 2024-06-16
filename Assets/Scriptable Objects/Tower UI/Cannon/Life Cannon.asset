@@ -17,4 +17,7 @@ MonoBehaviour:
   towerImage: {fileID: 21300000, guid: b6e7a6b5af6ddaa4a811fe2920397cfd, type: 3}
   towerName: Life
   towerPopup: Life cannon balls now stun enemies
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000, guid: f7d447413d432904ab35604947766adc, type: 2}
+  - {fileID: 11400000, guid: 9902f2c90e294ac489c0bd00b7558f9f, type: 2}
+  - {fileID: 11400000}

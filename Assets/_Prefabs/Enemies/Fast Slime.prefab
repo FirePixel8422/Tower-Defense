@@ -307,7 +307,7 @@ MonoBehaviour:
   smartBarrier: 1
   immunityBarrierType: 0
   immunityBarrier: {fileID: 0}
-  barrierChance: 25
+  barrierChance: 12
   barrierHealthDrainTime: 12
   barrierStartHealth: 100
   confused: 0

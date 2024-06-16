@@ -17,4 +17,7 @@ MonoBehaviour:
   towerImage: {fileID: 0}
   towerName: Ember
   towerPopup: Ember cannon balls now deal extra fire damage over time to enemies
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 9902f2c90e294ac489c0bd00b7558f9f, type: 2}
+  - {fileID: 11400000, guid: 757dd8e9b77fe344390a50aaf08a36f1, type: 2}

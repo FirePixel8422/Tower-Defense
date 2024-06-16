@@ -142,7 +142,10 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   towerUIData: {fileID: 11400000, guid: d0e32431aea1eab40ad7adcee84cc2ba, type: 2}
-  upgradePrefabs: []
+  upgradePrefabs:
+  - {fileID: 0}
+  - {fileID: 6288385469615007651, guid: 1d790b6a5dcd3de4d88bda37227be0cf, type: 3}
+  - {fileID: 5538157176212337038, guid: 3fabf82b847fc7c42a343f22797d406a, type: 3}
   towerCompleted: 0
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}

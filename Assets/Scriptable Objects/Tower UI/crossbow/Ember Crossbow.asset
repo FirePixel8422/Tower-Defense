@@ -17,4 +17,7 @@ MonoBehaviour:
   towerImage: {fileID: 21300000, guid: 9c69b9ab5f7a72d42ad42568292e6a3b, type: 3}
   towerName: 'Ember '
   towerPopup: Heavy fire arrows that deal extra fire damage
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: c0adf55556c6a1e458e78a19ec32c2cd, type: 2}
+  - {fileID: 11400000, guid: ee548cffa5f566a43831a25f7ab16429, type: 2}

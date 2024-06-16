@@ -42,6 +42,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "AltRotate",
+                    "type": "Button",
+                    "id": "696b1f3e-9f07-436c-b1b7-09ff3bb6c18b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CamMove",
                     "type": "Value",
                     "id": "2e0ce718-0c8b-431c-a012-ac1517a20d6a",
@@ -149,39 +158,6 @@
                 },
                 {
                     "name": "2D Vector",
-                    "id": "d682f63d-286b-4b08-bf60-8b59b3fbf72a",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Scroll",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "3af4d6e2-a64d-4c73-9748-3ba51a193dc5",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Scroll",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "d7d86631-acde-4a39-b4c9-f5e984fd4a00",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Scroll",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
                     "id": "6b5cc1c5-a658-454c-a9f7-4aec37850c87",
                     "path": "2DVector",
                     "interactions": "",
@@ -248,12 +224,12 @@
                 },
                 {
                     "name": "",
-                    "id": "4b9c9c1f-fb8d-4fe4-ba00-8b41d3620c54",
+                    "id": "c8bc33b7-4ea0-404f-a70a-2abe91dd5150",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cancel",
+                    "action": "AltRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

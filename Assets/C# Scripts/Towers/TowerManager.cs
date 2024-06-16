@@ -94,18 +94,34 @@ public class TowerManager : MonoBehaviour
 
     private IEnumerator UpdateTowerTargetsLoop()
     {
+        float elapsedTime = towerTargetUpdateInterval;
         while (true)
         {
-            UpdateTowerTargets();
-            yield return new WaitForSeconds(towerTargetUpdateInterval);
+            if (elapsedTime >= towerTargetUpdateInterval)
+            {
+                elapsedTime -= towerTargetUpdateInterval;
+                UpdateTowerTargets();
+            }
+
+            yield return null;
+
+            elapsedTime += Time.deltaTime;
         }
     }
     private IEnumerator UpdateTowerRotationsLoop()
     {
+        float elapsedTime = towerRotationUpdateInterval;
         while (true)
         {
-            UpdateTowerRotations();
-            yield return new WaitForSeconds(towerRotationUpdateInterval);
+            if (elapsedTime >= towerRotationUpdateInterval)
+            {
+                UpdateTowerRotations(elapsedTime);
+                elapsedTime = 0;
+            }
+
+            yield return null;
+
+            elapsedTime += Time.deltaTime;
         }
     }
 
@@ -252,7 +268,7 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    private void UpdateTowerRotations()
+    private void UpdateTowerRotations(float deltaTime)
     {
         foreach (TowerCore tower in spawnedTowerObj)
         {
@@ -270,7 +286,7 @@ public class TowerManager : MonoBehaviour
                 Quaternion.RotateTowards(
                     tower.rotPoint.rotation,
                     Quaternion.Euler(0, angle, 0) * tower.rotOffset,
-                    tower.rotSpeed * towerRotationUpdateInterval);
+                    tower.rotSpeed * deltaTime);
         }
     }
 }

@@ -267,12 +267,15 @@ public class EnemyCore : MonoBehaviour
             deltaTime = Time.deltaTime;
 
             confusionTime -= deltaTime;
-            print(deltaTime * stunEffectDecrease);
             stunEffectMultiplier -= deltaTime * stunEffectDecrease;
         }
         confusionTime = 0;
         confused = false;
         yield break;
+    }
+    public void LoseStunResist(float deltaTime)
+    {
+        stunEffectMultiplier = Mathf.Clamp(stunEffectMultiplier + deltaTime * .05f, -1, 1);
     }
     private IEnumerator SlownessTimer(int slownessPercentage, float slownessTime, int maxStacks)
     {

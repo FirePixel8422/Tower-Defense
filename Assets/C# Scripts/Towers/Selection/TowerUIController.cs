@@ -26,6 +26,8 @@ public class TowerUIController : MonoBehaviour
     public TextMeshProUGUI[] towerUpgradeNames;
     public TextMeshProUGUI[] towerUpgradePopups;
     public TextMeshProUGUI[] towerUpgradeCosts;
+
+    public GameObject[] upgradeButtonObjs;
     
 
 
@@ -39,6 +41,12 @@ public class TowerUIController : MonoBehaviour
         foreach(UIPop uiPop in uiPopupControllers)
         {
             uiPop.OnPointerExit(null);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            bool state = tower.upgradePrefabs.Length > i && tower.upgradePrefabs[i] != null;
+            upgradeButtonObjs[i].SetActive(state);
         }
 
         //select tower and open and configure UI equal to that towers SO info

@@ -184,7 +184,7 @@ public class SelectionManager : MonoBehaviour
     public GameObject[] essenceTypes;
     public void TryUpgradeTower(int chosenType)
     {
-        if (selectedTower == null || selectedTower.upgradePrefabs.Length <= chosenType)
+        if (selectedTower == null || selectedTower.upgradePrefabs.Length <= chosenType && selectedTower.upgradePrefabs[chosenType] != null)
         {
             return;
         }

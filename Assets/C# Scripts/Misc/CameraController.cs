@@ -25,6 +25,7 @@ public class CameraController : MonoBehaviour
 
     private bool animatePanChanged;
 
+    public bool altRotating;
     public bool control;
 
 
@@ -34,7 +35,7 @@ public class CameraController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if (control)
+            if (control && altRotating == false)
             {
                 camMoveDir = Vector3.zero;
                 centerRotY = 0;
@@ -55,56 +56,62 @@ public class CameraController : MonoBehaviour
             }
         }
     }
+
     //detect Q/E Input for rotation of Camera left and right
     public void OnRotate(InputAction.CallbackContext ctx)
     {
-        if (control)
-        {
-            centerRotY = ctx.ReadValue<Vector2>().x;
-        }
+        centerRotY = ctx.ReadValue<Vector2>().x;
     }
+
+    //hold a key and swipe with mouse to rotate
+    public void OnRotateAltHeld(InputAction.CallbackContext ctx)
+    {
+        altRotating = ctx.ReadValueAsButton();
+    }
+
     //detect WASD movement Input for movement of the camera
     public void OnMove(InputAction.CallbackContext ctx)
     {
-
-        if (control)
-        {
-            camMoveDir = ctx.ReadValue<Vector3>();
-        }
+        camMoveDir = ctx.ReadValue<Vector3>();
     }
-    //if shift is held camera moves twice as fast
+
+    //if key is held camera moves twice as fast
     public void OnFastMoveHeld(InputAction.CallbackContext ctx)
     {
-        if (control)
+        if (ctx.performed)
         {
-            if (ctx.performed)
-            {
-                moveSpeed *= 2;
-            }
-            if (ctx.canceled)
-            {
-                moveSpeed /= 2;
-            }
+            moveSpeed *= 2;
+        }
+        if (ctx.canceled)
+        {
+            moveSpeed /= 2;
         }
     }
 
 
     private void Update()
     {
-        // check for inputs this frame
-        if (Mathf.Abs(centerRotY) > 0.01f)
+        if (control == true && altRotating == false)
         {
-            RotateCam();
-        }
+            // check for inputs this frame
+            if (Mathf.Abs(centerRotY) > 0.01f)
+            {
+                RotateCam();
+            }
 
-        if (camMoveDir.sqrMagnitude > 0.01f)
-        {
-            MoveCam();
-        }
+            if (camMoveDir.sqrMagnitude > 0.01f)
+            {
+                MoveCam();
+            }
 
-        if (animatePanChanged)
+            if (animatePanChanged)
+            {
+                AnimatePanCam();
+            }
+        }
+        else
         {
-            AnimatePanCam();
+            camCenter.Rotate(0, Input.GetAxis("Mouse X") * -rotSpeed * Time.deltaTime, 0);
         }
     }
 

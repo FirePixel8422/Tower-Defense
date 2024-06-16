@@ -5380,7 +5380,7 @@ MonoBehaviour:
   maxCoilEmisionRate: 10
   timePerCharge: 0.25
   rechargePowerDelay: 0.1
-  maxCharges: 4
+  maxCharges: 5
   amountOfTargets: 1
   damageDelay: 0.2
 --- !u!114 &626888678691555837

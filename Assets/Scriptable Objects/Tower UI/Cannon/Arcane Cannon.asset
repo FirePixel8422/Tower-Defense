@@ -17,4 +17,7 @@ MonoBehaviour:
   towerImage: {fileID: 21300000, guid: b6e7a6b5af6ddaa4a811fe2920397cfd, type: 3}
   towerName: 'Arcane '
   towerPopup: Arcane cannon balls now slow enemies
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000, guid: f7d447413d432904ab35604947766adc, type: 2}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 757dd8e9b77fe344390a50aaf08a36f1, type: 2}

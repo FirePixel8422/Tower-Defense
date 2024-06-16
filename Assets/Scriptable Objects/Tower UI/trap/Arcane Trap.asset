@@ -17,4 +17,7 @@ MonoBehaviour:
   towerImage: {fileID: 21300000, guid: ad87e518a72eda645a9960da256e4e95, type: 3}
   towerName: 'Arcane '
   towerPopup: Arcane Trap info
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000, guid: d0e32431aea1eab40ad7adcee84cc2ba, type: 2}
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 1a1e70ab6bd52f24991c1a9f6b958fd2, type: 2}

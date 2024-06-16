@@ -56,7 +56,10 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   towerUIData: {fileID: 11400000, guid: c0adf55556c6a1e458e78a19ec32c2cd, type: 2}
-  upgradePrefabs: []
+  upgradePrefabs:
+  - {fileID: 1536371639034263773, guid: 446ae7ae31df14b4687d256624482f98, type: 3}
+  - {fileID: 0}
+  - {fileID: 1219494928676782444, guid: db80bb036fe59e84bb84c6c3d13acee9, type: 3}
   towerCompleted: 0
   towerPreviewRenderer: {fileID: 0}
   anim: {fileID: 0}
@@ -526,7 +529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
-  startDelay: 0
+  startDelay: 0.75
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.6
   endDisolveValue: -0.925
@@ -742,7 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
-  startDelay: 0
+  startDelay: 0.75
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.6
   endDisolveValue: -0.925
@@ -843,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
-  startDelay: 0
+  startDelay: 0.75
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.6
   endDisolveValue: -0.925

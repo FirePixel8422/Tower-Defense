@@ -17,4 +17,7 @@ MonoBehaviour:
   towerImage: {fileID: 21300000, guid: ad87e518a72eda645a9960da256e4e95, type: 3}
   towerName: 'Ember '
   towerPopup: Ember Trap info
-  upgrades: []
+  upgrades:
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 6efca559791a5a04aa28b8db4c8525eb, type: 2}
+  - {fileID: 11400000, guid: 1a1e70ab6bd52f24991c1a9f6b958fd2, type: 2}

@@ -218,8 +218,6 @@ public class ResourceManager : MonoBehaviour
         }
         else
         {
-            print(amount * zeroPointThree);
-            print(zeroPointThree);
             LifeEssence += amount * zeroPointThree;
             ArcaneEssence += amount * zeroPointThree;
             EmberEssence += amount * zeroPointThree;

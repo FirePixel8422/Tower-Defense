@@ -359,6 +359,7 @@ MonoBehaviour:
   zoomSpeed: 6
   scrollForMaxZoom: 10
   cScroll: 0
+  altRotating: 0
   control: 1
 --- !u!1 &67615838
 GameObject:
@@ -671,9 +672,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f19547c55c6db4dad9a38a0c2f21bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveScaleHealthDelay: 5
+  waveScaleHealthDelay: 1
   waveId: 0
-  healthScaleMultiplier: 1.2
+  healthScaleMultiplier: 1.325
   cHealthScale: 1
   enemyMovementUpdateInterval: 1
   points:
@@ -710,11 +711,8 @@ MonoBehaviour:
   rotMultiplier: 1.25
   preparationTime: 6
   waves:
-  - {fileID: 11400000, guid: 6485c35baf3aed8409bcb983d9dacc4d, type: 2}
-  - {fileID: 11400000, guid: d68f380661058994b950619738446021, type: 2}
-  - {fileID: 11400000, guid: f7ed23a1bfe277e4abe7b0e61475e57a, type: 2}
-  - {fileID: 11400000, guid: 63b03ae03135cc045b441c505771484d, type: 2}
-  - {fileID: 11400000, guid: 6b0ade866db45b040be72399b8e6fb32, type: 2}
+  - {fileID: 11400000, guid: 0a5b322f5f82de742894baf72215e408, type: 2}
+  - {fileID: 11400000, guid: 8f2168ef05c365c46875f7c886356418, type: 2}
   spawnedObj: []
 --- !u!4 &146782329
 Transform:
@@ -3778,6 +3776,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 013444cb-2494-4e40-b16e-31701bcb79f8
     m_ActionName: Gameplay/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 54021388}
+        m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+        m_MethodName: OnRotateAltHeld
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 696b1f3e-9f07-436c-b1b7-09ff3bb6c18b
+    m_ActionName: Gameplay/AltRotate[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -6634,7 +6648,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.9
+  m_fontSize: 38.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9844,6 +9858,10 @@ MonoBehaviour:
   - {fileID: 9034806490547606191}
   - {fileID: 4707625749453925594}
   - {fileID: 464169024070878668}
+  upgradeButtonObjs:
+  - {fileID: 3287474763506159490}
+  - {fileID: 6141495785495097528}
+  - {fileID: 4837082989520818934}
 --- !u!1 &3427160579076569740
 GameObject:
   m_ObjectHideFlags: 0
