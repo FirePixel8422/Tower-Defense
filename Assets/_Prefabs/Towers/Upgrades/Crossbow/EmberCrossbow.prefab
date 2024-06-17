@@ -84,11 +84,11 @@ MonoBehaviour:
     projectileSize: 0.2
     speed: 10
     damageType: 3
-    damage: 8
+    damage: 6
     damageOverTimeType: 3
     damageOverTime: 0
     time: 0
-    pierce: 3
+    pierce: 2
     confusionTime: 0
     slownessPercentage: 0
     slownessTime: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
     AIO_damageType: 0
     AIO_damage: 0
     AIO_damageOverTimeType: 3
-    AIO_damageOverTime: 7.5
+    AIO_damageOverTime: 4
     AIO_time: 1
     AIO_confusionTime: 0
     AIO_slownessPercentage: 0

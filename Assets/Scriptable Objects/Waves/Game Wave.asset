@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Game Wave
   m_EditorClassIdentifier: 
   waveEndDelay: 0
-  scrapForThisWave: 100
+  scrapForThisWave: 200
   waveParts:
   - scrapForThisWavePart: 20
     startDelay: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
     startDelay: 10
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
     spawnDelay: 0.1
-    amount: 12
+    amount: 8
   - scrapForThisWavePart: 20
     startDelay: 10
     enemy: {fileID: 5576476361995142429, guid: 767852faca6697e4d9b03aa331511e2a, type: 3}
@@ -59,7 +59,7 @@ MonoBehaviour:
     startDelay: 10
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
     spawnDelay: 0.1
-    amount: 15
+    amount: 8
   - scrapForThisWavePart: 30
     startDelay: 10
     enemy: {fileID: 5576476361995142429, guid: 767852faca6697e4d9b03aa331511e2a, type: 3}

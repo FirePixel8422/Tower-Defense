@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d6fff890941044fb8d074a908159ca, type: 3}
   m_Name: Repeat Wave
   m_EditorClassIdentifier: 
-  waveEndDelay: 0
-  scrapForThisWave: 300
+  waveEndDelay: 20
+  scrapForThisWave: 0
   waveParts:
   - scrapForThisWavePart: 10
     startDelay: 2
@@ -60,7 +60,7 @@ MonoBehaviour:
     enemy: {fileID: 6013184689902231836, guid: e74a92c7688bb7a45be2073607786d25, type: 3}
     spawnDelay: 0.5
     amount: 5
-  - scrapForThisWavePart: 10
+  - scrapForThisWavePart: 0
     startDelay: 2
     enemy: {fileID: 5576476361995142429, guid: 767852faca6697e4d9b03aa331511e2a, type: 3}
     spawnDelay: 0.3
@@ -70,7 +70,7 @@ MonoBehaviour:
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
     spawnDelay: 0.3
     amount: 15
-  - scrapForThisWavePart: 10
+  - scrapForThisWavePart: 0
     startDelay: 2
     enemy: {fileID: 6013184689902231836, guid: e74a92c7688bb7a45be2073607786d25, type: 3}
     spawnDelay: 0.3
@@ -80,7 +80,7 @@ MonoBehaviour:
     enemy: {fileID: 5576476361995142429, guid: 767852faca6697e4d9b03aa331511e2a, type: 3}
     spawnDelay: 0.2
     amount: 5
-  - scrapForThisWavePart: 10
+  - scrapForThisWavePart: 0
     startDelay: 1
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
     spawnDelay: 0.1
@@ -90,7 +90,7 @@ MonoBehaviour:
     enemy: {fileID: 6013184689902231836, guid: e74a92c7688bb7a45be2073607786d25, type: 3}
     spawnDelay: 0.2
     amount: 5
-  - scrapForThisWavePart: 10
+  - scrapForThisWavePart: 0
     startDelay: 1
     enemy: {fileID: 3704580758801229996, guid: 52aac14bd8217c449886a0ba3577df75, type: 3}
     spawnDelay: 0.2
@@ -100,7 +100,7 @@ MonoBehaviour:
     enemy: {fileID: 5160671295169573744, guid: f1b0e4f2ecfe8594c8fb4ed32582329f, type: 3}
     spawnDelay: 0.2
     amount: 12
-  - scrapForThisWavePart: 10
+  - scrapForThisWavePart: 0
     startDelay: 1
     enemy: {fileID: 6013184689902231836, guid: e74a92c7688bb7a45be2073607786d25, type: 3}
     spawnDelay: 0.2
