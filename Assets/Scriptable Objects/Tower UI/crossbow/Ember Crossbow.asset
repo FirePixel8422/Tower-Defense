@@ -16,7 +16,7 @@ MonoBehaviour:
   essenceType: 3
   towerImage: {fileID: 21300000, guid: 9c69b9ab5f7a72d42ad42568292e6a3b, type: 3}
   towerName: 'Ember '
-  towerPopup: Heavy fire arrows that deal extra fire damage
+  towerPopup: Arrows now pierce and do more damage
   upgrades:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: c0adf55556c6a1e458e78a19ec32c2cd, type: 2}

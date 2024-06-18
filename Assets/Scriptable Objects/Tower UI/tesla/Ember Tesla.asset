@@ -16,7 +16,7 @@ MonoBehaviour:
   essenceType: 3
   towerImage: {fileID: 21300000, guid: 4cd6cc81df3b01844bce72399b815916, type: 3}
   towerName: 'Ember '
-  towerPopup: Ember Tesla info
+  towerPopup: Tesla now does more damage
   upgrades:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: 10e08f755d1d0ac4fb59da1b35ce511a, type: 2}

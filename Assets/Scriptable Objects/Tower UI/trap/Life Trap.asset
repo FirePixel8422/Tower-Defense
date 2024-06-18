@@ -16,7 +16,7 @@ MonoBehaviour:
   essenceType: 1
   towerImage: {fileID: 21300000, guid: ad87e518a72eda645a9960da256e4e95, type: 3}
   towerName: 'Life '
-  towerPopup: Life Trap info
+  towerPopup: now does slow
   upgrades:
   - {fileID: 11400000, guid: d0e32431aea1eab40ad7adcee84cc2ba, type: 2}
   - {fileID: 11400000, guid: 6efca559791a5a04aa28b8db4c8525eb, type: 2}

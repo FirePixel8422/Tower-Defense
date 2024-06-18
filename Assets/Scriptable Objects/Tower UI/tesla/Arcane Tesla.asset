@@ -16,7 +16,7 @@ MonoBehaviour:
   essenceType: 2
   towerImage: {fileID: 21300000, guid: 4cd6cc81df3b01844bce72399b815916, type: 3}
   towerName: 'Arcane '
-  towerPopup: Arcane Telsa info
+  towerPopup: Tesla now does slow and hits multiple targets at the same time
   upgrades:
   - {fileID: 11400000, guid: c99f827a5ff86874ab9a05bff6a5b5d8, type: 2}
   - {fileID: 11400000}
