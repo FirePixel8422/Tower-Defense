@@ -1,9 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
     public AnimationCurve zoom_RotationCurve;
     public AnimationCurve zoom_PositionCurve;
 
@@ -12,7 +21,10 @@ public class CameraController : MonoBehaviour
     public Transform worldCenter;
 
     public float rotSpeed;
+    public float mouseSens = 1;
+
     public float moveSpeed;
+
     public Vector3 camConfinementOffset;
     public Vector3 camConfinementSize;
     public float zoomSpeed;
@@ -52,6 +64,17 @@ public class CameraController : MonoBehaviour
         {
             if (ctx.performed)
             {
+                PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+                pointerEventData.position = Input.mousePosition;
+
+                var results = new List<RaycastResult>();
+                SelectionManager.gfxRayCaster.Raycast(pointerEventData, results);
+
+                if (results.Count > 0)
+                {
+                    return;
+                }
+
                 Scroll(ctx.ReadValue<Vector2>().y);
             }
         }
@@ -88,10 +111,16 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    //update mouse sensitivity
+    public void UpdateMouseSens(float newSens)
+    {
+        mouseSens = newSens;
+    }
+
 
     private void Update()
     {
-        if (control == true && altRotating == false)
+        if (control == true)
         {
             // check for inputs this frame
             if (Mathf.Abs(centerRotY) > 0.01f)
@@ -109,9 +138,9 @@ public class CameraController : MonoBehaviour
                 AnimatePanCam();
             }
         }
-        else
+        if (altRotating)
         {
-            camCenter.Rotate(0, Input.GetAxis("Mouse X") * -rotSpeed * Time.deltaTime, 0);
+            camCenter.Rotate(0, Input.GetAxis("Mouse X") * -rotSpeed * mouseSens * Time.deltaTime, 0);
         }
     }
 

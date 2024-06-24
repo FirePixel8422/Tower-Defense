@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 
 public class Projectile : MonoBehaviour
 {
@@ -172,6 +171,11 @@ public class Projectile : MonoBehaviour
 
         if (other.gameObject.TryGetComponent(out EnemyCore target))
         {
+            if (target == this.target)
+            {
+                return;
+            }
+
             piercesDone += 1;
 
 
@@ -195,7 +199,7 @@ public class Projectile : MonoBehaviour
         coll.enabled = true;
         rb.velocity = transform.forward * p.speed;
 
-        yield return new WaitForSeconds(20 / p.speed);
+        yield return new WaitForSeconds(p.speed);
 
         if (trail != null)
         {

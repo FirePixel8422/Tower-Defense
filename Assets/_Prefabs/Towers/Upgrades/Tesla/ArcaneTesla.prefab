@@ -10130,7 +10130,7 @@ MonoBehaviour:
     confusionTime: 0
     slownessPercentage: 20
     slownessTime: 1
-    maxSlowStacks: 3
+    maxSlowStacks: 2
     areaEffect: {fileID: 0}
     AIO_duration: 0
     AIO_areaEffectSize: {x: 0, y: 0, z: 0}

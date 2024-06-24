@@ -205,6 +205,7 @@ public class TowerCore : MonoBehaviour
         if (excludeTargetUpdates == false)
         {
             TowerManager.Instance.spawnedTowerObj.Add(tower);
+            AudioManager.Instance.audioControllers.Add(tower.audioController);
         }
         tower.CoreInit();
         GridManager.Instance.UpdateGridDataFieldType(gridPos, 3, tower);
@@ -215,8 +216,12 @@ public class TowerCore : MonoBehaviour
         cDissolves += 1;
         if (cDissolves == amountOfDissolves)
         {
-            towerCompleted = true;
+            TowerCompleted();
         }
+    }
+    public virtual void TowerCompleted()
+    {
+        towerCompleted = true;
     }
     public void RevertCompleted()
     {
@@ -224,6 +229,7 @@ public class TowerCore : MonoBehaviour
         if (cDissolves == 0)
         {
             Destroy(gameObject);
+            AudioManager.Instance.audioControllers.Remove(audioController);
         }
     }
 

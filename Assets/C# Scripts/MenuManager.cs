@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-
+    
     public void PauseRestartGame()
     {
         paused = !paused;
@@ -48,6 +49,6 @@ public class MenuManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-
+        SceneManager.LoadScene("bennie UI");
     }
 }

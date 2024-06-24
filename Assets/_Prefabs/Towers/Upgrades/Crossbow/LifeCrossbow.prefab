@@ -190,7 +190,7 @@ MonoBehaviour:
     damageOverTime: 0
     time: 0
     pierce: 0
-    confusionTime: 0.065
+    confusionTime: 0.11
     slownessPercentage: 0
     slownessTime: 0
     maxSlowStacks: 0

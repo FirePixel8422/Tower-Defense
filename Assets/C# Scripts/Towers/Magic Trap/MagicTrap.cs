@@ -37,7 +37,7 @@ public class MagicTrap : TowerCore
         }
     }
 
-    private IEnumerator Attack()
+    public virtual IEnumerator Attack()
     {
         anim.SetTrigger("Attack");
         audioController.Play();

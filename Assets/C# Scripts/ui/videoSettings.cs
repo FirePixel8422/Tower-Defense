@@ -1,13 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class videoSettings : MonoBehaviour
+public class VideoSettings : MonoBehaviour
 {
-    public void Change()
-    {
-       Screen.fullScreen = !Screen.fullScreen;
-       
-    }
-
 }

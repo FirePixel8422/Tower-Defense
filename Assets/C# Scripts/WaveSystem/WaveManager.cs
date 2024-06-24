@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class WaveManager : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class WaveManager : MonoBehaviour
 
     public List<EnemyCore> spawnedObj;
 
+    public Color scrapColor;
+    public Vector3 textPos;
+    public Quaternion textRot;
+    public float textSize;
+
 
     private void Start()
     {
@@ -46,6 +52,7 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(preparationTime);
 
+        float scrap = 0;
         bool startWaveDone = false;
         while (true)
         {
@@ -70,7 +77,9 @@ public class WaveManager : MonoBehaviour
 
                         yield return new WaitForSeconds(waves[i].waveParts[i2].spawnDelay);
                     }
-                    ResourceManager.Instance.AddScrap(waves[i].waveParts[i2].scrapForThisWavePart);
+                    scrap = waves[i].waveParts[i2].scrapForThisWavePart;
+
+                    ResourceManager.Instance.AddScrap(scrap);
                 }
                 yield return new WaitForSeconds(waves[i].waveEndDelay);
                 waveId += 1;
@@ -121,6 +130,8 @@ public class WaveManager : MonoBehaviour
         //then rotate them towards the next points, making them turn.
         for (int i = spawnedObj.Count - 1; i >= 0; i--)
         {
+            spawnedObj[i].LoseStunResist(enemyMovementUpdateInterval);
+
             targetMoveSpeed = spawnedObj[i].MoveSpeed;
             if (targetMoveSpeed == 0)
             {

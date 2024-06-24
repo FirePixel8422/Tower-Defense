@@ -75,7 +75,6 @@ public class TowerManager : MonoBehaviour
             chosenId = targetTypeIndex[0];
         }
 
-        print(chosenId);
         if (chosenId == 0)
         {
             return MagicType.Life;

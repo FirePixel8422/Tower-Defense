@@ -20,7 +20,6 @@ public static class SaveAndLoadGame
 
         formatter.Serialize(stream, data);
         stream.Close();
-        Debug.Log("Data Saved Correctly");
     }
 
     public static GameSaveData LoadInfo()
@@ -38,7 +37,6 @@ public static class SaveAndLoadGame
         }
         else
         {
-            Debug.Log("Save file not found yet in" + path);
             return null;
         }
     }

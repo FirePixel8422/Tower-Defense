@@ -101,9 +101,9 @@ MonoBehaviour:
     AIO_damageOverTime: 0
     AIO_time: 0
     AIO_confusionTime: 0
-    AIO_slownessPercentage: 40
+    AIO_slownessPercentage: 30
     AIO_slownessTime: 1.65
-    AIO_maxSlowStacks: 1
+    AIO_maxSlowStacks: 2
 --- !u!95 &679368592438362629
 Animator:
   serializedVersion: 5

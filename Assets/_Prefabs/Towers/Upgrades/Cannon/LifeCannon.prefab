@@ -247,7 +247,7 @@ MonoBehaviour:
     AIO_damageOverTimeType: 1
     AIO_damageOverTime: 0
     AIO_time: 0
-    AIO_confusionTime: 0.4
+    AIO_confusionTime: 0.55
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
     AIO_maxSlowStacks: 0

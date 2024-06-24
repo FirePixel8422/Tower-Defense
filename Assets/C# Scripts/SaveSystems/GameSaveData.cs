@@ -19,6 +19,7 @@ public class GameSaveData
 [System.Serializable]
 public struct MenuData
 {
+    public float mouseSens;
     public float audioMaster;
     public float audioSFX;
     public float audioMusic;

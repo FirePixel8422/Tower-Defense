@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class SelectionManager : MonoBehaviour
     }
 
 
-    public GraphicRaycaster gfxRayCaster;
+    public static GraphicRaycaster gfxRayCaster;
 
     private Camera mainCam;
 
@@ -127,6 +128,10 @@ public class SelectionManager : MonoBehaviour
         selectedPreviewTower.transform.localPosition = Vector3.zero;
         selectedTower = Instantiate(selectedPreviewTower.towerPrefab, selectedGridTileData.worldPos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
 
+        AudioController towerAudio = selectedTower.GetComponent<AudioController>();
+        towerAudio.UpdateVolume(AudioManager.Instance.menuData.audioMaster, AudioManager.Instance.menuData.audioSFX, 0);
+        AudioManager.Instance.audioControllers.Add(towerAudio);
+
         selectedTower.CoreInit();
 
         if (selectedTower.excludeTargetUpdates == false)
@@ -215,6 +220,7 @@ public class SelectionManager : MonoBehaviour
 
         TowerUIController.Instance.DeSelectTower(selectedTower);
 
+        AudioManager.Instance.audioControllers.Remove(selectedTower.audioController);
         Destroy(selectedTower.gameObject);
 
         towerSelected = false;

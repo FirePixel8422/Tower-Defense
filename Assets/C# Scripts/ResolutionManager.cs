@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class ResolutionManager : MonoBehaviour
@@ -16,8 +17,22 @@ public class ResolutionManager : MonoBehaviour
     public RefreshRate cRefreshRate;
 
 
+
+    public TextMeshProUGUI fullscreenButtonText;
+
+    public void ChangeFullScreenState()
+    {
+        bool newState = !Screen.fullScreen;
+        Screen.fullScreen = newState;
+
+        fullscreenButtonText.text = newState ? "Go Windowed" : "Go Fullscreen";
+    }
+
     private void Start()
     {
+        fullscreenButtonText.text = Screen.fullScreen ? "Go Windowed" : "Go Fullscreen";
+
+
         resolutions = Screen.resolutions;
         filterdResolutionList = new List<Resolution>();
 
@@ -41,16 +56,24 @@ public class ResolutionManager : MonoBehaviour
             string resolutionOption = filterdResolutionList[i].width + "x" + filterdResolutionList[i].height + " " + refreshRate + "Hz";
 
             options.Add(resolutionOption);
-
-            if (filterdResolutionList[i].width == Screen.width && filterdResolutionList[i].height == Screen.height)
-            {
-                cresolutionIndex = i;
-            }
         }
+        filterdResolutionList.Reverse();
         options.Reverse();
 
         dropdown.AddOptions(options);
-        dropdown.value = 0;
+
+        for (int i = 0; i < filterdResolutionList.Count; i++)
+        {
+            if (filterdResolutionList[i].width == Screen.width && filterdResolutionList[i].height == Screen.height)
+            {
+                cresolutionIndex = i;
+                break;
+            }
+        }
+        
+        dropdown.value = cresolutionIndex;
+        dropdown.captionText.text = Screen.width + "x" + Screen.height + " " + Screen.currentResolution.refreshRateRatio + "Hz";
+
         dropdown.RefreshShownValue();
     }
   
@@ -59,6 +82,6 @@ public class ResolutionManager : MonoBehaviour
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = filterdResolutionList[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, true);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }
