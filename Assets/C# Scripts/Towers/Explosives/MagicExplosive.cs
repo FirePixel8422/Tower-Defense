@@ -49,6 +49,9 @@ public class MagicExplosive : TowerCore
 
         OnHitVFXPooling.Instance.GetPulledObj(onHitEffectIndex, explosionPoint.position, Quaternion.identity);
 
+        GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(transform.position);
+        GridManager.Instance.ResetGridDataFieldType(gridData.gridPos);
+
         Destroy(gameObject, explosionTime);
     }
 }

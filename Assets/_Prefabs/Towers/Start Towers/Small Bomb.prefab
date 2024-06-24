@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462877085777846973}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.22080612, y: -0.08258098, z: -0.13664365, w: 0.96216094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
@@ -42,7 +42,7 @@ Transform:
   - {fileID: 7186058021118403234}
   - {fileID: 4869818325442855313}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -26.582, y: -6.328, z: -14.67}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2232937300498220236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerUIData: {fileID: 11400000, guid: 3247656ff2b20c947b5eaebd9882c939, type: 2}
+  towerUIData: {fileID: 11400000, guid: 19435afdf7e639c4f95cbbdf3f07a540, type: 2}
   upgradePrefabs: []
   towerCompleted: 0
   towerPreviewRenderer: {fileID: 0}
@@ -77,14 +77,14 @@ MonoBehaviour:
   rotSpeed: 0
   rotPoint: {fileID: 0}
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
-  range: 0.75
+  range: 0.65
   lookTreshold: 0
   attackSpeed: 0
   p:
     projectileSize: 0
     speed: 0
     damageType: 0
-    damage: 1000
+    damage: 100
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0
@@ -106,11 +106,11 @@ MonoBehaviour:
     AIO_slownessPercentage: 0
     AIO_slownessTime: 0
     AIO_maxSlowStacks: 0
-  explosionPoint: {fileID: 0}
-  explosionTrigger: {fileID: 0}
-  explosionColl: {fileID: 0}
+  explosionPoint: {fileID: 4869818325442855313}
+  explosionTrigger: {fileID: 2454063407427608022}
+  explosionColl: {fileID: 6761997028576802689}
   explosionDelay: 0.3
-  explosionTime: 0.2
+  explosionTime: 0.1
 --- !u!95 &3442018792503175540
 Animator:
   serializedVersion: 5
@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 6925790507190346253}
   - component: {fileID: 1662371690580105417}
   - component: {fileID: 4569162182715521825}
+  - component: {fileID: 3882480693328545828}
   m_Layer: 0
   m_Name: "B\xE9zierCurve.001"
   m_TagString: Untagged
@@ -427,6 +428,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3882480693328545828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3501489692052012595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121ae165e199cd54b95d85abe4829508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 1.1
+  endDisolveValue: -1
 --- !u!1 &4920032261649779133
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,13 +470,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4920032261649779133}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.48187223, y: 0.7010951, z: -0.34364545, w: 0.39770922}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1381101348752670195}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!212 &1952684410307163103
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -522,6 +540,7 @@ GameObject:
   - component: {fileID: 446309377750190469}
   - component: {fileID: 332618674934667770}
   - component: {fileID: 2846004320790645074}
+  - component: {fileID: 6756668402939040664}
   m_Layer: 0
   m_Name: "B\xE9zierCurve"
   m_TagString: Untagged
@@ -594,6 +613,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6756668402939040664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8590727356892289902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121ae165e199cd54b95d85abe4829508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 1.1
+  endDisolveValue: -1
 --- !u!1001 &5848140840800600682
 PrefabInstance:
   m_ObjectHideFlags: 0

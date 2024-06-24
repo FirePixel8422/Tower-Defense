@@ -14,6 +14,17 @@ public class WaveManager : MonoBehaviour
         Instance = this;
     }
 
+    public float health;
+    public float healthRemaining;
+    public float HealthRemaining
+    {
+        get
+        {
+            return healthRemaining;
+        }
+        set { healthRemaining = value; }
+    }
+
     public int waveScaleHealthDelay;
     public int waveId;
     public float healthScaleMultiplier;
@@ -40,6 +51,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        healthRemaining = health;
         points = GetComponentsInChildren<Transform>().ToList();
         points.Remove(transform);
         startPointPos = points[0].position;
@@ -206,6 +218,7 @@ public class WaveManager : MonoBehaviour
                 if (pointIndex == points.Count)
                 {
                     spawnedObj[i].gameObject.SetActive(false);
+                    HealthRemaining -= spawnedObj[i].damage;
                     spawnedObj.RemoveAt(i);
                 }
                 else

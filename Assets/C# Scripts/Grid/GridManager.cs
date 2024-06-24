@@ -93,21 +93,13 @@ public class GridManager : MonoBehaviour
     {
         grid[gridPos.x, gridPos.y].type = newType;
     }
-    public void UpdateGridDataFieldType(Vector2Int gridPos, float addedScrapOrEssence, MagicType essenceType)
+    public void UpdateGridDataFieldType(Vector2Int gridPos, float addedScrap)
     {
-        if(essenceType == MagicType.Neutral)
-        {
-            grid[gridPos.x, gridPos.y].scrap += addedScrapOrEssence;
-            return;
-        }
-        
-        grid[gridPos.x, gridPos.y].essence += addedScrapOrEssence;
-        grid[gridPos.x, gridPos.y].essenceType = essenceType;
+        grid[gridPos.x, gridPos.y].scrap += addedScrap;
     }
     public void ResetGridDataFieldType(Vector2Int gridPos)
     {
         grid[gridPos.x, gridPos.y].scrap = 0;
-        grid[gridPos.x, gridPos.y].essence = 0;
 
         grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;
         grid[gridPos.x, gridPos.y].tower = null;

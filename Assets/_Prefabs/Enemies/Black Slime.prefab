@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyId: 1
   essenseOnDamage: 3
-  essenceOnDeath: 10
+  essenceOnDeath: 5
   startStunEffectMultiplier: 1
   stunEffectMultiplier: 1
   stunEffectDecrease: 0

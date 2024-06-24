@@ -140,7 +140,6 @@ public class SelectionManager : MonoBehaviour
         }
 
         GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 3, selectedTower);
-        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, selectedTower.towerUIData.buildCost, selectedTower.towerUIData.essenceType);
         isPlacingTower = false;
     }
 
@@ -197,7 +196,6 @@ public class SelectionManager : MonoBehaviour
         if (ResourceManager.Instance.TryUpgradeTower(selectedTower.towerUIData.upgrades[chosenType].buildCost, selectedTower.towerUIData.upgrades[chosenType].essenceType, (MagicType)chosenType))
         {
             GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
-            GridManager.Instance.UpdateGridDataFieldType(gridData.gridPos, selectedTower.towerUIData.upgrades[chosenType].buildCost, selectedTower.towerUIData.upgrades[chosenType].essenceType);
 
             TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
             selectedTower.UpgradeTower(chosenType, gridData.gridPos);
@@ -213,7 +211,6 @@ public class SelectionManager : MonoBehaviour
         GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
         GridManager.Instance.ResetGridDataFieldType(gridData.gridPos);
 
-        ResourceManager.Instance.AddRemoveEssence(gridData.essence, gridData.essenceType);
         ResourceManager.Instance.AddScrap(gridData.scrap);
 
         TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
@@ -253,7 +250,7 @@ public class SelectionManager : MonoBehaviour
     private void Update()
     {
         //give player preview of selectedTower
-        if (isPlacingTower && Input.mousePosition != mousePos && selectedPreviewTower.locked == false)
+        if (Input.mousePosition != mousePos)
         {
             UpdateTowerPlacementPreview();
         }
@@ -262,6 +259,11 @@ public class SelectionManager : MonoBehaviour
     public void UpdateTowerPlacementPreview()
     {
         mousePos = Input.mousePosition;
+        if (isPlacingTower == false || selectedPreviewTower.locked == true)
+        {
+            return;
+        }
+
         Ray ray = mainCam.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, floor + path))

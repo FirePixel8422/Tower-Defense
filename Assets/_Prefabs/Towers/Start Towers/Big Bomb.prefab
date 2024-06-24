@@ -19455,7 +19455,7 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.6
+  dissolveSpeed: 1.1
   endDisolveValue: -1
 --- !u!1 &3848072987556450249
 GameObject:
@@ -38999,7 +38999,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  towerUIData: {fileID: 11400000, guid: 3247656ff2b20c947b5eaebd9882c939, type: 2}
+  towerUIData: {fileID: 11400000, guid: bce87fd7ded1cd54f9ddc106af5af143, type: 2}
   upgradePrefabs: []
   towerCompleted: 0
   towerPreviewRenderer: {fileID: 0}
@@ -39018,14 +39018,14 @@ MonoBehaviour:
   rotSpeed: 0
   rotPoint: {fileID: 0}
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
-  range: 0.75
+  range: 0.9
   lookTreshold: 0
   attackSpeed: 0
   p:
     projectileSize: 0
     speed: 0
     damageType: 0
-    damage: 1000
+    damage: 400
     damageOverTimeType: 0
     damageOverTime: 0
     time: 0
@@ -39050,8 +39050,8 @@ MonoBehaviour:
   explosionPoint: {fileID: 3858288795844443237}
   explosionTrigger: {fileID: 7390011450086495536}
   explosionColl: {fileID: 2165007105383193823}
-  explosionDelay: 0.3
-  explosionTime: 0.2
+  explosionDelay: 0.4
+  explosionTime: 0.1
 --- !u!95 &3842808551646482380
 Animator:
   serializedVersion: 5
@@ -39140,7 +39140,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.4
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5370416857278054498
 MonoBehaviour:
@@ -39353,7 +39353,7 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 0.6
+  dissolveSpeed: 1.1
   endDisolveValue: -1
 --- !u!1 &5702803676823524786
 GameObject:

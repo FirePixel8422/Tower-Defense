@@ -126,16 +126,19 @@ public class CameraController : MonoBehaviour
             if (Mathf.Abs(centerRotY) > 0.01f)
             {
                 RotateCam();
+                SelectionManager.Instance.UpdateTowerPlacementPreview();
             }
 
             if (camMoveDir.sqrMagnitude > 0.01f)
             {
                 MoveCam();
+                SelectionManager.Instance.UpdateTowerPlacementPreview();
             }
 
             if (animatePanChanged)
             {
                 AnimatePanCam();
+                SelectionManager.Instance.UpdateTowerPlacementPreview();
             }
         }
         if (altRotating)
