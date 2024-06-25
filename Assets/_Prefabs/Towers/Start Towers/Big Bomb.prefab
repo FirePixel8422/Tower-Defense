@@ -39051,7 +39051,7 @@ MonoBehaviour:
   explosionTrigger: {fileID: 7390011450086495536}
   explosionColl: {fileID: 2165007105383193823}
   explosionDelay: 0.4
-  explosionTime: 0.1
+  explosionTime: 0.05
 --- !u!95 &3842808551646482380
 Animator:
   serializedVersion: 5

@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemyCore : MonoBehaviour
 {
     private Animator anim;
+    public float dieAnimDelay;
 
     public int enemyId;
 
@@ -237,6 +238,7 @@ public class EnemyCore : MonoBehaviour
                     
                     dead = true;
                     gameObject.SetActive(false);
+
                     yield break;
                 }
             }
@@ -244,6 +246,18 @@ public class EnemyCore : MonoBehaviour
             yield return null;
         }
         incomingDamage -= damage;
+    }
+
+    private IEnumerator Die()
+    {
+        float speed = anim.speed;
+        anim.speed = 1;
+        anim.SetTrigger("Die");
+
+        yield return new WaitForSeconds(dieAnimDelay);
+
+        anim.speed = speed;
+        gameObject.SetActive(false);
     }
 
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildCost: 20
   essenceType: 0
-  towerImage: {fileID: 0}
+  towerImage: {fileID: 21300000, guid: 1879a97239d5e6f4098e97f2d60ac9ee, type: 3}
   towerName: Tiny bomb
   towerPopup: explodes and can hit multiple targets
   upgrades: []

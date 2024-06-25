@@ -5355,10 +5355,10 @@ MonoBehaviour:
     projectileSize: 0
     speed: 0
     damageType: 0
-    damage: 8
+    damage: 17.5
     damageOverTimeType: 0
-    damageOverTime: 10
-    time: 1
+    damageOverTime: 0
+    time: 0
     pierce: 0
     confusionTime: 0
     slownessPercentage: 0

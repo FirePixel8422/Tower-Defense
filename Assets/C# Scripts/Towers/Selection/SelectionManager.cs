@@ -140,6 +140,7 @@ public class SelectionManager : MonoBehaviour
         }
 
         GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 3, selectedTower);
+        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, selectedTower.towerUIData.buildCost);
         isPlacingTower = false;
     }
 
@@ -209,9 +210,9 @@ public class SelectionManager : MonoBehaviour
     public void SellTower()
     {
         GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(selectedTower.transform.position);
-        GridManager.Instance.ResetGridDataFieldType(gridData.gridPos);
 
         ResourceManager.Instance.AddScrap(gridData.scrap);
+        GridManager.Instance.ResetGridDataFieldType(gridData.gridPos);
 
         TowerManager.Instance.spawnedTowerObj.Remove(selectedTower);
 

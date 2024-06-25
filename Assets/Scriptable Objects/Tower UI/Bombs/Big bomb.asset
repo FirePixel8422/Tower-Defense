@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildCost: 40
   essenceType: 0
-  towerImage: {fileID: 0}
+  towerImage: {fileID: 21300000, guid: 1864c1e4a7005f04dad468d7e2a172f4, type: 3}
   towerName: Big bomb
   towerPopup: does more explosive dmg and has more range
   upgrades: []

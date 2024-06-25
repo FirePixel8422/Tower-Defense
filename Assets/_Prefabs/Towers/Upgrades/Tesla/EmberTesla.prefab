@@ -10112,12 +10112,12 @@ MonoBehaviour:
   rotOffset: {x: 0, y: 0, z: 0, w: 0}
   range: 1.8
   lookTreshold: 0
-  attackSpeed: 0.3
+  attackSpeed: 0.1
   p:
     projectileSize: 0
     speed: 0
     damageType: 3
-    damage: 15
+    damage: 10
     damageOverTimeType: 3
     damageOverTime: 5
     time: 1
@@ -10140,8 +10140,8 @@ MonoBehaviour:
     AIO_slownessTime: 0
     AIO_maxSlowStacks: 0
   maxCoilEmisionRate: 12
-  timePerCharge: 0.3
-  rechargePowerDelay: 0.1
+  timePerCharge: 0.1
+  rechargePowerDelay: 0.05
   maxCharges: 5
   amountOfTargets: 1
   damageDelay: 0.2

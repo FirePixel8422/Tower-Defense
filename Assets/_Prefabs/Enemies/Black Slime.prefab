@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee2c164db7e18d439225a200a575896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieAnimDelay: 2
   enemyId: 1
   essenseOnDamage: 3
   essenceOnDeath: 5
@@ -166,8 +167,8 @@ MonoBehaviour:
   immunityBarrierType: 0
   immunityBarrier: {fileID: 0}
   barrierChance: 12
-  barrierHealthDrainTime: 12
-  barrierStartHealth: 100
+  barrierHealthDrainTime: 20
+  barrierStartHealth: 110
   confused: 0
   confusionTime: 0
 --- !u!65 &751855711249831110

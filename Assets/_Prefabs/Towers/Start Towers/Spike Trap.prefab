@@ -271,9 +271,9 @@ MonoBehaviour:
     projectileSize: 0
     speed: 0
     damageType: 0
-    damage: 25
+    damage: 32
     damageOverTimeType: 0
-    damageOverTime: 5
+    damageOverTime: 0
     time: 0
     pierce: 0
     confusionTime: 0
