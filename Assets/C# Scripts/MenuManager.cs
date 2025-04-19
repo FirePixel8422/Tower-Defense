@@ -6,14 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
+
+
+
     public GameObject pauseMenuObj;
     public GameObject[] settingsMenus;
 
     public bool paused;
+    public bool disableControl;
 
     public void OnPause(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && SelectionManager.Instance.isPlacingTower == false && Input.GetKeyDown(KeyCode.Escape))
+        if (disableControl == false && ctx.performed && SelectionManager.Instance.isPlacingTower == false && Input.GetKeyDown(KeyCode.Escape))
         {
             PauseRestartGame();
         }
@@ -22,28 +33,34 @@ public class MenuManager : MonoBehaviour
     
     public void PauseRestartGame()
     {
-        paused = !paused;
-
-        Time.timeScale = paused ? 0 : 1;
-        pauseMenuObj.SetActive(paused);
-
-        if (paused == false)
+        if (disableControl == false)
         {
-            foreach (GameObject g in settingsMenus)
+            paused = !paused;
+
+            Time.timeScale = paused ? 0 : 1;
+            pauseMenuObj.SetActive(paused);
+
+            if (paused == false)
             {
-                g.SetActive(false);
+                foreach (GameObject g in settingsMenus)
+                {
+                    g.SetActive(false);
+                }
             }
         }
     }
     public void RestartGame()
     {
-        paused = false;
-
-        Time.timeScale = 1;
-        pauseMenuObj.SetActive(false);
-        foreach(GameObject g in settingsMenus)
+        if (disableControl == false)
         {
-            g.SetActive(false);
+            paused = false;
+
+            Time.timeScale = 1;
+            pauseMenuObj.SetActive(false);
+            foreach (GameObject g in settingsMenus)
+            {
+                g.SetActive(false);
+            }
         }
     }
 

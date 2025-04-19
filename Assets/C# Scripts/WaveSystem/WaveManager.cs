@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SocialPlatforms.Impl;
+using TMPro;
 
 public class WaveManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class WaveManager : MonoBehaviour
         Instance = this;
     }
 
+    public GameObject deathText;
+
     public float health;
     public float healthRemaining;
     public float HealthRemaining
@@ -22,7 +25,17 @@ public class WaveManager : MonoBehaviour
         {
             return healthRemaining;
         }
-        set { healthRemaining = value; }
+        set 
+        { 
+            healthRemaining = value; 
+            if (healthRemaining <= 0)
+            {
+                deathText.SetActive(true);
+                MenuManager.Instance.RestartGame();
+                MenuManager.Instance.disableControl = true;
+                Time.timeScale = 0;
+            }
+        }
     }
 
     public int waveScaleHealthDelay;
@@ -58,6 +71,19 @@ public class WaveManager : MonoBehaviour
 
         StartCoroutine(SpawnLoop());
         StartCoroutine(UpdateEnemyMovementsLoop());
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ResourceManager.Instance.AddRemoveEssence(300000, MagicType.Neutral);
+            ResourceManager.Instance.AddScrap(100000);
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            healthRemaining = 10000000;
+        }
     }
 
     private IEnumerator SpawnLoop()
